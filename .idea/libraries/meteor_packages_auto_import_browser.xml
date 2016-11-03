@@ -69,6 +69,8 @@
         <item url="file://$USER_HOME$/.meteor/packages/random/1.0.10/web.browser/random.js" />
         <item url="file://$USER_HOME$/.meteor/packages/logging/1.1.16/web.browser/logging.js" />
         <item url="file://$USER_HOME$/.meteor/packages/logging/1.1.16/web.browser/logging_cordova.js" />
+        <item url="file://$USER_HOME$/.meteor/packages/momentjs_moment/2.15.2/web.browser/moment.js" />
+        <item url="file://$USER_HOME$/.meteor/packages/momentjs_moment/2.15.2/web.browser/meteor/export.js" />
         <item url="file://$USER_HOME$/.meteor/packages/reload/1.1.11/web.browser/deprecated.js" />
         <item url="file://$USER_HOME$/.meteor/packages/reload/1.1.11/web.browser/reload.js" />
         <item url="file://$USER_HOME$/.meteor/packages/base64/1.0.10/web.browser/base64.js" />
@@ -96,7 +98,9 @@
         <item url="file://$USER_HOME$/.meteor/packages/caching-compiler/1.1.8/web.browser/multi-file-caching-compiler.js" />
         <item url="file://$USER_HOME$/.meteor/packages/caching-compiler/1.1.8/web.browser/caching-compiler.js" />
         <item url="file://$USER_HOME$/.meteor/packages/underscore/1.0.10/web.browser/underscore.js" />
+        <item url="file://$USER_HOME$/.meteor/packages/lbee_moment-helpers/1.3.6/web.browser/common.js" />
         <item url="file://$USER_HOME$/.meteor/packages/underscore/1.0.10/web.browser/pre.js" />
+        <item url="file://$USER_HOME$/.meteor/packages/lbee_moment-helpers/1.3.6/web.browser/client.js" />
         <item url="file://$USER_HOME$/.meteor/packages/underscore/1.0.10/web.browser/post.js" />
         <item url="file://$USER_HOME$/.meteor/packages/callback-hook/1.0.10/web.browser/hook.js" />
         <item url="file://$USER_HOME$/.meteor/packages/webapp/1.3.12/web.browser/webapp_client_tests.js" />
@@ -204,6 +208,8 @@
       <root url="file://$USER_HOME$/.meteor/packages/random/1.0.10/web.browser/random.js" />
       <root url="file://$USER_HOME$/.meteor/packages/logging/1.1.16/web.browser/logging.js" />
       <root url="file://$USER_HOME$/.meteor/packages/logging/1.1.16/web.browser/logging_cordova.js" />
+      <root url="file://$USER_HOME$/.meteor/packages/momentjs_moment/2.15.2/web.browser/moment.js" />
+      <root url="file://$USER_HOME$/.meteor/packages/momentjs_moment/2.15.2/web.browser/meteor/export.js" />
       <root url="file://$USER_HOME$/.meteor/packages/reload/1.1.11/web.browser/deprecated.js" />
       <root url="file://$USER_HOME$/.meteor/packages/reload/1.1.11/web.browser/reload.js" />
       <root url="file://$USER_HOME$/.meteor/packages/base64/1.0.10/web.browser/base64.js" />
@@ -231,7 +237,9 @@
       <root url="file://$USER_HOME$/.meteor/packages/caching-compiler/1.1.8/web.browser/multi-file-caching-compiler.js" />
       <root url="file://$USER_HOME$/.meteor/packages/caching-compiler/1.1.8/web.browser/caching-compiler.js" />
       <root url="file://$USER_HOME$/.meteor/packages/underscore/1.0.10/web.browser/underscore.js" />
+      <root url="file://$USER_HOME$/.meteor/packages/lbee_moment-helpers/1.3.6/web.browser/common.js" />
       <root url="file://$USER_HOME$/.meteor/packages/underscore/1.0.10/web.browser/pre.js" />
+      <root url="file://$USER_HOME$/.meteor/packages/lbee_moment-helpers/1.3.6/web.browser/client.js" />
       <root url="file://$USER_HOME$/.meteor/packages/underscore/1.0.10/web.browser/post.js" />
       <root url="file://$USER_HOME$/.meteor/packages/callback-hook/1.0.10/web.browser/hook.js" />
       <root url="file://$USER_HOME$/.meteor/packages/webapp/1.3.12/web.browser/webapp_client_tests.js" />
