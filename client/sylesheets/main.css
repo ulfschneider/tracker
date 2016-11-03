@@ -6,12 +6,6 @@
 }
 
 
-/*
-SIMPLE GRID
-(C) ZACH COLE 2016
-*/
-
-
 html,
 body {
     height: 100%;
@@ -25,6 +19,12 @@ body {
 
 
 /* ==== GRID SYSTEM ==== */
+
+/*
+SIMPLE GRID
+inspired by ZACH COLE 2016
+*/
+
 
 .container {
     margin-left: auto;
@@ -170,10 +170,6 @@ body {
     }
 }
 
-
-tr.track:hover {
-    background:#eee;
-}
 
 tr.track td {
     padding:0 .5em;
