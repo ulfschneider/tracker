@@ -1,4 +1,4 @@
-var day = null;
+var day = null; //browser window scope
 
 Meteor.track = {
     formatDay: function(day) {
