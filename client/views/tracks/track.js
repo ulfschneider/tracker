@@ -44,7 +44,7 @@ Template.track.helpers({
         if (Template.currentData().results) {
             results = results.concat(Template.currentData().results);
         }
-        return Meteor.tracker.prettyPrint(results, " ");
+        return Meteor.tracker.arrayPrint(results, " ");
     },
     comment: function () {
         var comment = Template.currentData().comment;

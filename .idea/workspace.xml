@@ -2,23 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8f94bd54-6f4a-4908-8fcb-7b5f5f64d50d" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/views/tracks/createTrack.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/client/views/tracks/createTrack.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/lib/tracker.js" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/tracker_node_modules.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/meteor_packages_auto_import_browser.xml" afterPath="$PROJECT_DIR$/.idea/libraries/meteor_packages_auto_import_browser.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/tracker.iml" afterPath="$PROJECT_DIR$/.idea/tracker.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.meteor/packages" afterPath="$PROJECT_DIR$/.meteor/packages" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.meteor/versions" afterPath="$PROJECT_DIR$/.meteor/versions" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/sylesheets/main.css" afterPath="$PROJECT_DIR$/client/sylesheets/main.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/views/main.html" afterPath="$PROJECT_DIR$/client/views/main.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/views/tracks/track.html" afterPath="$PROJECT_DIR$/client/views/tracks/track.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/views/tracks/createTrack.js" afterPath="$PROJECT_DIR$/client/views/tracks/createTrack.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/views/tracks/track.js" afterPath="$PROJECT_DIR$/client/views/tracks/track.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/views/tracks/tracks.html" afterPath="$PROJECT_DIR$/client/views/tracks/tracks.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/views/tracks/tracks.js" afterPath="$PROJECT_DIR$/client/views/tracks/tracks.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/shared/main.js" afterPath="$PROJECT_DIR$/shared/main.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/tracker.js" afterPath="$PROJECT_DIR$/lib/tracker.js" />
     </list>
     <ignored path="tracker.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -51,9 +39,12 @@
       <file leaf-file-name="createTrack.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/views/tracks/createTrack.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="15">
-              <caret line="1" column="58" selection-start-line="1" selection-start-column="58" selection-end-line="1" selection-end-column="58" />
-              <folding />
+            <state relative-caret-position="45">
+              <caret line="3" column="11" selection-start-line="3" selection-start-column="11" selection-end-line="3" selection-end-column="11" />
+              <folding>
+                <element signature="e#169#176#0#HTML" expanded="true" />
+                <marker date="1478348361000" expanded="true" signature="28:214" ph="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -71,8 +62,8 @@
       <file leaf-file-name="main.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/sylesheets/main.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="363">
-              <caret line="201" column="74" selection-start-line="201" selection-start-column="74" selection-end-line="201" selection-end-column="74" />
+            <state relative-caret-position="558">
+              <caret line="220" column="0" selection-start-line="220" selection-start-column="0" selection-end-line="220" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -88,21 +79,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="createTrack.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="createTrack.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/client/views/tracks/createTrack.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="495">
-              <caret line="68" column="59" selection-start-line="68" selection-start-column="59" selection-end-line="68" selection-end-column="59" />
+            <state relative-caret-position="325">
+              <caret line="89" column="0" selection-start-line="89" selection-start-column="0" selection-end-line="89" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="tracker.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="tracker.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/tracker.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="780">
-              <caret line="52" column="9" selection-start-line="52" selection-start-column="9" selection-end-line="52" selection-end-column="9" />
+            <state relative-caret-position="30">
+              <caret line="2" column="8" selection-start-line="2" selection-start-column="8" selection-end-line="2" selection-end-column="8" />
               <folding />
             </state>
           </provider>
@@ -159,11 +150,11 @@
         <option value="$PROJECT_DIR$/shared/main.js" />
         <option value="$PROJECT_DIR$/client/views/tracks/tracks.html" />
         <option value="$PROJECT_DIR$/client/views/tracks/createTrack.html" />
-        <option value="$PROJECT_DIR$/client/sylesheets/main.css" />
         <option value="$PROJECT_DIR$/client/views/tracks/tracks.js" />
-        <option value="$PROJECT_DIR$/client/views/tracks/createTrack.js" />
         <option value="$PROJECT_DIR$/client/views/tracks/track.js" />
         <option value="$PROJECT_DIR$/lib/tracker.js" />
+        <option value="$PROJECT_DIR$/client/sylesheets/main.css" />
+        <option value="$PROJECT_DIR$/client/views/tracks/createTrack.js" />
       </list>
     </option>
   </component>
@@ -467,12 +458,12 @@
       <updated>1478097774013</updated>
       <workItem from="1478097775224" duration="15115000" />
       <workItem from="1478264168414" duration="15274000" />
-      <workItem from="1478335851070" duration="10104000" />
+      <workItem from="1478335851070" duration="13783000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="40493000" />
+    <option name="totallyTimeSpent" value="44172000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="50" y="38" width="2320" height="1099" extended-state="0" />
@@ -533,7 +524,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="15">
           <caret line="1" column="43" selection-start-line="1" selection-start-column="43" selection-end-line="1" selection-end-column="43" />
-          <folding />
+          <folding>
+            <element signature="e#169#176#0#HTML" expanded="true" />
+            <marker date="1478348361000" expanded="true" signature="28:214" ph="..." />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -744,30 +738,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/views/tracks/track.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="93" selection-start-line="1" selection-start-column="93" selection-end-line="1" selection-end-column="93" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/views/tracks/createTrack.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="58" selection-start-line="1" selection-start-column="58" selection-end-line="1" selection-end-column="58" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/sylesheets/main.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="363">
-          <caret line="201" column="74" selection-start-line="201" selection-start-column="74" selection-end-line="201" selection-end-column="74" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/.meteor/packages/momentjs_moment/2.15.2/npm/node_modules/typescript/lib/lib.core.d.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="184">
@@ -784,22 +754,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/views/tracks/tracks.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="26" selection-start-line="17" selection-start-column="26" selection-end-line="17" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/views/tracks/createTrack.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="495">
-          <caret line="68" column="59" selection-start-line="68" selection-start-column="59" selection-end-line="68" selection-end-column="59" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/views/tracks/track.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="615">
@@ -810,8 +764,51 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/tracker.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="780">
-          <caret line="52" column="9" selection-start-line="52" selection-start-column="9" selection-end-line="52" selection-end-column="9" />
+        <state relative-caret-position="30">
+          <caret line="2" column="8" selection-start-line="2" selection-start-column="8" selection-end-line="2" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/views/tracks/track.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="93" selection-start-line="1" selection-start-column="93" selection-end-line="1" selection-end-column="93" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/views/tracks/createTrack.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="11" selection-start-line="3" selection-start-column="11" selection-end-line="3" selection-end-column="11" />
+          <folding>
+            <element signature="e#169#176#0#HTML" expanded="true" />
+            <marker date="1478348361000" expanded="true" signature="28:214" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/sylesheets/main.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="558">
+          <caret line="220" column="0" selection-start-line="220" selection-start-column="0" selection-end-line="220" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/views/tracks/tracks.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" column="26" selection-start-line="17" selection-start-column="26" selection-end-line="17" selection-end-column="26" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/views/tracks/createTrack.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="325">
+          <caret line="89" column="0" selection-start-line="89" selection-start-column="0" selection-end-line="89" selection-end-column="0" />
           <folding />
         </state>
       </provider>

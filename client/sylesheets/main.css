@@ -52,12 +52,14 @@ inspired by ZACH COLE 2016
 .row {
     position: relative;
     width: 100%;
+    overflow:hidden;
 }
 
 .row [class^="col"] {
     float: left;
     margin: 0.5rem 2%;
     min-height: 0.125rem;
+    overflow:hidden;
 }
 
 .col-1,
@@ -134,7 +136,7 @@ inspired by ZACH COLE 2016
 }
 
 
-@media only screen and (min-width: 45em) {  /* 720px */
+@media only screen and (min-width: 65em) {
     .col-1 {
         width: 4.33%;
     }
@@ -220,6 +222,7 @@ table.tracks {
 tr.track td {
     padding:0;
     padding-right:1em;
+    vertical-align:top;
 }
 
 tr.track td:last-child {

@@ -7,29 +7,29 @@ Meteor.createTrack = {
 
     },
     _analyzeComment: function (track) {
-        var regExp = /\/\/.*/;
-        return track.match(regExp);
+        var regex = /\/\/.*/;
+        return track.match(regex);
     },
     _analyzeWorkout: function (track) {
-        var regExp = /(^|[\s])#[^\s]+/g;
-        return track.match(regExp);
+        var regex = /#[^\s]+/g;
+        return track.match(regex);
     },
     _analyzeDuration: function (track) {
-        var regExp = /(^|[\s])([0-9]+(h|m|s|i)[\s]*)+($|[\s])/gi;
-        return track.match(regExp);
+        var regex = /([0-9]+(h|m|s|i)[\s]*)+/gi;
+        return track.match(regex);
     },
-    _sumMillis: function(duration){
+    _sumMillis: function (duration) {
         var split = [];
 
         if (duration) {
-            var regExp = /[0-9]+(h|m|s|i)/gi;
-            _.each(duration, function(match) {
-                split = split.concat(match.match(regExp));
+            var regex = /[0-9]+(h|m|s|i)/gi;
+            _.each(duration, function (match) {
+                split = split.concat(match.match(regex));
             });
         }
 
         var sum = 0; //milliseconds
-        _.each(split, function(match) {
+        _.each(split, function (match) {
             var multiplier = 0;
             if (match.indexOf("h") > 0) {
                 //hours
@@ -48,9 +48,17 @@ Meteor.createTrack = {
 
         return sum;
     },
+    _analyzeDate: function (track) {
+        var regex = /[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])/g;
+        return track.match(regex);
+    },
+    _analyzeTime: function (track) {
+        var regex = /([0-1][1-9]|2[0-3]):([0-5][0-9])/g;
+        return track.match(regex);
+    },
     _analyzeResults: function (track) {
-        var regExp = /(^|[\s])[0-9][0-9]*(\.|,)*[0-9]*[^\s]*/g;
-        return track.match(regExp);
+        var regex = /[0-9][0-9]*(\.|,)*[0-9]*[^\s]*/g;
+        return track.match(regex);
     },
     analyzeTrack: function (track) {
         if (track) {
@@ -63,11 +71,49 @@ Meteor.createTrack = {
                 track = track.replace(comment[0], "");
             }
 
+            //date
+            var workoutDate = {
+                year: trackData.date.getFullYear(),
+                month: trackData.date.getMonth(),
+                day: trackData.date.getDate(),
+                hour: trackData.date.getHours(),
+                minute: trackData.date.getMinutes(),
+                second: 0
+            };
+
+            var date = Meteor.createTrack._analyzeDate(track);
+            if (date) {
+                var parsedDate = moment(date[0]).toDate();
+                workoutDate.year = parsedDate.getFullYear();
+                workoutDate.month = parsedDate.getMonth();
+                workoutDate.day = parsedDate.getDate();
+
+                trackData.date = moment(workoutDate).toDate();
+
+                _.each(date, function (match) {
+                    track = track.replace(match, "");
+                });
+            }
+
+            //time
+            var time = Meteor.createTrack._analyzeTime(track);
+            if (time) {
+                var parsedTime = moment(time[0], "HH:mm").toDate();
+                workoutDate.hour = parsedTime.getHours();
+                workoutDate.minute = parsedTime.getMinutes();
+
+                trackData.date = moment(workoutDate).toDate();
+
+                _.each(time, function (match) {
+                    track = track.replace(match, "");
+                });
+            }
+
             //workout
             var workout = Meteor.createTrack._analyzeWorkout(track);
             if (workout) {
                 trackData.workout = workout[0].substring(1);
-                _.each(workout, function(match) {
+                _.each(workout, function (match) {
                     track = track.replace(match, "");
                 });
             }
@@ -76,21 +122,16 @@ Meteor.createTrack = {
             var duration = Meteor.createTrack._analyzeDuration(track);
             if (duration) {
                 trackData.duration = Meteor.createTrack._sumMillis(duration);
-                _.each(duration, function(match) {
+                _.each(duration, function (match) {
                     track = track.replace(match, "");
                 });
             }
 
-            //date
-
-
-
             //results
             var results = Meteor.createTrack._analyzeResults(track);
             if (results) {
-                console.log(JSON.stringify(results));
                 trackData.results = results;
-                _.each(results, function(match) {
+                _.each(results, function (match) {
                     track = track.replace(match, "");
                 });
 
