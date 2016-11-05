@@ -1,5 +1,8 @@
 <template name="tracks">
-    {{#each tracks}}
-        {{> track}}
-    {{/each}}
+    {{> createTrack}}
+    <table class="tracks">
+        {{#each tracks}}
+            {{> track}}
+        {{/each}}
+    </table>
 </template>

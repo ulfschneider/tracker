@@ -1,10 +1,12 @@
 TrackSchema = new SimpleSchema({
-    date: {type: Date},
-    workout: {type: String},
-    results: {type: [String], optional: true},
-    comment: {type: String, optional: true},
-    username: {type: String},
-    userId: {type: String}
+    date: {type: Date}, //date and time of workout
+    workout: {type: String}, //name of workout
+    duration: {type: Number, optional:true}, //milliseconds
+    results: {type: [String], optional: true}, //further generic results
+    comment: {type: String, optional: true}, //a comment
+    input: {type: String, optional: true}, //original input string
+    username: {type: String}, //the name of the user
+    userId: {type: String} //the meteor userId
 });
 
 TrackData = new Mongo.Collection("TrackData");
@@ -19,7 +21,7 @@ if (Meteor.isClient) {
 if (Meteor.isServer) {
 
     Meteor.publish("TrackData", function () {
-        return TrackData.find({userId: this.userId});
+        return TrackData.find({userId: this.userId}, {sort: {date: -1}});
     });
 
 

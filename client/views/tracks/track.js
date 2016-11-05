@@ -1,9 +1,11 @@
-var day = null; //browser window scope
+import {Session} from "meteor/session";
 
 Meteor.track = {
-    formatDay: function(day) {
+    _formatDay: function (day) {
         var now = new Date();
-        if (moment(day).isBefore(now, "week") && moment(day).isSame(now, "year")) {
+        if (moment(day).isSame(now, "day")) {
+            return "Today";
+        } else if (moment(day).isBefore(now, "week") && moment(day).isSame(now, "year")) {
             return moment(day).format("dd Mo MMM");
         } else if (moment(day).isBefore(now, "week")) {
             return moment(day).format("dd Mo MMM YY");
@@ -19,25 +21,34 @@ Template.track.helpers({
         var result = null;
         var date = Template.currentData().date;
 
-        if (day == null) {
+        var day = Meteor.tracks.getTrackDay();
+        if (!day || !moment(day).isSame(date, "day")) {
             result = date;
-            day = date;
-        } else if (!moment(day).isSame(date, "day")) {
-            result = date;
+            Meteor.tracks.setTrackDay(date);
         }
 
-        return Meteor.track.formatDay(result);
+        return Meteor.track._formatDay(result);
     },
     time: function () {
-        return moment(new Date()).format("HH:mm");
+        return moment(Template.currentData().date).format("HH:mm");
     },
     workout: function () {
-        return "6pyra";
+        var workout = Template.currentData().workout;
+        return workout ? "#" + workout : "";
     },
-    results: function () {
-        return "18m30s";
+    durationAndResults: function() {
+        var results = [];
+        if (Template.currentData().duration) {
+            results.push(Meteor.tracker.durationPrint(Template.currentData().duration));
+        }
+        if (Template.currentData().results) {
+            results = results.concat(Template.currentData().results);
+        }
+        return Meteor.tracker.prettyPrint(results, " ");
     },
     comment: function () {
-        return "PB";
+        var comment = Template.currentData().comment;
+        return comment ? "//" + Template.currentData().comment : "";
     }
 });
+
