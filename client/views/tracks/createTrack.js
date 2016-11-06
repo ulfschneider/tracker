@@ -49,15 +49,15 @@ Meteor.createTrack = {
         return sum;
     },
     _analyzeDate: function (track) {
-        var regex = /[0-9]{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])/g;
+        var regex = /[0-9]{4}-(0?[1-9]|1[0-2])-(0?[1-9]|[1-2][0-9]|3[0-1])/g;
         return track.match(regex);
     },
     _analyzeTime: function (track) {
-        var regex = /([0-1][1-9]|2[0-3]):([0-5][0-9])/g;
+        var regex = /([0-1]?[1-9]|2[0-3]):([0-5][0-9])/g;
         return track.match(regex);
     },
     _analyzeResults: function (track) {
-        var regex = /[0-9][0-9]*(\.|,)*[0-9]*[^\s]*/g;
+        var regex = /[0-9]+[^\s]*/g;
         return track.match(regex);
     },
     analyzeTrack: function (track) {
@@ -83,16 +83,13 @@ Meteor.createTrack = {
 
             var date = Meteor.createTrack._analyzeDate(track);
             if (date) {
-                var parsedDate = moment(date[0]).toDate();
+                var parsedDate = moment(date[0], "YYYY-M-D", true).toDate();
                 workoutDate.year = parsedDate.getFullYear();
                 workoutDate.month = parsedDate.getMonth();
                 workoutDate.day = parsedDate.getDate();
 
                 trackData.date = moment(workoutDate).toDate();
-
-                _.each(date, function (match) {
-                    track = track.replace(match, "");
-                });
+                track = track.replace(date[0], "");
             }
 
             //time
@@ -103,19 +100,14 @@ Meteor.createTrack = {
                 workoutDate.minute = parsedTime.getMinutes();
 
                 trackData.date = moment(workoutDate).toDate();
-
-                _.each(time, function (match) {
-                    track = track.replace(match, "");
-                });
+                track = track.replace(time[0], "");
             }
 
             //workout
             var workout = Meteor.createTrack._analyzeWorkout(track);
             if (workout) {
                 trackData.workout = workout[0].substring(1);
-                _.each(workout, function (match) {
-                    track = track.replace(match, "");
-                });
+                track = track.replace(workout[0]);
             }
 
             //duration

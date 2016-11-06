@@ -52,14 +52,12 @@ inspired by ZACH COLE 2016
 .row {
     position: relative;
     width: 100%;
-    overflow:hidden;
 }
 
 .row [class^="col"] {
     float: left;
     margin: 0.5rem 2%;
     min-height: 0.125rem;
-    overflow:hidden;
 }
 
 .col-1,
@@ -192,6 +190,7 @@ inspired by ZACH COLE 2016
 
 
 /*  Account UI */
+
 .accounts-dialog * {
     font-family: 'Roboto Mono', monospace, sans-serif;
 }
@@ -217,6 +216,24 @@ table.tracks {
     margin-top:1.62em;
     border:none;
     border-spacing:0;
+}
+
+tr.track .control {
+    position:absolute;
+    display:none;
+    background:slategray;
+    text-align:center;
+    border-radius:3px;
+    padding:0 5px;
+}
+
+tr.track .control a {
+    color:white;
+    text-decoration:none;
+}
+
+tr.track:hover .control {
+    display:block;
 }
 
 tr.track td {

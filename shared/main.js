@@ -42,6 +42,11 @@ if (Meteor.isServer) {
             } else {
                 TrackData.insert(data);
             }
+        },
+        remove: function(data) {
+            if (data && data._id) {
+                TrackData.remove(data._id);
+            }
         }
     });
 }
