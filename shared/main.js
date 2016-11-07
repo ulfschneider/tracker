@@ -4,7 +4,6 @@ TrackSchema = new SimpleSchema({
     duration: {type: Number, optional:true}, //milliseconds
     results: {type: [String], optional: true}, //further generic results
     comment: {type: String, optional: true}, //a comment
-    input: {type: String, optional: true}, //original input string
     username: {type: String}, //the name of the user
     userId: {type: String} //the meteor userId
 });

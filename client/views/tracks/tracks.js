@@ -5,13 +5,13 @@ Meteor.tracks = {
         if (moment(day).isSame(now, "day")) {
             return "Today";
         } else if (moment(now).subtract(1, "day").isSame(day, "day")) {
-            return "Yday.";
+            return "Yesterday";
         } else if (moment(day).isBefore(now, "week") && moment(day).isSame(now, "year")) {
-            return moment(day).format("dd Mo MMM");
+            return moment(day).format("ddd Mo MMM");
         } else if (moment(day).isBefore(now, "week")) {
-            return moment(day).format("dd Mo MMM YY");
+            return moment(day).format("ddd Mo MMM YY");
         } else if (day) {
-            return moment(day).format("dd");
+            return moment(day).format("ddd");
         }
     },
     day: function (date) {
