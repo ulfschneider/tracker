@@ -1,6 +1,6 @@
 TrackSchema = new SimpleSchema({
-    date: {type: Date}, //date and time of workout
-    workout: {type: String}, //name of workout
+    date: {type: Date}, //date and time of track
+    track: {type: String}, //name of track
     duration: {type: Number, optional:true}, //milliseconds
     results: {type: [String], optional: true}, //further generic results
     comment: {type: String, optional: true}, //a comment
@@ -20,7 +20,7 @@ if (Meteor.isClient) {
 if (Meteor.isServer) {
 
     Meteor.publish("TrackData", function () {
-        return TrackData.find({userId: this.userId}, {sort: {date: -1, workout: 1}});
+        return TrackData.find({userId: this.userId}, {sort: {date: -1, track: 1}});
     });
 
 
