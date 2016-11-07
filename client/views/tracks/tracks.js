@@ -1,17 +1,24 @@
 Meteor.tracks = {
     trackDay: null,
     _formatDay: function (day) {
-        var now = new Date();
-        if (moment(day).isSame(now, "day")) {
-            return "Today";
-        } else if (moment(now).subtract(1, "day").isSame(day, "day")) {
-            return "Yesterday";
-        } else if (moment(day).isBefore(now, "week") && moment(day).isSame(now, "year")) {
-            return moment(day).format("ddd Mo MMM");
-        } else if (moment(day).isBefore(now, "week")) {
-            return moment(day).format("ddd Mo MMM YY");
-        } else if (day) {
-            return moment(day).format("ddd");
+        if (day) {
+            var momentDay = moment(day);
+            var now = new Date();
+            if (momentDay.isSame(now, "day")) {
+                return "Today";
+            } else if (moment(now).subtract(1, "day").isSame(day, "day")) {
+                return "Yesterday";
+            } else if (moment(now).subtract(7, "day").isAfter(day, "day")) {
+                if (momentDay.isSame(now, "year")) {
+                    return momentDay.format("ddd DD MMM");
+                } else {
+                    return momentDay.format("ddd DD MMM YY");
+                }
+            } else {
+                return momentDay.format("ddd");
+            }
+        } else {
+            return null;
         }
     },
     day: function (date) {
@@ -23,7 +30,6 @@ Meteor.tracks = {
             result = date;
             Meteor.tracks.trackDay = date;
         }
-
         return Meteor.tracks._formatDay(result);
     }
 }
@@ -32,14 +38,11 @@ Template.tracks.helpers({
     tracks: function () {
         Meteor.tracks.trackDay = null; //reset the trackDay whenever tracks are being reloaded
 
-        //return training data for last 7 days
-        //return TrackData.find({date: {$gte: moment().subtract(7, "days").startOf("day").toDate()}}, {sort: {date: -1}}).fetch();
-
         //return 30 tracks
-        var tracks = TrackData.find({}, {sort: {date: -1}, limit:30}).fetch();
+        var tracks = TrackData.find({}, {sort: {date: -1}, limit: 30}).fetch();
 
         //set day
-        for(var i = 0; i < tracks.length; i++) {
+        for (var i = 0; i < tracks.length; i++) {
             tracks[i].day = Meteor.tracks.day(tracks[i].date);
         }
 
