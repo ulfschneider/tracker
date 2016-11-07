@@ -1,14 +1,20 @@
-Template.createTrack.events = {
+Template.createTrack.events({
+    "keyup #newTrack": function(event) {
+        if (event.which !== 13) {
+            $("#newTrack").removeClass("error");
+        }
+    },
     "keypress #newTrack": function (event) {
         if (event.which === 13) {
             event.preventDefault();
             event.stopPropagation();
             var track = Meteor.tracker.analyzeTrack($("#newTrack").val());
-            if (track.failure) {
-                console.log("Input: " + track.input);
-                console.log("Failure: " + JSON.stringify(track.failure));
-                console.log("Recognized: " + JSON.stringify(track.recognized));
+            if (track.errors) {
+                var errors = Meteor.tracker.errorPrintHtml(track.errors);
+                $("#errors").html(errors);
+                $("#newTrack").addClass("error");
             } else {
+                $("#errors").html("");
                 Meteor.call("upsert", track, function (error, result) {
                     if (!error) {
                         $("#newTrack").val("");
@@ -17,7 +23,7 @@ Template.createTrack.events = {
             }
         }
     }
-};
+});
 
 Template.createTrack.rendered = function () {
     $("#newTrack").autosize();

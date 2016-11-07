@@ -134,7 +134,7 @@ inspired by ZACH COLE 2016
 }
 
 
-@media only screen and (min-width: 65em) {
+@media only screen and (min-width: 80em) {
     .col-1 {
         width: 4.33%;
     }
@@ -209,6 +209,17 @@ inspired by ZACH COLE 2016
 .hint {
     color:slategray;
     font-size:0.81em;
+}
+
+.error {
+    color: firebrick;
+}
+
+.error ul {
+    font-size:0.81em;
+    list-style-type: none;
+    margin:0;
+    padding:0;
 }
 
 
