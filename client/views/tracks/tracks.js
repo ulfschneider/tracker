@@ -39,7 +39,7 @@ Template.tracks.helpers({
         Meteor.tracks.trackDay = null; //reset the trackDay whenever tracks are being reloaded
 
         //return 30 tracks
-        var tracks = TrackData.find({}, {sort: {date: -1}, limit: 30}).fetch();
+        var tracks = TrackData.find({}, {sort: {date: -1, workout: 1}, limit: 30}).fetch();
 
         //set day
         for (var i = 0; i < tracks.length; i++) {

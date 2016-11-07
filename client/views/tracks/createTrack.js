@@ -9,13 +9,13 @@ Template.createTrack.events({
             event.preventDefault();
             event.stopPropagation();
             var track = Meteor.tracker.analyzeTrack($("#newTrack").val());
-            if (track.errors) {
+            if (track.errors.length) {
                 var errors = Meteor.tracker.errorPrintHtml(track.errors);
                 $("#errors").html(errors);
                 $("#newTrack").addClass("error");
             } else {
                 $("#errors").html("");
-                Meteor.call("upsert", track, function (error, result) {
+                Meteor.call("upsert", track.trackData, function (error, result) {
                     if (!error) {
                         $("#newTrack").val("");
                     }

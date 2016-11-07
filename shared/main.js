@@ -20,7 +20,7 @@ if (Meteor.isClient) {
 if (Meteor.isServer) {
 
     Meteor.publish("TrackData", function () {
-        return TrackData.find({userId: this.userId}, {sort: {date: -1}});
+        return TrackData.find({userId: this.userId}, {sort: {date: -1, workout: 1}});
     });
 
 
