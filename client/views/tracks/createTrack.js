@@ -9,7 +9,7 @@ Template.createTrack.events = {
                 console.log("Failure: " + JSON.stringify(track.failure));
                 console.log("Recognized: " + JSON.stringify(track.recognized));
             } else {
-                Meteor.call("upsert", trackData, function (error, result) {
+                Meteor.call("upsert", track, function (error, result) {
                     if (!error) {
                         $("#newTrack").val("");
                     }

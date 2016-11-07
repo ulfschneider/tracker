@@ -1,4 +1,3 @@
-
 Template.track.helpers({
     time: function () {
         return moment(Template.currentData().date).format("HH:mm");
@@ -7,7 +6,7 @@ Template.track.helpers({
         var workout = Template.currentData().workout;
         return workout ? "#" + workout : "";
     },
-    durationAndResults: function() {
+    durationAndResults: function () {
         var results = [];
         if (Template.currentData().duration) {
             results.push(Meteor.tracker.durationPrint(Template.currentData().duration));
@@ -15,6 +14,7 @@ Template.track.helpers({
         if (Template.currentData().results) {
             results = results.concat(Template.currentData().results);
         }
+
         return Meteor.tracker.arrayPrint(results, " ");
     },
     comment: function () {
@@ -24,7 +24,7 @@ Template.track.helpers({
 });
 
 Template.track.events({
-    "click a.remove": function() {
+    "click a.remove": function () {
         Meteor.call("remove", Template.currentData());
     }
 });

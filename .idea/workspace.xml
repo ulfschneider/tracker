@@ -4,10 +4,8 @@
     <list default="true" id="8f94bd54-6f4a-4908-8fcb-7b5f5f64d50d" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/views/tracks/createTrack.js" afterPath="$PROJECT_DIR$/client/views/tracks/createTrack.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/views/tracks/tracks.js" afterPath="$PROJECT_DIR$/client/views/tracks/tracks.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/views/tracks/track.js" afterPath="$PROJECT_DIR$/client/views/tracks/track.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/tracker.js" afterPath="$PROJECT_DIR$/lib/tracker.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/server/main.js" afterPath="$PROJECT_DIR$/server/main.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/shared/main.js" afterPath="$PROJECT_DIR$/shared/main.js" />
     </list>
     <ignored path="tracker.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -30,7 +28,7 @@
       <file leaf-file-name="main.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/views/main.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
+            <state relative-caret-position="0">
               <caret line="13" column="50" selection-start-line="13" selection-start-column="50" selection-end-line="13" selection-end-column="50" />
               <folding />
             </state>
@@ -70,8 +68,8 @@
       <file leaf-file-name="createTrack.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/views/tracks/createTrack.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="8" column="71" selection-start-line="8" selection-start-column="71" selection-end-line="8" selection-end-column="71" />
+            <state relative-caret-position="345">
+              <caret line="23" column="1" selection-start-line="23" selection-start-column="1" selection-end-line="23" selection-end-column="1" />
               <folding />
             </state>
           </provider>
@@ -80,8 +78,8 @@
       <file leaf-file-name="tracker.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/tracker.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="357">
-              <caret line="258" column="46" selection-start-line="258" selection-start-column="46" selection-end-line="258" selection-end-column="46" />
+            <state relative-caret-position="165">
+              <caret line="11" column="59" selection-start-line="11" selection-start-column="59" selection-end-line="11" selection-end-column="59" />
               <folding />
             </state>
           </provider>
@@ -100,18 +98,8 @@
       <file leaf-file-name="track.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/views/tracks/track.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="25" column="19" selection-start-line="25" selection-start-column="19" selection-end-line="25" selection-end-column="19" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="tracks.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/views/tracks/tracks.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="7" column="11" selection-start-line="7" selection-start-column="11" selection-end-line="7" selection-end-column="11" />
+            <state relative-caret-position="255">
+              <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -145,13 +133,13 @@
         <option value="$PROJECT_DIR$/client/views/tracks/tracks.html" />
         <option value="$PROJECT_DIR$/client/views/tracks/createTrack.html" />
         <option value="$PROJECT_DIR$/client/views/main.html" />
-        <option value="$PROJECT_DIR$/client/views/tracks/track.js" />
         <option value="$PROJECT_DIR$/client/views/tracks/track.html" />
         <option value="$PROJECT_DIR$/client/sylesheets/main.css" />
         <option value="$PROJECT_DIR$/shared/main.js" />
         <option value="$PROJECT_DIR$/client/views/tracks/tracks.js" />
         <option value="$PROJECT_DIR$/server/main.js" />
         <option value="$PROJECT_DIR$/client/views/tracks/createTrack.js" />
+        <option value="$PROJECT_DIR$/client/views/tracks/track.js" />
         <option value="$PROJECT_DIR$/lib/tracker.js" />
       </list>
     </option>
@@ -425,12 +413,12 @@
       <workItem from="1478097775224" duration="15115000" />
       <workItem from="1478264168414" duration="15274000" />
       <workItem from="1478335851070" duration="19853000" />
-      <workItem from="1478505285373" duration="6732000" />
+      <workItem from="1478505285373" duration="8393000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="56974000" />
+    <option name="totallyTimeSpent" value="58635000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="50" y="38" width="2320" height="1099" extended-state="0" />
@@ -769,7 +757,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/client/views/main.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
+        <state relative-caret-position="0">
           <caret line="13" column="50" selection-start-line="13" selection-start-column="50" selection-end-line="13" selection-end-column="50" />
           <folding />
         </state>
@@ -794,14 +782,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3390">
           <caret line="226" column="18" selection-start-line="226" selection-start-column="18" selection-end-line="226" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/views/tracks/track.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="25" column="19" selection-start-line="25" selection-start-column="19" selection-end-line="25" selection-end-column="19" />
           <folding />
         </state>
       </provider>
@@ -832,16 +812,40 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/client/views/tracks/createTrack.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="8" column="71" selection-start-line="8" selection-start-column="71" selection-end-line="8" selection-end-column="71" />
+        <state relative-caret-position="345">
+          <caret line="23" column="1" selection-start-line="23" selection-start-column="1" selection-end-line="23" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/views/tracks/track.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" column="0" selection-start-line="17" selection-start-column="0" selection-end-line="17" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.meteor/packages/momentjs_moment/2.15.2/npm/node_modules/lodash/lodash.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="334">
+          <caret line="12137" column="13" selection-start-line="12137" selection-start-column="13" selection-end-line="12137" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.meteor/packages/momentjs_moment/2.15.2/npm/node_modules/lodash/core.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="334">
+          <caret line="2907" column="11" selection-start-line="2907" selection-start-column="11" selection-end-line="2907" selection-end-column="11" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/tracker.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="258" column="46" selection-start-line="258" selection-start-column="46" selection-end-line="258" selection-end-column="46" />
+        <state relative-caret-position="165">
+          <caret line="11" column="59" selection-start-line="11" selection-start-column="59" selection-end-line="11" selection-end-column="59" />
           <folding />
         </state>
       </provider>
