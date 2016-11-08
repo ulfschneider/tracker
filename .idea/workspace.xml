@@ -2,9 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8f94bd54-6f4a-4908-8fcb-7b5f5f64d50d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/sylesheets/main.css" afterPath="$PROJECT_DIR$/client/sylesheets/main.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/views/tracks/createTrack.js" afterPath="$PROJECT_DIR$/client/views/tracks/createTrack.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/tracker.js" afterPath="$PROJECT_DIR$/lib/tracker.js" />
     </list>
     <ignored path="tracker.iws" />
@@ -78,8 +75,8 @@
       <file leaf-file-name="tracker.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/lib/tracker.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="837">
-              <caret line="348" column="29" selection-start-line="348" selection-start-column="29" selection-end-line="348" selection-end-column="29" />
+            <state relative-caret-position="742">
+              <caret line="250" column="91" selection-start-line="250" selection-start-column="91" selection-end-line="250" selection-end-column="91" />
               <folding />
             </state>
           </provider>
@@ -433,12 +430,12 @@
       <workItem from="1478264168414" duration="15274000" />
       <workItem from="1478335851070" duration="19853000" />
       <workItem from="1478505285373" duration="20602000" />
-      <workItem from="1478589972954" duration="747000" />
+      <workItem from="1478589972954" duration="1664000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="71591000" />
+    <option name="totallyTimeSpent" value="72508000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="50" y="38" width="2320" height="1099" extended-state="0" />
@@ -852,8 +849,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/lib/tracker.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="837">
-          <caret line="348" column="29" selection-start-line="348" selection-start-column="29" selection-end-line="348" selection-end-column="29" />
+        <state relative-caret-position="742">
+          <caret line="250" column="91" selection-start-line="250" selection-start-column="91" selection-end-line="250" selection-end-column="91" />
           <folding />
         </state>
       </provider>
