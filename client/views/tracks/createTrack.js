@@ -1,5 +1,5 @@
 Template.createTrack.events({
-    "keyup #newTrack": function(event) {
+    "keyup #newTrack": function (event) {
         if (event.which !== 13) {
             $("#newTrack").removeClass("error");
         }
@@ -9,8 +9,9 @@ Template.createTrack.events({
             event.preventDefault();
             event.stopPropagation();
             var track = Meteor.tracker.analyzeTrack($("#newTrack").val());
+            var errors;
             if (track.errors.length) {
-                var errors = Meteor.tracker.errorPrintHtml(track.errors);
+                errors = Meteor.tracker.errorPrintHtml(track.errors);
                 $("#errors").html(errors);
                 $("#newTrack").addClass("error");
             } else {
@@ -18,6 +19,9 @@ Template.createTrack.events({
                 Meteor.call("upsert", track.data, function (error, result) {
                     if (!error) {
                         $("#newTrack").val("");
+                    } else {
+                        errors = Meteor.tracker.errorPrintHtml([{description: "Your track could not be stored on the server. " + error}]);
+                        $("#errors").html(errors);
                     }
                 });
             }
