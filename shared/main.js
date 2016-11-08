@@ -1,4 +1,5 @@
 TrackSchema = new SimpleSchema({
+    _id: {type: String, optional:true}, //mongo id
     date: {type: Date}, //date and time of track
     track: {type: String}, //name of track
     duration: {type: Number, optional:true}, //milliseconds
@@ -37,7 +38,7 @@ if (Meteor.isServer) {
             }
             TrackData.schema.validate(data);
             if (data._id) {
-                TrackData.update(data);
+                TrackData.update(data._id, data);
             } else {
                 TrackData.insert(data);
             }

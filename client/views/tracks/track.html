@@ -1,3 +1,15 @@
 <template name="track">
-    <tr class="track"><td>{{day}}</td><td class="hidden-sm">{{time}}</td><td>{{track}}</td><td>{{durationAndResults}}</td><td class="hidden-sm">{{comment}}</td><td><span class="control"><a href="#" class="remove">&#9003;</a></span></td></tr>
+    {{#if isEditing}}
+        <tr>
+            <td colspan="10">{{> editTrack value=inputValue _id=_id}}</td>
+        </tr>
+    {{else}}
+        <tr class="track{{#if isRecentEditing}} recent{{/if}}">
+            <td>{{day}}</td>
+            <td class="hidden-sm">{{time}}</td>
+            <td>{{track}}</td>
+            <td>{{durationAndResults}}</td>
+            <td class="hidden-sm">{{comment}}</td>
+        </tr>
+    {{/if}}
 </template>

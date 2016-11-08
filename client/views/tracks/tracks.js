@@ -77,7 +77,7 @@ Template.tracks.onCreated(function () {
     });
 
     instance.tracks = function () {
-        return TrackData.find({}, {limit: instance.loaded.get(), sort: {date: -1, track: 1}});
+        return TrackData.find({}, {limit: instance.loaded.get(), sort: {date: -1, track: 1} });
     }
 
 })

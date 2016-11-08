@@ -225,31 +225,16 @@ inspired by ZACH COLE 2016
 
 
 table.tracks {
-    margin-top:1.62em;
     border:none;
     border-spacing:0;
-}
-
-tr.track .control:after {
-    content:"\00a0\00a0";
 }
 
 tr.track:hover {
     background:#d4d9de;
 }
 
-tr.track:hover .control:after {
-    content:none;
-}
-
-tr.track .control a {
-    display:none;
-}
-
-tr.track:hover .control a {
-    display:inline;
-    color:firebrick;
-    text-decoration:none;
+tr.recent td {
+    border-bottom:1px solid slategrey;
 }
 
 
@@ -279,7 +264,15 @@ a.load-more:hover {
     background:black;
 }
 
-textarea.create-track {
+.edit-track {
+    margin-bottom:1.62em;
+}
+
+tr .edit-track {
+    margin:3.24em 0;
+}
+
+.edit-track textarea {
     border:none;
     padding:0;
     margin:0;
@@ -289,6 +282,14 @@ textarea.create-track {
     border-bottom:1px solid transparent;
 }
 
-textarea.create-track:hover, textarea.create-track:focus {
+.edit-track textarea:hover, .edit-track textarea:focus {
     border-bottom:1px solid lightslategrey;
 }
+
+a.remove {
+    display:inline;
+    color:firebrick;
+    text-decoration:underline;
+    float:right;
+}
+
