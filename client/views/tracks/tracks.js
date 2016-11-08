@@ -4,16 +4,17 @@ Meteor.tracks = {
         if (day) {
             var momentDay = moment(day);
             var now = new Date();
-            if (momentDay.isSame(now, "day")) {
-                return "Today";
-            } else if (moment(now).subtract(1, "day").isSame(day, "day")) {
-                return "Yesterday";
-            } else if (moment(now).subtract(7, "day").isAfter(day, "day")) {
+            
+            if (moment(now).subtract(7, "day").isAfter(day, "day")) {
                 if (momentDay.isSame(now, "year")) {
                     return momentDay.format("ddd DD MMM");
                 } else {
                     return momentDay.format("ddd DD MMM YY");
                 }
+            } else if (momentDay.isSame(now, "day")) {
+                return "Today";
+            } else if (moment(now).subtract(1, "day").isSame(day, "day")) {
+                return "Yesterday";
             } else {
                 return momentDay.format("ddd");
             }
