@@ -2,7 +2,7 @@
 
 * {
     font-family: 'Roboto Mono', monospace, sans-serif;
-    line-height: 1.62;
+    line-height: 1.62em;
     outline:none;
     font-size:100%;
 }
@@ -234,8 +234,6 @@ tr.track .control {
     display:none;
     background:slategray;
     text-align:center;
-    border-radius:3px;
-    padding:0 5px;
 }
 
 tr.track .control a {
@@ -243,9 +241,16 @@ tr.track .control a {
     text-decoration:none;
 }
 
+tr.track:hover {
+    background: #d4d9de;
+}
+
 tr.track:hover .control {
     display:block;
+    margin-top: -1.62em;
+    border-bottom: 1px solid slategrey;
 }
+
 
 tr.track td {
     padding:0;

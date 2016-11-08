@@ -15,7 +15,7 @@ Template.createTrack.events({
                 $("#newTrack").addClass("error");
             } else {
                 $("#errors").html("");
-                Meteor.call("upsert", track.trackData, function (error, result) {
+                Meteor.call("upsert", track.data, function (error, result) {
                     if (!error) {
                         $("#newTrack").val("");
                     }
