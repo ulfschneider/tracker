@@ -4,7 +4,7 @@ Meteor.tracks = {
         if (day) {
             var momentDay = moment(day);
             var now = new Date();
-            
+
             if (moment(now).subtract(7, "day").isAfter(day, "day")) {
                 if (momentDay.isSame(now, "year")) {
                     return momentDay.format("ddd DD MMM");

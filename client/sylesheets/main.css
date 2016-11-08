@@ -129,10 +129,12 @@ inspired by ZACH COLE 2016
     clear: both;
 }
 
-.hidden-sm {
-    display: none;
-}
 
+@media only screen and (max-width: 40em) {
+    .hidden-sm {
+        display: none;
+    }
+}
 
 @media only screen and (min-width: 80em) {
     .col-1 {
@@ -182,10 +184,6 @@ inspired by ZACH COLE 2016
     .col-12 {
         width: 96%;
     }
-
-    .hidden-sm {
-        display: block;
-    }
 }
 
 
@@ -229,26 +227,26 @@ table.tracks {
     border-spacing:0;
 }
 
-tr.track .control {
-    position:absolute;
-    display:none;
-    background:slategray;
-    text-align:center;
-}
-
-tr.track .control a {
-    color:white;
-    text-decoration:none;
+tr.track .control:after {
+    content:"\00a0\00a0";
 }
 
 tr.track:hover {
-    background: #d4d9de;
+    background:#d4d9de;
 }
 
-tr.track:hover .control {
-    display:block;
-    margin-top: -1.62em;
-    border-bottom: 1px solid slategrey;
+tr.track:hover .control:after {
+    content:none;
+}
+
+tr.track .control a {
+    display:none;
+}
+
+tr.track:hover .control a {
+    display:inline;
+    color:firebrick;
+    text-decoration:none;
 }
 
 
