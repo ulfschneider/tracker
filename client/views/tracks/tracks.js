@@ -39,20 +39,46 @@ Template.tracks.helpers({
     tracks: function () {
         Meteor.tracks.trackDay = null; //reset the trackDay whenever tracks are being reloaded
 
-        //return 30 tracks
-        var tracks = TrackData.find({}, {sort: {date: -1, track: 1}, limit: 30}).fetch();
-
+        var tracks = Template.instance().tracks().fetch();
         //set day
         for (var i = 0; i < tracks.length; i++) {
             tracks[i].day = Meteor.tracks.day(tracks[i].date);
         }
 
         return tracks;
+
+    },
+    hasMoreTracks: function () {
+        return Template.instance().tracks().count() >= Template.instance().limit.get();
+    }
+});
+
+Template.tracks.events({
+    'click .load-more': function (event) {
+        event.preventDefault();
+        var limit = Template.instance().limit.get();
+        limit += 30;
+        Template.instance().limit.set(limit);
     }
 });
 
 Template.tracks.onCreated(function () {
+
+    var instance = this;
+    instance.loaded = new ReactiveVar(0);
+    instance.limit = new ReactiveVar(30);
+
     this.autorun(function () {
-        Meteor.subscribe('TrackData');
+        var limit = instance.limit.get();
+        var subscription = instance.subscribe('TrackData', limit);
+        if (subscription.ready()) {
+            instance.loaded.set(limit);
+        }
     });
-});
+
+    instance.tracks = function () {
+        return TrackData.find({}, {limit: instance.loaded.get(), sort: {date: -1, track: 1}});
+    }
+
+})
+;

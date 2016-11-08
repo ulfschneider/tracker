@@ -19,8 +19,8 @@ if (Meteor.isClient) {
 
 if (Meteor.isServer) {
 
-    Meteor.publish("TrackData", function () {
-        return TrackData.find({userId: this.userId}, {sort: {date: -1, track: 1}});
+    Meteor.publish("TrackData", function (limit) {
+        return TrackData.find({userId: this.userId}, {limit: limit, sort: {date: -1, track: 1}});
     });
 
 
