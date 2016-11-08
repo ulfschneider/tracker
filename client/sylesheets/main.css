@@ -4,6 +4,7 @@
     font-family: 'Roboto Mono', monospace, sans-serif;
     line-height: 1.62em;
     outline:none;
+    text-decoration:none;
     font-size:100%;
 }
 
@@ -196,6 +197,8 @@ inspired by ZACH COLE 2016
 #login-buttons .login-button, .accounts-dialog .login-button {
     background: slategray;
     font-family: 'Roboto Mono', monospace, sans-serif;
+    border:none;
+    border-radius:4px;
 }
 
 #login-buttons .login-button:hover, .accounts-dialog .login-button:hover {
@@ -258,6 +261,22 @@ tr.track td {
 
 tr.track td:last-child {
     padding:0;
+}
+
+.end-of-list td {
+    padding:1.62em 0;
+    text-align:center;
+}
+
+a.load-more {
+    padding:0.25em 2em;
+    border-radius:4px;
+    background:slategrey;
+    color:white;
+}
+
+a.load-more:hover {
+    background:black;
 }
 
 textarea.create-track {

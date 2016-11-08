@@ -4,12 +4,16 @@
         {{#each tracks}}
             {{> track}}
         {{/each}}
+        <tr class="end-of-list">
+            <td colspan="10">
+                {{#if Template.subscriptionsReady}}
+                    {{#if hasMoreTracks}}
+                        <a class="load-more" href="#">Load More Tracks</a>
+                    {{else}}
+                        <span>End Of List</span>
+                    {{/if}}
+                {{/if}}
+            </td>
+        </tr>
     </table>
-    {{#if Template.subscriptionsReady}}
-        {{#if hasMoreTracks}}
-            <a class="load-more" href="#">Load More</a>
-        {{else}}
-            <div class="end-of-list">End Of List</div>
-        {{/if}}
-    {{/if}}
 </template>
