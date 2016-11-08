@@ -6,7 +6,7 @@ Meteor.editTrack = {
         Session.set("recentEditId", editId);
     },
     clearEditId: function () {
-        Session.set("editId", null);
+        Session.set("editId", "");
     },
     getEditId: function () {
         return Session.get("editId");
@@ -27,14 +27,59 @@ Meteor.editTrack = {
         } else {
             return Meteor.editTrack.getRecentEditId() ? true : false;
         }
+    },
+    escapeEdit: function () {
+        var id = Meteor.editTrack.getEditId();
+        $("#edit" + id).val("");
+        $("#edit" + id).removeClass("error");
+        $("#errors" + id).html("");
+        Meteor.editTrack.clearEditId();
+    },
+    _submitTrack: function (id) {
+        var id = id ? id : "";
+        var track = Meteor.tracker.analyzeTrack($("#edit" + id).val());
+        var errors;
+        if (track.errors.length) {
+            errors = Meteor.tracker.errorPrintHtml(track.errors);
+            $("#errors" + id).html(errors);
+            $("#edit" + id).addClass("error");
+        } else {
+            $("#errors" + id).html("");
+
+            if (id) {
+                track.data._id = id;
+            }
+
+            Meteor.call("upsert", track.data, function (error, result) {
+                if (!error) {
+                    Meteor.editTrack.escapeEdit();
+                } else {
+                    errors = Meteor.tracker.errorPrintHtml([{description: "Your track could not be stored on the server. " + error}]);
+                    $("#errors" + id).html(errors);
+                }
+            });
+        }
     }
+
 }
 
 Template.editTrack.events({
+    "blur textarea": function (event) {
+        var id = this._id ? this._id : "";
+        if (!id) {
+            $("#edit").removeClass("error");
+            $("#errors").html("");
+        } else {
+            Meteor.editTrack.escapeEdit();
+        }
+    },
     "keyup textarea": function (event) {
         var id = this._id ? this._id : "";
         if (event.which !== 13) {
             $("#edit" + id).removeClass("error");
+        }
+        if (event.which === 27) {
+            Meteor.editTrack.escapeEdit();
         }
     },
     "keypress textarea": function (event) {
@@ -42,30 +87,7 @@ Template.editTrack.events({
         if (event.which === 13) {
             event.preventDefault();
             event.stopPropagation();
-
-            var track = Meteor.tracker.analyzeTrack($("#edit" + id).val());
-            var errors;
-            if (track.errors.length) {
-                errors = Meteor.tracker.errorPrintHtml(track.errors);
-                $("#errors" + id).html(errors);
-                $("#edit" + id).addClass("error");
-            } else {
-                $("#errors" + id).html("");
-
-                if (id) {
-                    track.data._id = id;
-                }
-
-                Meteor.call("upsert", track.data, function (error, result) {
-                    if (!error) {
-                        $("#edit" + id).val("");
-                        Meteor.editTrack.clearEditId();
-                    } else {
-                        errors = Meteor.tracker.errorPrintHtml([{description: "Your track could not be stored on the server. " + error}]);
-                        $("#errors" + id).html(errors);
-                    }
-                });
-            }
+            Meteor.editTrack._submitTrack(id);
         }
     },
     "click a.remove": function () {
@@ -76,10 +98,12 @@ Template.editTrack.events({
 Template.editTrack.helpers({
     isVisible: function () {
         var id = this._id ? this._id : "";
-        return !id && !Meteor.editTrack.isEditing() || id && id == Meteor.editTrack.getEditId();
+        return !id || id == Meteor.editTrack.getEditId();
     }
 });
 
 Template.editTrack.rendered = function () {
-    $("textarea").autosize();
+    var id = Template.currentData() && Template.currentData()._id ? Template.currentData()._id : "";
+    $("#edit" + id).autosize();
+    $("#edit" + id).focus();
 }

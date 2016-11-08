@@ -1,9 +1,8 @@
 <template name="editTrack">
     {{#if isVisible}}
         <div class="edit-track">
-            <textarea id="edit{{_id}}" autofocus placeholder="Enter a new track &#8230;">{{value}}</textarea>
-            <div class="hint" id="hints{{_id}}">Press &#9166; to submit your track. {{#if _id}}
-                <a href="#" class="remove">Remove track</a>{{/if}}</div>
+            <textarea id="edit{{_id}}" placeholder="Enter a new track &#8230;">{{value}}</textarea>
+            <div class="hint" id="hints{{_id}}">Press &#9166; to submit your track.&nbsp;{{#if _id}}<a href="#" class="remove">Remove track</a>{{/if}}</div>
             <div class="error" id="errors{{_id}}"></div>
         </div>
     {{/if}}

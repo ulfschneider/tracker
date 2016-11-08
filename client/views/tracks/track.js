@@ -48,7 +48,9 @@ Template.track.helpers({
 });
 
 Template.track.events({
-    "click tr": function () {
+    "mousedown tr": function () {
+        event.stopPropagation();
+        event.preventDefault();
         Meteor.editTrack.setEditId(Template.currentData()._id);
     }
 });
