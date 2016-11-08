@@ -39,8 +39,9 @@ if (Meteor.isServer) {
             TrackData.schema.validate(data);
             if (data._id) {
                 TrackData.update(data._id, data);
+                return data._id;
             } else {
-                TrackData.insert(data);
+                return TrackData.insert(data);
             }
         },
         remove: function(data) {

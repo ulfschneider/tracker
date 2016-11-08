@@ -233,10 +233,13 @@ tr.track:hover {
     background:#d4d9de;
 }
 
-tr.recent td {
-    border-bottom:1px solid slategrey;
+tr.recent .indicator:before {
+    content:"_";
+    margin-left:-1em;
+    position:absolute;
+    width:1em;
+    display:block;
 }
-
 
 tr.track td {
     padding:0;

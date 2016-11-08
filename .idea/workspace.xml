@@ -3,9 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="8f94bd54-6f4a-4908-8fcb-7b5f5f64d50d" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/views/tracks/editTrack.html" afterPath="$PROJECT_DIR$/client/views/tracks/editTrack.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/sylesheets/main.css" afterPath="$PROJECT_DIR$/client/sylesheets/main.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/views/tracks/editTrack.js" afterPath="$PROJECT_DIR$/client/views/tracks/editTrack.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/views/tracks/track.js" afterPath="$PROJECT_DIR$/client/views/tracks/track.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/views/tracks/track.html" afterPath="$PROJECT_DIR$/client/views/tracks/track.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/shared/main.js" afterPath="$PROJECT_DIR$/shared/main.js" />
     </list>
     <ignored path="tracker.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -48,11 +49,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.css" pinned="false" current-in-tab="false">
+      <file leaf-file-name="main.css" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/client/sylesheets/main.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="228">
-              <caret line="235" column="13" selection-start-line="235" selection-start-column="13" selection-end-line="235" selection-end-column="13" />
+            <state relative-caret-position="243">
+              <caret line="236" column="14" selection-start-line="236" selection-start-column="14" selection-end-line="236" selection-end-column="14" />
               <folding />
             </state>
           </provider>
@@ -91,8 +92,8 @@
       <file leaf-file-name="track.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/views/tracks/track.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="6" column="59" selection-start-line="6" selection-start-column="59" selection-end-line="6" selection-end-column="59" />
+            <state relative-caret-position="105">
+              <caret line="7" column="47" selection-start-line="7" selection-start-column="47" selection-end-line="7" selection-end-column="47" />
               <folding />
             </state>
           </provider>
@@ -111,18 +112,18 @@
       <file leaf-file-name="main.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/shared/main.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="345">
-              <caret line="23" column="93" selection-start-line="23" selection-start-column="93" selection-end-line="23" selection-end-column="93" />
+            <state relative-caret-position="423">
+              <caret line="41" column="32" selection-start-line="41" selection-start-column="32" selection-end-line="41" selection-end-column="32" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="editTrack.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="editTrack.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/views/tracks/editTrack.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="426">
-              <caret line="100" column="19" selection-start-line="100" selection-start-column="19" selection-end-line="100" selection-end-column="19" />
+            <state relative-caret-position="195">
+              <caret line="58" column="59" selection-start-line="58" selection-start-column="59" selection-end-line="58" selection-end-column="59" />
               <folding />
             </state>
           </provider>
@@ -149,14 +150,14 @@
         <option value="$PROJECT_DIR$/client/views/tracks/createTrack.js" />
         <option value="$PROJECT_DIR$/client/views/main.html" />
         <option value="$PROJECT_DIR$/client/views/tracks/tracks.html" />
-        <option value="$PROJECT_DIR$/client/views/tracks/track.html" />
-        <option value="$PROJECT_DIR$/client/sylesheets/main.css" />
         <option value="$PROJECT_DIR$/lib/tracker.js" />
-        <option value="$PROJECT_DIR$/shared/main.js" />
         <option value="$PROJECT_DIR$/client/views/tracks/tracks.js" />
         <option value="$PROJECT_DIR$/client/views/tracks/editTrack.html" />
         <option value="$PROJECT_DIR$/client/views/tracks/track.js" />
         <option value="$PROJECT_DIR$/client/views/tracks/editTrack.js" />
+        <option value="$PROJECT_DIR$/shared/main.js" />
+        <option value="$PROJECT_DIR$/client/views/tracks/track.html" />
+        <option value="$PROJECT_DIR$/client/sylesheets/main.css" />
       </list>
     </option>
   </component>
@@ -434,12 +435,12 @@
       <workItem from="1478264168414" duration="15274000" />
       <workItem from="1478335851070" duration="19853000" />
       <workItem from="1478505285373" duration="20602000" />
-      <workItem from="1478589972954" duration="20877000" />
+      <workItem from="1478589972954" duration="22881000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="91721000" />
+    <option name="totallyTimeSpent" value="93725000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="50" y="38" width="2320" height="1099" extended-state="0" />
@@ -799,34 +800,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/sylesheets/main.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="235" column="13" selection-start-line="235" selection-start-column="13" selection-end-line="235" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/lib/tracker.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="242">
           <caret line="109" column="81" selection-start-line="109" selection-start-column="81" selection-end-line="109" selection-end-column="81" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/shared/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="23" column="93" selection-start-line="23" selection-start-column="93" selection-end-line="23" selection-end-column="93" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/views/tracks/track.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="59" selection-start-line="6" selection-start-column="59" selection-end-line="6" selection-end-column="59" />
           <folding />
         </state>
       </provider>
@@ -868,8 +845,32 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/client/views/tracks/editTrack.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="426">
-          <caret line="100" column="19" selection-start-line="100" selection-start-column="19" selection-end-line="100" selection-end-column="19" />
+        <state relative-caret-position="195">
+          <caret line="58" column="59" selection-start-line="58" selection-start-column="59" selection-end-line="58" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/shared/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="423">
+          <caret line="41" column="32" selection-start-line="41" selection-start-column="32" selection-end-line="41" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/views/tracks/track.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="47" selection-start-line="7" selection-start-column="47" selection-end-line="7" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/sylesheets/main.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="243">
+          <caret line="236" column="14" selection-start-line="236" selection-start-column="14" selection-end-line="236" selection-end-column="14" />
           <folding />
         </state>
       </provider>

@@ -3,13 +3,16 @@ import {Session} from "meteor/session";
 Meteor.editTrack = {
     setEditId: function (editId) {
         Session.set("editId", editId);
-        Session.set("recentEditId", editId);
+        Meteor.editTrack.setRecentEditId(editId);
     },
     clearEditId: function () {
         Session.set("editId", "");
     },
     getEditId: function () {
         return Session.get("editId");
+    },
+    setRecentEditId: function(editId) {
+        Session.set("recentEditId", editId);
     },
     getRecentEditId: function () {
         return Session.get("recentEditId");
@@ -53,6 +56,7 @@ Meteor.editTrack = {
             Meteor.call("upsert", track.data, function (error, result) {
                 if (!error) {
                     Meteor.editTrack.escapeEdit();
+                    Meteor.editTrack.setRecentEditId(result);
                 } else {
                     errors = Meteor.tracker.errorPrintHtml([{description: "Your track could not be stored on the server. " + error}]);
                     $("#errors" + id).html(errors);
