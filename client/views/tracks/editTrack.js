@@ -70,14 +70,21 @@ Meteor.editTrack = {
 
 Template.editTrack.events({
     "mousedown a.submit, touchend a.submit": function () {
+        var id = this._id ? this._id : "";
+
         event.stopPropagation();
         event.preventDefault();
-
-        var id = this._id ? this._id : "";
+        
         Meteor.editTrack._submitTrack(id);
     },
     "mousedown a.cancel, touchend a.cancel": function () {
         var id = this._id ? this._id : "";
+
+        event.stopPropagation();
+        if (id) {
+            event.preventDefault();
+        }
+
         Meteor.editTrack.escapeEdit();
     },
     "click a.remove": function () {

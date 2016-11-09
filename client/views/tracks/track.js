@@ -26,7 +26,7 @@ Template.track.helpers({
     isEditing: function () {
         return Meteor.editTrack.isEditing(Template.currentData()._id);
     },
-    isRecentEditing: function() {
+    isRecentEditing: function () {
         return Meteor.editTrack.isRecentEditing(Template.currentData()._id);
     },
     inputValue: function () {
@@ -48,17 +48,21 @@ Template.track.helpers({
 });
 
 Template.track.events({
-    "mousedown tr, touchend tr": function () {
+    "mousedown tr": function (event) {
         event.stopPropagation();
         event.preventDefault();
+        Meteor.editTrack.setEditId(Template.currentData()._id);
+    },
+    "touchend tr": function (event) {
         if (!touchmove) {
             Meteor.editTrack.setEditId(Template.currentData()._id);
         }
     },
-    "touchstart tr": function() {
+
+    "touchstart tr": function () {
         touchmove = false;
     },
-    "touchmove tr": function() {
+    "touchmove tr": function () {
         touchmove = true;
     }
 });
