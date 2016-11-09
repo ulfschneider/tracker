@@ -226,7 +226,9 @@ tr.track:hover {
 }
 
 tr.recent td.indicator:before {
-    content: "»\00a0";
+    content: "»";
+    margin-left:-1em;
+    position:absolute;
 }
 
 tr.track td {
