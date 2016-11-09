@@ -37,7 +37,7 @@ Meteor.tracks = {
 
 Template.tracks.helpers({
     tracks: function () {
-        Meteor.tracks.trackDay = null; //reset the trackDay whenever tracks are being reloaded
+        Meteor.tracks.trackDay = null; //reset the trackDay whenever tracks are being requested
 
         var tracks = Template.instance().tracks().fetch();
         //set day
