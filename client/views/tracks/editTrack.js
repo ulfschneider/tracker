@@ -74,7 +74,7 @@ Template.editTrack.events({
 
         event.stopPropagation();
         event.preventDefault();
-        
+
         Meteor.editTrack._submitTrack(id);
     },
     "mousedown a.cancel, touchend a.cancel": function () {
@@ -82,6 +82,7 @@ Template.editTrack.events({
 
         event.stopPropagation();
         if (id) {
+            //preventDefault to avoid the mousedown event for <tr>
             event.preventDefault();
         }
 
