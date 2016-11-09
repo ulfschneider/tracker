@@ -1,4 +1,5 @@
 import {Session} from "meteor/session";
+var touchmove;
 
 Meteor.editTrack = {
     setEditId: function (editId) {
@@ -68,17 +69,14 @@ Meteor.editTrack = {
 }
 
 Template.editTrack.events({
-    "mousedown a.submit": function () {
+    "mousedown a.submit, touchend a.submit": function () {
         event.stopPropagation();
         event.preventDefault();
 
         var id = this._id ? this._id : "";
         Meteor.editTrack._submitTrack(id);
     },
-    "mousedown a.cancel": function () {
-        event.stopPropagation();
-        event.preventDefault();
-
+    "mousedown a.cancel, touchend a.cancel": function () {
         var id = this._id ? this._id : "";
         Meteor.editTrack.escapeEdit();
     },
@@ -89,7 +87,7 @@ Template.editTrack.events({
         var id = this._id ? this._id : "";
         $("#control" + id + " div").show(0);
     },
-    "mousedown textarea": function (event) {
+    "mousedown textarea, touchend textarea": function (event) {
         event.stopPropagation();
     },
     "blur textarea": function (event) {
@@ -119,6 +117,7 @@ Template.editTrack.events({
             Meteor.editTrack._submitTrack(id);
         }
     }
+
 });
 
 Template.editTrack.helpers({

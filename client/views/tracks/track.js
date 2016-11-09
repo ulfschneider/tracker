@@ -1,4 +1,4 @@
-import {Session} from "meteor/session";
+var touchmove;
 
 Template.track.helpers({
     time: function () {
@@ -48,10 +48,18 @@ Template.track.helpers({
 });
 
 Template.track.events({
-    "mousedown tr": function () {
+    "mousedown tr, touchend tr": function () {
         event.stopPropagation();
         event.preventDefault();
-        Meteor.editTrack.setEditId(Template.currentData()._id);
+        if (!touchmove) {
+            Meteor.editTrack.setEditId(Template.currentData()._id);
+        }
+    },
+    "touchstart tr": function() {
+        touchmove = false;
+    },
+    "touchmove tr": function() {
+        touchmove = true;
     }
 });
 
