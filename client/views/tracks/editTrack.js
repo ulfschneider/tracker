@@ -11,7 +11,7 @@ Meteor.editTrack = {
     getEditId: function () {
         return Session.get("editId");
     },
-    setRecentEditId: function(editId) {
+    setRecentEditId: function (editId) {
         Session.set("recentEditId", editId);
     },
     getRecentEditId: function () {
@@ -68,7 +68,15 @@ Meteor.editTrack = {
 }
 
 Template.editTrack.events({
-    "mousedown textarea": function(event) {
+    "focusin textarea": function (event) {
+        var id = this._id ? this._id : "";
+        $("#control" + id + " div").show(0);
+    },
+    "focusout textarea": function (event) {
+        var id = this._id ? this._id : "";
+        $("#control" + id + " div").hide(0);
+    },
+    "mousedown textarea": function (event) {
         event.stopPropagation();
     },
     "blur textarea": function (event) {
