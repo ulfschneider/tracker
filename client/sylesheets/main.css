@@ -225,12 +225,8 @@ tr.track:hover {
     background:#d4d9de;
 }
 
-tr.recent .indicator:before {
-    content:"»";
-    margin-left:-1em;
-    position:absolute;
-    width:1em;
-    display:block;
+tr.recent td.indicator:before {
+    content: "»\00a0";
 }
 
 tr.track td {
@@ -246,6 +242,7 @@ tr.track td:last-child {
 .end-of-list td {
     padding:1.62em 0;
     text-align:center;
+    font-size:.81em;
 }
 
 a.load-more {
