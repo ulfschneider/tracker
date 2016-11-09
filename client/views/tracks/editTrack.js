@@ -78,17 +78,12 @@ Template.editTrack.events({
         Meteor.editTrack._submitTrack(id);
     },
     "mousedown a.cancel, touchend a.cancel": function () {
-        var id = this._id ? this._id : "";
-
         event.stopPropagation();
-        if (id) {
-            //preventDefault to avoid the mousedown event for <tr>
-            event.preventDefault();
-        }
+        event.preventDefault();
 
         Meteor.editTrack.escapeEdit();
     },
-    "click a.remove": function () {
+    "mousedown a.remove, touchend a.remove": function () {
         Meteor.call("remove", Template.currentData());
     },
     "focusin textarea": function (event) {

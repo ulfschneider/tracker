@@ -48,17 +48,14 @@ Template.track.helpers({
 });
 
 Template.track.events({
-    "mousedown tr": function (event) {
+    "mousedown tr.track, touchend tr.track": function (event) {
         event.stopPropagation();
         event.preventDefault();
-        Meteor.editTrack.setEditId(Template.currentData()._id);
-    },
-    "touchend tr": function (event) {
         if (!touchmove) {
             Meteor.editTrack.setEditId(Template.currentData()._id);
         }
+        touchmove = false;
     },
-
     "touchstart tr": function () {
         touchmove = false;
     },
