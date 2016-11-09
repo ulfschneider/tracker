@@ -68,19 +68,33 @@ Meteor.editTrack = {
 }
 
 Template.editTrack.events({
+    "mousedown a.submit": function () {
+        event.stopPropagation();
+        event.preventDefault();
+
+        var id = this._id ? this._id : "";
+        Meteor.editTrack._submitTrack(id);
+    },
+    "mousedown a.cancel": function () {
+        event.stopPropagation();
+        event.preventDefault();
+
+        var id = this._id ? this._id : "";
+        Meteor.editTrack.escapeEdit();
+    },
+    "click a.remove": function () {
+        Meteor.call("remove", Template.currentData());
+    },
     "focusin textarea": function (event) {
         var id = this._id ? this._id : "";
         $("#control" + id + " div").show(0);
-    },
-    "focusout textarea": function (event) {
-        var id = this._id ? this._id : "";
-        $("#control" + id + " div").hide(0);
     },
     "mousedown textarea": function (event) {
         event.stopPropagation();
     },
     "blur textarea": function (event) {
         var id = this._id ? this._id : "";
+        $("#control" + id + " div").hide(0);
         if (!id) {
             $("#edit").removeClass("error");
             $("#errors").html("");
@@ -104,18 +118,7 @@ Template.editTrack.events({
             event.stopPropagation();
             Meteor.editTrack._submitTrack(id);
         }
-    },
-    "click a.submit": function () {
-        var id = this._id ? this._id : "";
-        Meteor.editTrack._submitTrack(id);
-    },
-    "click a.cancel": function () {
-        var id = this._id ? this._id : "";
-        Meteor.editTrack.escapeEdit();
-    },
-    "click a.remove": function () {
-        Meteor.call("remove", Template.currentData());
-    },
+    }
 });
 
 Template.editTrack.helpers({
