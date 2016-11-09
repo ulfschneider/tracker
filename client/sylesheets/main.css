@@ -8,6 +8,17 @@
     font-size:100%;
 }
 
+html,
+body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    left: 0;
+    top: 0;
+    font-size: 100%;
+}
+
 ::-webkit-input-placeholder {
     color: slategray;
 }
@@ -24,20 +35,17 @@
     color: slategray;
 }
 
-
-html,
-body {
-    height: 100%;
-    width: 100%;
-    margin: 0;
-    padding: 0;
-    left: 0;
-    top: 0;
-    font-size: 100%;
+.error {
+    color: firebrick;
 }
 
+.error ul {
+    font-size:0.81em;
+    list-style-type: none;
+    margin:0;
+    padding:0;
+}
 
-/* ==== GRID SYSTEM ==== */
 
 /*
 SIMPLE GRID
@@ -57,8 +65,8 @@ inspired by ZACH COLE 2016
 
 .row [class^="col"] {
     float: left;
-    margin: 0.5rem 2%;
-    min-height: 0.125rem;
+    margin: 1.5em;
+    min-height: 0.125em;
 }
 
 .col-1,
@@ -207,22 +215,6 @@ inspired by ZACH COLE 2016
 
 /* Tracks */
 
-.hint {
-    color:slategray;
-    font-size:0.81em;
-}
-
-.error {
-    color: firebrick;
-}
-
-.error ul {
-    font-size:0.81em;
-    list-style-type: none;
-    margin:0;
-    padding:0;
-}
-
 
 table.tracks {
     border:none;
@@ -234,7 +226,7 @@ tr.track:hover {
 }
 
 tr.recent .indicator:before {
-    content:"_";
+    content:"»";
     margin-left:-1em;
     position:absolute;
     width:1em;
@@ -267,6 +259,9 @@ a.load-more:hover {
     background:black;
 }
 
+
+/* edit track */
+
 .edit-track {
     margin-bottom:1.62em;
 }
@@ -289,10 +284,24 @@ tr .edit-track {
     border-bottom:1px solid lightslategrey;
 }
 
-a.remove {
-    display:inline;
+
+.edit-track .control {
+    color:slategray;
+    font-size:.81em;
+}
+
+
+.edit-track .control a {
+    color:slategrey;
+    text-decoration: underline;
+}
+
+.edit-track .control a.submit {
+    margin-right:1.62em;
+}
+
+.edit-track .control a.remove {
     color:firebrick;
-    text-decoration:underline;
     float:right;
 }
 

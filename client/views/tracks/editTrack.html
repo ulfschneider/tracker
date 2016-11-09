@@ -1,8 +1,8 @@
 <template name="editTrack">
     {{#if isVisible}}
         <div class="edit-track">
-            <textarea id="edit{{_id}}" placeholder="Your track &#8230;">{{value}}</textarea>
-            <div class="hint" id="hints{{_id}}">Press &#9166; to submit your track.&nbsp;{{#if _id}}<a href="#" class="remove">Remove track</a>{{/if}}</div>
+            <textarea id="edit{{_id}}" placeholder="Your track &hellip;">{{value}}</textarea>
+            <div class="control" id="hints{{_id}}"><a href="#" class="submit">Submit</a> <a href="#" class="cancel">Cancel</a>{{#if _id}}<a href="#" class="remove">Remove track</a>{{/if}}</div>
             <div class="error" id="errors{{_id}}"></div>
         </div>
     {{/if}}

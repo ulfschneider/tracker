@@ -68,6 +68,9 @@ Meteor.editTrack = {
 }
 
 Template.editTrack.events({
+    "mousedown textarea": function(event) {
+        event.stopPropagation();
+    },
     "blur textarea": function (event) {
         var id = this._id ? this._id : "";
         if (!id) {
@@ -93,6 +96,14 @@ Template.editTrack.events({
             event.stopPropagation();
             Meteor.editTrack._submitTrack(id);
         }
+    },
+    "click a.submit": function () {
+        var id = this._id ? this._id : "";
+        Meteor.editTrack._submitTrack(id);
+    },
+    "click a.cancel": function () {
+        var id = this._id ? this._id : "";
+        Meteor.editTrack.escapeEdit();
     },
     "click a.remove": function () {
         Meteor.call("remove", Template.currentData());
