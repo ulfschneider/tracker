@@ -181,9 +181,7 @@
         <item url="file://$USER_HOME$/.meteor/packages/logging/1.1.16/web.browser/logging_cordova.js" />
         <item url="file://$USER_HOME$/.meteor/packages/momentjs_moment/2.15.2/web.browser/moment.js" />
         <item url="file://$USER_HOME$/.meteor/packages/momentjs_moment/2.15.2/web.browser/meteor/export.js" />
-        <item url="file://$USER_HOME$/.meteor/packages/sacha_spin/2.3.1/web.browser/packages/sacha_spin.js" />
         <item url="file://$USER_HOME$/.meteor/packages/accounts-base/1.2.14/web.browser/client_main.js" />
-        <item url="file://$USER_HOME$/.meteor/packages/sacha_spin/2.3.1/web.browser/packages/sacha_spin/lib/spinner.css" />
         <item url="file://$USER_HOME$/.meteor/packages/accounts-base/1.2.14/web.browser/server_main.js" />
         <item url="file://$USER_HOME$/.meteor/packages/accounts-base/1.2.14/web.browser/server_tests.js" />
         <item url="file://$USER_HOME$/.meteor/packages/accounts-base/1.2.14/web.browser/url_client.js" />
@@ -369,9 +367,7 @@
       <root url="file://$USER_HOME$/.meteor/packages/logging/1.1.16/web.browser/logging_cordova.js" />
       <root url="file://$USER_HOME$/.meteor/packages/momentjs_moment/2.15.2/web.browser/moment.js" />
       <root url="file://$USER_HOME$/.meteor/packages/momentjs_moment/2.15.2/web.browser/meteor/export.js" />
-      <root url="file://$USER_HOME$/.meteor/packages/sacha_spin/2.3.1/web.browser/packages/sacha_spin.js" />
       <root url="file://$USER_HOME$/.meteor/packages/accounts-base/1.2.14/web.browser/client_main.js" />
-      <root url="file://$USER_HOME$/.meteor/packages/sacha_spin/2.3.1/web.browser/packages/sacha_spin/lib/spinner.css" />
       <root url="file://$USER_HOME$/.meteor/packages/accounts-base/1.2.14/web.browser/server_main.js" />
       <root url="file://$USER_HOME$/.meteor/packages/accounts-base/1.2.14/web.browser/server_tests.js" />
       <root url="file://$USER_HOME$/.meteor/packages/accounts-base/1.2.14/web.browser/url_client.js" />

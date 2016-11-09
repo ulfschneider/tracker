@@ -14731,22 +14731,6 @@
         <item url="file://$USER_HOME$/.meteor/packages/momentjs_moment/2.15.2/npm/node_modules/babel-plugin-transform-es2015-computed-properties/lib/index.js" />
         <item url="file://$USER_HOME$/.meteor/packages/momentjs_moment/2.15.2/npm/node_modules/babel-plugin-transform-es2015-shorthand-properties/lib/index.js" />
         <item url="file://$USER_HOME$/.meteor/packages/momentjs_moment/2.15.2/npm/node_modules/babel-plugin-transform-es2015-block-scoped-functions/lib/index.js" />
-        <item url="file://$USER_HOME$/.meteor/packages/sacha_spin/2.3.1/npm/node_modules/spin.js/spin.js" />
-        <item url="file://$USER_HOME$/.meteor/packages/sacha_spin/2.3.1/npm/node_modules/spin.js/spin.min.js" />
-        <item url="file://$USER_HOME$/.meteor/packages/sacha_spin/2.3.1/npm/node_modules/spin.js/jquery.spin.js" />
-        <item url="file://$USER_HOME$/.meteor/packages/sacha_spin/2.3.1/npm/node_modules/spin.js/.grunt/grunt-gh-pages/gh-pages/release/spin.js" />
-        <item url="file://$USER_HOME$/.meteor/packages/sacha_spin/2.3.1/npm/node_modules/spin.js/.grunt/grunt-gh-pages/gh-pages/release/spin.min.js" />
-        <item url="file://$USER_HOME$/.meteor/packages/sacha_spin/2.3.1/npm/node_modules/spin.js/.grunt/grunt-gh-pages/gh-pages/release/jquery.spin.js" />
-        <item url="file://$USER_HOME$/.meteor/packages/sacha_spin/2.3.1/npm/node_modules/spin.js/.grunt/grunt-gh-pages/gh-pages/release/assets/prettify.js" />
-        <item url="file://$USER_HOME$/.meteor/packages/sacha_spin/2.3.1/npm/node_modules/spin.js/.grunt/grunt-gh-pages/gh-pages/release/assets/main.css" />
-        <item url="file://$USER_HOME$/.meteor/packages/sacha_spin/2.3.1/npm/node_modules/spin.js/.grunt/grunt-gh-pages/gh-pages/release/assets/prettify.css" />
-        <item url="file://$USER_HOME$/.meteor/packages/sacha_spin/2.3.1/npm/node_modules/spin.js/.grunt/grunt-gh-pages/gh-pages/release/example/modernizr.js" />
-        <item url="file://$USER_HOME$/.meteor/packages/sacha_spin/2.3.1/npm/node_modules/spin.js/.grunt/grunt-gh-pages/gh-pages/release/assets/fd-slider/fd-slider-tooltip.css" />
-        <item url="file://$USER_HOME$/.meteor/packages/sacha_spin/2.3.1/npm/node_modules/spin.js/.grunt/grunt-gh-pages/gh-pages/release/assets/fd-slider/fd-slider.js" />
-        <item url="file://$USER_HOME$/.meteor/packages/sacha_spin/2.3.1/npm/node_modules/spin.js/.grunt/grunt-gh-pages/gh-pages/release/assets/fd-slider/fd-slider.css" />
-        <item url="file://$USER_HOME$/.meteor/packages/sacha_spin/2.3.1/npm/node_modules/spin.js/bower_components/spin.js/spin.js" />
-        <item url="file://$USER_HOME$/.meteor/packages/sacha_spin/2.3.1/npm/node_modules/spin.js/bower_components/spin.js/spin.min.js" />
-        <item url="file://$USER_HOME$/.meteor/packages/sacha_spin/2.3.1/npm/node_modules/spin.js/bower_components/spin.js/jquery.spin.js" />
       </sourceFilesUrls>
     </properties>
     <CLASSES>
@@ -29479,22 +29463,6 @@
       <root url="file://$USER_HOME$/.meteor/packages/momentjs_moment/2.15.2/npm/node_modules/babel-plugin-transform-es2015-computed-properties/lib/index.js" />
       <root url="file://$USER_HOME$/.meteor/packages/momentjs_moment/2.15.2/npm/node_modules/babel-plugin-transform-es2015-shorthand-properties/lib/index.js" />
       <root url="file://$USER_HOME$/.meteor/packages/momentjs_moment/2.15.2/npm/node_modules/babel-plugin-transform-es2015-block-scoped-functions/lib/index.js" />
-      <root url="file://$USER_HOME$/.meteor/packages/sacha_spin/2.3.1/npm/node_modules/spin.js/spin.js" />
-      <root url="file://$USER_HOME$/.meteor/packages/sacha_spin/2.3.1/npm/node_modules/spin.js/spin.min.js" />
-      <root url="file://$USER_HOME$/.meteor/packages/sacha_spin/2.3.1/npm/node_modules/spin.js/jquery.spin.js" />
-      <root url="file://$USER_HOME$/.meteor/packages/sacha_spin/2.3.1/npm/node_modules/spin.js/.grunt/grunt-gh-pages/gh-pages/release/spin.js" />
-      <root url="file://$USER_HOME$/.meteor/packages/sacha_spin/2.3.1/npm/node_modules/spin.js/.grunt/grunt-gh-pages/gh-pages/release/spin.min.js" />
-      <root url="file://$USER_HOME$/.meteor/packages/sacha_spin/2.3.1/npm/node_modules/spin.js/.grunt/grunt-gh-pages/gh-pages/release/jquery.spin.js" />
-      <root url="file://$USER_HOME$/.meteor/packages/sacha_spin/2.3.1/npm/node_modules/spin.js/.grunt/grunt-gh-pages/gh-pages/release/assets/prettify.js" />
-      <root url="file://$USER_HOME$/.meteor/packages/sacha_spin/2.3.1/npm/node_modules/spin.js/.grunt/grunt-gh-pages/gh-pages/release/assets/main.css" />
-      <root url="file://$USER_HOME$/.meteor/packages/sacha_spin/2.3.1/npm/node_modules/spin.js/.grunt/grunt-gh-pages/gh-pages/release/assets/prettify.css" />
-      <root url="file://$USER_HOME$/.meteor/packages/sacha_spin/2.3.1/npm/node_modules/spin.js/.grunt/grunt-gh-pages/gh-pages/release/example/modernizr.js" />
-      <root url="file://$USER_HOME$/.meteor/packages/sacha_spin/2.3.1/npm/node_modules/spin.js/.grunt/grunt-gh-pages/gh-pages/release/assets/fd-slider/fd-slider-tooltip.css" />
-      <root url="file://$USER_HOME$/.meteor/packages/sacha_spin/2.3.1/npm/node_modules/spin.js/.grunt/grunt-gh-pages/gh-pages/release/assets/fd-slider/fd-slider.js" />
-      <root url="file://$USER_HOME$/.meteor/packages/sacha_spin/2.3.1/npm/node_modules/spin.js/.grunt/grunt-gh-pages/gh-pages/release/assets/fd-slider/fd-slider.css" />
-      <root url="file://$USER_HOME$/.meteor/packages/sacha_spin/2.3.1/npm/node_modules/spin.js/bower_components/spin.js/spin.js" />
-      <root url="file://$USER_HOME$/.meteor/packages/sacha_spin/2.3.1/npm/node_modules/spin.js/bower_components/spin.js/spin.min.js" />
-      <root url="file://$USER_HOME$/.meteor/packages/sacha_spin/2.3.1/npm/node_modules/spin.js/bower_components/spin.js/jquery.spin.js" />
     </CLASSES>
     <SOURCES />
   </library>
