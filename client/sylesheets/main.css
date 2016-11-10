@@ -65,7 +65,7 @@ inspired by ZACH COLE 2016
 
 .row [class^="col"] {
     float: left;
-    margin: 1.5em;
+    margin: 1.5em 2%;
     min-height: 0.125em;
 }
 
@@ -81,7 +81,7 @@ inspired by ZACH COLE 2016
 .col-10,
 .col-11,
 .col-12 {
-    width: 90%;
+    width: 96%;
 }
 
 
@@ -92,61 +92,6 @@ inspired by ZACH COLE 2016
 }
 
 
-@media only screen and (max-width: 40em) {
-    .hidden-sm {
-        display: none;
-    }
-}
-
-@media only screen and (min-width: 80em) {
-    .col-1 {
-        width: 4.33%;
-    }
-
-    .col-2 {
-        width: 12.66%;
-    }
-
-    .col-3 {
-        width: 21%;
-    }
-
-    .col-4 {
-        width: 29.33%;
-    }
-
-    .col-5 {
-        width: 37.66%;
-    }
-
-    .col-6 {
-        width: 46%;
-    }
-
-    .col-7 {
-        width: 54.33%;
-    }
-
-    .col-8 {
-        width: 62.66%;
-    }
-
-    .col-9 {
-        width: 71%;
-    }
-
-    .col-10 {
-        width: 79.33%;
-    }
-
-    .col-11 {
-        width: 87.66%;
-    }
-
-    .col-12 {
-        width: 96%;
-    }
-}
 
 
 /*  Account UI */
@@ -258,4 +203,66 @@ tr .edit-track {
     color:firebrick;
     float:right;
 }
+
+
+@media only screen and (max-width: 40em) {
+    .hidden-sm {
+        display: none;
+    }
+    tr.recent td.indicator:before {
+        margin-left:0;
+        position:static;
+    }
+}
+
+@media only screen and (min-width: 80em) {
+    .col-1 {
+        width: 4.33%;
+    }
+
+    .col-2 {
+        width: 12.66%;
+    }
+
+    .col-3 {
+        width: 21%;
+    }
+
+    .col-4 {
+        width: 29.33%;
+    }
+
+    .col-5 {
+        width: 37.66%;
+    }
+
+    .col-6 {
+        width: 46%;
+    }
+
+    .col-7 {
+        width: 54.33%;
+    }
+
+    .col-8 {
+        width: 62.66%;
+    }
+
+    .col-9 {
+        width: 71%;
+    }
+
+    .col-10 {
+        width: 79.33%;
+    }
+
+    .col-11 {
+        width: 87.66%;
+    }
+
+    .col-12 {
+        width: 96%;
+    }
+}
+
 
