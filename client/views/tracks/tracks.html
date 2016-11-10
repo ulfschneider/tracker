@@ -1,18 +1,28 @@
 <template name="tracks">
-    <table class="tracks">
-        {{#each tracks}}
-            {{> track}}
-        {{/each}}
-        <tr class="end-of-list">
-            <td colspan="10">
-                {{#if Template.subscriptionsReady}}
-                    {{#if hasMoreTracks}}
-                        <a class="load-more" href="#">Load more tracks</a>
-                    {{else}}
-                        <span>End of list</span>
-                    {{/if}}
-                {{/if}}
-            </td>
-        </tr>
-    </table>
+    <div class="row">
+        <div class="col-6" style="overflow:hidden;">
+            <div>{{> chart tracks=tracks}}</div>
+        </div>
+        <div class="col-6">
+            <table class="tracks">
+                {{#each tracks}}
+                    {{> track}}
+                {{/each}}
+                <tr class="end-of-list">
+                    <td colspan="10">
+                        {{#if Template.subscriptionsReady}}
+                            {{#if hasMoreTracks}}
+                                <a class="load-more" href="#">Load more tracks</a>
+                            {{else}}
+                                <span>End of list</span>
+                            {{/if}}
+                        {{/if}}
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
 </template>
+
+
+
