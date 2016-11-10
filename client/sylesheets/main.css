@@ -3,9 +3,9 @@
 * {
     font-family: 'Roboto Mono', monospace, sans-serif;
     line-height: 1.62em;
-    outline:none;
-    text-decoration:none;
-    font-size:100%;
+    outline: none;
+    text-decoration: none;
+    font-size: 100%;
 }
 
 html,
@@ -27,7 +27,7 @@ body {
     color: slategray;
 }
 
-::-moz-placeholder {  /* Firefox 19+ */
+::-moz-placeholder { /* Firefox 19+ */
     color: slategray;
 }
 
@@ -40,18 +40,122 @@ body {
 }
 
 .error ul {
-    font-size:0.81em;
+    font-size: 0.81em;
     list-style-type: none;
-    margin:0;
-    padding:0;
+    margin: 0;
+    padding: 0;
 }
 
+/*  Account UI */
+
+.accounts-dialog * {
+    font-family: 'Roboto Mono', monospace, sans-serif;
+}
+
+#login-buttons .login-button, .accounts-dialog .login-button {
+    background: slategray;
+    font-family: 'Roboto Mono', monospace, sans-serif;
+    border: none;
+    border-radius: 4px;
+}
+
+#login-buttons .login-button:hover, .accounts-dialog .login-button:hover {
+    background: black;
+}
+
+/* Tracks */
+
+table.tracks {
+    border: none;
+    border-spacing: 0;
+    width: 100%;
+}
+
+tr.track:hover {
+    background: #d4d9de;
+}
+
+tr.recent td.indicator:before {
+    content: "»";
+    margin-left: -1em;
+    position: absolute;
+}
+
+tr.track td {
+    padding: 0;
+    padding-right: 1em;
+    vertical-align: top;
+}
+
+tr.track td:last-child {
+    padding: 0;
+}
+
+.end-of-list td {
+    padding: 3.24em 0;
+    text-align: center;
+    font-size: .81em;
+}
+
+a.load-more {
+    padding: 0.25em 2em;
+    border-radius: 4px;
+    background: slategrey;
+    color: white;
+}
+
+a.load-more:hover {
+    background: black;
+}
+
+/* edit track */
+
+.edit-track {
+ 
+}
+
+tr .edit-track {
+    margin: 1.62em 0;
+}
+
+.edit-track textarea {
+    border: none;
+    padding: 0;
+    margin: 0;
+    resize: none;
+    height: 1.62em;
+    width: 100%;
+    border-bottom: 1px solid transparent;
+}
+
+.edit-track textarea:hover, .edit-track textarea:focus {
+    border-bottom: 1px solid lightslategrey;
+}
+
+.edit-track .control {
+    color: slategray;
+    font-size: .81em;
+    height: 1.62em;
+}
+
+.edit-track .control a {
+    color: slategrey;
+    text-decoration: underline;
+}
+
+.edit-track .control a.submit {
+    margin-right: 1.62em;
+}
+
+.edit-track .control a.remove {
+    color: firebrick;
+    float: right;
+}
 
 /*
 SIMPLE GRID
 inspired by ZACH COLE 2016
 */
-
 
 .container {
     margin-left: auto;
@@ -65,8 +169,9 @@ inspired by ZACH COLE 2016
 
 .row [class^="col"] {
     float: left;
-    margin: 1.5em 2%;
+    padding: 1.5em;
     min-height: 0.125em;
+    box-sizing: border-box;
 }
 
 .col-1,
@@ -81,9 +186,8 @@ inspired by ZACH COLE 2016
 .col-10,
 .col-11,
 .col-12 {
-    width: 96%;
+    width: 100%;
 }
-
 
 .row::after {
     content: "";
@@ -91,177 +195,59 @@ inspired by ZACH COLE 2016
     clear: both;
 }
 
-
-
-
-/*  Account UI */
-
-.accounts-dialog * {
-    font-family: 'Roboto Mono', monospace, sans-serif;
-}
-
-#login-buttons .login-button, .accounts-dialog .login-button {
-    background: slategray;
-    font-family: 'Roboto Mono', monospace, sans-serif;
-    border:none;
-    border-radius:4px;
-}
-
-#login-buttons .login-button:hover, .accounts-dialog .login-button:hover {
-    background: black;
-}
-
-/* Tracks */
-
-
-table.tracks {
-    border:none;
-    border-spacing:0;
-    width:100%;
-}
-
-tr.track:hover {
-    background:#d4d9de;
-}
-
-tr.recent td.indicator:before {
-    content: "»";
-    margin-left:-1em;
-    position:absolute;
-}
-
-tr.track td {
-    padding:0;
-    padding-right:1em;
-    vertical-align:top;
-}
-
-tr.track td:last-child {
-    padding:0;
-}
-
-.end-of-list td {
-    padding:3.24em 0;
-    text-align:center;
-    font-size:.81em;
-}
-
-a.load-more {
-    padding:0.25em 2em;
-    border-radius:4px;
-    background:slategrey;
-    color:white;
-}
-
-a.load-more:hover {
-    background:black;
-}
-
-
-/* edit track */
-
-.edit-track {
-    margin-bottom:1.62em;
-}
-
-tr .edit-track {
-    margin:1.62em 0;
-}
-
-.edit-track textarea {
-    border:none;
-    padding:0;
-    margin:0;
-    resize:none;
-    height:1.62em;
-    width:100%;
-    border-bottom:1px solid transparent;
-}
-
-.edit-track textarea:hover, .edit-track textarea:focus {
-    border-bottom:1px solid lightslategrey;
-}
-
-
-.edit-track .control {
-    color:slategray;
-    font-size:.81em;
-    height:1.62em;
-}
-
-
-.edit-track .control a {
-    color:slategrey;
-    text-decoration: underline;
-}
-
-.edit-track .control a.submit {
-    margin-right:1.62em;
-}
-
-.edit-track .control a.remove {
-    color:firebrick;
-    float:right;
-}
-
-
 @media only screen and (max-width: 40em) {
     .hidden-sm {
         display: none;
-    }
-    tr.recent td.indicator:before {
-        margin-left:0;
-        position:static;
     }
 }
 
 @media only screen and (min-width: 80em) {
     .col-1 {
-        width: 4.33%;
+        width: 8.33%;
     }
 
     .col-2 {
-        width: 12.66%;
+        width: 16.66%;
     }
 
     .col-3 {
-        width: 21%;
+        width: 25%;
     }
 
     .col-4 {
-        width: 29.33%;
+        width: 33.33%;
     }
 
     .col-5 {
-        width: 37.66%;
+        width: 41.66%;
     }
 
     .col-6 {
-        width: 46%;
+        width: 50%;
     }
 
     .col-7 {
-        width: 54.33%;
+        width: 58.33%;
     }
 
     .col-8 {
-        width: 62.66%;
+        width: 66.66%;
     }
 
     .col-9 {
-        width: 71%;
+        width: 75%;
     }
 
     .col-10 {
-        width: 79.33%;
+        width: 83.33%;
     }
 
     .col-11 {
-        width: 87.66%;
+        width: 91.66%;
     }
 
     .col-12 {
-        width: 96%;
+        width: 100%;
     }
 }
 
