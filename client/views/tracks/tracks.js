@@ -16,7 +16,7 @@ Meteor.tracks = {
             } else if (moment(now).subtract(1, "day").isSame(day, "day")) {
                 return "Yesterday";
             } else {
-                return momentDay.format("ddd");
+                return momentDay.format("dddd");
             }
         } else {
             return null;
