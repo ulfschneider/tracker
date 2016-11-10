@@ -9,11 +9,13 @@
     </div>
     {{#if currentUser}}
         <div class="row">
+            <div class="col-6">{{> editTrack}}</div>
+        </div>
+        <div class="row">
             <div class="col-6" style="overflow:hidden;">
                 <div>The Chart</div>
             </div>
             <div class="col-6">
-                {{> editTrack}}
                 {{> tracks}}
             </div>
         </div>
