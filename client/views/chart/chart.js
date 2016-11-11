@@ -47,7 +47,7 @@ Meteor.chart = {
             .rangeRound([chartData.height, 0]);
         chartData.durationAxis = d3.svg.axis().scale(chartData.durationScale).orient("left").innerTickSize(-chartData.width)
             .outerTickSize(0)
-            .tickPadding(7).tickFormat(Meteor.tracker.durationPrint);
+            .tickPadding(10).tickFormat(Meteor.tracker.durationPrint);
         return chartData;
     },
     setDurationLine: function (chartData) {
@@ -63,7 +63,9 @@ Meteor.chart = {
     setResultsScale: function (chartData) {
         chartData.resultsScale = d3.scale.linear().domain([chartData.resultsMin, chartData.resultsMax])
             .rangeRound([chartData.height, 0]);
-        chartData.resultsAxis = d3.svg.axis().scale(chartData.resultsScale).orient("right");
+        chartData.resultsAxis = d3.svg.axis().scale(chartData.resultsScale).orient("right").innerTickSize(-chartData.width)
+            .outerTickSize(0)
+            .tickPadding(10);
         return chartData;
     },
 
