@@ -6,6 +6,7 @@
     outline: none;
     text-decoration: none;
     font-size: 100%;
+    box-sizing: border-box;
 }
 
 html,
@@ -165,6 +166,7 @@ inspired by ZACH COLE 2016
 .row {
     position: relative;
     width: 100%;
+    box-sizing: border-box;
 }
 
 .row [class^="col"] {

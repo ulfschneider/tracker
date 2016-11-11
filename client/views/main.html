@@ -4,11 +4,11 @@
 
 <body>
 <div class="container">
-    <div class="row">
+    <div class="row header">
         <div class="col-12">Tracker {{> loginButtons}}</div>
     </div>
     {{#if currentUser}}
-        <div class="row">
+        <div class="row header">
             <div class="col-6">{{> editTrack}}</div>
         </div>
        {{> tracks}}

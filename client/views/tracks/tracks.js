@@ -1,3 +1,5 @@
+import {Session} from "meteor/session";
+
 Meteor.tracks = {
     trackDay: null,
     _formatDay: function (day) {
@@ -22,7 +24,7 @@ Meteor.tracks = {
             return null;
         }
     },
-    day: function (date) {
+    _day: function (date) {
         //detect if date changed compared to track from before
         var result = null;
 
@@ -32,6 +34,19 @@ Meteor.tracks = {
             Meteor.tracks.trackDay = date;
         }
         return Meteor.tracks._formatDay(result);
+    },
+    increaseLimit: function() {
+        var limit = Meteor.tracks.getLimit();
+        limit += 30;
+        Session.set("limit", limit);
+    },
+    getLimit: function() {
+        var limit = Session.get("limit");
+        if (!limit) {
+            return 30;
+        } else {
+            return limit;
+        }
     }
 }
 
@@ -42,23 +57,21 @@ Template.tracks.helpers({
         var tracks = Template.instance().tracks().fetch();
         //set day
         for (var i = 0; i < tracks.length; i++) {
-            tracks[i].day = Meteor.tracks.day(tracks[i].date);
+            tracks[i].day = Meteor.tracks._day(tracks[i].date);
         }
 
         return tracks;
 
     },
     hasMoreTracks: function () {
-        return Template.instance().tracks().count() >= Template.instance().limit.get();
+        return Template.instance().tracks().count() >= Meteor.tracks.getLimit();
     }
 });
 
 Template.tracks.events({
     'click .load-more': function (event) {
         event.preventDefault();
-        var limit = Template.instance().limit.get();
-        limit += 30;
-        Template.instance().limit.set(limit);
+        Meteor.tracks.increaseLimit();
     }
 });
 
@@ -66,10 +79,9 @@ Template.tracks.onCreated(function () {
 
     var instance = this;
     instance.loaded = new ReactiveVar(0);
-    instance.limit = new ReactiveVar(30);
 
     this.autorun(function () {
-        var limit = instance.limit.get();
+        var limit = Meteor.tracks.getLimit();
         var subscription = instance.subscribe('TrackData', limit);
         if (subscription.ready()) {
             instance.loaded.set(limit);

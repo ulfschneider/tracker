@@ -44,6 +44,7 @@
         <item url="file://$USER_HOME$/.meteor/packages/blaze/2.1.9/web.browser/builtins.js" />
         <item url="file://$USER_HOME$/.meteor/packages/blaze/2.1.9/web.browser/preamble.js" />
         <item url="file://$USER_HOME$/.meteor/packages/blaze/2.1.9/web.browser/domrange.js" />
+        <item url="file://$USER_HOME$/.meteor/packages/d3js_d3/3.5.8/web.browser/packages/d3js_d3.js" />
         <item url="file://$USER_HOME$/.meteor/packages/tracker/1.1.1/web.browser/deprecated.js" />
         <item url="file://$USER_HOME$/.meteor/packages/blaze-tools/1.0.10/web.browser/tokens.js" />
         <item url="file://$USER_HOME$/.meteor/packages/tracker/1.1.1/web.browser/tracker.js" />
@@ -230,6 +231,7 @@
       <root url="file://$USER_HOME$/.meteor/packages/blaze/2.1.9/web.browser/builtins.js" />
       <root url="file://$USER_HOME$/.meteor/packages/blaze/2.1.9/web.browser/preamble.js" />
       <root url="file://$USER_HOME$/.meteor/packages/blaze/2.1.9/web.browser/domrange.js" />
+      <root url="file://$USER_HOME$/.meteor/packages/d3js_d3/3.5.8/web.browser/packages/d3js_d3.js" />
       <root url="file://$USER_HOME$/.meteor/packages/tracker/1.1.1/web.browser/deprecated.js" />
       <root url="file://$USER_HOME$/.meteor/packages/blaze-tools/1.0.10/web.browser/tokens.js" />
       <root url="file://$USER_HOME$/.meteor/packages/tracker/1.1.1/web.browser/tracker.js" />
