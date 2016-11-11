@@ -1,30 +1,70 @@
 Meteor.chart = {
+    chartData: null,
     d3Chart: function () {
         return d3.select("#chart");
     },
     jQueryChart: function () {
         return $("#chart");
     },
+    clear: function(chartData) {
+        chartData.d3Chart.selectAll("*").remove();
+        return chartData;
+    },
     loadData: function (chartData) {
-        chartData.data =  Template.instance().tracks().fetch();
+        chartData.data = Template.instance().tracks().fetch();
+        chartData.durationMin = d3.min(chartData.data, function (d) {
+            return d.duration;
+        });
+        chartData.durationMax = d3.max(chartData.data, function (d) {
+            return d.duration;
+        });
+        chartData.dateMin = d3.min(chartData.data, function (d) {
+            return d.date;
+        });
+        chartData.dateMax = d3.max(chartData.data, function (d) {
+            return d.date;
+        });
+        chartData.resultsMin = d3.min(chartData.data, function (d) {
+            return d.results ? d3.min(d.results, function (r) {
+                return parseFloat(r);
+            }) : chartData.resultsMin;
+        });
+        chartData.resultsMax = d3.max(chartData.data, function (d) {
+            return d.results ? d3.max(d.results, function (r) {
+                return parseFloat(r);
+            }) : chartData.resultsMax;
+        });
         return chartData;
     },
-    setX: function (chartData) {
-        chartData.x = d3.scale.linear()
+    setDateScale: function (chartData) {
+        chartData.dateScale = d3.time.scale().domain([chartData.dateMin, chartData.dateMax])
             .rangeRound([0, chartData.width]);
+        chartData.dateAxis = d3.svg.axis().scale(chartData.dateScale).orient("top");
         return chartData;
     },
-    setY: function (chartData) {
-        chartData.y = d3.scale.linear()
+    setDurationScale: function (chartData) {
+        chartData.durationScale = d3.scale.linear().domain([chartData.durationMin, chartData.durationMax])
             .rangeRound([chartData.height, 0]);
+        chartData.durationAxis = d3.svg.axis().scale(chartData.durationScale).orient("left").tickFormat(Meteor.tracker.durationPrint);
         return chartData;
     },
-    setDurationLine: function(chartData) {
+    setDurationLine: function (chartData) {
         chartData.durationLine = d3.svg.line()
-            .x(function(d) { return  chartData.x(d.date); })
-            .y(function(d) { return  chartData.y(d.duration); });
+            .x(function (d) {
+                return chartData.dateScale(d.date);
+            })
+            .y(function (d) {
+                return d.duration ? chartData.durationScale(d.duration) : chartData.durationMin;
+            });
         return chartData;
     },
+    setResultsScale: function (chartData) {
+        chartData.resultsScale = d3.scale.linear().domain([chartData.resultsMin, chartData.resultsMax])
+            .rangeRound([chartData.height, 0]);
+        chartData.resultsAxis = d3.svg.axis().scale(chartData.resultsScale).orient("right");
+        return chartData;
+    },
+
     detectDimensions: function (chartData) {
         var jQueryChart = Meteor.chart.jQueryChart();
         chartData.jQueryChart = jQueryChart;
@@ -39,33 +79,63 @@ Meteor.chart = {
             headerHeight += $(element).outerHeight(true) + 2;
         });
 
-        chartData.width = w;
-        chartData.height = Math.max(windowHeight - headerHeight - padding, 400);
+        chartData.svgWidth = w;
+        chartData.svgHeight = Math.max(windowHeight - headerHeight - padding, 200);
 
         return chartData;
     }
     ,
     setDimensions: function (chartData) {
-        var d3Chart = chartData.d3Chart;
-        d3Chart.attr("width", chartData.width).attr("height", chartData.height);
-    },
-    draw: function () {
-        var chartData = {
-            d3Chart: Meteor.chart.d3Chart()
-        };
 
-        Meteor.chart.loadData(chartData);
+        chartData.margin = {top: 16 * 1.62, right: 100, bottom: 16*1.62, left: 100};
+
+        chartData.width = chartData.svgWidth - chartData.margin.left - chartData.margin.right;
+        chartData.height = chartData.svgHeight - chartData.margin.top - chartData.margin.bottom;
+
+        chartData.d3Chart.attr("width", chartData.svgWidth).attr("height", chartData.svgHeight);
+
+        return chartData;
+    },
+    draw: function (reload) {
+
+        if (!Meteor.chart.chartData) {
+            Meteor.chart.chartData = {
+                d3Chart: Meteor.chart.d3Chart()
+            }
+        }
+
+        var chartData = Meteor.chart.chartData;
+
+        Meteor.chart.clear(chartData);
         Meteor.chart.detectDimensions(chartData);
         Meteor.chart.setDimensions(chartData);
 
-     //   Meteor.chart.setX(chartData);
-      //  Meteor.chart.setY(chartData);
-      //  Meteor.chart.setDurationLine(chartData);
 
-      //  console.log(JSON.stringify(chartData.data));
-      //  console.log(JSON.stringify(chartData.durationLine));
+        if (reload) {
+            Meteor.chart.loadData(chartData);
+        }
 
-      //  chartData.d3Chart.append("svg:path").attr("d", chartData.durationLine(chartData.data));
+        Meteor.chart.setDateScale(chartData);
+        Meteor.chart.setDurationScale(chartData);
+        Meteor.chart.setDurationLine(chartData);
+        Meteor.chart.setResultsScale(chartData);
+
+
+        var g = chartData.d3Chart.append("g").attr("transform", "translate(" + chartData.margin.left + "," + chartData.margin.top + ")");
+
+        g.append("g").attr("class", "date axis")
+            .call(chartData.dateAxis);
+
+
+        g.append("g").attr("class", "duration axis")
+            .call(chartData.durationAxis);
+
+
+        g.append("g").attr("class", "results axis").attr("transform", "translate(" + chartData.width + ",0)")
+            .call(chartData.resultsAxis);
+
+        g.append("path").attr("class", "duration").attr("d", chartData.durationLine(chartData.data));
+
     }
 }
 
@@ -80,13 +150,14 @@ Template.chart.onCreated(function () {
         var subscription = instance.subscribe('TrackData', limit);
         if (subscription.ready()) {
             instance.loaded.set(limit);
-            Meteor.chart.draw();
+            Meteor.chart.draw(true);
         }
     });
 
     instance.tracks = function () {
-        return TrackData.find({}, {limit: instance.loaded.get(), sort: {date: -1, track: 1} });
+        return TrackData.find({}, {limit: instance.loaded.get(), sort: {date: -1, track: 1}});
     }
+
 
 });
 

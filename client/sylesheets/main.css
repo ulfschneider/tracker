@@ -64,12 +64,51 @@ body {
     background: black;
 }
 
+/* Chart */
+
+.axis path, .axis line {
+    shape-rendering: crispEdges;
+    stroke: black;
+    stroke-width: 1px;
+    fill: none;
+    display: none;
+}
+
+
+.results.axis path, .results.axis line {
+    stroke:#d4d9de;
+}
+
+.axis .minor line {
+    stroke: black;
+    stroke-dasharray: 2,2;
+}
+
+
+.axis text {
+    font-size:.82em;
+}
+
+.results.axis text {
+    fill: slategray;
+}
+
+.duration.axis text {
+    fill: black;
+}
+
+path.duration {
+    stroke: black;
+    stroke-width: 1px;
+    fill:none;
+}
+
+
 /* Tracks */
 
 table.tracks {
     border: none;
     border-spacing: 0;
-    width: 100%;
 }
 
 tr.track:hover {
