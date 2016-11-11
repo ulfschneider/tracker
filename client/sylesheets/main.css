@@ -71,7 +71,10 @@ body {
     stroke: black;
     stroke-width: 1px;
     fill: none;
-    display: none;
+}
+
+.axis path {
+    display:none;
 }
 
 
@@ -89,6 +92,7 @@ body {
     font-size:.82em;
 }
 
+
 .results.axis text {
     fill: slategray;
 }
@@ -97,10 +101,25 @@ body {
     fill: black;
 }
 
+
 path.duration {
     stroke: black;
     stroke-width: 1px;
     fill:none;
+}
+
+.line{
+    fill: none;
+    stroke: blue;
+    stroke-width: 2px;
+}
+
+.tick text{
+    font-size: 12px;
+}
+
+.tick line{
+    opacity: 0.2;
 }
 
 
