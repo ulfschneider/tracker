@@ -1,6 +1,6 @@
 Meteor.chart = {
     chartData: null,
-    trackFilters: new Set(),
+    chartTrackFilter: new Set(),
     d3Chart: function () {
         return d3.select("#chart");
     },
@@ -11,36 +11,42 @@ Meteor.chart = {
         chartData.d3Chart.selectAll("*").remove();
         return chartData;
     },
-    _addToTrackFilter: function (trackName) {
-        Meteor.chart.trackFilters.add(trackName.toLowerCase());
+    _addToChartTrackFilter: function (trackName) {
+        Meteor.chart.chartTrackFilter.add(trackName.toLowerCase());
     },
-    _removeFromTrackFilter: function (trackName) {
-        Meteor.chart.trackFilters.delete(trackName.toLowerCase());
+    _removeFromChartTrackFilter: function (trackName) {
+        Meteor.chart.chartTrackFilter.delete(trackName.toLowerCase());
     },
-    _toggleTrackFilter: function(trackName) {
-        if (Meteor.chart._hasTrackFilter(trackName)) {
-            Meteor.chart._removeFromTrackFilter(trackName);
+    _toggleChartTrackFilter: function(trackName) {
+        if (Meteor.chart._hasChartTrackFilter(trackName)) {
+            Meteor.chart._removeFromChartTrackFilter(trackName);
         } else {
-            Meteor.chart._addToTrackFilter(trackName);
+            Meteor.chart._addToChartTrackFilter(trackName);
         }
     },
-    _clearTrackFilter: function () {
-        Meteor.chart.trackFilter.clear();
+    _clearChartTrackFilter: function () {
+        Meteor.chart.chartTrackFilter.clear();
     },
-    _noTrackFilter: function() {
-        return Meteor.chart.trackFilters.size == 0;
+    _emptyChartTrackFilter: function() {
+        return Meteor.chart.chartTrackFilter.size == 0;
     },
-    _hasTrackFilter: function (trackName) {
-        return Meteor.chart.trackFilters.has(trackName.toLowerCase());
+    _hasChartTrackFilter: function (trackName) {
+        return Meteor.chart.chartTrackFilter.has(trackName.toLowerCase());
     },
     _trackBucketNameHtml: function (chartData) {
         var html = "";
-        if (chartData.trackBucketNames.length) {
+        if (chartData.trackBucketNames.length > 1) {
             html += "<ul class='track-bucket-names'>";
+
+            if (Meteor.chart._emptyChartTrackFilter()) {
+                html += "<li>Chart filter:</li>";
+            } else {
+                html += '<li><a href="#" class="reset">Reset filter</a>:';
+            }
             _.each(chartData.trackBucketNames, function (n) {
                 html += '<li><a name="' + n + '"';
                 html += ' href="#"';
-                html += ' class="' + (Meteor.chart._hasTrackFilter(n) ? "on" : "off") + '"';
+                html += ' class="filter ' + (Meteor.chart._hasChartTrackFilter(n) ? "on" : "off") + '"';
                 html +=  '>#' + n + '</a></li>';
             });
             html += "</ul>"
@@ -120,7 +126,7 @@ Meteor.chart = {
     _setDateScale: function (chartData) {
         chartData.dateScale = d3.time.scale().domain([chartData.dateMin, chartData.dateMax])
             .rangeRound([0, chartData.width]);
-        chartData.dateAxis = d3.svg.axis().scale(chartData.dateScale).orient("top");
+        chartData.dateAxis = d3.svg.axis().scale(chartData.dateScale).orient("top").ticks(4);
         return chartData;
     },
     _setDurationScale: function (chartData) {
@@ -224,7 +230,7 @@ Meteor.chart = {
 
         //track duration lines
         _.each(chartData.trackBuckets, function (bucket) {
-            if (Meteor.chart._noTrackFilter() || Meteor.chart._hasTrackFilter(bucket.name)) {
+            if (Meteor.chart._emptyChartTrackFilter() || Meteor.chart._hasChartTrackFilter(bucket.name)) {
                 g.append("path").attr("class", "duration " + bucket.name).attr("d", chartData.durationLine(bucket.tracks));
 
             }
@@ -237,9 +243,13 @@ Meteor.chart = {
 
 
 Template.chart.events({
-    "mousedown .track-bucket-names a": function (event) {
+    "click .track-bucket-names a.reset": function (event) {
+        Meteor.chart._clearChartTrackFilter();
+        Meteor.chart.draw(false);
+    },
+    "click .track-bucket-names a.filter": function (event) {
         var trackName = event.target.name;
-        Meteor.chart._toggleTrackFilter(trackName);
+        Meteor.chart._toggleChartTrackFilter(trackName);
         Meteor.chart.draw(false);
     }
 });

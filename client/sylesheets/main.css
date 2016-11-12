@@ -22,7 +22,7 @@ body {
 
 a {
     text-decoration:underline;
-    color:slategrey;
+    color:black;
 }
 
 ::-webkit-input-placeholder {
@@ -83,7 +83,7 @@ ul.track-bucket-names li {
     margin-right:1em;
 }
 
-ul.track-bucket-names a {
+ul.track-bucket-names a.filter {
     display:inline-block;
     padding:0px 3px;
     border-radius: 4px;
