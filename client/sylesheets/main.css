@@ -20,6 +20,11 @@ body {
     font-size: 100%;
 }
 
+a {
+    text-decoration:underline;
+    color:slategrey;
+}
+
 ::-webkit-input-placeholder {
     color: slategray;
 }
@@ -66,6 +71,22 @@ body {
 
 /* Chart */
 
+ul.track-bucket-names  {
+    list-style-type: none;
+    margin: 0;
+    margin-bottom:1.62em;
+    padding: 0;
+}
+
+ul.track-bucket-names li {
+    display:inline-block;
+    margin-right:1em;
+}
+
+ul.track-bucket-names .on {
+    color:black;
+}
+
 .axis path, .axis line {
     shape-rendering: crispEdges;
     stroke: black;
@@ -83,8 +104,8 @@ body {
     opacity: 1.0;
 }
 
-.results.axis path, .results.axis line {
-    stroke:#d4d9de;
+.results.axis line, .date.axis line {
+    display:none;
 }
 
 
@@ -100,26 +121,12 @@ body {
     fill: black;
 }
 
-
 path.duration {
     stroke: black;
     stroke-width: 1px;
     fill:none;
 }
 
-.line{
-    fill: none;
-    stroke: blue;
-    stroke-width: 2px;
-}
-
-.tick text{
-    font-size: 12px;
-}
-
-.tick line{
-    opacity: 0.2;
-}
 
 
 /* Tracks */
@@ -198,7 +205,6 @@ tr .edit-track {
 
 .edit-track .control a {
     color: slategrey;
-    text-decoration: underline;
 }
 
 .edit-track .control a.submit {
