@@ -83,8 +83,22 @@ ul.track-bucket-names li {
     margin-right:1em;
 }
 
-ul.track-bucket-names .on {
+ul.track-bucket-names a {
+    display:inline-block;
+    padding:0px 3px;
+    border-radius: 4px;
+    margin-left:-3px;
+}
+
+ul.track-bucket-names .off {
     color:black;
+    background:transparent;
+}
+
+ul.track-bucket-names .on {
+    color:white;
+    background:black;
+    text-decoration:none;
 }
 
 .axis path, .axis line {

@@ -226,6 +226,7 @@ Meteor.chart = {
         _.each(chartData.trackBuckets, function (bucket) {
             if (Meteor.chart._noTrackFilter() || Meteor.chart._hasTrackFilter(bucket.name)) {
                 g.append("path").attr("class", "duration " + bucket.name).attr("d", chartData.durationLine(bucket.tracks));
+
             }
         });
 
