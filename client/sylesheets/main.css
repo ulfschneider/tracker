@@ -190,7 +190,7 @@ a.load-more:hover {
 /* edit track */
 
 .edit-track {
-
+    min-width:300px;
 }
 
 tr .edit-track {

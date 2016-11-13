@@ -65,6 +65,9 @@ Template.tracks.helpers({
     },
     hasMoreTracks: function () {
         return Template.instance().tracks().count() >= Meteor.tracks.getLimit();
+    },
+    hasTracks: function() {
+        return Template.instance().tracks().count() >= 1;
     }
 });
 

@@ -1,10 +1,14 @@
 <template name="tracks">
     <div class="row">
+
+
         <div class="col-6">
             {{> chart}}
         </div>
 
+
         <div class="col-6">
+
             <table class="tracks">
                 {{#each tracks}}
                     {{> track}}
@@ -15,7 +19,9 @@
                             {{#if hasMoreTracks}}
                                 <a class="load-more" href="#">Load more tracks</a>
                             {{else}}
-                                <span>End of list</span>
+                                {{#if hasTracks}}
+                                    <span>End of list</span>
+                                {{/if}}
                             {{/if}}
                         {{/if}}
                     </td>
