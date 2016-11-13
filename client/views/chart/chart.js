@@ -140,22 +140,7 @@ Meteor.chart = {
         return chartData;
     }
     ,
-    _loadData: function (chartData) {
-
-        delete chartData.durationMin;
-        delete chartData.durationMax;
-        delete chartData.dateMin;
-        delete chartData.dateMax;
-        delete chartData.dateMin;
-        delete chartData.resultsMin;
-        delete chartData.resultsMax;
-        delete chartData.trackBuckets;
-        delete chartData.trackBucketNames;
-
-        chartData.data = Template.instance()
-            .tracks()
-            .fetch();
-
+    _calcMinMax:function(chartData) {
         chartData.durationMin = d3.min(chartData.data, function (d) {
             return d.duration;
         });
@@ -178,9 +163,8 @@ Meteor.chart = {
                 return parseFloat(r);
             }) : chartData.resultsMax;
         });
-
-        Meteor.chart._addDomainPadding(chartData);
-
+    },
+    _sortData: function (chartData) {
         //prepare track buckets and result buckets
         _.each(chartData.data, function (d) {
             Meteor.chart._addToTrackBucket(chartData, d);
@@ -191,12 +175,31 @@ Meteor.chart = {
         _.sortBy(chartData.trackBucketNames, function (n) {
             return n.toLowerCase();
         });
-        _.each(chartData.trackBuckets, function(trackBucket) {
-            _.sortBy(trackBucket.resultBuckets, function(b) {
+        _.each(chartData.trackBuckets, function (trackBucket) {
+            _.sortBy(trackBucket.resultBuckets, function (b) {
                 return b.name.toLowerCase();
             });
         });
+    },
+    _loadData: function (chartData) {
 
+        delete chartData.durationMin;
+        delete chartData.durationMax;
+        delete chartData.dateMin;
+        delete chartData.dateMax;
+        delete chartData.dateMin;
+        delete chartData.resultsMin;
+        delete chartData.resultsMax;
+        delete chartData.trackBuckets;
+        delete chartData.trackBucketNames;
+
+        chartData.data = Template.instance()
+            .tracks()
+            .fetch();
+
+        Meteor.chart._calcMinMax(chartData);
+        Meteor.chart._addDomainPadding(chartData);
+        Meteor.chart._sortData(chartData);
 
         return chartData;
     }
@@ -355,7 +358,7 @@ Meteor.chart = {
                         .attr("class", "duration " + trackBucket.name)
                         .attr("d", chartData.durationLine(trackBucket.tracks));
 
-                    _.each(trackBucket.resultBuckets, function(resultBucket) {
+                    _.each(trackBucket.resultBuckets, function (resultBucket) {
                         if (resultBucket.results.length > 1) {
                             g.append("path")
                                 .attr("class", "results " + resultBucket.name)
@@ -367,8 +370,6 @@ Meteor.chart = {
                 } else {
                     //TODO draw plot
                 }
-
-
             });
 
             //track bucket names
