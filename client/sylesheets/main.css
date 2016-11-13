@@ -141,6 +141,12 @@ path.duration {
     fill:none;
 }
 
+path.results {
+    stroke: #d4d9de;
+    stroke-width: 1px;
+    fill:none;
+}
+
 
 
 /* Tracks */

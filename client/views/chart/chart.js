@@ -90,7 +90,7 @@ Meteor.chart = {
         }
         return bucket;
     },
-    _addToResultBucket: function (trackBucket, result) {
+    _addToResultBucket: function (trackBucket, date, result) {
         var number = Meteor.chart._extractResult(result);
 
         if (number != NaN) {
@@ -104,11 +104,11 @@ Meteor.chart = {
 
             for (var i = 0; i < buckets.length; i++) {
                 if (buckets[i].name.toLowerCase() == resultBucket.toLowerCase()) {
-                    buckets[i].results.push(number);
+                    buckets[i].results.push({date: date, result: number});
                     return trackBucket;
                 }
             }
-            buckets.push({name: resultBucket, results: [number]});
+            buckets.push({name: resultBucket, results: [{date: date, result: number}]});
         }
         return trackBucket;
     },
@@ -126,14 +126,14 @@ Meteor.chart = {
                 buckets[i].tracks.push(t);
 
                 _.each(t.results, function (result) {
-                    Meteor.chart._addToResultBucket(buckets[i], result);
+                    Meteor.chart._addToResultBucket(buckets[i], t.date, result);
                 });
                 return chartData;
             }
         }
         buckets.push({name: t.track, tracks: [t]});
         _.each(t.results, function (result) {
-            Meteor.chart._addToResultBucket(buckets[buckets.length - 1], result);
+            Meteor.chart._addToResultBucket(buckets[buckets.length - 1], t.date, result);
         });
 
         chartData.trackBucketNames.push(t.track);
@@ -195,7 +195,6 @@ Meteor.chart = {
             _.sortBy(trackBucket.resultBuckets, function(b) {
                 return b.name.toLowerCase();
             });
-            console.log(JSON.stringify(trackBucket.resultBuckets));
         });
 
 
@@ -245,13 +244,20 @@ Meteor.chart = {
         chartData.resultsAxis = d3.svg.axis()
             .scale(chartData.resultsScale)
             .orient("right");
-
-        //no second grid:
-        //.innerTickSize(-chartData.width).outerTickSize(0).tickPadding(10);
         return chartData;
     }
     ,
-
+    _setResultsLine: function (chartData) {
+        chartData.resultsLine = d3.svg.line()
+            .x(function (d) {
+                return chartData.dateScale(d.date);
+            })
+            .y(function (d) {
+                return chartData.resultsScale(d.result);
+            });
+        return chartData;
+    }
+    ,
     _detectDimensions: function (chartData) {
         var jQueryChart = Meteor.chart.jQueryChart();
         chartData.jQueryChart = jQueryChart;
@@ -319,6 +325,7 @@ Meteor.chart = {
             Meteor.chart._setDurationScale(chartData);
             Meteor.chart._setDurationLine(chartData);
             Meteor.chart._setResultsScale(chartData);
+            Meteor.chart._setResultsLine(chartData);
 
 
             //chart
@@ -342,16 +349,26 @@ Meteor.chart = {
                 .call(chartData.resultsAxis);
 
             //track lines
-            _.each(chartData.trackBuckets, function (bucket) {
-                if (bucket.tracks.length > 1 && Meteor.chart._emptyChartTrackFilter() || Meteor.chart._hasChartTrackFilter(bucket.name)) {
+            _.each(chartData.trackBuckets, function (trackBucket) {
+                if (trackBucket.tracks.length > 1 && Meteor.chart._emptyChartTrackFilter() || Meteor.chart._hasChartTrackFilter(trackBucket.name)) {
                     g.append("path")
-                        .attr("class", "duration " + bucket.name)
-                        .attr("d", chartData.durationLine(bucket.tracks));
+                        .attr("class", "duration " + trackBucket.name)
+                        .attr("d", chartData.durationLine(trackBucket.tracks));
+
+                    _.each(trackBucket.resultBuckets, function(resultBucket) {
+                        if (resultBucket.results.length > 1) {
+                            g.append("path")
+                                .attr("class", "results " + resultBucket.name)
+                                .attr("d", chartData.resultsLine(resultBucket.results));
+                        } else {
+                            //TODO draw plot
+                        }
+                    });
                 } else {
                     //TODO draw plot
                 }
 
-                //TODO draw result buckets
+
             });
 
             //track bucket names
