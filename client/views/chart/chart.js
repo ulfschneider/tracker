@@ -354,6 +354,9 @@ Meteor.chart = {
     draw: function (reload) {
         if (!Meteor.chart.chartData) {
             reload = true;
+        }
+
+        if (reload) {
             Meteor.chart.chartData = {
                 d3Chart: Meteor.chart.d3Chart()
             }
