@@ -113,7 +113,7 @@ ul.track-bucket-names .on {
 }
 
 .axis .tick line {
-    stroke-dasharray: 1,5;
+    stroke-dasharray: 1,15;
     stroke-width: .5px;
     opacity: 1.0;
 }

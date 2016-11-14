@@ -265,7 +265,7 @@ Meteor.chart = {
     }
     ,
     _setDurationLine: function (chartData) {
-        chartData.durationLine = d3.svg.line()
+        chartData.durationLine = d3.svg.line().interpolate("bundle")
             .x(function (d) {
                 return chartData.dateScale(d.date);
             })
@@ -286,7 +286,7 @@ Meteor.chart = {
     }
     ,
     _setResultsLine: function (chartData) {
-        chartData.resultsLine = d3.svg.line()
+        chartData.resultsLine = d3.svg.line().interpolate("bundle")
             .x(function (d) {
                 return chartData.dateScale(d.date);
             })
