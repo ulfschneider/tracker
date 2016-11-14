@@ -278,7 +278,7 @@ Meteor.chart = {
             .defined(function (d) {
                 return !isNaN(d.duration);
             })
-            .interpolate("cardinal")
+          //  .interpolate("cardinal")
             .x(function (d) {
                 return chartData.dateScale(d.date);
             })
@@ -303,7 +303,7 @@ Meteor.chart = {
             .defined(function (d) {
                 return !isNaN(d.result);
             })
-            .interpolate("cardinal")
+         //   .interpolate("cardinal")
             .x(function (d) {
                 return chartData.dateScale(d.date);
             })
@@ -416,8 +416,8 @@ Meteor.chart = {
                             g.append("circle")
                                 .attr("class", "results dot " + resultBucket.name)
                                 .attr("r", 5)
-                                .attr("cx", chartData.resultsScale(resultBucket.results[0].date))
-                                .attr("cy", chartData.durationScale(resultBucket.results[0].result));
+                                .attr("cx", chartData.dateScale(resultBucket.results[0].date))
+                                .attr("cy", chartData.resultsScale(resultBucket.results[0].result));
                         }
                     });
                 } else if (trackBucket.tracks.length == 1) {
