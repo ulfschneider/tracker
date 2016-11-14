@@ -7,7 +7,7 @@ Meteor.chart = {
     jQueryChart: function () {
         return $("#chart");
     },
-    clearChartDrawing: function (chartData) {
+    _clearChartDrawing: function (chartData) {
         chartData.d3Chart.selectAll("*")
             .remove();
         $("#trackBucketNames")
@@ -141,6 +141,14 @@ Meteor.chart = {
     }
     ,
     _calcMinMax:function(chartData) {
+        delete chartData.durationMin;
+        delete chartData.durationMax;
+        delete chartData.dateMin;
+        delete chartData.dateMax;
+        delete chartData.dateMin;
+        delete chartData.resultsMin;
+        delete chartData.resultsMax;
+
         chartData.durationMin = d3.min(chartData.data, function (d) {
             return d.duration;
         });
@@ -164,7 +172,7 @@ Meteor.chart = {
             }) : chartData.resultsMax;
         });
     },
-    _sortData: function (chartData) {
+    _prepareBuckets: function (chartData) {
         //prepare track buckets and result buckets
         _.each(chartData.data, function (d) {
             Meteor.chart._addToTrackBucket(chartData, d);
@@ -181,15 +189,21 @@ Meteor.chart = {
             });
         });
     },
+    _scaling: function(chartData) {
+        Meteor.chart._calcMinMax(chartData);
+        Meteor.chart._addDomainPadding(chartData);
+
+        Meteor.chart._setDateScale(chartData);
+        Meteor.chart._setDurationScale(chartData);
+        Meteor.chart._setResultsScale(chartData);
+
+        Meteor.chart._setDurationLine(chartData);
+        Meteor.chart._setResultsLine(chartData);
+
+        return chartData;
+    },
     _loadData: function (chartData) {
 
-        delete chartData.durationMin;
-        delete chartData.durationMax;
-        delete chartData.dateMin;
-        delete chartData.dateMax;
-        delete chartData.dateMin;
-        delete chartData.resultsMin;
-        delete chartData.resultsMax;
         delete chartData.trackBuckets;
         delete chartData.trackBucketNames;
 
@@ -197,9 +211,7 @@ Meteor.chart = {
             .tracks()
             .fetch();
 
-        Meteor.chart._calcMinMax(chartData);
-        Meteor.chart._addDomainPadding(chartData);
-        Meteor.chart._sortData(chartData);
+        Meteor.chart._prepareBuckets(chartData);
 
         return chartData;
     }
@@ -309,7 +321,7 @@ Meteor.chart = {
 
         var chartData = Meteor.chart.chartData;
 
-        Meteor.chart.clearChartDrawing(chartData);
+        Meteor.chart._clearChartDrawing(chartData);
         Meteor.chart._detectDimensions(chartData);
         Meteor.chart._setDimensions(chartData);
 
@@ -324,12 +336,7 @@ Meteor.chart = {
             $("#chart")
                 .show();
 
-            Meteor.chart._setDateScale(chartData);
-            Meteor.chart._setDurationScale(chartData);
-            Meteor.chart._setDurationLine(chartData);
-            Meteor.chart._setResultsScale(chartData);
-            Meteor.chart._setResultsLine(chartData);
-
+            Meteor.chart._scaling(chartData);
 
             //chart
             var g = chartData.d3Chart.append("g")
@@ -351,7 +358,7 @@ Meteor.chart = {
                 .attr("transform", "translate(" + chartData.width + ",0)")
                 .call(chartData.resultsAxis);
 
-            //track lines
+            //draw track lines
             _.each(chartData.trackBuckets, function (trackBucket) {
                 if (trackBucket.tracks.length > 1 && Meteor.chart._emptyChartTrackFilter() || Meteor.chart._hasChartTrackFilter(trackBucket.name)) {
                     g.append("path")

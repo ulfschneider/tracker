@@ -128,7 +128,7 @@ ul.track-bucket-names .on {
 }
 
 .results.axis text {
-    fill: slategray;
+    fill: lightslategray;
 }
 
 .duration.axis text {
@@ -137,13 +137,13 @@ ul.track-bucket-names .on {
 
 path.duration {
     stroke: black;
-    stroke-width: 1px;
+    stroke-width: 2px;
     fill:none;
 }
 
 path.results {
-    stroke: #d4d9de;
-    stroke-width: 1px;
+    stroke: lightslategray;
+    stroke-width: 2px;
     fill:none;
 }
 
