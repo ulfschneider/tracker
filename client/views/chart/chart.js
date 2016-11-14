@@ -246,7 +246,7 @@ Meteor.chart = {
         chartData.dateAxis = d3.svg.axis()
             .scale(chartData.dateScale)
             .orient("top")
-            .ticks(3);
+            .ticks(chartData.width > 400 ? 3 : 2);
         return chartData;
     }
     ,
