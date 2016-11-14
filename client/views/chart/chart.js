@@ -138,8 +138,7 @@ Meteor.chart = {
 
         chartData.trackBucketNames.push(t.track);
         return chartData;
-    }
-    ,
+    },
     _calcMinMax:function(chartData) {
         delete chartData.durationMin;
         delete chartData.durationMax;
@@ -150,26 +149,50 @@ Meteor.chart = {
         delete chartData.resultsMax;
 
         chartData.durationMin = d3.min(chartData.data, function (d) {
-            return d.duration;
+            if (Meteor.chart._hasChartTrackFilter(d.track)||Meteor.chart._emptyChartTrackFilter()) {
+                return d.duration;
+            } else {
+                return chartData.durationMin;
+            }
         });
         chartData.durationMax = d3.max(chartData.data, function (d) {
-            return d.duration;
+            if (Meteor.chart._hasChartTrackFilter(d.track)||Meteor.chart._emptyChartTrackFilter()) {
+                return d.duration;
+            } else {
+                return chartData.durationMax;
+            }
         });
         chartData.dateMin = d3.min(chartData.data, function (d) {
-            return d.date;
+            if (Meteor.chart._hasChartTrackFilter(d.track)||Meteor.chart._emptyChartTrackFilter()) {
+                return d.date;
+            } else {
+                return chartData.dateMin;
+            }
         });
         chartData.dateMax = d3.max(chartData.data, function (d) {
-            return d.date;
+            if (Meteor.chart._hasChartTrackFilter(d.track)||Meteor.chart._emptyChartTrackFilter()) {
+                return d.date;
+            }else {
+                return chartData.dateMax;
+            }
         });
         chartData.resultsMin = d3.min(chartData.data, function (d) {
-            return d.results ? d3.min(d.results, function (r) {
-                return parseFloat(r);
-            }) : chartData.resultsMin;
+            if (Meteor.chart._hasChartTrackFilter(d.track)||Meteor.chart._emptyChartTrackFilter()) {
+                return d.results ? d3.min(d.results, function (r) {
+                    return parseFloat(r);
+                }) : chartData.resultsMin;
+            } else {
+                return chartData.resultsMin;
+            }
         });
         chartData.resultsMax = d3.max(chartData.data, function (d) {
-            return d.results ? d3.max(d.results, function (r) {
-                return parseFloat(r);
-            }) : chartData.resultsMax;
+            if (Meteor.chart._hasChartTrackFilter(d.track)||Meteor.chart._emptyChartTrackFilter()) {
+                return d.results ? d3.max(d.results, function (r) {
+                    return parseFloat(r);
+                }) : chartData.resultsMax;
+            } else {
+                return chartData.resultsMax;
+            }
         });
     },
     _prepareBuckets: function (chartData) {
