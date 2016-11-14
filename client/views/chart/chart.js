@@ -436,7 +436,8 @@ Meteor.chart = {
                             g.append("path")
                                 .attr("class", "results line " + resultBucket.name)
                                 .attr("d", chartData.resultsLine(resultBucket.results));
-                        } else if (resultBucket.results.length == 1 && !isNaN(resultBucket.results[0].result)) {
+                        } else if (resultBucket.results.length == 1 && !isNaN(resultBucket.results[0].results)) {
+
                             //draw cirlce
                             g.append("circle")
                                 .attr("class", "results dot " + resultBucket.name)
