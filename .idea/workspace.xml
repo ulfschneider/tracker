@@ -2,12 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8f94bd54-6f4a-4908-8fcb-7b5f5f64d50d" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/tracker_node_modules.xml" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/meteor_packages_auto_import_browser.xml" afterPath="$PROJECT_DIR$/.idea/libraries/meteor_packages_auto_import_browser.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/meteor_packages_auto_import_npm.xml" afterPath="$PROJECT_DIR$/.idea/libraries/meteor_packages_auto_import_npm.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/tracker.iml" afterPath="$PROJECT_DIR$/.idea/tracker.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/views/chart/chart.js" afterPath="$PROJECT_DIR$/client/views/chart/chart.js" />
     </list>
     <ignored path="tracker.iws" />
@@ -51,8 +45,8 @@
       <file leaf-file-name="chart.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/client/views/chart/chart.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="740">
-              <caret line="305" column="11" selection-start-line="305" selection-start-column="11" selection-end-line="305" selection-end-column="11" />
+            <state relative-caret-position="675">
+              <caret line="305" column="9" selection-start-line="305" selection-start-column="9" selection-end-line="305" selection-end-column="9" />
               <folding />
             </state>
           </provider>
@@ -461,12 +455,12 @@
       <workItem from="1479050787880" duration="2651000" />
       <workItem from="1479108481078" duration="4650000" />
       <workItem from="1479125419115" duration="5004000" />
-      <workItem from="1479146773619" duration="456000" />
+      <workItem from="1479146773619" duration="1226000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="172449000" />
+    <option name="totallyTimeSpent" value="173219000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="121" y="150" width="1654" height="1086" extended-state="0" />
@@ -876,8 +870,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/client/views/chart/chart.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="740">
-          <caret line="305" column="11" selection-start-line="305" selection-start-column="11" selection-end-line="305" selection-end-column="11" />
+        <state relative-caret-position="675">
+          <caret line="305" column="9" selection-start-line="305" selection-start-column="9" selection-end-line="305" selection-end-column="9" />
           <folding />
         </state>
       </provider>
