@@ -135,18 +135,25 @@ ul.track-bucket-names .on {
     fill: black;
 }
 
-path.duration {
+.duration.line {
     stroke: black;
     stroke-width: 2px;
     fill:none;
 }
 
-path.results {
+.duration.dot {
+    fill:black;
+}
+
+.results.line {
     stroke: gray;
     stroke-width: 2px;
     stroke-dasharray: 8,2;
     fill:none;
+}
 
+.results.dot {
+    fill:gray;
 }
 
 

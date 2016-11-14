@@ -60,7 +60,7 @@ Meteor.chart = {
     },
     _addDomainPadding: function (chartData) {
         if (!_.isUndefined(chartData.durationMax) && !_.isUndefined(chartData.durationMin)) {
-            if (chartData.durationMin == NaN || chartData.durationMin == chartData.durationMax) {
+            if (isNaN(chartData.durationMin) || chartData.durationMin == chartData.durationMax) {
                 chartData.durationMin = 0;
             }
 
@@ -73,7 +73,7 @@ Meteor.chart = {
         }
 
         if (!_.isUndefined(chartData.resultsMax) && !_.isUndefined(chartData.resultsMin)) {
-            if (chartData.resultsMin == NaN || chartData.resultsMin == chartData.resultsMax) {
+            if (isNaN(chartData.resultsMin) || chartData.resultsMin == chartData.resultsMax) {
                 chartData.resultsMin = 0;
             }
             var results = chartData.resultsMax - chartData.resultsMin;
@@ -104,23 +104,21 @@ Meteor.chart = {
     _addToResultBucket: function (trackBucket, date, result) {
         var number = Meteor.chart._extractResult(result);
 
-        if (number != NaN) {
-
-            if (!trackBucket["resultBuckets"]) {
-                trackBucket.resultBuckets = [];
-            }
-
-            var buckets = trackBucket.resultBuckets;
-            var resultBucket = Meteor.chart._extractResultBucket(result);
-
-            for (var i = 0; i < buckets.length; i++) {
-                if (buckets[i].name.toLowerCase() == resultBucket.toLowerCase()) {
-                    buckets[i].results.push({date: date, result: number});
-                    return trackBucket;
-                }
-            }
-            buckets.push({name: resultBucket, results: [{date: date, result: number}]});
+        if (!trackBucket["resultBuckets"]) {
+            trackBucket.resultBuckets = [];
         }
+
+        var buckets = trackBucket.resultBuckets;
+        var resultBucket = Meteor.chart._extractResultBucket(result);
+
+        for (var i = 0; i < buckets.length; i++) {
+            if (buckets[i].name.toLowerCase() == resultBucket.toLowerCase()) {
+                buckets[i].results.push({date: date, result: number});
+                return trackBucket;
+            }
+        }
+        buckets.push({name: resultBucket, results: [{date: date, result: number}]});
+
         return trackBucket;
     },
     _addToTrackBucket: function (chartData, t) {
@@ -276,12 +274,16 @@ Meteor.chart = {
     }
     ,
     _setDurationLine: function (chartData) {
-        chartData.durationLine = d3.svg.line().interpolate("cardinal")
+        chartData.durationLine = d3.svg.line()
+            .defined(function (d) {
+                return !isNaN(d.duration);
+            })
+            .interpolate("cardinal")
             .x(function (d) {
                 return chartData.dateScale(d.date);
             })
             .y(function (d) {
-                return d.duration ? chartData.durationScale(d.duration) : chartData.durationMin;
+                return chartData.durationScale(d.duration);
             });
         return chartData;
     }
@@ -297,7 +299,11 @@ Meteor.chart = {
     }
     ,
     _setResultsLine: function (chartData) {
-        chartData.resultsLine = d3.svg.line().interpolate("cardinal")
+        chartData.resultsLine = d3.svg.line()
+            .defined(function (d) {
+                return !isNaN(d.result);
+            })
+            .interpolate("cardinal")
             .x(function (d) {
                 return chartData.dateScale(d.date);
             })
@@ -359,7 +365,6 @@ Meteor.chart = {
         Meteor.chart._detectDimensions(chartData);
         Meteor.chart._setDimensions(chartData);
 
-
         if (reload) {
             Meteor.chart._loadData(chartData);
         }
@@ -395,21 +400,50 @@ Meteor.chart = {
             //draw track lines
             _.each(chartData.trackBuckets, function (trackBucket) {
                 if (trackBucket.tracks.length > 1 && Meteor.chart._emptyChartTrackFilter() || Meteor.chart._hasChartTrackFilter(trackBucket.name)) {
+                    //draw track duration line
                     g.append("path")
                         .attr("class", "duration line " + trackBucket.name)
                         .attr("d", chartData.durationLine(trackBucket.tracks));
 
                     _.each(trackBucket.resultBuckets, function (resultBucket) {
                         if (resultBucket.results.length > 1) {
+                            //draw track result line
                             g.append("path")
                                 .attr("class", "results line " + resultBucket.name)
                                 .attr("d", chartData.resultsLine(resultBucket.results));
-                        } else {
-                            //TODO draw plot
+                        } else if (resultBucket.results.length == 1 && !isNaN(resultBucket.results[0].result)) {
+                            //draw cirlce
+                            g.append("circle")
+                                .attr("class", "results dot " + resultBucket.name)
+                                .attr("r", 5)
+                                .attr("cx", chartData.resultsScale(resultBucket.results[0].date))
+                                .attr("cy", chartData.durationScale(resultBucket.results[0].result));
                         }
                     });
-                } else {
-                    //TODO draw plot
+                } else if (trackBucket.tracks.length == 1) {
+                    //draw circle
+                    if (!isNaN(trackBucket.tracks[0].duration)) {
+                        g.append("circle")
+                            .attr("class", "duration dot " + trackBucket.name)
+                            .attr("r", 5)
+                            .attr("cx", chartData.dateScale(trackBucket.tracks[0].date))
+                            .attr("cy", chartData.durationScale(trackBucket.tracks[0].duration));
+                    }
+                    _.each(trackBucket.resultBuckets, function (resultBucket) {
+                        if (resultBucket.results.length > 1) {
+                            //draw track result line
+                            g.append("path")
+                                .attr("class", "results line " + resultBucket.name)
+                                .attr("d", chartData.resultsLine(resultBucket.results));
+                        } else if (resultBucket.results.length == 1 && !isNaN(resultBucket.results[0].result)) {
+                            //draw cirlce
+                            g.append("circle")
+                                .attr("class", "results dot " + resultBucket.name)
+                                .attr("r", 5)
+                                .attr("cx", chartData.dateScale(resultBucket.results[0].date))
+                                .attr("cy", chartData.resultsScale(resultBucket.results[0].result));
+                        }
+                    });
                 }
             });
 
