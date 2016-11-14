@@ -396,13 +396,13 @@ Meteor.chart = {
             _.each(chartData.trackBuckets, function (trackBucket) {
                 if (trackBucket.tracks.length > 1 && Meteor.chart._emptyChartTrackFilter() || Meteor.chart._hasChartTrackFilter(trackBucket.name)) {
                     g.append("path")
-                        .attr("class", "duration " + trackBucket.name)
+                        .attr("class", "duration line " + trackBucket.name)
                         .attr("d", chartData.durationLine(trackBucket.tracks));
 
                     _.each(trackBucket.resultBuckets, function (resultBucket) {
                         if (resultBucket.results.length > 1) {
                             g.append("path")
-                                .attr("class", "results " + resultBucket.name)
+                                .attr("class", "results line " + resultBucket.name)
                                 .attr("d", chartData.resultsLine(resultBucket.results));
                         } else {
                             //TODO draw plot
@@ -449,7 +449,7 @@ Template.chart.onCreated(function () {
     });
 
     instance.tracks = function () {
-        return TrackData.find({}, {limit: instance.loaded.get(), sort: {date: -1, track: 1}});
+        return TrackData.find({}, {limit: instance.loaded.get(), sort: {date: 1, track: 1}});
     }
 });
 
