@@ -373,15 +373,20 @@ Meteor.chart = {
         g.append("path")
             .attr("class", "duration line " + trackBucket.name)
             .attr("d", chartData.durationLine(trackBucket.tracks));
+
+        _.each(trackBucket.tracks, function(track) {
+            Meteor.chart._drawDurationDot(chartData, g, trackBucket, track);
+        });
+
         return chartData;
     },
-    _drawDurationDot: function (chartData, g, trackBucket) {
-        if (!isNaN(trackBucket.tracks[0].duration)) {
+    _drawDurationDot: function (chartData, g, trackBucketName, data) {
+        if (!isNaN(data.duration)) {
             g.append("circle")
-                .attr("class", "duration dot " + trackBucket.name)
+                .attr("class", "duration dot " + trackBucketName)
                 .attr("r", 5)
-                .attr("cx", chartData.dateScale(trackBucket.tracks[0].date))
-                .attr("cy", chartData.durationScale(trackBucket.tracks[0].duration));
+                .attr("cx", chartData.dateScale(data.date))
+                .attr("cy", chartData.durationScale(data.duration));
         }
         return chartData;
     },
@@ -389,15 +394,20 @@ Meteor.chart = {
         g.append("path")
             .attr("class", "results line " + resultBucket.name)
             .attr("d", chartData.resultsLine(resultBucket.results));
+
+        _.each(resultBucket.results, function(result) {
+            console.log("draw result dots");
+            Meteor.chart._drawResultDot(chartData, g, resultBucket, result);
+        });
         return chartData;
     },
-    _drawResultDot: function (chartData, g, resultBucket) {
-        if (!isNaN(resultBucket.results[0].result)) {
+    _drawResultDot: function (chartData, g, resultBucketName, data) {
+        if (!isNaN(data.result)) {
             g.append("circle")
-                .attr("class", "results dot " + resultBucket.name)
-                .attr("r", 4)
-                .attr("cx", chartData.dateScale(resultBucket.results[0].date))
-                .attr("cy", chartData.resultsScale(resultBucket.results[0].result));
+                .attr("class", "results dot " + resultBucketName)
+                .attr("r", 3)
+                .attr("cx", chartData.dateScale(data.date))
+                .attr("cy", chartData.resultsScale(data.result));
         }
         return chartData;
     },
@@ -409,16 +419,16 @@ Meteor.chart = {
                     if (resultBucket.results.length > 1) {
                         Meteor.chart._drawResultLine(chartData, g, resultBucket);
                     } else if (resultBucket.results.length == 1) {
-                        Meteor.chart._drawResultDot(chartData, g, resultBucket);
+                        Meteor.chart._drawResultDot(chartData, g, resultBucket.name, resultBucket.results[0]);
                     }
                 });
             } else if (trackBucket.tracks.length == 1) {
-                Meteor.chart._drawDurationDot(chartData, g, trackBucket);
+                Meteor.chart._drawDurationDot(chartData, g, trackBucket.name, trackBucket.tracks[0]);
                 _.each(trackBucket.resultBuckets, function (resultBucket) {
                     if (resultBucket.results.length > 1) {
                         Meteor.chart._drawResultLine(chartData, g, resultBucket);
                     } else if (resultBucket.results.length == 1) {
-                        Meteor.chart._drawResultDot(chartData, g, resultBucket);
+                        Meteor.chart._drawResultDot(chartData, g, resultBucket.name, resultBucket.results[0]);
                     }
                 });
             }
