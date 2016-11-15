@@ -370,11 +370,12 @@ Meteor.chart = {
         return chartData;
     },
     _drawDurationLine: function (chartData, g, trackBucket) {
-        g.append("path")
-            .attr("class", "duration line " + trackBucket.name)
-            .attr("d", chartData.durationLine(trackBucket.tracks));
-
-        _.each(trackBucket.tracks, function(track) {
+        if (trackBucket.tracks.length > 1) {
+            g.append("path")
+                .attr("class", "duration line " + trackBucket.name)
+                .attr("d", chartData.durationLine(trackBucket.tracks));
+        }
+        _.each(trackBucket.tracks, function (track) {
             Meteor.chart._drawDurationDot(chartData, g, trackBucket, track);
         });
 
@@ -386,17 +387,17 @@ Meteor.chart = {
                 .attr("class", "duration dot " + trackBucketName)
                 .attr("r", 5)
                 .attr("cx", chartData.dateScale(data.date))
-                .attr("cy", chartData.durationScale(data.duration));
+                .attr("cy", chartData.durationScale(data.duration))
         }
         return chartData;
     },
     _drawResultLine: function (chartData, g, resultBucket) {
-        g.append("path")
-            .attr("class", "results line " + resultBucket.name)
-            .attr("d", chartData.resultsLine(resultBucket.results));
-
-        _.each(resultBucket.results, function(result) {
-            console.log("draw result dots");
+        if (resultBucket.results.length > 1) {
+            g.append("path")
+                .attr("class", "results line " + resultBucket.name)
+                .attr("d", chartData.resultsLine(resultBucket.results));
+        }
+        _.each(resultBucket.results, function (result) {
             Meteor.chart._drawResultDot(chartData, g, resultBucket, result);
         });
         return chartData;
@@ -413,26 +414,14 @@ Meteor.chart = {
     },
     _drawTracks: function (chartData, g) {
         _.each(chartData.trackBuckets, function (trackBucket) {
-            if (trackBucket.tracks.length > 1 && Meteor.chart._emptyChartTrackFilter() || Meteor.chart._hasChartTrackFilter(trackBucket.name)) {
+            if (trackBucket.tracks.length && Meteor.chart._emptyChartTrackFilter() || Meteor.chart._hasChartTrackFilter(trackBucket.name)) {
                 Meteor.chart._drawDurationLine(chartData, g, trackBucket);
                 _.each(trackBucket.resultBuckets, function (resultBucket) {
-                    if (resultBucket.results.length > 1) {
-                        Meteor.chart._drawResultLine(chartData, g, resultBucket);
-                    } else if (resultBucket.results.length == 1) {
-                        Meteor.chart._drawResultDot(chartData, g, resultBucket.name, resultBucket.results[0]);
-                    }
-                });
-            } else if (trackBucket.tracks.length == 1) {
-                Meteor.chart._drawDurationDot(chartData, g, trackBucket.name, trackBucket.tracks[0]);
-                _.each(trackBucket.resultBuckets, function (resultBucket) {
-                    if (resultBucket.results.length > 1) {
-                        Meteor.chart._drawResultLine(chartData, g, resultBucket);
-                    } else if (resultBucket.results.length == 1) {
-                        Meteor.chart._drawResultDot(chartData, g, resultBucket.name, resultBucket.results[0]);
-                    }
+                    Meteor.chart._drawResultLine(chartData, g, resultBucket);
                 });
             }
         });
+
         return chartData;
     },
     draw: function (reload) {
