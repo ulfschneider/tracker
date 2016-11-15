@@ -408,16 +408,16 @@ Meteor.chart = {
                 _.each(trackBucket.resultBuckets, function (resultBucket) {
                     if (resultBucket.results.length > 1) {
                         Meteor.chart._drawResultLine(chartData, g, resultBucket);
-                    } else if (resultBucket.results.length == 1 && !isNaN(resultBucket.results[0].result)) {
+                    } else if (resultBucket.results.length == 1) {
                         Meteor.chart._drawResultDot(chartData, g, resultBucket);
                     }
                 });
             } else if (trackBucket.tracks.length == 1) {
-                Meteor.chart._drawResultDot(chartData, g, trackBucket);
+                Meteor.chart._drawDurationDot(chartData, g, trackBucket);
                 _.each(trackBucket.resultBuckets, function (resultBucket) {
                     if (resultBucket.results.length > 1) {
                         Meteor.chart._drawResultLine(chartData, g, resultBucket);
-                    } else if (resultBucket.results.length == 1 && !isNaN(resultBucket.results[0].results)) {
+                    } else if (resultBucket.results.length == 1) {
                         Meteor.chart._drawResultDot(chartData, g, resultBucket);
                     }
                 });
@@ -444,7 +444,7 @@ Meteor.chart = {
             Meteor.chart._loadData(chartData);
         }
 
-        if (chartData.data.length > 1) {
+        if (chartData.data.length >= 1) {
             $("#trackBucketNames")
                 .show();
             $("#chart")
