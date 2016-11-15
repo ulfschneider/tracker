@@ -1,14 +1,13 @@
 <template name="tracks">
     <div class="row">
 
+        {{#if hasMultipleTracks}}
+            <div class="col-6">
+                {{> chart}}
+            </div>
+        {{/if}}
 
-        <div class="col-6">
-            {{> chart}}
-        </div>
-
-
-        <div class="col-6">
-
+        <div class="{{#if hasMultipleTracks}}col-6{{else}}col-12{{/if}}">
             <table class="tracks">
                 {{#each tracks}}
                     {{> track}}

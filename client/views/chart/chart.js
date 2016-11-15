@@ -351,11 +351,84 @@ Meteor.chart = {
         return chartData;
     }
     ,
+    _drawAxis: function (chartData, g) {
+        //date axis
+        g.append("g")
+            .attr("class", "date axis")
+            .call(chartData.dateAxis);
+
+        //duration axis
+        g.append("g")
+            .attr("class", "duration axis")
+            .call(chartData.durationAxis);
+
+        //results axis
+        g.append("g")
+            .attr("class", "results axis")
+            .attr("transform", "translate(" + chartData.width + ",0)")
+            .call(chartData.resultsAxis);
+        return chartData;
+    },
+    _drawDurationLine: function (chartData, g, trackBucket) {
+        g.append("path")
+            .attr("class", "duration line " + trackBucket.name)
+            .attr("d", chartData.durationLine(trackBucket.tracks));
+        return chartData;
+    },
+    _drawDurationDot: function (chartData, g, trackBucket) {
+        if (!isNaN(trackBucket.tracks[0].duration)) {
+            g.append("circle")
+                .attr("class", "duration dot " + trackBucket.name)
+                .attr("r", 5)
+                .attr("cx", chartData.dateScale(trackBucket.tracks[0].date))
+                .attr("cy", chartData.durationScale(trackBucket.tracks[0].duration));
+        }
+        return chartData;
+    },
+    _drawResultLine: function (chartData, g, resultBucket) {
+        g.append("path")
+            .attr("class", "results line " + resultBucket.name)
+            .attr("d", chartData.resultsLine(resultBucket.results));
+        return chartData;
+    },
+    _drawResultDot: function (chartData, g, resultBucket) {
+        if (!isNaN(resultBucket.results[0].result)) {
+            g.append("circle")
+                .attr("class", "results dot " + resultBucket.name)
+                .attr("r", 4)
+                .attr("cx", chartData.dateScale(resultBucket.results[0].date))
+                .attr("cy", chartData.resultsScale(resultBucket.results[0].result));
+        }
+        return chartData;
+    },
+    _drawTracks: function (chartData, g) {
+        _.each(chartData.trackBuckets, function (trackBucket) {
+            if (trackBucket.tracks.length > 1 && Meteor.chart._emptyChartTrackFilter() || Meteor.chart._hasChartTrackFilter(trackBucket.name)) {
+                Meteor.chart._drawDurationLine(chartData, g, trackBucket);
+                _.each(trackBucket.resultBuckets, function (resultBucket) {
+                    if (resultBucket.results.length > 1) {
+                        Meteor.chart._drawResultLine(chartData, g, resultBucket);
+                    } else if (resultBucket.results.length == 1 && !isNaN(resultBucket.results[0].result)) {
+                        Meteor.chart._drawResultDot(chartData, g, resultBucket);
+                    }
+                });
+            } else if (trackBucket.tracks.length == 1) {
+                Meteor.chart._drawResultDot(chartData, g, trackBucket);
+                _.each(trackBucket.resultBuckets, function (resultBucket) {
+                    if (resultBucket.results.length > 1) {
+                        Meteor.chart._drawResultLine(chartData, g, resultBucket);
+                    } else if (resultBucket.results.length == 1 && !isNaN(resultBucket.results[0].results)) {
+                        Meteor.chart._drawResultDot(chartData, g, resultBucket);
+                    }
+                });
+            }
+        });
+        return chartData;
+    },
     draw: function (reload) {
         if (!Meteor.chart.chartData) {
             reload = true;
         }
-
         if (reload) {
             Meteor.chart.chartData = {
                 d3Chart: Meteor.chart.d3Chart()
@@ -363,7 +436,6 @@ Meteor.chart = {
         }
 
         var chartData = Meteor.chart.chartData;
-
         Meteor.chart._clearChartDrawing(chartData);
         Meteor.chart._detectDimensions(chartData);
         Meteor.chart._setDimensions(chartData);
@@ -383,76 +455,10 @@ Meteor.chart = {
             //chart
             var g = chartData.d3Chart.append("g")
                 .attr("transform", "translate(" + chartData.margin.left + "," + chartData.margin.top + ")");
+            Meteor.chart._drawAxis(chartData, g);
+            Meteor.chart._drawTracks(chartData, g);
 
-            //date axis
-            g.append("g")
-                .attr("class", "date axis")
-                .call(chartData.dateAxis);
-
-            //duration axis
-            g.append("g")
-                .attr("class", "duration axis")
-                .call(chartData.durationAxis);
-
-            //results axis
-            g.append("g")
-                .attr("class", "results axis")
-                .attr("transform", "translate(" + chartData.width + ",0)")
-                .call(chartData.resultsAxis);
-
-            //draw track lines
-            _.each(chartData.trackBuckets, function (trackBucket) {
-                if (trackBucket.tracks.length > 1 && Meteor.chart._emptyChartTrackFilter() || Meteor.chart._hasChartTrackFilter(trackBucket.name)) {
-                    //draw track duration line
-                    g.append("path")
-                        .attr("class", "duration line " + trackBucket.name)
-                        .attr("d", chartData.durationLine(trackBucket.tracks));
-
-                    _.each(trackBucket.resultBuckets, function (resultBucket) {
-                        if (resultBucket.results.length > 1) {
-                            //draw track result line
-                            g.append("path")
-                                .attr("class", "results line " + resultBucket.name)
-                                .attr("d", chartData.resultsLine(resultBucket.results));
-                        } else if (resultBucket.results.length == 1 && !isNaN(resultBucket.results[0].result)) {
-                            //draw cirlce
-
-                            g.append("circle")
-                                .attr("class", "results dot " + resultBucket.name)
-                                .attr("r", 5)
-                                .attr("cx", chartData.dateScale(resultBucket.results[0].date))
-                                .attr("cy", chartData.resultsScale(resultBucket.results[0].result));
-                        }
-                    });
-                } else if (trackBucket.tracks.length == 1) {
-                    //draw circle
-                    if (!isNaN(trackBucket.tracks[0].duration)) {
-                        g.append("circle")
-                            .attr("class", "duration dot " + trackBucket.name)
-                            .attr("r", 5)
-                            .attr("cx", chartData.dateScale(trackBucket.tracks[0].date))
-                            .attr("cy", chartData.durationScale(trackBucket.tracks[0].duration));
-                    }
-                    _.each(trackBucket.resultBuckets, function (resultBucket) {
-                        if (resultBucket.results.length > 1) {
-                            //draw track result line
-                            g.append("path")
-                                .attr("class", "results line " + resultBucket.name)
-                                .attr("d", chartData.resultsLine(resultBucket.results));
-                        } else if (resultBucket.results.length == 1 && !isNaN(resultBucket.results[0].results)) {
-
-                            //draw cirlce
-                            g.append("circle")
-                                .attr("class", "results dot " + resultBucket.name)
-                                .attr("r", 5)
-                                .attr("cx", chartData.dateScale(resultBucket.results[0].date))
-                                .attr("cy", chartData.resultsScale(resultBucket.results[0].result));
-                        }
-                    });
-                }
-            });
-
-            //track bucket names
+            //set bucket names
             $("#trackBucketNames")
                 .html(Meteor.chart._trackBucketNameHtml(chartData));
         }
