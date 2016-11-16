@@ -319,9 +319,14 @@ Meteor.chart = {
     ,
     _registerResultBucketName: function(chartData, resultBucketName) {
         if (!chartData["resultBucketNames"]) {
-            chartData.resultBucketNames = new Set();
+            chartData.resultBucketNames = [];
         }
-        chartData.resultBucketNames.add(resultBucketName.toLowerCase());
+        for(var i = 0; i < chartData.resultBucketNames.length; i++) {
+            if (chartData.resultBucketNames[i].toLowerCase() == resultBucketName.toLowerCase()) {
+                return chartData;
+            }
+        }
+        chartData.resultBucketNames.push(resultBucketName);
         return chartData;
     },
     _setResultColorScale:function(chartData) {
@@ -331,13 +336,10 @@ Meteor.chart = {
         return chartData;
     },
     _getResultBucketNames: function(chartData) {
-
-        var bucketNames = [];
         if (chartData["resultBucketNames"]) {
-            bucketNames = Array.from(chartData.resultBucketNames);
+            return chartData.resultBucketNames;
         }
-
-        return bucketNames;
+        return [];
     },
     _getResultColor: function (chartData, resultName) {
         if (resultName) {
