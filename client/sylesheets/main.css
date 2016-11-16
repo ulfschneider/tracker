@@ -122,7 +122,6 @@ ul.track-bucket-names .on {
     display:none;
 }
 
-
 .axis text {
     font-size:.82em;
 }
@@ -146,14 +145,9 @@ ul.track-bucket-names .on {
 }
 
 .results.line {
-    stroke: gray;
     stroke-width: 2px;
     stroke-dasharray: 8,2;
     fill:none;
-}
-
-.results.dot {
-    fill:gray;
 }
 
 
