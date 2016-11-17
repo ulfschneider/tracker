@@ -71,19 +71,23 @@ a {
 
 /* Chart */
 
-ul.track-bucket-names  {
+.bucket-container {
+    margin-bottom:1.62em;
+}
+
+ul.track-bucket-names, ul.result-bucket-names  {
     list-style-type: none;
     margin: 0;
-    margin-bottom:1.62em;
+    margin-bottom: .81em;
     padding: 0;
 }
 
-ul.track-bucket-names li {
+ul.track-bucket-names li, ul.result-bucket-names li {
     display:inline-block;
     margin-right:1em;
 }
 
-ul.track-bucket-names a.filter {
+ul.track-bucket-names a.filter, ul.result-bucket-names a.filter {
     display:inline-block;
     padding:0px 3px;
     border-radius: 4px;
@@ -98,6 +102,10 @@ ul.track-bucket-names .off {
 ul.track-bucket-names .on {
     color:white;
     background:black;
+    text-decoration:none;
+}
+
+ul.result-bucket-names .on {
     text-decoration:none;
 }
 
