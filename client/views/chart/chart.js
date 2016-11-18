@@ -32,7 +32,7 @@ Meteor.chart = {
             }
             _.each(chartData.trackFilter.getAll(), function (n) {
                 html += '<li><a name="' + n + '"';
-                html += ' href="#"';
+                html += ' href="#t"';
                 html += ' class="track filter ' + (chartData.trackFilter.isOn(n) ? "on" : "off") + '"';
                 html += '>#' + n + '</a></li>';
             });
@@ -68,7 +68,7 @@ Meteor.chart = {
 
             _.each(Meteor.chart._resultBucketsForOnTracks(chartData), function (n) {
                 html += '<li><a name="' + n + '"';
-                html += ' href="#"';
+                html += ' href="#r"';
                 if (chartData.resultFilter.isOn(n)) {
                     html += ' style="background:' + Meteor.chart._getResultColor(chartData, n) + '; color:white;"';
                     html += ' class="result filter on"';
@@ -503,6 +503,7 @@ Meteor.chart = {
             //set bucket names
             //track and result bucket names must be set before detecting
             //of dimensions, otherwise the chart will have too much height
+
             $("#trackBucketNames")
                 .html(Meteor.chart._trackBucketNameHtml(chartData));
             $("#resultBucketNames")
