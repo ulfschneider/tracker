@@ -12,9 +12,7 @@ Meteor.chart = {
     _clearChartDrawing: function (chartData) {
         chartData.d3Chart.selectAll("*")
             .remove();
-        $("#trackBucketNames")
-            .hide();
-        $("#chart")
+        $(".chart")
             .hide();
         return chartData;
     },
@@ -48,7 +46,9 @@ Meteor.chart = {
                     });
                 }
             });
-            return Array.from(buckets);
+            var bucketArray = Array.from(buckets);
+
+            return bucketArray;
         } else {
             return chartData.resultFilter.getAll();
         }
@@ -84,10 +84,12 @@ Meteor.chart = {
             }
 
             var duration = chartData.durationMax - chartData.durationMin;
-            var durationPadding = Math.round(duration / 100 * 5); //5% padding
+            var durationPadding = Math.round(duration / 100 * 10); //10% padding
             chartData.durationMax += durationPadding;
             if (chartData.durationMin - durationPadding >= 0) {
                 chartData.durationMin -= durationPadding;
+            } else {
+                chartData.durationMin = 0;
             }
         }
 
@@ -96,10 +98,12 @@ Meteor.chart = {
                 chartData.resultsMin = 0;
             }
             var results = chartData.resultsMax - chartData.resultsMin;
-            var resultsPadding = Math.round(results / 100 * 5); //5% padding
+            var resultsPadding = Math.round(results / 100 * 10); //10% padding
             chartData.resultsMax += resultsPadding;
             if (chartData.resultsMin - resultsPadding >= 0) {
                 chartData.resultsMin -= resultsPadding;
+            } else {
+                chartData.resultsMin = 0;
             }
         }
         return chartData;
@@ -169,56 +173,76 @@ Meteor.chart = {
         delete chartData.durationMax;
         delete chartData.dateMin;
         delete chartData.dateMax;
-        delete chartData.dateMin;
         delete chartData.resultsMin;
         delete chartData.resultsMax;
 
-        chartData.durationMin = d3.min(chartData.chartData, function (d) {
-            if (chartData.trackFilter.has(d.track) || chartData.trackFilter.isEmpty()) {
-                return d.duration;
+        chartData.durationMin = d3.min(chartData.trackBuckets, function (trackBucket) {
+            if (chartData.trackFilter.isOn(trackBucket.name) || chartData.trackFilter.isAllOff()) {
+                return trackBucket.tracks ? d3.min(trackBucket.tracks, function (t) {
+                    return t.duration;
+                }) : chartData.durationMin;
             } else {
                 return chartData.durationMin;
             }
         });
-        chartData.durationMax = d3.max(chartData.chartData, function (d) {
-            if (chartData.trackFilter.has(d.track) || chartData.trackFilter.isEmpty()) {
-                return d.duration;
+        chartData.durationMax = d3.max(chartData.trackBuckets, function (trackBucket) {
+            if (chartData.trackFilter.isOn(trackBucket.name) || chartData.trackFilter.isAllOff()) {
+                return trackBucket.tracks ? d3.max(trackBucket.tracks, function (t) {
+                    return t.duration;
+                }) : chartData.durationMax;
             } else {
                 return chartData.durationMax;
             }
         });
-        chartData.dateMin = d3.min(chartData.chartData, function (d) {
-            if (chartData.trackFilter.has(d.track) || chartData.trackFilter.isEmpty()) {
-                return d.date;
+        chartData.dateMin = d3.min(chartData.trackBuckets, function (trackBucket) {
+            if (chartData.trackFilter.isOn(trackBucket.name) || chartData.trackFilter.isAllOff()) {
+                return trackBucket.tracks ? d3.min(trackBucket.tracks, function (t) {
+                    return t.date;
+                }) : chartData.dateMin;
             } else {
                 return chartData.dateMin;
             }
         });
-        chartData.dateMax = d3.max(chartData.chartData, function (d) {
-            if (chartData.trackFilter.has(d.track) || chartData.trackFilter.isEmpty()) {
-                return d.date;
+        chartData.dateMax = d3.max(chartData.trackBuckets, function (trackBucket) {
+            if (chartData.trackFilter.isOn(trackBucket.name) || chartData.trackFilter.isAllOff()) {
+                return trackBucket.tracks ? d3.max(trackBucket.tracks, function (t) {
+                    return t.date;
+                }) : chartData.dateMax;
             } else {
                 return chartData.dateMax;
             }
         });
-        chartData.resultsMin = d3.min(chartData.chartData, function (d) {
-            if (chartData.trackFilter.has(d.track) || chartData.trackFilter.isEmpty()) {
-                return d.results ? d3.min(d.results, function (r) {
-                    return parseFloat(r);
-                }) : chartData.resultsMin;
+
+
+        chartData.resultsMin = d3.min(chartData.trackBuckets, function (trackBucket) {
+            if ((chartData.trackFilter.isOn(trackBucket.name) || chartData.trackFilter.isAllOff()) && trackBucket.resultBuckets) {
+                return d3.min(trackBucket.resultBuckets, function (resultBucket) {
+                    if (chartData.resultFilter.isOn(resultBucket.name) || chartData.resultFilter.isAllOff()) {
+                        return resultBucket.results ? d3.min(resultBucket.results, function (r) {
+                            return parseFloat(r.result);
+                        }) : chartData.resultsMin;
+                    }
+                });
             } else {
                 return chartData.resultsMin;
             }
         });
-        chartData.resultsMax = d3.max(chartData.chartData, function (d) {
-            if (chartData.trackFilter.has(d.track) || chartData.trackFilter.isEmpty()) {
-                return d.results ? d3.max(d.results, function (r) {
-                    return parseFloat(r);
-                }) : chartData.resultsMax;
+
+        chartData.resultsMax = d3.max(chartData.trackBuckets, function (trackBucket) {
+            if ((chartData.trackFilter.isOn(trackBucket.name) || chartData.trackFilter.isAllOff()) && trackBucket.resultBuckets) {
+                return d3.max(trackBucket.resultBuckets, function (resultBucket) {
+                    if (chartData.resultFilter.isOn(resultBucket.name) || chartData.resultFilter.isAllOff()) {
+                        return resultBucket.results ? d3.max(resultBucket.results, function (r) {
+                            return parseFloat(r.result);
+                        }) : chartData.resultsMax;
+                    }
+                });
             } else {
                 return chartData.resultsMax;
             }
         });
+
+
     },
     _prepareBuckets: function (chartData) {
 
@@ -237,7 +261,7 @@ Meteor.chart = {
         }
 
         //prepare track buckets and result buckets
-        _.each(chartData.chartData, function (d) {
+        _.each(chartData.data, function (d) {
             Meteor.chart._addToTrackBucket(chartData, d);
         });
         _.sortBy(chartData.trackBuckets, function (t) {
@@ -247,12 +271,9 @@ Meteor.chart = {
     _scaling: function (chartData) {
         Meteor.chart._calcMinMax(chartData);
         Meteor.chart._addDomainPadding(chartData);
-
         Meteor.chart._setDateScale(chartData);
         Meteor.chart._setDurationScale(chartData);
         Meteor.chart._setResultsScale(chartData);
-        Meteor.chart._setResultColorScale(chartData);
-
         Meteor.chart._setDurationLine(chartData);
         Meteor.chart._setResultsLine(chartData);
 
@@ -260,7 +281,7 @@ Meteor.chart = {
     },
     _loadData: function (chartData) {
 
-        chartData.chartData = Template.instance()
+        chartData.data = Template.instance()
             .tracks()
             .fetch();
 
@@ -287,9 +308,6 @@ Meteor.chart = {
         chartData.durationAxis = d3.svg.axis()
             .scale(chartData.durationScale)
             .orient("left")
-            .innerTickSize(-chartData.width)
-            .outerTickSize(0)
-            .tickPadding(10)
             .tickFormat(Meteor.tracker.durationPrint);
         return chartData;
     }
@@ -476,19 +494,24 @@ Meteor.chart = {
 
         var chartData = Meteor.chart.chartData;
         Meteor.chart._clearChartDrawing(chartData);
-        Meteor.chart._detectDimensions(chartData);
-        Meteor.chart._setDimensions(chartData);
 
         if (reload) {
             Meteor.chart._loadData(chartData);
+            Meteor.chart._setResultColorScale(chartData);
         }
 
-        if (chartData.chartData.length >= 1) {
-            $("#trackBucketNames")
-                .show();
-            $("#chart")
+        if (chartData.data.length >= 1) {
+            $(".chart")
                 .show();
 
+            //set bucket names
+            $("#trackBucketNames")
+                .html(Meteor.chart._trackBucketNameHtml(chartData));
+            $("#resultBucketNames")
+                .html(Meteor.chart._resultBucketNameHtml(chartData));
+
+            Meteor.chart._detectDimensions(chartData);
+            Meteor.chart._setDimensions(chartData);
             Meteor.chart._scaling(chartData);
 
             //chart
@@ -497,11 +520,7 @@ Meteor.chart = {
             Meteor.chart._drawAxis(chartData, g);
             Meteor.chart._drawTracks(chartData, g);
 
-            //set bucket names
-            $("#trackBucketNames")
-                .html(Meteor.chart._trackBucketNameHtml(chartData));
-            $("#resultBucketNames")
-                .html(Meteor.chart._resultBucketNameHtml(chartData));
+
         }
     }
 }

@@ -83,14 +83,29 @@ ChartFilter.prototype.isOn = function (entry) {
     }
 }
 
+ChartFilter.prototype.retainOn = function (entries) {
+    var _self = this;
+    _.each(this.getAllOn(), function (t) {
+        var contains = false;
+        for (var i = 0; i++; i < entries.length) {
+            if (t == entries[i].toLowerCase()) {
+                contains = true;
+                break;
+            }
+        }
+        if (!contains) {
+            _self.off(t);
+        }
+    });
+}
+
 ChartFilter.prototype.isOff = function (entry) {
     return !this.isOn(entry);
 }
 
-ChartFilter.prototype.isAllOff = function() {
+ChartFilter.prototype.isAllOff = function () {
     return !this.hasOneOn();
 }
-
 
 ChartFilter.prototype.hasOneOn = function () {
     for (var i = 0; i < this.data.length; i++) {
@@ -101,9 +116,9 @@ ChartFilter.prototype.hasOneOn = function () {
     return false;
 }
 
-ChartFilter.prototype.getAllOn = function() {
+ChartFilter.prototype.getAllOn = function () {
     var _self = this;
-    _.each(this.toggles, function(t) {
+    _.each(this.toggles, function (t) {
         if (!_self.has(t)) {
             _self.off(t);
         }

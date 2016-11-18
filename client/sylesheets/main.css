@@ -110,24 +110,8 @@ ul.result-bucket-names .on {
 }
 
 .axis path, .axis line {
-    shape-rendering: crispEdges;
-    stroke: black;
-    stroke-width: 1px;
+    display:none;
     fill: none;
-}
-
-.axis path {
-    display:none;
-}
-
-.axis .tick line {
-    stroke-dasharray: 1,15;
-    stroke-width: .5px;
-    opacity: 1.0;
-}
-
-.results.axis line, .date.axis line {
-    display:none;
 }
 
 .axis text {

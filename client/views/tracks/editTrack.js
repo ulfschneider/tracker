@@ -51,10 +51,10 @@ Meteor.editTrack = {
             $("#errors" + id).html("");
 
             if (id) {
-                track.chartData._id = id;
+                track.data._id = id;
             }
 
-            Meteor.call("upsert", track.chartData, function (error, result) {
+            Meteor.call("upsert", track.data, function (error, result) {
                 if (!error) {
                     Meteor.editTrack.escapeEdit();
                     Meteor.editTrack.setRecentEditId(result);
