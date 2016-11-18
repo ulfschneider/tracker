@@ -6,8 +6,8 @@ Meteor.chart = {
     d3Chart: function () {
         return d3.select("#chart");
     },
-    jQueryChart: function () {
-        return $("#chart");
+    chartContainer: function () {
+        return $(".chart-container");
     },
     _clearChartDrawing: function (chartData) {
         chartData.d3Chart.selectAll("*")
@@ -364,15 +364,13 @@ Meteor.chart = {
     },
 
     _detectDimensions: function (chartData) {
-        var jQueryChart = Meteor.chart.jQueryChart();
-        chartData.jQueryChart = jQueryChart;
+        var chartContainer = Meteor.chart.chartContainer();
+        chartData.chartContainer = chartContainer;
 
-        var w = jQueryChart.parent()
-            .width();
 
-        var padding = jQueryChart.parent()
-                .outerHeight(true) - jQueryChart.parent()
-                .height() + 2;
+        var w = chartContainer.width();
+
+        var padding = chartContainer.outerHeight(true) - chartContainer.height() + 2;
         var windowHeight = $(window)
             .height();
 
