@@ -78,13 +78,14 @@ a {
 ul.track-bucket-names, ul.result-bucket-names  {
     list-style-type: none;
     margin: 0;
-    margin-bottom: .81em;
     padding: 0;
 }
 
 ul.track-bucket-names li, ul.result-bucket-names li {
     display:inline-block;
+    line-height:1em;
     margin-right:1em;
+    margin-bottom:.62em;
 }
 
 ul.track-bucket-names a.filter, ul.result-bucket-names a.filter {

@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8f94bd54-6f4a-4908-8fcb-7b5f5f64d50d" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/sylesheets/main.css" afterPath="$PROJECT_DIR$/client/sylesheets/main.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/views/chart/chart.js" afterPath="$PROJECT_DIR$/client/views/chart/chart.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/views/tracks/tracks.html" afterPath="$PROJECT_DIR$/client/views/tracks/tracks.html" />
     </list>
     <ignored path="tracker.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -56,37 +58,27 @@
         <entry file="file://$PROJECT_DIR$/client/views/tracks/tracks.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="60">
-              <caret line="4" column="45" selection-start-line="4" selection-start-column="45" selection-end-line="4" selection-end-column="45" />
+              <caret line="4" column="49" selection-start-line="4" selection-start-column="49" selection-end-line="4" selection-end-column="49" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="chart.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="chart.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/views/chart/chart.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="335">
-              <caret line="271" column="11" selection-start-line="271" selection-start-column="11" selection-end-line="271" selection-end-column="11" />
+            <state relative-caret-position="259">
+              <caret line="494" column="46" selection-start-line="494" selection-start-column="46" selection-end-line="494" selection-end-column="46" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.css" pinned="false" current-in-tab="false">
+      <file leaf-file-name="main.css" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/client/sylesheets/main.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="435">
-              <caret line="127" column="0" selection-start-line="127" selection-start-column="0" selection-end-line="127" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="tracker.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/lib/tracker.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1785">
-              <caret line="119" column="22" selection-start-line="119" selection-start-column="22" selection-end-line="119" selection-end-column="22" />
+            <state relative-caret-position="270">
+              <caret line="79" column="14" selection-start-line="79" selection-start-column="14" selection-end-line="79" selection-end-column="14" />
               <folding />
             </state>
           </provider>
@@ -153,10 +145,10 @@
         <option value="$PROJECT_DIR$/client/views/tracks/editTrack.js" />
         <option value="$PROJECT_DIR$/lib/tracker.js" />
         <option value="$PROJECT_DIR$/client/views/chart/chart.html" />
-        <option value="$PROJECT_DIR$/client/sylesheets/main.css" />
-        <option value="$PROJECT_DIR$/client/views/tracks/tracks.html" />
         <option value="$PROJECT_DIR$/client/views/chart/chartFilter.js" />
+        <option value="$PROJECT_DIR$/client/views/tracks/tracks.html" />
         <option value="$PROJECT_DIR$/client/views/chart/chart.js" />
+        <option value="$PROJECT_DIR$/client/sylesheets/main.css" />
       </list>
     </option>
   </component>
@@ -481,12 +473,12 @@
       <workItem from="1479108481078" duration="4650000" />
       <workItem from="1479125419115" duration="5004000" />
       <workItem from="1479146773619" duration="37208000" />
-      <workItem from="1479459416571" duration="9707000" />
+      <workItem from="1479459416571" duration="10368000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="218908000" />
+    <option name="totallyTimeSpent" value="219569000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -538,14 +530,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/client/views/tracks/editTrack.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/views/tracks/track.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="375">
@@ -873,14 +857,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/sylesheets/main.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="127" column="0" selection-start-line="127" selection-start-column="0" selection-end-line="127" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/views/chart/chart.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
@@ -897,14 +873,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/views/tracks/tracks.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="45" selection-start-line="4" selection-start-column="45" selection-end-line="4" selection-end-column="45" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/views/chart/chartFilter.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="326">
@@ -913,10 +881,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/lib/JavaScriptLanguage.jar!/com/intellij/lang/javascript/index/predefined/EcmaScript.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="305">
+          <caret line="841" column="0" selection-start-line="841" selection-start-column="0" selection-end-line="841" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/views/tracks/tracks.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="49" selection-start-line="4" selection-start-column="49" selection-end-line="4" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/client/views/chart/chart.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="335">
-          <caret line="271" column="11" selection-start-line="271" selection-start-column="11" selection-end-line="271" selection-end-column="11" />
+        <state relative-caret-position="259">
+          <caret line="494" column="46" selection-start-line="494" selection-start-column="46" selection-end-line="494" selection-end-column="46" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/sylesheets/main.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="79" column="14" selection-start-line="79" selection-start-column="14" selection-end-line="79" selection-end-column="14" />
           <folding />
         </state>
       </provider>

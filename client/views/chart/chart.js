@@ -7,7 +7,11 @@ Meteor.chart = {
         return d3.select("#chart");
     },
     chartContainer: function () {
-        return $(".chart-container");
+        //somewhere there must be container for the entire chart
+        //to get the padding of that container into the equation,
+        //we select the container via id #chart-container
+
+        return $("#chartContainer");
     },
     _clearChartDrawing: function (chartData) {
         chartData.d3Chart.selectAll("*")
@@ -370,9 +374,7 @@ Meteor.chart = {
         var chartContainer = Meteor.chart.chartContainer();
         chartData.chartContainer = chartContainer;
 
-
         var w = chartContainer.width();
-
         var padding = chartContainer.outerHeight(true) - chartContainer.height() + 2;
         var windowHeight = $(window)
             .height();
@@ -391,7 +393,7 @@ Meteor.chart = {
     ,
     _setDimensions: function (chartData) {
 
-        chartData.margin = {top: 16 * 1.62, right: 100, bottom: 16 * 1.62, left: 100};
+        chartData.margin = {top: 16 * 1.62, right: 100, bottom: 16 * 1.62, left: 100}; //assume 16px for font, line-height is 1.62em
 
         chartData.width = chartData.svgWidth - chartData.margin.left - chartData.margin.right;
         chartData.height = chartData.svgHeight - chartData.margin.top - chartData.margin.bottom;
@@ -499,6 +501,8 @@ Meteor.chart = {
                 .show();
 
             //set bucket names
+            //track and result bucket names must be set before detecting
+            //of dimensions, otherwise the chart will have too much height
             $("#trackBucketNames")
                 .html(Meteor.chart._trackBucketNameHtml(chartData));
             $("#resultBucketNames")
