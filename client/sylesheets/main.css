@@ -189,6 +189,10 @@ a.load-more:hover {
     background: black;
 }
 
+.comment {
+    color:gray;
+}
+
 /* edit track */
 
 .edit-track {

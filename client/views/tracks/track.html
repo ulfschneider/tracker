@@ -8,8 +8,7 @@
             <td class="indicator">{{day}}</td>
             <td class="hidden-sm">{{time}}</td>
             <td>{{track}}</td>
-            <td>{{durationAndResults}}</td>
-            <td class="hidden-sm">{{comment}}</td>
+            <td>{{durationAndResults}}{{#if comment}}<br><span class="comment">{{comment}}</span>{{/if}}</td>
         </tr>
     {{/if}}
 </template>
