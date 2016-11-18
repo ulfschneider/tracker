@@ -47,6 +47,9 @@ Meteor.chart = {
                 }
             });
             var bucketArray = Array.from(resultBuckets);
+            bucketArray.sort(function (a, b) {
+                return a.toLowerCase().localeCompare(b.toLowerCase());
+            });
             chartData.resultFilter.retainOn(bucketArray);
             return bucketArray;
         } else {
@@ -264,8 +267,8 @@ Meteor.chart = {
         _.each(chartData.data, function (d) {
             Meteor.chart._addToTrackBucket(chartData, d);
         });
-        _.sortBy(chartData.trackBuckets, function (t) {
-            return t.name.toLowerCase();
+        chartData.trackBuckets.sort(function (a, b) {
+            return a.name.toLowerCase().localeCompare(b.name.toLowerCase());
         });
     },
     _scaling: function (chartData) {
