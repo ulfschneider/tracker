@@ -1,7 +1,7 @@
 import {ChartFilter} from "/client/views/chart/chartFilter.js";
 
 Meteor.chart = {
-    chartData: null,
+    chartData: {},
 
     d3Chart: function () {
         return d3.select("#chart");
@@ -36,18 +36,18 @@ Meteor.chart = {
         }
         return html;
     },
-    _resultBucketsForTracks: function (chartData) {
+    _resultBucketsForOnTracks: function (chartData) {
         if (chartData.trackFilter.hasOneOn()) {
-            var buckets = new Set();
+            var resultBuckets = new Set();
             _.each(chartData.trackBuckets, function (trackBucket) {
                 if (chartData.trackFilter.isOn(trackBucket.name)) {
                     _.each(trackBucket.resultBuckets, function (resultBucket) {
-                        buckets.add(resultBucket.name);
+                        resultBuckets.add(resultBucket.name);
                     });
                 }
             });
-            var bucketArray = Array.from(buckets);
-
+            var bucketArray = Array.from(resultBuckets);
+            chartData.resultFilter.retainOn(bucketArray);
             return bucketArray;
         } else {
             return chartData.resultFilter.getAll();
@@ -59,7 +59,7 @@ Meteor.chart = {
         if (!chartData.resultFilter.isEmpty()) {
             html += "<ul class='result-bucket-names'>";
 
-            _.each(Meteor.chart._resultBucketsForTracks(chartData), function (n) {
+            _.each(Meteor.chart._resultBucketsForOnTracks(chartData), function (n) {
                 html += '<li><a name="' + n + '"';
                 html += ' href="#"';
                 if (chartData.resultFilter.isOn(n)) {
@@ -481,16 +481,9 @@ Meteor.chart = {
         return chartData;
     },
     draw: function (reload) {
-        if (!Meteor.chart.chartData) {
-            reload = true;
-        }
-        if (reload) {
-            Meteor.chart.chartData = {
-                d3Chart: Meteor.chart.d3Chart()
-            }
-        }
 
         var chartData = Meteor.chart.chartData;
+        chartData.d3Chart = Meteor.chart.d3Chart();
         Meteor.chart._clearChartDrawing(chartData);
 
         if (reload) {
@@ -517,8 +510,6 @@ Meteor.chart = {
                 .attr("transform", "translate(" + chartData.margin.left + "," + chartData.margin.top + ")");
             Meteor.chart._drawAxis(chartData, g);
             Meteor.chart._drawTracks(chartData, g);
-
-
         }
     }
 }

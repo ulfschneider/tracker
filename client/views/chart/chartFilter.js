@@ -28,7 +28,6 @@ ChartFilter.prototype.delete = function (entry) {
     var idx = this.indexOf(entry);
     if (idx >= 0) {
         this.data.splice(idx, 1);
-        this.off(entry);
     }
     return this;
 }
@@ -78,25 +77,8 @@ ChartFilter.prototype.isOn = function (entry) {
     if (this.has(entry) && this.toggles.has(entry.toLowerCase())) {
         return true;
     } else {
-        this.toggles.delete(entry.toLowerCase());
         return false;
     }
-}
-
-ChartFilter.prototype.retainOn = function (entries) {
-    var _self = this;
-    _.each(this.getAllOn(), function (t) {
-        var contains = false;
-        for (var i = 0; i++; i < entries.length) {
-            if (t == entries[i].toLowerCase()) {
-                contains = true;
-                break;
-            }
-        }
-        if (!contains) {
-            _self.off(t);
-        }
-    });
 }
 
 ChartFilter.prototype.isOff = function (entry) {
@@ -118,17 +100,37 @@ ChartFilter.prototype.hasOneOn = function () {
 
 ChartFilter.prototype.getAllOn = function () {
     var _self = this;
-    _.each(this.toggles, function (t) {
-        if (!_self.has(t)) {
-            _self.off(t);
+    var allOn = [];
+    _.each(this.data, function (t) {
+        if (_self.isOn(t)) {
+            allOn.push(t);
         }
     });
 
-    return Array.from(this.toggles);
+    return allOn;
 }
 
 ChartFilter.prototype.clearToggles = function () {
     this.toggles.clear();
     return this;
+}
+
+ChartFilter.prototype.retainOn = function (entries) {
+    var _self = this;
+    var allOn = this.getAllOn();
+    _.each(allOn, function (t) {
+        var contains = false;
+        var lowerT = t.toLowerCase();
+        for (var i = 0; i < entries.length; i++) {
+            if (lowerT == entries[i].toLowerCase()) {
+                contains = true;
+                break;
+            }
+        }
+
+        if (!contains) {
+            _self.off(t);
+        }
+    });
 }
 
