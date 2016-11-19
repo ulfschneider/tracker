@@ -100,8 +100,10 @@
         <item url="file://$USER_HOME$/.meteor/packages/ejson/1.0.13/web.browser/ejson.js" />
         <item url="file://$USER_HOME$/.meteor/packages/ddp-client/1.2.9/web.browser/stream_client_common.js" />
         <item url="file://$USER_HOME$/.meteor/packages/geojson-utils/1.0.10/web.browser/geojson-utils.js" />
+        <item url="file://$USER_HOME$/.meteor/packages/mquandalle_jquery-textcomplete/0.8.0_1/web.browser/jquery-textcomplete/dist/jquery.textcomplete.css" />
         <item url="file://$USER_HOME$/.meteor/packages/ddp-client/1.2.9/web.browser/livedata_connection.js" />
         <item url="file://$USER_HOME$/.meteor/packages/geojson-utils/1.0.10/web.browser/main.js" />
+        <item url="file://$USER_HOME$/.meteor/packages/mquandalle_jquery-textcomplete/0.8.0_1/web.browser/jquery-textcomplete/dist/jquery.textcomplete.js" />
         <item url="file://$USER_HOME$/.meteor/packages/ddp-client/1.2.9/web.browser/stream_client_sockjs.js" />
         <item url="file://$USER_HOME$/.meteor/packages/id-map/1.0.9/web.browser/id-map.js" />
         <item url="file://$USER_HOME$/.meteor/packages/reactive-dict/1.1.8/web.browser/reactive-dict-tests.js" />
@@ -287,8 +289,10 @@
       <root url="file://$USER_HOME$/.meteor/packages/ejson/1.0.13/web.browser/ejson.js" />
       <root url="file://$USER_HOME$/.meteor/packages/ddp-client/1.2.9/web.browser/stream_client_common.js" />
       <root url="file://$USER_HOME$/.meteor/packages/geojson-utils/1.0.10/web.browser/geojson-utils.js" />
+      <root url="file://$USER_HOME$/.meteor/packages/mquandalle_jquery-textcomplete/0.8.0_1/web.browser/jquery-textcomplete/dist/jquery.textcomplete.css" />
       <root url="file://$USER_HOME$/.meteor/packages/ddp-client/1.2.9/web.browser/livedata_connection.js" />
       <root url="file://$USER_HOME$/.meteor/packages/geojson-utils/1.0.10/web.browser/main.js" />
+      <root url="file://$USER_HOME$/.meteor/packages/mquandalle_jquery-textcomplete/0.8.0_1/web.browser/jquery-textcomplete/dist/jquery.textcomplete.js" />
       <root url="file://$USER_HOME$/.meteor/packages/ddp-client/1.2.9/web.browser/stream_client_sockjs.js" />
       <root url="file://$USER_HOME$/.meteor/packages/id-map/1.0.9/web.browser/id-map.js" />
       <root url="file://$USER_HOME$/.meteor/packages/reactive-dict/1.1.8/web.browser/reactive-dict-tests.js" />

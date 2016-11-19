@@ -280,7 +280,7 @@ Meteor.chart = {
 
                 var trackBucket = this._trackBucket(chartData, lastTrack.track);
 
-                if (!lastTrack["duration"] && trackBucket.resultBuckets) {
+                if (trackBucket.resultBuckets) {
                     _.each(trackBucket.resultBuckets, function (resultBucket) {
                         chartData.resultFilter.on(resultBucket.name);
                     });

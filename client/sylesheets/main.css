@@ -245,6 +245,16 @@ tr .edit-track {
     float: right;
 }
 
+.textcomplete-dropdown li:hover,
+.textcomplete-dropdown .active {
+    background: black;
+}
+
+.textcomplete-dropdown li:hover a,
+.textcomplete-dropdown .active a {
+    color:white;
+}
+
 /*
 SIMPLE GRID
 inspired by ZACH COLE 2016

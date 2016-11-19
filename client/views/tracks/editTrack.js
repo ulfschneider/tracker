@@ -2,6 +2,18 @@ import {Session} from "meteor/session";
 var touchmove;
 
 Meteor.editTrack = {
+    tracksGroups: function () {
+        var tracks = [];
+        var track = "";
+        var cursor = TrackData.find({}, {fields: {track:1}, sort: {track: 1}});
+        cursor.forEach(function(t) {
+            if (t.track != track) {
+                tracks.push(t.track);
+                track = t.track;
+            }
+        });
+        return tracks;
+    },
     setEditId: function (editId) {
         Session.set("editId", editId);
         Meteor.editTrack.setRecentEditId(editId);
@@ -131,7 +143,23 @@ Template.editTrack.helpers({
 });
 
 Template.editTrack.rendered = function () {
+    Meteor.subscribe("TrackData");
     var id = Template.currentData() && Template.currentData()._id ? Template.currentData()._id : "";
     $("#edit" + id).autosize();
     $("#edit" + id).focus();
+    $("#edit" + id).textcomplete([
+        { // html
+            match: /#(\w*)$/,
+            search: function (term, callback) {
+                callback($.map(Meteor.editTrack.tracksGroups(), function (element) {
+                    return element.indexOf(term) === 0 ? element : null;
+                }));
+            },
+            index: 1,
+            replace: function (element) {
+                return "#" + element;
+            }
+        }
+    ]);
+
 }
