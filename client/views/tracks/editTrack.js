@@ -168,7 +168,7 @@ Template.editTrack.rendered = function () {
 
     $("#edit" + id).textcomplete([
         {
-            match: /(^|\s)(#|(\d+(\.\d+)?)\w*)$/,
+            match: /(^|\s)(#|(\d+(\.\d+)?)[^\s]*)$/,
             search: function (term, callback) {
                 var query, result;
                 if (term.indexOf("#") == 0) {
@@ -186,8 +186,9 @@ Template.editTrack.rendered = function () {
             },
             index: 2,
             replace: function (element) {
-                return "$1" + element;
+                return "$1" + element + " ";
             }
         }
     ]);
+
 }
