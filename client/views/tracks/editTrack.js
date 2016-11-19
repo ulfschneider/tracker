@@ -2,19 +2,30 @@ import {Session} from "meteor/session";
 import {Filter} from "/client/views/chart/filter.js";
 
 Meteor.editTrack = {
-    trackBuckets: function () {
-        var buckets = [];
+    trackBuckets: null,
+    resultBuckets: null,
+
+    getTrackBuckets: function () {
+        if (this.trackBuckets) {
+            return this.trackBuckets;
+        }
+
+        this.trackBuckets = [];
         var track = "";
         var cursor = TrackData.find({}, {fields: {track: 1}, sort: {track: 1}});
+        var _self = this;
         cursor.forEach(function (t) {
             if (t.track.toLowerCase() != track) {
-                buckets.push(t.track);
+                _self.trackBuckets.push(t.track);
                 track = t.track.toLowerCase();
             }
         });
-        return buckets;
+        return this.trackBuckets;
     },
-    resultBuckets: function () {
+    getResultBuckets: function () {
+        if (this.resultBuckets) {
+            return this.resultBuckets;
+        }
         var buckets = new Filter();
         var cursor = TrackData.find({}, {fields: {results: 1}});
         cursor.forEach(function (t) {
@@ -28,7 +39,8 @@ Meteor.editTrack = {
             }
         });
 
-        return buckets.getAll();
+        this.resultBuckets = buckets.getAll();
+        return this.resultBuckets;
     },
     setEditId: function (editId) {
         Session.set("editId", editId);
@@ -81,6 +93,10 @@ Meteor.editTrack = {
             if (id) {
                 track.data._id = id;
             }
+
+            //TODO cache this somewhere with reactivity
+            this.resultBuckets = null;
+            this.trackBuckets = null;
 
             Meteor.call("upsert", track.data, function (error, result) {
                 if (!error) {
@@ -168,18 +184,18 @@ Template.editTrack.rendered = function () {
 
     $("#edit" + id).textcomplete([
         {
-            match: /(^|\s)(#|(\d+(\.\d+)?)[^\s]*)$/,
+            match: /(^|\s)(#|(\d+(\.\d+)?))[^\s]*$/,
             search: function (term, callback) {
                 var query, result;
                 if (term.indexOf("#") == 0) {
                     query = term.substring(1);
-                    callback($.map(Meteor.editTrack.trackBuckets(), function (element) {
+                    callback($.map(Meteor.editTrack.getTrackBuckets(), function (element) {
                         return element.indexOf(query) === 0 ? "#" + element : null;
                     }));
                 } else {
                     query = Meteor.tracker.extractResultBucket(term);
                     result = Meteor.tracker.extractResult(term);
-                    callback($.map(Meteor.editTrack.resultBuckets(), function (element) {
+                    callback($.map(Meteor.editTrack.getResultBuckets(), function (element) {
                         return element.indexOf(query) === 0 ? (result + element) : null;
                     }));
                 }
