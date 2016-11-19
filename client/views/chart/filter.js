@@ -1,9 +1,9 @@
-export function ChartFilter() {
+export function Filter() {
     this.data = [];
     this.toggles = new Set();
 }
 
-ChartFilter.prototype.indexOf = function (entry) {
+Filter.prototype.indexOf = function (entry) {
     var lowerEntry = entry.toLowerCase();
     for (var i = 0; i < this.data.length; i++) {
         if (this.data[i].toLowerCase() == lowerEntry) {
@@ -13,18 +13,18 @@ ChartFilter.prototype.indexOf = function (entry) {
     return -1;
 }
 
-ChartFilter.prototype.has = function (entry) {
+Filter.prototype.has = function (entry) {
     return this.indexOf(entry) >= 0;
 }
 
-ChartFilter.prototype.add = function (entry) {
+Filter.prototype.add = function (entry) {
     if (!this.has(entry)) {
         this.data.push(entry);
     }
     return this;
 }
 
-ChartFilter.prototype.delete = function (entry) {
+Filter.prototype.delete = function (entry) {
     var idx = this.indexOf(entry);
     if (idx >= 0) {
         this.data.splice(idx, 1);
@@ -32,27 +32,27 @@ ChartFilter.prototype.delete = function (entry) {
     return this;
 }
 
-ChartFilter.prototype.getAll = function () {
+Filter.prototype.getAll = function () {
     this.data.sort(function (a, b) {
         return a.toLowerCase().localeCompare(b.toLowerCase());
     });
     return this.data;
 }
 
-ChartFilter.prototype.clear = function () {
+Filter.prototype.clear = function () {
     this.data = [];
 }
 
-ChartFilter.prototype.size = function () {
+Filter.prototype.size = function () {
     return this.data.length;
 }
 
-ChartFilter.prototype.isEmpty = function () {
+Filter.prototype.isEmpty = function () {
     return this.size() == 0;
 }
 
 
-ChartFilter.prototype.toggle = function (entry) {
+Filter.prototype.toggle = function (entry) {
     if (this.isOn(entry)) {
         this.off(entry);
     } else {
@@ -62,18 +62,18 @@ ChartFilter.prototype.toggle = function (entry) {
     return this;
 }
 
-ChartFilter.prototype.on = function (entry) {
+Filter.prototype.on = function (entry) {
     this.toggles.add(entry.toLowerCase());
     this.add(entry);
     return this;
 }
 
-ChartFilter.prototype.off = function (entry) {
+Filter.prototype.off = function (entry) {
     this.toggles.delete(entry.toLowerCase());
     return this;
 }
 
-ChartFilter.prototype.isOn = function (entry) {
+Filter.prototype.isOn = function (entry) {
     if (this.has(entry) && this.toggles.has(entry.toLowerCase())) {
         return true;
     } else {
@@ -81,15 +81,15 @@ ChartFilter.prototype.isOn = function (entry) {
     }
 }
 
-ChartFilter.prototype.isOff = function (entry) {
+Filter.prototype.isOff = function (entry) {
     return !this.isOn(entry);
 }
 
-ChartFilter.prototype.isAllOff = function () {
+Filter.prototype.isAllOff = function () {
     return !this.hasOneOn();
 }
 
-ChartFilter.prototype.hasOneOn = function () {
+Filter.prototype.hasOneOn = function () {
     for (var i = 0; i < this.data.length; i++) {
         if (this.isOn(this.data[i])) {
             return true;
@@ -98,7 +98,7 @@ ChartFilter.prototype.hasOneOn = function () {
     return false;
 }
 
-ChartFilter.prototype.getAllOn = function () {
+Filter.prototype.getAllOn = function () {
     var _self = this;
     var allOn = [];
     _.each(this.data, function (t) {
@@ -110,12 +110,12 @@ ChartFilter.prototype.getAllOn = function () {
     return allOn;
 }
 
-ChartFilter.prototype.clearToggles = function () {
+Filter.prototype.clearToggles = function () {
     this.toggles.clear();
     return this;
 }
 
-ChartFilter.prototype.retainOn = function (entries) {
+Filter.prototype.retainOn = function (entries) {
     var _self = this;
     var allOn = this.getAllOn();
     _.each(allOn, function (t) {

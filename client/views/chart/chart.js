@@ -1,4 +1,4 @@
-import {ChartFilter} from "/client/views/chart/chartFilter.js";
+import {Filter} from "/client/views/chart/filter.js";
 
 Meteor.chart = {
     chartData: {},
@@ -112,31 +112,15 @@ Meteor.chart = {
         }
         return chartData;
     },
-    _extractResult: function (result) {
-        return parseFloat(result);
-    },
-    _extractResultBucket: function (result) {
-        var bucket = "";
-        var number = Meteor.chart._extractResult(result);
-        if (!isNaN(number)) {
-            var numberString = number.toString();
-            var idx = result.indexOf(numberString);
-
-            if (idx == 0) {
-                bucket = result.substr(idx + numberString.length, result.length);
-            }
-        }
-        return bucket;
-    },
     _addToResultBucket: function (chartData, trackBucket, date, result) {
-        var number = Meteor.chart._extractResult(result);
+        var number = Meteor.tracker.extractResult(result);
 
         if (!trackBucket["resultBuckets"]) {
             trackBucket.resultBuckets = [];
         }
 
         var buckets = trackBucket.resultBuckets;
-        var resultBucket = Meteor.chart._extractResultBucket(result);
+        var resultBucket = Meteor.tracker.extractResultBucket(result);
 
         for (var i = 0; i < buckets.length; i++) {
             if (buckets[i].name.toLowerCase() == resultBucket.toLowerCase()) {
@@ -254,12 +238,12 @@ Meteor.chart = {
         delete chartData.trackBuckets;
 
         if (!chartData["trackFilter"]) {
-            chartData.trackFilter = new ChartFilter();
+            chartData.trackFilter = new Filter();
         } else {
             chartData.trackFilter.clear();
         }
         if (!chartData["resultFilter"]) {
-            chartData.resultFilter = new ChartFilter();
+            chartData.resultFilter = new Filter();
         } else {
             chartData.resultFilter.clear();
         }

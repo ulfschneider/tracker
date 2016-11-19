@@ -2,13 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8f94bd54-6f4a-4908-8fcb-7b5f5f64d50d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/meteor_packages_auto_import_browser.xml" afterPath="$PROJECT_DIR$/.idea/libraries/meteor_packages_auto_import_browser.xml" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/client/views/chart/chartFilter.js" afterPath="$PROJECT_DIR$/client/views/chart/filter.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.meteor/packages" afterPath="$PROJECT_DIR$/.meteor/packages" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.meteor/versions" afterPath="$PROJECT_DIR$/.meteor/versions" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/sylesheets/main.css" afterPath="$PROJECT_DIR$/client/sylesheets/main.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/views/chart/chart.js" afterPath="$PROJECT_DIR$/client/views/chart/chart.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/views/tracks/editTrack.js" afterPath="$PROJECT_DIR$/client/views/tracks/editTrack.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/tracker.js" afterPath="$PROJECT_DIR$/lib/tracker.js" />
     </list>
     <ignored path="tracker.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -38,27 +36,29 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="chartFilter.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/client/views/chart/chartFilter.js">
+      <file leaf-file-name="filter.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/client/views/chart/filter.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-914">
-              <caret line="2" column="29" selection-start-line="2" selection-start-column="29" selection-end-line="2" selection-end-column="29" />
+            <state relative-caret-position="75">
+              <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="editTrack.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="editTrack.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/client/views/tracks/editTrack.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="556">
-              <caret line="142" column="3" selection-start-line="134" selection-start-column="0" selection-end-line="142" selection-end-column="3" />
-              <folding />
+            <state relative-caret-position="572">
+              <caret line="170" column="46" selection-start-line="170" selection-start-column="46" selection-end-line="170" selection-end-column="46" />
+              <folding>
+                <element signature="e#0#39#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="main.css" pinned="false" current-in-tab="true">
+      <file leaf-file-name="main.css" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/sylesheets/main.css">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="750">
@@ -91,8 +91,8 @@
       <file leaf-file-name="chart.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/views/chart/chart.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="661">
-              <caret line="623" column="32" selection-start-line="623" selection-start-column="32" selection-end-line="623" selection-end-column="32" />
+            <state relative-caret-position="0">
+              <caret line="0" column="14" selection-start-line="0" selection-start-column="14" selection-end-line="0" selection-end-column="14" />
               <folding />
             </state>
           </provider>
@@ -101,8 +101,8 @@
       <file leaf-file-name="tracker.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/lib/tracker.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-479">
-              <caret line="251" column="47" selection-start-line="251" selection-start-column="47" selection-end-line="251" selection-end-column="47" />
+            <state relative-caret-position="436">
+              <caret line="312" column="36" selection-start-line="312" selection-start-column="36" selection-end-line="312" selection-end-column="36" />
               <folding />
             </state>
           </provider>
@@ -121,8 +121,8 @@
       <file leaf-file-name="tracks.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/views/tracks/tracks.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="766">
-              <caret line="94" column="15" selection-start-line="94" selection-start-column="15" selection-end-line="94" selection-end-column="15" />
+            <state relative-caret-position="902">
+              <caret line="98" column="1" selection-start-line="80" selection-start-column="0" selection-end-line="98" selection-end-column="1" />
               <folding />
             </state>
           </provider>
@@ -153,16 +153,17 @@
         <option value="$PROJECT_DIR$/client/views/tracks/tracks.js" />
         <option value="$PROJECT_DIR$/client/views/chart/SortableSet.js" />
         <option value="$PROJECT_DIR$/client/views/chart/ChartFilter.js" />
-        <option value="$PROJECT_DIR$/lib/tracker.js" />
         <option value="$PROJECT_DIR$/client/views/chart/chart.html" />
         <option value="$PROJECT_DIR$/client/views/tracks/track.html" />
         <option value="$PROJECT_DIR$/client/views/tracks/editTrack.html" />
         <option value="$PROJECT_DIR$/client/views/chart/chartFilter.js" />
         <option value="$PROJECT_DIR$/client/views/tracks/tracks.html" />
-        <option value="$PROJECT_DIR$/client/views/chart/chart.js" />
         <option value="$PROJECT_DIR$/shared/main.js" />
-        <option value="$PROJECT_DIR$/client/views/tracks/editTrack.js" />
         <option value="$PROJECT_DIR$/client/sylesheets/main.css" />
+        <option value="$PROJECT_DIR$/lib/tracker.js" />
+        <option value="$PROJECT_DIR$/client/views/chart/filter.js" />
+        <option value="$PROJECT_DIR$/client/views/chart/chart.js" />
+        <option value="$PROJECT_DIR$/client/views/tracks/editTrack.js" />
       </list>
     </option>
   </component>
@@ -178,10 +179,10 @@
     <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="444" />
-    <option name="y" value="36" />
-    <option name="width" value="1909" />
-    <option name="height" value="1290" />
+    <option name="x" value="1321" />
+    <option name="y" value="48" />
+    <option name="width" value="1217" />
+    <option name="height" value="1366" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -487,12 +488,12 @@
       <workItem from="1479108481078" duration="4650000" />
       <workItem from="1479125419115" duration="5004000" />
       <workItem from="1479146773619" duration="37208000" />
-      <workItem from="1479459416571" duration="22147000" />
+      <workItem from="1479459416571" duration="26575000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="231348000" />
+    <option name="totallyTimeSpent" value="235776000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -504,13 +505,13 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="444" y="36" width="1909" height="1290" extended-state="0" />
+    <frame x="1321" y="48" width="1217" height="1366" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1398638" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21939194" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32923833" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22686322" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21356978" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -848,26 +849,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/views/chart/chartFilter.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-914">
-          <caret line="2" column="29" selection-start-line="2" selection-start-column="29" selection-end-line="2" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/views/chart/chart.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
           <caret line="7" column="10" selection-start-line="0" selection-start-column="0" selection-end-line="8" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/lib/tracker.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-479">
-          <caret line="251" column="47" selection-start-line="251" selection-start-column="47" selection-end-line="251" selection-end-column="47" />
           <folding />
         </state>
       </provider>
@@ -888,34 +873,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/views/tracks/tracks.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="766">
-          <caret line="94" column="15" selection-start-line="94" selection-start-column="15" selection-end-line="94" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/views/chart/chart.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="661">
-          <caret line="623" column="32" selection-start-line="623" selection-start-column="32" selection-end-line="623" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/shared/main.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="330">
           <caret line="22" column="47" selection-start-line="22" selection-start-column="42" selection-end-line="22" selection-end-column="47" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/views/tracks/editTrack.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="556">
-          <caret line="142" column="3" selection-start-line="134" selection-start-column="0" selection-end-line="142" selection-end-column="3" />
           <folding />
         </state>
       </provider>
@@ -925,6 +886,48 @@
         <state relative-caret-position="750">
           <caret line="254" column="16" selection-start-line="254" selection-start-column="16" selection-end-line="254" selection-end-column="16" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/lib/tracker.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="436">
+          <caret line="312" column="36" selection-start-line="312" selection-start-column="36" selection-end-line="312" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/views/chart/chart.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="14" selection-start-line="0" selection-start-column="14" selection-end-line="0" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/views/chart/filter.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/views/tracks/tracks.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="902">
+          <caret line="98" column="1" selection-start-line="80" selection-start-column="0" selection-end-line="98" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/views/tracks/editTrack.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="572">
+          <caret line="170" column="46" selection-start-line="170" selection-start-column="46" selection-end-line="170" selection-end-column="46" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

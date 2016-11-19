@@ -1,18 +1,34 @@
 import {Session} from "meteor/session";
-var touchmove;
+import {Filter} from "/client/views/chart/filter.js";
 
 Meteor.editTrack = {
-    tracksGroups: function () {
-        var tracks = [];
+    trackBuckets: function () {
+        var buckets = [];
         var track = "";
-        var cursor = TrackData.find({}, {fields: {track:1}, sort: {track: 1}});
-        cursor.forEach(function(t) {
-            if (t.track != track) {
-                tracks.push(t.track);
-                track = t.track;
+        var cursor = TrackData.find({}, {fields: {track: 1}, sort: {track: 1}});
+        cursor.forEach(function (t) {
+            if (t.track.toLowerCase() != track) {
+                buckets.push(t.track);
+                track = t.track.toLowerCase();
             }
         });
-        return tracks;
+        return buckets;
+    },
+    resultBuckets: function () {
+        var buckets = new Filter();
+        var cursor = TrackData.find({}, {fields: {results: 1}});
+        cursor.forEach(function (t) {
+            if (t["results"]) {
+                _.each(t.results, function (r) {
+                    var bucket = Meteor.tracker.extractResultBucket(r);
+                    if (bucket) {
+                        buckets.add(bucket);
+                    }
+                });
+            }
+        });
+
+        return buckets.getAll();
     },
     setEditId: function (editId) {
         Session.set("editId", editId);
@@ -143,23 +159,35 @@ Template.editTrack.helpers({
 });
 
 Template.editTrack.rendered = function () {
+
     Meteor.subscribe("TrackData");
     var id = Template.currentData() && Template.currentData()._id ? Template.currentData()._id : "";
     $("#edit" + id).autosize();
     $("#edit" + id).focus();
+
+
     $("#edit" + id).textcomplete([
-        { // html
-            match: /#(\w*)$/,
+        {
+            match: /(^|\s)(#|(\d+(\.\d+)?)\w*)$/,
             search: function (term, callback) {
-                callback($.map(Meteor.editTrack.tracksGroups(), function (element) {
-                    return element.indexOf(term) === 0 ? element : null;
-                }));
+                var query, result;
+                if (term.indexOf("#") == 0) {
+                    query = term.substring(1);
+                    callback($.map(Meteor.editTrack.trackBuckets(), function (element) {
+                        return element.indexOf(query) === 0 ? "#" + element : null;
+                    }));
+                } else {
+                    query = Meteor.tracker.extractResultBucket(term);
+                    result = Meteor.tracker.extractResult(term);
+                    callback($.map(Meteor.editTrack.resultBuckets(), function (element) {
+                        return element.indexOf(query) === 0 ? (result + element) : null;
+                    }));
+                }
             },
-            index: 1,
+            index: 2,
             replace: function (element) {
-                return "#" + element;
+                return "$1" + element;
             }
         }
     ]);
-
 }
