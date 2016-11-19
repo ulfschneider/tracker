@@ -433,21 +433,21 @@ Meteor.chart = {
     ,
     _drawAxis: function (chartData, g) {
         //date axis
-        if (this.hasTrack() || this.hasResult()) {
+        if (this.hasDuration(chartData) || this.hasResult(chartData)) {
             g.append("g")
                 .attr("class", "date axis")
                 .call(chartData.dateAxis);
         }
 
         //duration axis
-        if (this.hasTrack()) {
+        if (this.hasDuration(chartData)) {
             g.append("g")
                 .attr("class", "duration axis")
                 .call(chartData.durationAxis);
         }
 
         //results axis
-        if (this.hasResult()) {
+        if (this.hasResult(chartData)) {
             g.append("g")
                 .attr("class", "results axis")
                 .attr("transform", "translate(" + chartData.width + ",0)")
@@ -526,11 +526,23 @@ Meteor.chart = {
 
         return chartData;
     },
-    hasTrack: function () {
-        return this.chartData.trackFilter.hasOneOn();
+    hasDuration: function (chartData) {
+        if (chartData.trackFilter.hasOneOn()) {
+            var allOn = chartData.trackFilter.getAllOn();
+            for(var i = 0; i < allOn.length; i++) {
+                var trackBucket = this._trackBucket(chartData, allOn[i]);
+                for(var j = 0; j < trackBucket.tracks.length; j++) {
+                    if (trackBucket.tracks[j]["duration"]) {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
     },
-    hasResult: function () {
-        return this.chartData.resultFilter.hasOneOn();
+    hasResult: function (chartData) {
+        return chartData.resultFilter.hasOneOn();
     },
     prepare: function (load) {
 
@@ -559,7 +571,7 @@ Meteor.chart = {
         this.prepare(loadData);
         var chartData = this.chartData;
 
-        if (this.hasTrack() || this.hasResult()) {
+        if (this.hasDuration(chartData) || this.hasResult(chartData)) {
             $("#chart").show();
             this._scaling(chartData);
 

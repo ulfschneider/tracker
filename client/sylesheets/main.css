@@ -74,15 +74,6 @@ a {
     margin-bottom:1.62em;
 }
 
-a.reset-filter {
-    background: gray;
-    color: white;
-}
-
-a.reset-filter:hover {
-    background: black;
-}
-
 
 ul.track-bucket-names, ul.result-bucket-names  {
     list-style-type: none;
@@ -104,6 +95,13 @@ ul.track-bucket-names a, ul.result-bucket-names a {
     margin-left:-3px;
     text-decoration:none;
 }
+
+ul.track-bucket-names a.reset-filter {
+    color:white;
+    background:gray;
+    padding-right:0;
+}
+
 
 ul.track-bucket-names .off {
     color:black;
