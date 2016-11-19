@@ -21,7 +21,6 @@ body {
 }
 
 a {
-    text-decoration:underline;
     color:black;
 }
 
@@ -75,6 +74,16 @@ a {
     margin-bottom:1.62em;
 }
 
+a.reset-filter {
+    background: gray;
+    color: white;
+}
+
+a.reset-filter:hover {
+    background: black;
+}
+
+
 ul.track-bucket-names, ul.result-bucket-names  {
     list-style-type: none;
     margin: 0;
@@ -88,11 +97,12 @@ ul.track-bucket-names li, ul.result-bucket-names li {
     margin-bottom:.62em;
 }
 
-ul.track-bucket-names a.filter, ul.result-bucket-names a.filter {
+ul.track-bucket-names a, ul.result-bucket-names a {
     display:inline-block;
     padding:0px 3px;
     border-radius: 4px;
     margin-left:-3px;
+    text-decoration:none;
 }
 
 ul.track-bucket-names .off {
@@ -225,6 +235,7 @@ tr .edit-track {
 
 .edit-track .control a {
     color: gray;
+    text-decoration: underline;
 }
 
 .edit-track .control a.submit {

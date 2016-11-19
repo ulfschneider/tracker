@@ -16,8 +16,6 @@ Meteor.chart = {
     _clearChartDrawing: function (chartData) {
         chartData.d3Chart.selectAll("*")
             .remove();
-        $(".chart")
-            .hide();
         return chartData;
     },
     _trackBucketNameHtml: function (chartData) {
@@ -26,9 +24,9 @@ Meteor.chart = {
             html += "<ul class='track-bucket-names'>";
 
             if (chartData.trackFilter.isAllOff() && chartData.resultFilter.isAllOff()) {
-                html += "<li>Track filter:</li>";
+                html += "<li>Chart filter:</li>";
             } else {
-                html += '<li><a href="#" class="reset-filter">Reset filter</a>:';
+                html += '<li><a href="#" class="reset-filter">Reset filter:</a>';
             }
             _.each(chartData.trackFilter.getAll(), function (n) {
                 html += '<li><a name="' + n + '"';
@@ -54,7 +52,6 @@ Meteor.chart = {
             bucketArray.sort(function (a, b) {
                 return a.toLowerCase().localeCompare(b.toLowerCase());
             });
-            chartData.resultFilter.retainOn(bucketArray);
             return bucketArray;
         } else {
             return chartData.resultFilter.getAll();
@@ -274,6 +271,36 @@ Meteor.chart = {
         chartData.trackBuckets.sort(function (a, b) {
             return a.name.toLowerCase().localeCompare(b.name.toLowerCase());
         });
+
+        if (chartData.trackFilter.isAllOff() && chartData.resultFilter.isAllOff()) {
+            //set last track on
+            var lastTrack = this._lastTrack(chartData);
+            if (lastTrack) {
+                chartData.trackFilter.on(lastTrack.track);
+
+                var trackBucket = this._trackBucket(chartData, lastTrack.track);
+
+                if (!lastTrack["duration"] && trackBucket.resultBuckets) {
+                    _.each(trackBucket.resultBuckets, function (resultBucket) {
+                        chartData.resultFilter.on(resultBucket.name);
+                    });
+                }
+            }
+        }
+    },
+    _lastTrack: function (chartData) {
+        return _.last(chartData.data);
+    },
+    _trackBucket: function (chartData, trackBucketName) {
+        if (chartData.trackBuckets) {
+            for (var i = 0; i < chartData.trackBuckets.length; i++) {
+                var name = chartData.trackBuckets[i].name;
+                if (name.toLowerCase() == trackBucketName.toLowerCase()) {
+                    return chartData.trackBuckets[i];
+                }
+            }
+        }
+        return null;
     },
     _scaling: function (chartData) {
         Meteor.chart._calcMinMax(chartData);
@@ -371,7 +398,7 @@ Meteor.chart = {
     },
 
     _detectDimensions: function (chartData) {
-        var chartContainer = Meteor.chart.chartContainer();
+        var chartContainer = this.chartContainer();
         chartData.chartContainer = chartContainer;
 
         var w = chartContainer.width();
@@ -406,20 +433,26 @@ Meteor.chart = {
     ,
     _drawAxis: function (chartData, g) {
         //date axis
-        g.append("g")
-            .attr("class", "date axis")
-            .call(chartData.dateAxis);
+        if (this.hasTrack() || this.hasResult()) {
+            g.append("g")
+                .attr("class", "date axis")
+                .call(chartData.dateAxis);
+        }
 
         //duration axis
-        g.append("g")
-            .attr("class", "duration axis")
-            .call(chartData.durationAxis);
+        if (this.hasTrack()) {
+            g.append("g")
+                .attr("class", "duration axis")
+                .call(chartData.durationAxis);
+        }
 
         //results axis
-        g.append("g")
-            .attr("class", "results axis")
-            .attr("transform", "translate(" + chartData.width + ",0)")
-            .call(chartData.resultsAxis);
+        if (this.hasResult()) {
+            g.append("g")
+                .attr("class", "results axis")
+                .attr("transform", "translate(" + chartData.width + ",0)")
+                .call(chartData.resultsAxis);
+        }
         return chartData;
     },
     _drawDurationLine: function (chartData, g, trackBucket) {
@@ -469,55 +502,74 @@ Meteor.chart = {
         return chartData;
     },
     _drawTracks: function (chartData, g) {
-        _.each(chartData.trackBuckets, function (trackBucket) {
-            if (trackBucket.tracks.length && (chartData.trackFilter.isAllOff() || chartData.trackFilter.isOn(trackBucket.name))) {
-
-                if ((chartData.resultFilter.hasOneOn() && chartData.trackFilter.isOn(trackBucket.name)) || chartData.resultFilter.isAllOff()) {
+        if (chartData.trackFilter.hasOneOn()) {
+            _.each(chartData.trackBuckets, function (trackBucket) {
+                if (chartData.trackFilter.isOn(trackBucket.name)) {
                     Meteor.chart._drawDurationLine(chartData, g, trackBucket);
+                    _.each(trackBucket.resultBuckets, function (resultBucket) {
+                        if (chartData.resultFilter.isOn(resultBucket.name)) {
+                            Meteor.chart._drawResultLine(chartData, g, resultBucket);
+                        }
+                    });
                 }
+            });
+        } else if (chartData.resultFilter.hasOneOn()) {
+            _.each(chartData.trackBuckets, function (trackBucket) {
                 _.each(trackBucket.resultBuckets, function (resultBucket) {
-                    if (chartData.resultFilter.isAllOff() || chartData.resultFilter.isOn(resultBucket.name)) {
+                    if (chartData.resultFilter.isOn(resultBucket.name)) {
                         Meteor.chart._drawResultLine(chartData, g, resultBucket);
                     }
                 });
-            }
-        });
+            });
+
+        }
 
         return chartData;
     },
-    draw: function (reload) {
+    hasTrack: function () {
+        return this.chartData.trackFilter.hasOneOn();
+    },
+    hasResult: function () {
+        return this.chartData.resultFilter.hasOneOn();
+    },
+    prepare: function (load) {
 
-        var chartData = Meteor.chart.chartData;
+        var chartData = this.chartData;
         chartData.d3Chart = Meteor.chart.d3Chart();
-        Meteor.chart._clearChartDrawing(chartData);
+        this._clearChartDrawing(chartData);
 
-        if (reload) {
-            Meteor.chart._loadData(chartData);
-            Meteor.chart._setResultColorScale(chartData);
+        if (load) {
+            this._loadData(chartData);
+            this._setResultColorScale(chartData);
         }
 
-        if (chartData.data.length >= 1) {
-            $(".chart")
-                .show();
+        //set bucket names
+        //track and result bucket names must be set before detecting
+        //dimensions, otherwise the chart will have too much height
+        $("#trackBucketNames")
+            .html(Meteor.chart._trackBucketNameHtml(chartData));
+        $("#resultBucketNames")
+            .html(Meteor.chart._resultBucketNameHtml(chartData));
 
-            //set bucket names
-            //track and result bucket names must be set before detecting
-            //of dimensions, otherwise the chart will have too much height
+        this._detectDimensions(chartData);
+        this._setDimensions(chartData);
 
-            $("#trackBucketNames")
-                .html(Meteor.chart._trackBucketNameHtml(chartData));
-            $("#resultBucketNames")
-                .html(Meteor.chart._resultBucketNameHtml(chartData));
+    },
+    draw: function (loadData) {
+        this.prepare(loadData);
+        var chartData = this.chartData;
 
-            Meteor.chart._detectDimensions(chartData);
-            Meteor.chart._setDimensions(chartData);
-            Meteor.chart._scaling(chartData);
+        if (this.hasTrack() || this.hasResult()) {
+            $("#chart").show();
+            this._scaling(chartData);
 
             //chart
             var g = chartData.d3Chart.append("g")
                 .attr("transform", "translate(" + chartData.margin.left + "," + chartData.margin.top + ")");
-            Meteor.chart._drawAxis(chartData, g);
-            Meteor.chart._drawTracks(chartData, g);
+            this._drawAxis(chartData, g);
+            this._drawTracks(chartData, g);
+        } else {
+            $("#chart").hide();
         }
     }
 }
@@ -527,17 +579,17 @@ Template.chart.events({
     "click .track-bucket-names a.reset-filter": function (event) {
         Meteor.chart.chartData.trackFilter.clearToggles();
         Meteor.chart.chartData.resultFilter.clearToggles();
-        Meteor.chart.draw(false);
+        Meteor.chart.draw();
     },
     "click .track-bucket-names a.filter": function (event) {
         var trackName = event.target.name;
         Meteor.chart.chartData.trackFilter.toggle(trackName);
-        Meteor.chart.draw(false);
+        Meteor.chart.draw();
     },
     "click .result-bucket-names a.filter": function (event) {
         var resultName = event.target.name;
         Meteor.chart.chartData.resultFilter.toggle(resultName);
-        Meteor.chart.draw(false);
+        Meteor.chart.draw();
     }
 
 });
@@ -545,20 +597,20 @@ Template.chart.events({
 
 Template.chart.onCreated(function () {
 
-    var instance = this;
-    instance.loaded = new ReactiveVar(0);
+    var _self = this;
+    _self.loaded = new ReactiveVar(0);
 
     this.autorun(function () {
         var limit = Meteor.tracks.getLimit();
-        var subscription = instance.subscribe('TrackData', limit);
+        var subscription = _self.subscribe('TrackData', limit);
         if (subscription.ready()) {
-            instance.loaded.set(limit);
+            _self.loaded.set(limit);
             Meteor.chart.draw(true);
         }
     });
 
-    instance.tracks = function () {
-        return TrackData.find({}, {limit: instance.loaded.get(), sort: {date: 1, track: 1}});
+    _self.tracks = function () {
+        return TrackData.find({}, {limit: _self.loaded.get(), sort: {date: 1, track: 1}});
     }
 });
 
