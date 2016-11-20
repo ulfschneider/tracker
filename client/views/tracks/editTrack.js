@@ -182,31 +182,36 @@ Template.editTrack.rendered = function () {
     $("#edit" + id).autosize();
     $("#edit" + id).focus();
 
-    /*
+
     $("#edit" + id).textcomplete([
-        {//|(\d+(\.\d+)?)
-            match: /(^|\s)(#)[^\s]*$/,
+        {
+            match: /#([^\s]*)$/,
             search: function (term, callback) {
-                var query, result;
-                if (term.indexOf("#") == 0) {
-                    query = term.substring(1);
-                    callback($.map(Meteor.editTrack.getTrackBuckets(), function (element) {
-                        return element.indexOf(query) === 0 ? "#" + element : null;
-                    }));
-                } else {
-                    query = Meteor.tracker.extractResultBucket(term);
-                    result = Meteor.tracker.extractResult(term);
-                    callback($.map(Meteor.editTrack.getResultBuckets(), function (element) {
-                        return element.indexOf(query) === 0 ? (result + element) : null;
-                    }));
-                }
+                callback($.map(Meteor.editTrack.getTrackBuckets(), function (element) {
+                    return element.indexOf(term) === 0 ? element : null;
+                }));
             },
-            index: 2,
+            index: 1,
+            replace: function (element) {
+                return "#" + element + " ";
+            }
+        },
+        {
+            match: /(\d+(\.\d+)?)([^\s]*)$/,
+            search: function (term, callback) {
+                var query = Meteor.tracker.extractResultBucket(term);
+                var result = Meteor.tracker.extractResult(term);
+
+                callback($.map(Meteor.editTrack.getResultBuckets(), function (element) {
+                    return element.indexOf(term) === 0 ? element : null;
+                }));
+            },
+            index: 3,
             replace: function (element) {
                 return "$1" + element + " ";
             }
         }
+
     ]);
-*/
 
 }
