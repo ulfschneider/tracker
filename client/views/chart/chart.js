@@ -273,7 +273,7 @@ Meteor.chart = {
         }
     },
     _lastTrack: function (chartData) {
-        return _.last(chartData.data);
+        return _.first(chartData.data); //most recent comes first
     },
     _trackBucket: function (chartData, trackBucketName) {
         if (chartData.trackBuckets) {
@@ -573,16 +573,19 @@ Meteor.chart = {
 
 Template.chart.events({
     "click .track-bucket-names a.reset-filter": function (event) {
+        event.preventDefault();
         Meteor.chart.chartData.trackFilter.clearToggles();
         Meteor.chart.chartData.resultFilter.clearToggles();
         Meteor.chart.draw();
     },
     "click .track-bucket-names a.filter": function (event) {
+        event.preventDefault();
         var trackName = event.target.name;
         Meteor.chart.chartData.trackFilter.toggle(trackName);
         Meteor.chart.draw();
     },
     "click .result-bucket-names a.filter": function (event) {
+        event.preventDefault();
         var resultName = event.target.name;
         Meteor.chart.chartData.resultFilter.toggle(resultName);
         Meteor.chart.draw();
@@ -606,7 +609,7 @@ Template.chart.onCreated(function () {
     });
 
     _self.tracks = function () {
-        return TrackData.find({}, {limit: _self.loaded.get(), sort: {date: 1, track: 1}});
+        return TrackData.find({}, {limit: _self.loaded.get(), sort: {date: -1, track: 1}});
     }
 });
 

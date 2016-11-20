@@ -128,6 +128,7 @@ Template.editTrack.events({
         Meteor.editTrack.escapeEdit();
     },
     "mousedown a.remove, touchend a.remove": function () {
+        event.preventDefault();
         Meteor.call("remove", Template.currentData());
     },
     "focusin textarea": function (event) {
@@ -181,10 +182,10 @@ Template.editTrack.rendered = function () {
     $("#edit" + id).autosize();
     $("#edit" + id).focus();
 
-
+    /*
     $("#edit" + id).textcomplete([
-        {
-            match: /(^|\s)(#|(\d+(\.\d+)?))[^\s]*$/,
+        {//|(\d+(\.\d+)?)
+            match: /(^|\s)(#)[^\s]*$/,
             search: function (term, callback) {
                 var query, result;
                 if (term.indexOf("#") == 0) {
@@ -206,5 +207,6 @@ Template.editTrack.rendered = function () {
             }
         }
     ]);
+*/
 
 }
