@@ -18,10 +18,11 @@ Meteor.editTrack = {
         var _self = this;
         cursor.forEach(function (t) {
             if (t.toLowerCase() != track) {
-                _self.trackBuckets.push(t.track);
+                _self.trackBuckets.push(t);
                 track = t.toLowerCase();
             }
         });
+        
         return this.trackBuckets;
     },
     getResultBuckets: function () {
