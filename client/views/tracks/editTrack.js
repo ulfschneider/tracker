@@ -12,12 +12,14 @@ Meteor.editTrack = {
 
         this.trackBuckets = [];
         var track = "";
-        var cursor = TrackData.find({}, {fields: {track: 1}, sort: {track: 1}});
+        var cursor = TrackData.find({}, {fields: {track: 1}, sort: {track: 1}}).map(function (t) {
+            return t.track;
+        });
         var _self = this;
         cursor.forEach(function (t) {
-            if (t.track.toLowerCase() != track) {
+            if (t.toLowerCase() != track) {
                 _self.trackBuckets.push(t.track);
-                track = t.track.toLowerCase();
+                track = t.toLowerCase();
             }
         });
         return this.trackBuckets;
@@ -27,16 +29,16 @@ Meteor.editTrack = {
             return this.resultBuckets;
         }
         var buckets = new Filter();
-        var cursor = TrackData.find({}, {fields: {results: 1}});
-        cursor.forEach(function (t) {
-            if (t["results"]) {
-                _.each(t.results, function (r) {
-                    var bucket = Meteor.tracker.extractResultBucket(r);
-                    if (bucket) {
-                        buckets.add(bucket);
-                    }
-                });
-            }
+        var cursor = TrackData.find({}, {fields: {results: 1}}).map(function (t) {
+            return t.results;
+        });
+        cursor.forEach(function (results) {
+            _.each(results, function (r) {
+                var bucket = Meteor.tracker.extractResultBucket(r);
+                if (bucket) {
+                    buckets.add(bucket);
+                }
+            });
         });
 
         this.resultBuckets = buckets.getAll();
