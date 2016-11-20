@@ -3,9 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="8f94bd54-6f4a-4908-8fcb-7b5f5f64d50d" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/meteor_packages_auto_import_browser.xml" afterPath="$PROJECT_DIR$/.idea/libraries/meteor_packages_auto_import_browser.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.meteor/packages" afterPath="$PROJECT_DIR$/.meteor/packages" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.meteor/versions" afterPath="$PROJECT_DIR$/.meteor/versions" />
     </list>
     <ignored path="tracker.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -35,11 +32,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="editTrack.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="editTrack.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/client/views/tracks/editTrack.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="774">
-              <caret line="158" column="6" selection-start-line="158" selection-start-column="6" selection-end-line="158" selection-end-column="6" />
+            <state relative-caret-position="1194">
+              <caret line="211" column="13" selection-start-line="211" selection-start-column="13" selection-end-line="211" selection-end-column="13" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
               </folding>
@@ -80,18 +77,18 @@
       <file leaf-file-name="chart.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/views/chart/chart.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-4011">
+            <state relative-caret-position="4125">
               <caret line="275" column="65" selection-start-line="275" selection-start-column="65" selection-end-line="275" selection-end-column="65" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="packages" pinned="false" current-in-tab="true">
+      <file leaf-file-name="packages" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/.meteor/packages">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="405">
-              <caret line="27" column="7" selection-start-line="27" selection-start-column="7" selection-end-line="27" selection-end-column="7" />
+            <state relative-caret-position="420">
+              <caret line="28" column="7" selection-start-line="28" selection-start-column="7" selection-end-line="28" selection-end-column="7" />
               <folding />
             </state>
           </provider>
@@ -100,8 +97,8 @@
       <file leaf-file-name="editTrack.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/views/tracks/editTrack.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="60">
-              <caret line="4" column="154" selection-start-line="4" selection-start-column="154" selection-end-line="4" selection-end-column="154" />
+            <state relative-caret-position="45">
+              <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -160,9 +157,9 @@
         <option value="$PROJECT_DIR$/client/views/chart/filter.js" />
         <option value="$PROJECT_DIR$/shared/main.js" />
         <option value="$PROJECT_DIR$/client/views/chart/chart.js" />
+        <option value="$PROJECT_DIR$/.meteor/packages" />
         <option value="$PROJECT_DIR$/client/views/tracks/editTrack.html" />
         <option value="$PROJECT_DIR$/client/views/tracks/editTrack.js" />
-        <option value="$PROJECT_DIR$/.meteor/packages" />
       </list>
     </option>
   </component>
@@ -230,8 +227,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -388,6 +383,8 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -488,12 +485,13 @@
       <workItem from="1479125419115" duration="5004000" />
       <workItem from="1479146773619" duration="37208000" />
       <workItem from="1479459416571" duration="33355000" />
-      <workItem from="1479650512276" duration="312000" />
+      <workItem from="1479650512276" duration="2260000" />
+      <workItem from="1479668460558" duration="3000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="242868000" />
+    <option name="totallyTimeSpent" value="244819000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -506,9 +504,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="411" y="48" width="2127" height="1366" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12552892" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.12552892" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32923833" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -522,7 +520,7 @@
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.21356978" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21356978" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
     </layout>
@@ -604,7 +602,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -668,7 +665,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2460">
           <caret line="164" column="8" selection-start-line="164" selection-start-column="8" selection-end-line="164" selection-end-column="8" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -814,7 +810,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
           <caret line="5" column="0" selection-start-line="5" selection-start-column="0" selection-end-line="5" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -822,7 +817,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3810">
           <caret line="254" column="16" selection-start-line="254" selection-start-column="16" selection-end-line="254" selection-end-column="16" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -838,7 +832,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -874,24 +867,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/views/tracks/editTrack.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="154" selection-start-line="4" selection-start-column="154" selection-end-line="4" selection-end-column="154" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/client/views/tracks/editTrack.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="774">
-          <caret line="158" column="6" selection-start-line="158" selection-start-column="6" selection-end-line="158" selection-end-column="6" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/views/tracks/track.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="150">
@@ -918,7 +893,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/client/views/chart/chart.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4011">
+        <state relative-caret-position="4125">
           <caret line="275" column="65" selection-start-line="275" selection-start-column="65" selection-end-line="275" selection-end-column="65" />
           <folding />
         </state>
@@ -926,9 +901,27 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/.meteor/packages">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="27" column="7" selection-start-line="27" selection-start-column="7" selection-end-line="27" selection-end-column="7" />
+        <state relative-caret-position="420">
+          <caret line="28" column="7" selection-start-line="28" selection-start-column="7" selection-end-line="28" selection-end-column="7" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/views/tracks/editTrack.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="0" selection-start-line="3" selection-start-column="0" selection-end-line="3" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/views/tracks/editTrack.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1194">
+          <caret line="211" column="13" selection-start-line="211" selection-start-column="13" selection-end-line="211" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
