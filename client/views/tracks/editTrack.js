@@ -97,7 +97,6 @@ Meteor.editTrack = {
                 track.data._id = id;
             }
 
-            //TODO cache this somewhere with reactivity
             this.resultBuckets = null;
             this.trackBuckets = null;
 

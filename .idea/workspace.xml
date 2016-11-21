@@ -2,12 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8f94bd54-6f4a-4908-8fcb-7b5f5f64d50d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/sylesheets/main.css" afterPath="$PROJECT_DIR$/client/sylesheets/main.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/views/chart/chart.js" afterPath="$PROJECT_DIR$/client/views/chart/chart.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/views/tracks/editTrack.js" afterPath="$PROJECT_DIR$/client/views/tracks/editTrack.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/views/tracks/tracks.js" afterPath="$PROJECT_DIR$/client/views/tracks/tracks.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/lib/tracker.js" afterPath="$PROJECT_DIR$/lib/tracker.js" />
     </list>
     <ignored path="tracker.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -40,8 +36,8 @@
       <file leaf-file-name="editTrack.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/views/tracks/editTrack.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="744">
-              <caret line="191" column="47" selection-start-line="191" selection-start-column="47" selection-end-line="191" selection-end-column="47" />
+            <state relative-caret-position="0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
               </folding>
@@ -72,8 +68,8 @@
       <file leaf-file-name="chart.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/client/views/chart/chart.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="858">
-              <caret line="506" column="50" selection-start-line="506" selection-start-column="50" selection-end-line="506" selection-end-column="50" />
+            <state relative-caret-position="-1393">
+              <caret line="452" column="54" selection-start-line="452" selection-start-column="54" selection-end-line="452" selection-end-column="54" />
               <folding />
             </state>
           </provider>
@@ -160,10 +156,10 @@
         <option value="$PROJECT_DIR$/shared/main.js" />
         <option value="$PROJECT_DIR$/.meteor/packages" />
         <option value="$PROJECT_DIR$/client/views/tracks/editTrack.html" />
-        <option value="$PROJECT_DIR$/client/views/tracks/editTrack.js" />
         <option value="$PROJECT_DIR$/client/views/tracks/tracks.js" />
         <option value="$PROJECT_DIR$/lib/tracker.js" />
         <option value="$PROJECT_DIR$/client/sylesheets/main.css" />
+        <option value="$PROJECT_DIR$/client/views/tracks/editTrack.js" />
         <option value="$PROJECT_DIR$/client/views/chart/chart.js" />
       </list>
     </option>
@@ -491,12 +487,12 @@
       <workItem from="1479146773619" duration="37208000" />
       <workItem from="1479459416571" duration="33355000" />
       <workItem from="1479650512276" duration="2260000" />
-      <workItem from="1479668460558" duration="5156000" />
+      <workItem from="1479668460558" duration="5852000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="249972000" />
+    <option name="totallyTimeSpent" value="250668000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -876,16 +872,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/views/tracks/editTrack.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="744">
-          <caret line="191" column="47" selection-start-line="191" selection-start-column="47" selection-end-line="191" selection-end-column="47" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/shared/main.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="630">
@@ -926,10 +912,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/client/views/tracks/editTrack.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/client/views/chart/chart.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="858">
-          <caret line="506" column="50" selection-start-line="506" selection-start-column="50" selection-end-line="506" selection-end-column="50" />
+        <state relative-caret-position="-1393">
+          <caret line="452" column="54" selection-start-line="452" selection-start-column="54" selection-end-line="452" selection-end-column="54" />
           <folding />
         </state>
       </provider>

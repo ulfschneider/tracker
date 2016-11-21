@@ -128,7 +128,7 @@ Meteor.chart = {
                 return trackBucket;
             }
         }
-        buckets.push({name: resultBucket, results: [{date: date, result: number}]});
+        buckets.push({name: resultBucket, results: [{date: date, result: number}], trackBucket: trackBucket});
         chartData.resultFilter.add(resultBucket);
 
         return trackBucket;
@@ -448,7 +448,20 @@ Meteor.chart = {
         if (trackBucket.tracks.length > 1) {
             g.append("path")
                 .attr("class", "line duration " + trackBucket.name)
-                .attr("d", chartData.durationLine(trackBucket.tracks));
+                .attr("d", chartData.durationLine(trackBucket.tracks))
+                .on("mouseover", function () {
+                    chartData.tooltip.html("#" + trackBucket.name)
+                        .style("left", (d3.event.pageX) + "px")
+                        .style("top", (d3.event.pageY - $("#chart-tooltip").outerHeight(true)) + "px")
+                        .style("background", "black")
+                        .style("color", "white")
+                        .style("display", "block")
+                })
+                .on("mouseout", function () {
+                    chartData.tooltip
+                        .style("display", "none");
+                });
+
         }
         _.each(trackBucket.tracks, function (track) {
             Meteor.chart._drawDurationDot(chartData, g, trackBucket, track);
@@ -478,15 +491,28 @@ Meteor.chart = {
         }
         return chartData;
     },
-    _drawResultLine: function (chartData, g, trackBucket, resultBucket) {
+    _drawResultLine: function (chartData, g, resultBucket) {
         if (resultBucket.results.length > 1) {
             g.append("path")
                 .attr("class", "line results " + resultBucket.name)
                 .attr("d", chartData.resultsLine(resultBucket.results))
-                .attr("stroke", Meteor.chart._getResultColor(chartData, resultBucket.name));
+                .attr("stroke", Meteor.chart._getResultColor(chartData, resultBucket.name))
+                .on("mouseover", function () {
+                    chartData.tooltip.html("#" + resultBucket.trackBucket.name + "<br>" + resultBucket.name)
+                        .style("left", (d3.event.pageX) + "px")
+                        .style("top", (d3.event.pageY - $("#chart-tooltip").outerHeight(true)) + "px")
+                        .style("background", Meteor.chart._getResultColor(chartData, resultBucket.name))
+                        .style("color", "white")
+                        .style("display", "block")
+                })
+                .on("mouseout", function () {
+                    chartData.tooltip
+                        .style("display", "none");
+                });
+
         }
         _.each(resultBucket.results, function (result) {
-            Meteor.chart._drawResultDot(chartData, g, trackBucket.name, resultBucket.name, result);
+            Meteor.chart._drawResultDot(chartData, g, resultBucket.trackBucket.name, resultBucket.name, result);
         });
         return chartData;
     },
@@ -521,7 +547,7 @@ Meteor.chart = {
                     Meteor.chart._drawDurationLine(chartData, g, trackBucket);
                     _.each(trackBucket.resultBuckets, function (resultBucket) {
                         if (chartData.resultFilter.isOn(resultBucket.name)) {
-                            Meteor.chart._drawResultLine(chartData, g, trackBucket, resultBucket);
+                            Meteor.chart._drawResultLine(chartData, g, resultBucket);
                         }
                     });
                 }
@@ -530,7 +556,7 @@ Meteor.chart = {
             _.each(chartData.trackBuckets, function (trackBucket) {
                 _.each(trackBucket.resultBuckets, function (resultBucket) {
                     if (chartData.resultFilter.isOn(resultBucket.name)) {
-                        Meteor.chart._drawResultLine(chartData, g, trackBucket, resultBucket);
+                        Meteor.chart._drawResultLine(chartData, g, resultBucket);
                     }
                 });
             });
