@@ -446,9 +446,17 @@ Meteor.chart = {
     },
     _drawDurationLine: function (chartData, g, trackBucket) {
         if (trackBucket.tracks.length > 1) {
+            //this line is for display
             g.append("path")
                 .attr("class", "line duration " + trackBucket.name)
+                .attr("d", chartData.durationLine(trackBucket.tracks));
+
+            //this is only to increase the hover area
+            g.append("path")
+                .attr("class", "line duration hover " + trackBucket.name)
                 .attr("d", chartData.durationLine(trackBucket.tracks))
+                .attr("stroke", "transparent")
+                .attr("stroke-width", 10)
                 .on("mouseover", function () {
                     chartData.tooltip.html("#" + trackBucket.name)
                         .style("left", (d3.event.pageX) + "px")
@@ -462,6 +470,7 @@ Meteor.chart = {
                         .style("display", "none");
                 });
 
+
         }
         _.each(trackBucket.tracks, function (track) {
             Meteor.chart._drawDurationDot(chartData, g, trackBucket, track);
@@ -471,11 +480,20 @@ Meteor.chart = {
     },
     _drawDurationDot: function (chartData, g, trackBucketName, data) {
         if (!isNaN(data.duration)) {
+            //this circle is for display
             g.append("circle")
                 .attr("class", "dot duration " + trackBucketName)
                 .attr("r", 4)
                 .attr("cx", chartData.dateScale(data.date))
                 .attr("cy", chartData.durationScale(data.duration))
+
+            //this on eis only to increase the hover area
+            g.append("circle")
+                .attr("class", "dot duration hover " + trackBucketName)
+                .attr("r", 10)
+                .attr("cx", chartData.dateScale(data.date))
+                .attr("cy", chartData.durationScale(data.duration))
+                .attr("fill", "transparent")
                 .on("mouseover", function () {
                     chartData.tooltip.html("#" + data.track + "<br>" + Meteor.tracker.durationPrint(data.duration) + "<br>" + Meteor.tracker.dayPrint(data.date))
                         .style("left", (d3.event.pageX) + "px")
@@ -493,10 +511,18 @@ Meteor.chart = {
     },
     _drawResultLine: function (chartData, g, resultBucket) {
         if (resultBucket.results.length > 1) {
+            //this line is for display
             g.append("path")
                 .attr("class", "line results " + resultBucket.name)
                 .attr("d", chartData.resultsLine(resultBucket.results))
-                .attr("stroke", Meteor.chart._getResultColor(chartData, resultBucket.name))
+                .attr("stroke", Meteor.chart._getResultColor(chartData, resultBucket.name));
+
+            //this one is only to increase the hover area
+            g.append("path")
+                .attr("class", "line results hover " + resultBucket.name)
+                .attr("d", chartData.resultsLine(resultBucket.results))
+                .attr("stroke", "transparent")
+                .attr("stroke-width", 10)
                 .on("mouseover", function () {
                     chartData.tooltip.html("#" + resultBucket.trackBucket.name + "<br>" + resultBucket.name)
                         .style("left", (d3.event.pageX) + "px")
@@ -510,6 +536,7 @@ Meteor.chart = {
                         .style("display", "none");
                 });
 
+
         }
         _.each(resultBucket.results, function (result) {
             Meteor.chart._drawResultDot(chartData, g, resultBucket.trackBucket.name, resultBucket.name, result);
@@ -518,12 +545,21 @@ Meteor.chart = {
     },
     _drawResultDot: function (chartData, g, trackBucketName, resultBucketName, data) {
         if (!isNaN(data.result)) {
+            //this circle is for display
             g.append("circle")
                 .attr("class", "dot results " + resultBucketName)
                 .attr("r", 4)
                 .attr("cx", chartData.dateScale(data.date))
                 .attr("cy", chartData.resultsScale(data.result))
                 .attr("fill", Meteor.chart._getResultColor(chartData, resultBucketName))
+
+            //this one is only to increase the hover area
+            g.append("circle")
+                .attr("class", "dot results hover " + resultBucketName)
+                .attr("r", 10)
+                .attr("cx", chartData.dateScale(data.date))
+                .attr("cy", chartData.resultsScale(data.result))
+                .attr("fill", "transparent")
                 .on("mouseover", function () {
                     chartData.tooltip.html("#" + trackBucketName + "<br>" + data.result + resultBucketName + "<br>" + Meteor.tracker.dayPrint(data.date))
                         .style("left", (d3.event.pageX) + "px")
@@ -536,6 +572,7 @@ Meteor.chart = {
                     chartData.tooltip
                         .style("display", "none");
                 });
+
         }
 
         return chartData;

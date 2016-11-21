@@ -151,6 +151,17 @@ ul.result-bucket-names .on {
     fill:none;
 }
 
+.line.hover {
+    stroke-width:10px;
+    stroke: transparent;
+    fill: none;
+}
+
+.dot.hover {
+    fill:transparent;
+    stroke:transparent;
+}
+
 #chart-tooltip {
     position: absolute;
     padding: 4px;
