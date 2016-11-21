@@ -457,10 +457,11 @@ Meteor.chart = {
                 .attr("d", chartData.durationLine(trackBucket.tracks))
                 .attr("stroke", "transparent")
                 .attr("stroke-width", 10)
+                .attr("stroke-dasharray", "8,2")
                 .on("mouseover", function () {
                     chartData.tooltip.html("#" + trackBucket.name)
                         .style("left", (d3.event.pageX) + "px")
-                        .style("top", (d3.event.pageY - $("#chart-tooltip").outerHeight(true)) + "px")
+                        .style("top", (d3.event.pageY - 16 * 2) + "px")
                         .style("background", "black")
                         .style("color", "white")
                         .style("display", "block")
@@ -487,7 +488,7 @@ Meteor.chart = {
                 .attr("cx", chartData.dateScale(data.date))
                 .attr("cy", chartData.durationScale(data.duration))
 
-            //this on eis only to increase the hover area
+            //this on is only to increase the hover area
             g.append("circle")
                 .attr("class", "dot duration hover " + trackBucketName)
                 .attr("r", 10)
@@ -497,7 +498,7 @@ Meteor.chart = {
                 .on("mouseover", function () {
                     chartData.tooltip.html("#" + data.track + "<br>" + Meteor.tracker.durationPrint(data.duration) + "<br>" + Meteor.tracker.dayPrint(data.date))
                         .style("left", (d3.event.pageX) + "px")
-                        .style("top", (d3.event.pageY - $("#chart-tooltip").outerHeight(true)) + "px")
+                        .style("top", (d3.event.pageY - 16 * 5) + "px")
                         .style("color", "white")
                         .style("background", "black")
                         .style("display", "block");
@@ -523,10 +524,11 @@ Meteor.chart = {
                 .attr("d", chartData.resultsLine(resultBucket.results))
                 .attr("stroke", "transparent")
                 .attr("stroke-width", 10)
+                .attr("stroke-dasharray", "8,2")
                 .on("mouseover", function () {
                     chartData.tooltip.html("#" + resultBucket.trackBucket.name + "<br>" + resultBucket.name)
                         .style("left", (d3.event.pageX) + "px")
-                        .style("top", (d3.event.pageY - $("#chart-tooltip").outerHeight(true)) + "px")
+                        .style("top", (d3.event.pageY - 16 * 3) + "px")
                         .style("background", Meteor.chart._getResultColor(chartData, resultBucket.name))
                         .style("color", "white")
                         .style("display", "block")
@@ -563,7 +565,7 @@ Meteor.chart = {
                 .on("mouseover", function () {
                     chartData.tooltip.html("#" + trackBucketName + "<br>" + data.result + resultBucketName + "<br>" + Meteor.tracker.dayPrint(data.date))
                         .style("left", (d3.event.pageX) + "px")
-                        .style("top", (d3.event.pageY - $("#chart-tooltip").outerHeight(true)) + "px")
+                        .style("top", (d3.event.pageY - 16 * 5) + "px")
                         .style("background", Meteor.chart._getResultColor(chartData, resultBucketName))
                         .style("color", "white")
                         .style("display", "block")
