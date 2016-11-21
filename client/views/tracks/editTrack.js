@@ -22,7 +22,7 @@ Meteor.editTrack = {
                 track = t.toLowerCase();
             }
         });
-        
+
         return this.trackBuckets;
     },
     getResultBuckets: function () {

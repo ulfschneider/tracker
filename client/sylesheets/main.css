@@ -131,24 +131,32 @@ ul.result-bucket-names .on {
     fill: gray;
 }
 
-.duration.axis text {
+.axis.duration text {
     fill: black;
 }
 
-.duration.line {
+.line.duration {
     stroke: black;
     stroke-width: 2px;
     fill:none;
 }
 
-.duration.dot {
+.dot.duration {
     fill:black;
 }
 
-.results.line {
+.line.results {
     stroke-width: 2px;
     stroke-dasharray: 8,2;
     fill:none;
+}
+
+#chart-tooltip {
+    position: absolute;
+    padding: 4px;
+    font-size:.81em;
+    pointer-events: none;
+    display:none;
 }
 
 
