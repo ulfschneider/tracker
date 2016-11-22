@@ -112,7 +112,7 @@ Meteor.chart = {
         }
         return chartData;
     },
-    _addToResultBucket: function (chartData, trackBucket, date, result) {
+    _addToResultBucket: function (chartData, trackBucket, track, result) {
         var number = Meteor.tracker.extractResult(result);
 
         if (!trackBucket["resultBuckets"]) {
@@ -124,36 +124,36 @@ Meteor.chart = {
 
         for (var i = 0; i < buckets.length; i++) {
             if (buckets[i].name.toLowerCase() == resultBucket.toLowerCase()) {
-                buckets[i].results.push({date: date, result: number});
+                buckets[i].results.push({date: track.date, result: number, duration:track.duration});
                 return trackBucket;
             }
         }
-        buckets.push({name: resultBucket, results: [{date: date, result: number}], trackBucket: trackBucket});
+        buckets.push({name: resultBucket, results: [{date: track.date, result: number, duration:track.duration}], trackBucket: trackBucket});
         chartData.resultFilter.add(resultBucket);
 
         return trackBucket;
     },
-    _addToTrackBucket: function (chartData, t) {
+    _addToTrackBucket: function (chartData, track) {
         if (!chartData["trackBuckets"]) {
             chartData.trackBuckets = [];
         }
         var buckets = chartData.trackBuckets;
         for (var i = 0; i < buckets.length; i++) {
-            if (buckets[i].name.toLowerCase() == t.track.toLowerCase()) {
-                buckets[i].tracks.push(t);
+            if (buckets[i].name.toLowerCase() == track.track.toLowerCase()) {
+                buckets[i].tracks.push(track);
 
-                _.each(t.results, function (result) {
-                    Meteor.chart._addToResultBucket(chartData, buckets[i], t.date, result);
+                _.each(track.results, function (result) {
+                    Meteor.chart._addToResultBucket(chartData, buckets[i], track, result);
                 });
                 return chartData;
             }
         }
-        buckets.push({name: t.track, tracks: [t]});
-        _.each(t.results, function (result) {
-            Meteor.chart._addToResultBucket(chartData, buckets[buckets.length - 1], t.date, result);
+        buckets.push({name: track.track, tracks: [track]});
+        _.each(track.results, function (result) {
+            Meteor.chart._addToResultBucket(chartData, buckets[buckets.length - 1], track, result);
         });
 
-        chartData.trackFilter.add(t.track);
+        chartData.trackFilter.add(track.track);
         return chartData;
     },
     _calcMinMax: function (chartData) {
@@ -444,6 +444,38 @@ Meteor.chart = {
         }
         return chartData;
     },
+    _extractTrackTooltip: function(track) {
+        var html = "";
+        html += "#" + track.track;
+        if (track.duration || track.results) {
+            html += "<br>";
+            if (track.duration) {
+                html += Meteor.tracker.durationPrint(track.duration);
+                if (track.results) {
+                    html += " ";
+                }
+            }
+            if (track.results) {
+                html += Meteor.tracker.arrayPrint(track.results, " ");
+            }
+
+        }
+        html += "<br>" + Meteor.tracker.dayPrint(track.date);
+
+        return html;
+    },
+    _extractResultTooltip: function(resultBucket, result) {
+        var html = "";
+        html += "#" + resultBucket.trackBucket.name;
+            html += "<br>";
+            if (result.duration) {
+                html += Meteor.tracker.durationPrint(result.duration) + " ";
+            }
+        html += result.result + resultBucket.name;
+        html += "<br>" + Meteor.tracker.dayPrint(result.date);
+
+        return html;
+    },
     _drawDurationLine: function (chartData, g, trackBucket) {
         if (trackBucket.tracks.length > 1) {
             //this line is for display
@@ -474,29 +506,29 @@ Meteor.chart = {
 
         }
         _.each(trackBucket.tracks, function (track) {
-            Meteor.chart._drawDurationDot(chartData, g, trackBucket, track);
+            Meteor.chart._drawDurationDot(chartData, g, track);
         });
 
         return chartData;
     },
-    _drawDurationDot: function (chartData, g, trackBucketName, data) {
-        if (!isNaN(data.duration)) {
+    _drawDurationDot: function (chartData, g, track) {
+        if (!isNaN(track.duration)) {
             //this circle is for display
             g.append("circle")
-                .attr("class", "dot duration " + trackBucketName)
+                .attr("class", "dot duration " + track.track)
                 .attr("r", 4)
-                .attr("cx", chartData.dateScale(data.date))
-                .attr("cy", chartData.durationScale(data.duration))
+                .attr("cx", chartData.dateScale(track.date))
+                .attr("cy", chartData.durationScale(track.duration))
 
             //this on is only to increase the hover area
             g.append("circle")
-                .attr("class", "dot duration hover " + trackBucketName)
+                .attr("class", "dot duration hover " + track.track)
                 .attr("r", 10)
-                .attr("cx", chartData.dateScale(data.date))
-                .attr("cy", chartData.durationScale(data.duration))
+                .attr("cx", chartData.dateScale(track.date))
+                .attr("cy", chartData.durationScale(track.duration))
                 .attr("fill", "transparent")
                 .on("mouseover", function () {
-                    chartData.tooltip.html("#" + data.track + "<br>" + Meteor.tracker.durationPrint(data.duration) + "<br>" + Meteor.tracker.dayPrint(data.date))
+                    chartData.tooltip.html(Meteor.chart._extractTrackTooltip(track))
                         .style("left", (d3.event.pageX) + "px")
                         .style("top", (d3.event.pageY - 16 * 5) + "px")
                         .style("color", "white")
@@ -537,36 +569,34 @@ Meteor.chart = {
                     chartData.tooltip
                         .style("display", "none");
                 });
-
-
         }
         _.each(resultBucket.results, function (result) {
-            Meteor.chart._drawResultDot(chartData, g, resultBucket.trackBucket.name, resultBucket.name, result);
+            Meteor.chart._drawResultDot(chartData, g, resultBucket, result);
         });
         return chartData;
     },
-    _drawResultDot: function (chartData, g, trackBucketName, resultBucketName, data) {
-        if (!isNaN(data.result)) {
+    _drawResultDot: function (chartData, g, resultBucket, result) {
+        if (!isNaN(result.result)) {
             //this circle is for display
             g.append("circle")
-                .attr("class", "dot results " + resultBucketName)
+                .attr("class", "dot results " + resultBucket.name)
                 .attr("r", 4)
-                .attr("cx", chartData.dateScale(data.date))
-                .attr("cy", chartData.resultsScale(data.result))
-                .attr("fill", Meteor.chart._getResultColor(chartData, resultBucketName))
+                .attr("cx", chartData.dateScale(result.date))
+                .attr("cy", chartData.resultsScale(result.result))
+                .attr("fill", Meteor.chart._getResultColor(chartData, resultBucket.name))
 
             //this one is only to increase the hover area
             g.append("circle")
-                .attr("class", "dot results hover " + resultBucketName)
+                .attr("class", "dot results hover " + resultBucket.name)
                 .attr("r", 10)
-                .attr("cx", chartData.dateScale(data.date))
-                .attr("cy", chartData.resultsScale(data.result))
+                .attr("cx", chartData.dateScale(result.date))
+                .attr("cy", chartData.resultsScale(result.result))
                 .attr("fill", "transparent")
                 .on("mouseover", function () {
-                    chartData.tooltip.html("#" + trackBucketName + "<br>" + data.result + resultBucketName + "<br>" + Meteor.tracker.dayPrint(data.date))
+                    chartData.tooltip.html(Meteor.chart._extractResultTooltip(resultBucket, result))
                         .style("left", (d3.event.pageX) + "px")
                         .style("top", (d3.event.pageY - 16 * 5) + "px")
-                        .style("background", Meteor.chart._getResultColor(chartData, resultBucketName))
+                        .style("background", Meteor.chart._getResultColor(chartData, resultBucket.name))
                         .style("color", "white")
                         .style("display", "block")
                 })

@@ -18,6 +18,9 @@ body {
     left: 0;
     top: 0;
     font-size: 100%;
+    -moz-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    -webkit-text-size-adjust: 100%;
 }
 
 a {
@@ -227,31 +230,34 @@ a.load-more:hover {
 
 .edit-track {
     min-width:300px;
+    margin-bottom:3.24em;
 }
 
 tr .edit-track {
     margin: 1.62em 0;
 }
 
+.edit-track .text-container {
+    border-bottom:1px solid black;
+}
+
 .edit-track textarea {
-    border: none;
-    padding: 0;
+
+    padding:0px;
+    padding-top:3px;
+    border:none;
     margin: 0;
     resize: none;
-    height: 1.62em;
+    height:1.62em;
     width: 100%;
-    border-bottom: 1px solid transparent;
 }
 
 
 .edit-track .control {
-    color: gray;
-    font-size: .81em;
     height: 1.62em;
 }
 
 .edit-track .control a {
-    color: gray;
     text-decoration: underline;
 }
 

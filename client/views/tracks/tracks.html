@@ -8,24 +8,28 @@
         {{/if}}
 
         <div class="{{#if hasTracks}}col-6{{else}}col-12{{/if}}">
-            <table class="tracks">
-                {{#each tracks}}
-                    {{> track}}
-                {{/each}}
-                <tr class="end-of-list">
-                    <td colspan="10">
-                        {{#if Template.subscriptionsReady}}
-                            {{#if hasMoreTracks}}
-                                <a class="load-more" href="#load">Load more tracks</a>
-                            {{else}}
-                                {{#if hasTracks}}
-                                    <span>End of list</span>
+            <div style="display:inline-block">
+                {{> editTrack}}
+
+                <table class="tracks">
+                    {{#each tracks}}
+                        {{> track}}
+                    {{/each}}
+                    <tr class="end-of-list">
+                        <td colspan="10">
+                            {{#if Template.subscriptionsReady}}
+                                {{#if hasMoreTracks}}
+                                    <a class="load-more" href="#load">Load more tracks</a>
+                                {{else}}
+                                    {{#if hasTracks}}
+                                        <span>End of list</span>
+                                    {{/if}}
                                 {{/if}}
                             {{/if}}
-                        {{/if}}
-                    </td>
-                </tr>
-            </table>
+                        </td>
+                    </tr>
+                </table>
+            </div>
         </div>
     </div>
 </template>

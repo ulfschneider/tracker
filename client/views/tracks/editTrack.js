@@ -138,12 +138,9 @@ Template.editTrack.events({
     "click a.remove": function (event) {
         event.preventDefault();
         event.stopPropagation();
-
-        Meteor.call("remove", Template.currentData());
-    },
-    "focusin textarea": function (event) {
         var id = this._id ? this._id : "";
-        $("#control" + id + " div").show(0);
+        Meteor.editTrack.escapeEdit(id);
+        Meteor.call("remove", Template.currentData());
     },
     "keyup textarea": function (event) {
         var id = this._id ? this._id : "";
