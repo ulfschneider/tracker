@@ -179,15 +179,9 @@ table.tracks {
     border-spacing: 0;
 }
 
-tr.track:hover, tr.track:hover .comment {
-    background: gray;
-    color:white;
+tr.track {
+    cursor:pointer;
 }
-
-.comment {
-    color:gray;
-}
-
 
 tr.recent td.indicator:before {
     content: "»";
@@ -204,6 +198,11 @@ tr.track td {
 tr.track td:last-child {
     padding: 0;
 }
+
+.comment {
+    color:gray;
+}
+
 
 .end-of-list td {
     padding: 3.24em 0;

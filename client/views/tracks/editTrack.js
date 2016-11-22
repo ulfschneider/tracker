@@ -78,12 +78,15 @@ Meteor.editTrack = {
             return Meteor.editTrack.getRecentEditId() ? true : false;
         }
     },
-    escapeEdit: function () {
-        var id = Meteor.editTrack.getEditId();
+    escapeEdit: function (id) {
+        var editId = id ? id : Meteor.editTrack.getEditId();
         $("#edit" + id).val("");
         $("#edit" + id).removeClass("error");
         $("#errors" + id).html("");
-        Meteor.editTrack.clearEditId();
+
+        if (id == editId) {
+            Meteor.editTrack.clearEditId();
+        }
     },
     isVisible: function () {
         var id = this._id ? this._id : "";
@@ -107,7 +110,6 @@ Meteor.editTrack = {
             this.resultBuckets = null;
             this.trackBuckets = null;
 
-            Meteor.editTrack.escapeEdit();
             Meteor.call("upsert", track.data, function (error, result) {
                 if (!error) {
                     Meteor.editTrack.escapeEdit();
@@ -124,17 +126,16 @@ Meteor.editTrack = {
 
 Template.editTrack.events({
     "click a.submit": function (event) {
-        var id = this._id ? this._id : "";
         event.preventDefault();
         event.stopPropagation();
-
+        var id = this._id ? this._id : "";
         Meteor.editTrack._submitTrack(id);
     },
     "click a.cancel": function (event) {
         event.preventDefault();
         event.stopPropagation();
-
-        Meteor.editTrack.escapeEdit();
+        var id = this._id ? this._id : "";
+        Meteor.editTrack.escapeEdit(id);
     },
     "click a.remove": function (event) {
         event.preventDefault();
@@ -152,7 +153,7 @@ Template.editTrack.events({
             $("#edit" + id).removeClass("error");
         }
         if (event.which === 27) {
-            Meteor.editTrack.escapeEdit();
+            Meteor.editTrack.escapeEdit(id);
         }
     },
     "keypress textarea": function (event) {
@@ -180,7 +181,10 @@ Template.editTrack.rendered = function () {
     Meteor.subscribe("TrackData");
     var id = Template.currentData() && Template.currentData()._id ? Template.currentData()._id : "";
     $("#edit" + id).autosize();
-    $("#edit" + id).focus();
+
+    if (id) {
+        $("#edit" + id).focus();
+    }
 
 
     $("#edit" + id).textcomplete([
