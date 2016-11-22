@@ -491,9 +491,9 @@ Meteor.chart = {
                 .attr("stroke-width", 10)
                 .attr("stroke-dasharray", "8,2")
                 .on("mouseover", function () {
-                    chartData.tooltip.html("#" + trackBucket.name)
+                    chartData.tooltip.html("#" + trackBucket.name + "<br>duration")
                         .style("left", (d3.event.pageX) + "px")
-                        .style("top", (d3.event.pageY - 16 * 2) + "px")
+                        .style("top", (d3.event.pageY - 16 * 3) + "px")
                         .style("background", "black")
                         .style("color", "white")
                         .style("display", "block")

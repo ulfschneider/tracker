@@ -2,14 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8f94bd54-6f4a-4908-8fcb-7b5f5f64d50d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/sylesheets/main.css" afterPath="$PROJECT_DIR$/client/sylesheets/main.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/views/chart/chart.js" afterPath="$PROJECT_DIR$/client/views/chart/chart.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/views/main.html" afterPath="$PROJECT_DIR$/client/views/main.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/views/tracks/editTrack.html" afterPath="$PROJECT_DIR$/client/views/tracks/editTrack.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/views/tracks/editTrack.js" afterPath="$PROJECT_DIR$/client/views/tracks/editTrack.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/views/tracks/track.html" afterPath="$PROJECT_DIR$/client/views/tracks/track.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/views/tracks/tracks.html" afterPath="$PROJECT_DIR$/client/views/tracks/tracks.html" />
     </list>
     <ignored path="tracker.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -106,8 +99,8 @@
       <file leaf-file-name="chart.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/client/views/chart/chart.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="450">
-              <caret line="471" column="74" selection-start-line="471" selection-start-column="74" selection-end-line="471" selection-end-column="74" />
+            <state relative-caret-position="360">
+              <caret line="493" column="83" selection-start-line="493" selection-start-column="83" selection-end-line="493" selection-end-column="83" />
               <folding />
             </state>
           </provider>
@@ -495,12 +488,12 @@
       <workItem from="1479146773619" duration="37208000" />
       <workItem from="1479459416571" duration="33355000" />
       <workItem from="1479650512276" duration="2260000" />
-      <workItem from="1479668460558" duration="22176000" />
+      <workItem from="1479668460558" duration="22346000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="266992000" />
+    <option name="totallyTimeSpent" value="267162000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -935,8 +928,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/client/views/chart/chart.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="471" column="74" selection-start-line="471" selection-start-column="74" selection-end-line="471" selection-end-column="74" />
+        <state relative-caret-position="360">
+          <caret line="493" column="83" selection-start-line="493" selection-start-column="83" selection-end-line="493" selection-end-column="83" />
           <folding />
         </state>
       </provider>
