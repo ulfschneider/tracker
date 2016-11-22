@@ -61,7 +61,7 @@ Meteor.editTrack = {
         Session.set("recentEditId", editId);
     },
     getRecentEditId: function () {
-        var id =  Session.get("recentEditId");
+        var id = Session.get("recentEditId");
         return id ? id : "";
     },
     isEditing: function (editId) {
@@ -79,14 +79,12 @@ Meteor.editTrack = {
         }
     },
     escapeEdit: function (id) {
-        var editId = id ? id : Meteor.editTrack.getEditId();
+        id = _.isUndefined(id) ? Meteor.editTrack.getEditId() : id;
+
         $("#edit" + id).val("");
         $("#edit" + id).removeClass("error");
         $("#errors" + id).html("");
-
-        if (id == editId) {
-            Meteor.editTrack.clearEditId();
-        }
+        Meteor.editTrack.clearEditId();
     },
     isVisible: function () {
         var id = this._id ? this._id : "";
@@ -153,7 +151,7 @@ Template.editTrack.events({
             $("#edit" + id).removeClass("error");
         }
         if (event.which === 27) {
-            Meteor.editTrack.escapeEdit(id);
+            Meteor.editTrack.escapeEdit();
         }
     },
     "keypress textarea": function (event) {
@@ -171,7 +169,7 @@ Template.editTrack.helpers({
     isVisible: function () {
         return Meteor.editTrack.isVisible();
     },
-    isHidden: function() {
+    isHidden: function () {
         return !Meteor.editTrack.isVisible();
     }
 });
