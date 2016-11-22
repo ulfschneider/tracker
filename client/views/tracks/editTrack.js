@@ -4,6 +4,7 @@ import {Filter} from "/client/views/chart/filter.js";
 Meteor.editTrack = {
     trackBuckets: null,
     resultBuckets: null,
+    edit: null,
 
     getTrackBuckets: function () {
         if (this.trackBuckets) {
@@ -53,13 +54,15 @@ Meteor.editTrack = {
         Session.set("editId", "");
     },
     getEditId: function () {
-        return Session.get("editId");
+        var id = Session.get("editId");
+        return id ? id : "";
     },
     setRecentEditId: function (editId) {
         Session.set("recentEditId", editId);
     },
     getRecentEditId: function () {
-        return Session.get("recentEditId");
+        var id =  Session.get("recentEditId");
+        return id ? id : "";
     },
     isEditing: function (editId) {
         if (editId) {
@@ -82,6 +85,10 @@ Meteor.editTrack = {
         $("#errors" + id).html("");
         Meteor.editTrack.clearEditId();
     },
+    isVisible: function () {
+        var id = this._id ? this._id : "";
+        return !id || id == Meteor.editTrack.getEditId();
+    },
     _submitTrack: function (id) {
         var id = id ? id : "";
         var track = Meteor.tracker.analyzeTrack($("#edit" + id).val());
@@ -100,6 +107,7 @@ Meteor.editTrack = {
             this.resultBuckets = null;
             this.trackBuckets = null;
 
+            Meteor.editTrack.escapeEdit();
             Meteor.call("upsert", track.data, function (error, result) {
                 if (!error) {
                     Meteor.editTrack.escapeEdit();
@@ -115,40 +123,28 @@ Meteor.editTrack = {
 }
 
 Template.editTrack.events({
-    "mousedown a.submit, touchend a.submit": function () {
+    "click a.submit": function (event) {
         var id = this._id ? this._id : "";
-
-        event.stopPropagation();
         event.preventDefault();
+        event.stopPropagation();
 
         Meteor.editTrack._submitTrack(id);
     },
-    "mousedown a.cancel, touchend a.cancel": function () {
-        event.stopPropagation();
+    "click a.cancel": function (event) {
         event.preventDefault();
+        event.stopPropagation();
 
         Meteor.editTrack.escapeEdit();
     },
-    "mousedown a.remove, touchend a.remove": function () {
+    "click a.remove": function (event) {
         event.preventDefault();
+        event.stopPropagation();
+
         Meteor.call("remove", Template.currentData());
     },
     "focusin textarea": function (event) {
         var id = this._id ? this._id : "";
         $("#control" + id + " div").show(0);
-    },
-    "mousedown textarea, touchend textarea": function (event) {
-        event.stopPropagation();
-    },
-    "blur textarea": function (event) {
-        var id = this._id ? this._id : "";
-        $("#control" + id + " div").hide(0);
-        if (!id) {
-            $("#edit").removeClass("error");
-            $("#errors").html("");
-        } else {
-            Meteor.editTrack.escapeEdit();
-        }
     },
     "keyup textarea": function (event) {
         var id = this._id ? this._id : "";
@@ -172,8 +168,10 @@ Template.editTrack.events({
 
 Template.editTrack.helpers({
     isVisible: function () {
-        var id = this._id ? this._id : "";
-        return !id || id == Meteor.editTrack.getEditId();
+        return Meteor.editTrack.isVisible();
+    },
+    isHidden: function() {
+        return !Meteor.editTrack.isVisible();
     }
 });
 

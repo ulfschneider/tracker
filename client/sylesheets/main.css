@@ -179,9 +179,15 @@ table.tracks {
     border-spacing: 0;
 }
 
-tr.track:hover {
-    background: #d4d9de;
+tr.track:hover, tr.track:hover .comment {
+    background: gray;
+    color:white;
 }
+
+.comment {
+    color:gray;
+}
+
 
 tr.recent td.indicator:before {
     content: "»";
@@ -216,9 +222,7 @@ a.load-more:hover {
     background: black;
 }
 
-.comment {
-    color:gray;
-}
+
 
 /* edit track */
 
@@ -240,9 +244,6 @@ tr .edit-track {
     border-bottom: 1px solid transparent;
 }
 
-.edit-track textarea:hover, .edit-track textarea:focus {
-    border-bottom: 1px solid lightgray;
-}
 
 .edit-track .control {
     color: gray;

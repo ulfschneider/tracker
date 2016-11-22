@@ -1,5 +1,3 @@
-var touchmove;
-
 Template.track.helpers({
     time: function () {
         return moment(Template.currentData().date).format("HH:mm");
@@ -48,19 +46,13 @@ Template.track.helpers({
 });
 
 Template.track.events({
-    "mousedown tr.track, touchend tr.track": function (event) {
-        event.stopPropagation();
-        event.preventDefault();
-        if (!touchmove) {
+    "click tr.track": function (event) {
+        if (!Meteor.editTrack.getEditId()) {
+            event.preventDefault();
+            event.stopPropagation();
+
             Meteor.editTrack.setEditId(Template.currentData()._id);
         }
-        touchmove = false;
-    },
-    "touchstart tr": function () {
-        touchmove = false;
-    },
-    "touchmove tr": function () {
-        touchmove = true;
     }
 });
 
