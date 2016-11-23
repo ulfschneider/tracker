@@ -220,7 +220,7 @@ Template.editTrack.rendered = function () {
             },
             index: 4,
             replace: function (element) {
-                return "$1$2$3" + element + " ";
+                return "$1$2" + element + " ";
             }
         }
 
