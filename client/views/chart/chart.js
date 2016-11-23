@@ -493,7 +493,7 @@ Meteor.chart = {
                 .attr("stroke-width", 10)
                 .attr("stroke-dasharray", "8,2")
                 .on("mouseover", function () {
-                    chartData.tooltip.html(Meteor.tracker.TOKEN_TRACK + trackBucket.name + "<br>duration" + d3.event.pageX + " " + d3.event.pageY)
+                    chartData.tooltip.html(Meteor.tracker.TOKEN_TRACK + trackBucket.name + "<br>duration")
                         .css("left", (d3.event.pageX) + "px")
                         .css("top", (d3.event.pageY - 120) + "px")
                         .css("background", "black")
