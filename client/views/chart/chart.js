@@ -493,9 +493,9 @@ Meteor.chart = {
                 .attr("stroke-width", 10)
                 .attr("stroke-dasharray", "8,2")
                 .on("mouseover", function () {
-                    chartData.tooltip.html("#" + trackBucket.name + "<br>duration")
+                    chartData.tooltip.html("#" + trackBucket.name + "<br>duration" + d3.event.pageX + " " + d3.event.pageY)
                         .css("left", (d3.event.pageX) + "px")
-                        .css("top", (d3.event.pageY - 16 * 3) + "px")
+                        .css("top", (d3.event.pageY - 120) + "px")
                         .css("background", "black")
                         .css("color", "white")
                         .show();
@@ -531,7 +531,7 @@ Meteor.chart = {
                 .on("mouseover", function () {
                     chartData.tooltip.html(Meteor.chart._extractTrackTooltip(track))
                         .css("left", (d3.event.pageX) + "px")
-                        .css("top", (d3.event.pageY - 16 * 5) + "px")
+                        .css("top", (d3.event.pageY - 160) + "px")
                         .css("color", "white")
                         .css("background", "black")
                         .show();
@@ -560,10 +560,10 @@ Meteor.chart = {
                 .on("mouseover", function () {
                     chartData.tooltip.html("#" + resultBucket.trackBucket.name + "<br>" + resultBucket.name)
                         .css("left", (d3.event.pageX) + "px")
-                        .css("top", (d3.event.pageY - 16 * 3) + "px")
+                        .css("top", (d3.event.pageY - 120) + "px")
                         .css("background", Meteor.chart._getResultColor(chartData, resultBucket.name))
                         .css("color", "white")
-                        .show();
+                        .show()
                 })
                 .on("mouseout", function () {
                     chartData.tooltip.hide();
@@ -594,7 +594,7 @@ Meteor.chart = {
                 .on("mouseover", function () {
                     chartData.tooltip.html(Meteor.chart._extractResultTooltip(resultBucket, result))
                         .css("left", (d3.event.pageX) + "px")
-                        .css("top", (d3.event.pageY - 16 * 5) + "px")
+                        .css("top", (d3.event.pageY - 160) + "px")
                         .css("background", Meteor.chart._getResultColor(chartData, resultBucket.name))
                         .css("color", "white")
                         .show();
