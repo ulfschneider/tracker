@@ -4,7 +4,7 @@ Template.track.helpers({
     },
     track: function () {
         var track = Template.currentData().track;
-        return track ? "#" + track : "";
+        return track ? Meteor.tracker.TOKEN_TRACK + track : "";
     },
     durationAndResults: function () {
         var results = [];
@@ -19,7 +19,7 @@ Template.track.helpers({
     },
     comment: function () {
         var comment = Template.currentData().comment;
-        return comment ? "//" + Template.currentData().comment : "";
+        return comment ? Meteor.tracker.TOKEN_COMMENT + Template.currentData().comment : "";
     },
     isEditing: function () {
         return Meteor.editTrack.isEditing(Template.currentData()._id);

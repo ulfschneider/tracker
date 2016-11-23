@@ -448,7 +448,7 @@ Meteor.chart = {
     },
     _extractTrackTooltip: function (track) {
         var html = "";
-        html += "#" + track.track;
+        html += Meteor.tracker.TOKEN_TRACK + track.track;
         if (track.duration || track.results) {
             html += "<br>";
             if (track.duration) {
@@ -468,7 +468,7 @@ Meteor.chart = {
     },
     _extractResultTooltip: function (resultBucket, result) {
         var html = "";
-        html += "#" + resultBucket.trackBucket.name;
+        html += Meteor.tracker.TOKEN_TRACK + resultBucket.trackBucket.name;
         html += "<br>";
         if (result.duration) {
             html += Meteor.tracker.durationPrint(result.duration) + " ";
@@ -493,7 +493,7 @@ Meteor.chart = {
                 .attr("stroke-width", 10)
                 .attr("stroke-dasharray", "8,2")
                 .on("mouseover", function () {
-                    chartData.tooltip.html("#" + trackBucket.name + "<br>duration" + d3.event.pageX + " " + d3.event.pageY)
+                    chartData.tooltip.html(Meteor.tracker.TOKEN_TRACK + trackBucket.name + "<br>duration" + d3.event.pageX + " " + d3.event.pageY)
                         .css("left", (d3.event.pageX) + "px")
                         .css("top", (d3.event.pageY - 120) + "px")
                         .css("background", "black")
@@ -558,7 +558,7 @@ Meteor.chart = {
                 .attr("stroke-width", 10)
                 .attr("stroke-dasharray", "8,2")
                 .on("mouseover", function () {
-                    chartData.tooltip.html("#" + resultBucket.trackBucket.name + "<br>" + resultBucket.name)
+                    chartData.tooltip.html(Meteor.tracker.TOKEN_TRACK + resultBucket.trackBucket.name + "<br>" + resultBucket.name)
                         .css("left", (d3.event.pageX) + "px")
                         .css("top", (d3.event.pageY - 120) + "px")
                         .css("background", Meteor.chart._getResultColor(chartData, resultBucket.name))
