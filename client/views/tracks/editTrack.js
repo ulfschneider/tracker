@@ -112,6 +112,16 @@ Meteor.editTrack = {
                 if (!error) {
                     Meteor.editTrack.escapeEdit();
                     Meteor.editTrack.setRecentEditId(result);
+                    Bert.alert({
+                        title: 'Track stored',
+                        message: Meteor.tracker.dayPrint(track.data.date)
+                        + " #" + track.data.track
+                        + (track.data.duration ? " " + Meteor.tracker.durationPrint(track.data.duration) : "")
+                        + (track.data.results ? " " + Meteor.tracker.arrayPrint(track.data.results, " ") : "")
+                        + (track.data.comment ? " " + "//" + track.data.comment : ""),
+                        type: 'info',
+                        style: 'growl-top-right'
+                    });
                 } else {
                     errors = Meteor.tracker.errorPrintHtml([{description: "Your track could not be stored on the server. " + error}]);
                     $("#errors" + id).html(errors);

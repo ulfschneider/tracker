@@ -230,7 +230,7 @@ a.load-more:hover {
 
 .edit-track {
     min-width:300px;
-    margin-bottom:3.24em;
+    margin-bottom:1.62em;
 }
 
 tr .edit-track {
@@ -278,6 +278,19 @@ tr .edit-track {
 .textcomplete-dropdown li:hover a,
 .textcomplete-dropdown .active a {
     color:white;
+}
+
+
+
+/* Bert */
+.bert-alert.clearfix {
+    background:gray;
+    border-radius:4px;
+    padding:5px;
+}
+
+.bert-alert .bert-container .bert-gem {
+    display:none;
 }
 
 /*
