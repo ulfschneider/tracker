@@ -6,6 +6,9 @@ Meteor.chart = {
     d3Chart: function () {
         return d3.select("#chart");
     },
+    tooltip: function() {
+        return $("#chart-tooltip");
+    },
     chartContainer: function () {
         //somewhere there must be container for the entire chart
         //to get the padding of that container into the equation,
@@ -124,11 +127,15 @@ Meteor.chart = {
 
         for (var i = 0; i < buckets.length; i++) {
             if (buckets[i].name.toLowerCase() == resultBucket.toLowerCase()) {
-                buckets[i].results.push({date: track.date, result: number, duration:track.duration});
+                buckets[i].results.push({date: track.date, result: number, duration: track.duration});
                 return trackBucket;
             }
         }
-        buckets.push({name: resultBucket, results: [{date: track.date, result: number, duration:track.duration}], trackBucket: trackBucket});
+        buckets.push({
+            name: resultBucket,
+            results: [{date: track.date, result: number, duration: track.duration}],
+            trackBucket: trackBucket
+        });
         chartData.resultFilter.add(resultBucket);
 
         return trackBucket;
@@ -415,11 +422,6 @@ Meteor.chart = {
         return chartData;
     }
     ,
-    _prepareTooltip: function (chartData) {
-        chartData.tooltip = d3.select("body").append("div")
-            .attr("id", "chart-tooltip");
-        return chartData;
-    },
     _drawAxis: function (chartData, g) {
         //date axis
         if (this.hasDuration(chartData) || this.hasResult(chartData)) {
@@ -444,7 +446,7 @@ Meteor.chart = {
         }
         return chartData;
     },
-    _extractTrackTooltip: function(track) {
+    _extractTrackTooltip: function (track) {
         var html = "";
         html += "#" + track.track;
         if (track.duration || track.results) {
@@ -464,13 +466,13 @@ Meteor.chart = {
 
         return html;
     },
-    _extractResultTooltip: function(resultBucket, result) {
+    _extractResultTooltip: function (resultBucket, result) {
         var html = "";
         html += "#" + resultBucket.trackBucket.name;
-            html += "<br>";
-            if (result.duration) {
-                html += Meteor.tracker.durationPrint(result.duration) + " ";
-            }
+        html += "<br>";
+        if (result.duration) {
+            html += Meteor.tracker.durationPrint(result.duration) + " ";
+        }
         html += result.result + resultBucket.name;
         html += "<br>" + Meteor.tracker.dayPrint(result.date);
 
@@ -492,15 +494,14 @@ Meteor.chart = {
                 .attr("stroke-dasharray", "8,2")
                 .on("mouseover", function () {
                     chartData.tooltip.html("#" + trackBucket.name + "<br>duration")
-                        .style("left", (d3.event.pageX) + "px")
-                        .style("top", (d3.event.pageY - 16 * 3) + "px")
-                        .style("background", "black")
-                        .style("color", "white")
-                        .style("display", "block")
+                        .css("left", (d3.event.pageX) + "px")
+                        .css("top", (d3.event.pageY - 16 * 3) + "px")
+                        .css("background", "black")
+                        .css("color", "white")
+                        .show();
                 })
                 .on("mouseout", function () {
-                    chartData.tooltip
-                        .style("display", "none");
+                    chartData.tooltip.hide();
                 });
 
 
@@ -529,15 +530,14 @@ Meteor.chart = {
                 .attr("fill", "transparent")
                 .on("mouseover", function () {
                     chartData.tooltip.html(Meteor.chart._extractTrackTooltip(track))
-                        .style("left", (d3.event.pageX) + "px")
-                        .style("top", (d3.event.pageY - 16 * 5) + "px")
-                        .style("color", "white")
-                        .style("background", "black")
-                        .style("display", "block");
+                        .css("left", (d3.event.pageX) + "px")
+                        .css("top", (d3.event.pageY - 16 * 5) + "px")
+                        .css("color", "white")
+                        .css("background", "black")
+                        .show();
                 })
                 .on("mouseout", function () {
-                    chartData.tooltip
-                        .style("display", "none");
+                    chartData.tooltip.hide();
                 });
         }
         return chartData;
@@ -559,15 +559,14 @@ Meteor.chart = {
                 .attr("stroke-dasharray", "8,2")
                 .on("mouseover", function () {
                     chartData.tooltip.html("#" + resultBucket.trackBucket.name + "<br>" + resultBucket.name)
-                        .style("left", (d3.event.pageX) + "px")
-                        .style("top", (d3.event.pageY - 16 * 3) + "px")
-                        .style("background", Meteor.chart._getResultColor(chartData, resultBucket.name))
-                        .style("color", "white")
-                        .style("display", "block")
+                        .css("left", (d3.event.pageX) + "px")
+                        .css("top", (d3.event.pageY - 16 * 3) + "px")
+                        .css("background", Meteor.chart._getResultColor(chartData, resultBucket.name))
+                        .css("color", "white")
+                        .show();
                 })
                 .on("mouseout", function () {
-                    chartData.tooltip
-                        .style("display", "none");
+                    chartData.tooltip.hide();
                 });
         }
         _.each(resultBucket.results, function (result) {
@@ -594,15 +593,14 @@ Meteor.chart = {
                 .attr("fill", "transparent")
                 .on("mouseover", function () {
                     chartData.tooltip.html(Meteor.chart._extractResultTooltip(resultBucket, result))
-                        .style("left", (d3.event.pageX) + "px")
-                        .style("top", (d3.event.pageY - 16 * 5) + "px")
-                        .style("background", Meteor.chart._getResultColor(chartData, resultBucket.name))
-                        .style("color", "white")
-                        .style("display", "block")
+                        .css("left", (d3.event.pageX) + "px")
+                        .css("top", (d3.event.pageY - 16 * 5) + "px")
+                        .css("background", Meteor.chart._getResultColor(chartData, resultBucket.name))
+                        .css("color", "white")
+                        .show();
                 })
                 .on("mouseout", function () {
-                    chartData.tooltip
-                        .style("display", "none");
+                    chartData.tooltip.hide();
                 });
 
         }
@@ -656,6 +654,7 @@ Meteor.chart = {
 
         var chartData = this.chartData;
         chartData.d3Chart = Meteor.chart.d3Chart();
+        chartData.tooltip = Meteor.chart.tooltip();
         this._clearChartDrawing(chartData);
 
         if (load) {
@@ -673,8 +672,6 @@ Meteor.chart = {
 
         this._detectDimensions(chartData);
         this._setDimensions(chartData);
-        this._prepareTooltip(chartData);
-
     },
     draw: function (loadData) {
         this.prepare(loadData);
