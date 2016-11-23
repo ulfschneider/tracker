@@ -184,19 +184,32 @@ Template.editTrack.rendered = function () {
 
     $("#edit" + id).textcomplete([
         {
-            match: /#([^\s]*)$/,
+            match: /(^|[\s]+)#([^\s]*)$/,
             search: function (term, callback) {
                 callback($.map(Meteor.editTrack.getTrackBuckets(), function (element) {
                     return element.indexOf(term) === 0 ? element : null;
                 }));
             },
-            index: 1,
+            index: 2,
             replace: function (element) {
-                return "#" + element + " ";
+                return "$1#" + element + " ";
             }
         },
         {
-            match: /(\d+(\.\d+)?)([^\s]*)$/,
+            match: /(^|[\s]+)@([^\s]*)$/,  //alternate for mobile phones, the @ is easier to reach than #
+            search: function (term, callback) {
+                callback($.map(Meteor.editTrack.getTrackBuckets(), function (element) {
+                    return element.indexOf(term) === 0 ? element : null;
+                }));
+            },
+            index: 2,
+            replace: function (element) {
+                return "$1#" + element + " ";
+            }
+        },
+
+        {
+            match: /(^|[\s]+)(\d+(\.\d+)?)([^\s]*)$/,
             search: function (term, callback) {
                 var query = Meteor.tracker.extractResultBucket(term);
                 var result = Meteor.tracker.extractResult(term);
@@ -205,9 +218,9 @@ Template.editTrack.rendered = function () {
                     return element.indexOf(term) === 0 ? element : null;
                 }));
             },
-            index: 3,
+            index: 4,
             replace: function (element) {
-                return "$1" + element + " ";
+                return "$1$2$3" + element + " ";
             }
         }
 
