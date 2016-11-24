@@ -9,13 +9,13 @@ Template.track.helpers({
     durationAndResults: function () {
         var results = [];
         if (Template.currentData().duration) {
-            results.push(Meteor.tracker.durationPrint(Template.currentData().duration));
+            results.push(Meteor.tracker.printDuration(Template.currentData().duration));
         }
         if (Template.currentData().results) {
             results = results.concat(Template.currentData().results);
         }
 
-        return Meteor.tracker.arrayPrint(results, " ");
+        return Meteor.tracker.printArray(results, " ");
     },
     comment: function () {
         var comment = Template.currentData().comment;
@@ -32,10 +32,10 @@ Template.track.helpers({
         input += moment(Template.currentData().date).format("YY-MM-DD HH:mm");
         input += " #" + Template.currentData().track;
         if (Template.currentData().duration) {
-            input += " " + Meteor.tracker.durationPrint(Template.currentData().duration);
+            input += " " + Meteor.tracker.printDuration(Template.currentData().duration);
         }
         if (Template.currentData().results) {
-            input += " " + Meteor.tracker.arrayPrint(Template.currentData().results, " ");
+            input += " " + Meteor.tracker.printArray(Template.currentData().results, " ");
         }
         if (Template.currentData().comment) {
             input += " //" + Template.currentData().comment;

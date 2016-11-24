@@ -11,7 +11,7 @@ Meteor.tracks = {
             result = date;
             Meteor.tracks.trackDay = date;
         }
-        return Meteor.tracker.dayPrint(result);
+        return Meteor.tracker.printDay(result);
     },
     increaseLimit: function() {
         var limit = Meteor.tracks.getLimit();

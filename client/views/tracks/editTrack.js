@@ -95,7 +95,7 @@ Meteor.editTrack = {
         var track = Meteor.tracker.analyzeTrack($("#edit" + id).val());
         var errors;
         if (track.errors.length) {
-            errors = Meteor.tracker.errorPrintHtml(track.errors);
+            errors = Meteor.tracker.printErrorHtml(track.errors);
             $("#errors" + id).html(errors);
             $("#edit" + id).addClass("error");
         } else {
@@ -114,16 +114,16 @@ Meteor.editTrack = {
                     Meteor.editTrack.setRecentEditId(result);
                     Bert.alert({
                         title: 'Track stored',
-                        message: Meteor.tracker.dayPrint(track.data.date)
+                        message: Meteor.tracker.printDay(track.data.date)
                         + " #" + track.data.track
-                        + (track.data.duration ? " " + Meteor.tracker.durationPrint(track.data.duration) : "")
-                        + (track.data.results ? " " + Meteor.tracker.arrayPrint(track.data.results, " ") : "")
+                        + (track.data.duration ? " " + Meteor.tracker.printDuration(track.data.duration) : "")
+                        + (track.data.results ? " " + Meteor.tracker.printArray(track.data.results, " ") : "")
                         + (track.data.comment ? " " + "//" + track.data.comment : ""),
                         type: 'info',
                         style: 'growl-top-right'
                     });
                 } else {
-                    errors = Meteor.tracker.errorPrintHtml([{description: "Your track could not be stored on the server. " + error}]);
+                    errors = Meteor.tracker.printErrorHtml([{description: "Your track could not be stored on the server. " + error}]);
                     $("#errors" + id).html(errors);
                 }
             });

@@ -333,7 +333,7 @@ Meteor.chart = {
         chartData.durationAxis = d3.svg.axis()
             .scale(chartData.durationScale)
             .orient("left")
-            .tickFormat(Meteor.tracker.durationPrint);
+            .tickFormat(Meteor.tracker.printDuration);
         return chartData;
     }
     ,
@@ -452,17 +452,17 @@ Meteor.chart = {
         if (track.duration || track.results) {
             html += "<br>";
             if (track.duration) {
-                html += Meteor.tracker.durationPrint(track.duration);
+                html += Meteor.tracker.printDuration(track.duration);
                 if (track.results) {
                     html += " ";
                 }
             }
             if (track.results) {
-                html += Meteor.tracker.arrayPrint(track.results, " ");
+                html += Meteor.tracker.printArray(track.results, " ");
             }
 
         }
-        html += "<br>" + Meteor.tracker.dayPrint(track.date);
+        html += "<br>" + Meteor.tracker.printDay(track.date);
 
         return html;
     },
@@ -471,10 +471,10 @@ Meteor.chart = {
         html += Meteor.tracker.TOKEN_TRACK + resultBucket.trackBucket.name;
         html += "<br>";
         if (result.duration) {
-            html += Meteor.tracker.durationPrint(result.duration) + " ";
+            html += Meteor.tracker.printDuration(result.duration) + " ";
         }
         html += result.result + resultBucket.name;
-        html += "<br>" + Meteor.tracker.dayPrint(result.date);
+        html += "<br>" + Meteor.tracker.printDay(result.date);
 
         return html;
     },
