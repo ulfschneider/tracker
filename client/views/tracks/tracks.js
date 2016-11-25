@@ -15,13 +15,13 @@ Meteor.tracks = {
     },
     increaseLimit: function() {
         var limit = Meteor.tracks.getLimit();
-        limit += 30;
+        limit += Meteor.tracker.COUNT_RELOAD;
         Session.set("limit", limit);
     },
     getLimit: function() {
         var limit = Session.get("limit");
         if (!limit) {
-            return 30;
+            return Meteor.tracker.COUNT_RELOAD;
         } else {
             return limit;
         }
