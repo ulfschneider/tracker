@@ -475,26 +475,33 @@ Meteor.chart = {
 
         return html;
     },
-    _wrap: function(text) {
-        text.each(function() {
+    _wrap: function (text, width) {
+        text.each(function () {
             var text = d3.select(this),
-                words = text.text().split(/\n/).reverse(),
-                word,
-                line = [],
+                lines = text.text().split(/\n/).reverse(),
+                l,
                 lineNumber = 0,
                 lineHeight = 1.62, // ems
                 x = text.attr("x"),
                 y = text.attr("y"),
                 tspan = text.text(null).append("tspan").attr("x", x).attr("y", y);
-            while (word = words.pop()) {
-                line.push(word);
-                tspan.text(line.join(" "));
-                //if (tspan.node().getComputedTextLength() > width) {
-                    line.pop();
+
+            while (l = lines.pop()) {
+                var words = l.split(/\s+/).reverse(),
+                    word,
+                    line = [];
+
+                while (word = words.pop()) {
+                    line.push(word);
                     tspan.text(line.join(" "));
-                    line = [word];
-                    tspan = text.append("tspan").attr("x", x).attr("y", y).attr("dy", ++lineNumber * lineHeight + "em").text(word);
-                //}
+                    if (tspan.node().getComputedTextLength() > width) {
+                        line.pop();
+                        tspan.text(line.join(" "));
+                        line = [word];
+                        tspan = text.append("tspan").attr("x", x).attr("y", y).attr("dy", ++lineNumber * lineHeight + "em").text(word);
+                    }
+                }
+                tspan = text.append("tspan").attr("x", x).attr("y", y).attr("dy", ++lineNumber * lineHeight + "em").text(null);
             }
         });
     },
@@ -541,7 +548,7 @@ Meteor.chart = {
                         .attr("transform", "translate(" + chartData.margin.left + "," + chartData.margin.top + ")")
                         .style("font-size", ".82em")
                         .text(Meteor.chart._extractTrackTooltip(track))
-                        .call(Meteor.chart._wrap);
+                        .call(Meteor.chart._wrap, 150);
 
                 })
                 .on("mouseout", function (d, i) {
@@ -584,7 +591,7 @@ Meteor.chart = {
                 .on("mouseover", function (d, i) {
                     chartData.d3Chart.append("text")
                         .attr({
-                            id:id,
+                            id: id,
                             x: function () {
                                 return chartData.dateScale(result.date);
                             },
@@ -596,16 +603,16 @@ Meteor.chart = {
                         .attr("fill", Meteor.chart._getResultColor(chartData, resultBucket.name))
                         .style("font-size", ".82em")
                         .text(Meteor.chart._extractResultTooltip(resultBucket, result))
-                        .call(Meteor.chart._wrap);
+                        .call(Meteor.chart._wrap, 150);
 
 
-/*
-                    html(Meteor.chart._extractResultTooltip(resultBucket, result))
-                        .css("left", (d3.event.pageX) + "px")
-                        .css("top", (d3.event.pageY - 160) + "px")
-                        .css("background", Meteor.chart._getResultColor(chartData, resultBucket.name))
-                        .css("color", "white")
-                        .show();*/
+                    /*
+                     html(Meteor.chart._extractResultTooltip(resultBucket, result))
+                     .css("left", (d3.event.pageX) + "px")
+                     .css("top", (d3.event.pageY - 160) + "px")
+                     .css("background", Meteor.chart._getResultColor(chartData, resultBucket.name))
+                     .css("color", "white")
+                     .show();*/
                 })
                 .on("mouseout", function (d, i) {
                     d3.select("#" + id).remove();
