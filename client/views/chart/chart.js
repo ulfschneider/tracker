@@ -484,7 +484,7 @@ Meteor.chart = {
                 lineHeight = 1.62, // ems
                 x = text.attr("x"),
                 y = text.attr("y"),
-                tspan = text.text(null).append("tspan").attr("x", x).attr("y", y);
+                tspan = text.text(null).append("tspan").attr("x", x).attr("y", y).style("alignment-baseline", "before-edge");
 
             while (l = lines.pop()) {
                 var words = l.split(/\s+/).reverse(),
@@ -498,10 +498,10 @@ Meteor.chart = {
                         line.pop();
                         tspan.text(line.join(" "));
                         line = [word];
-                        tspan = text.append("tspan").attr("x", x).attr("y", y).attr("dy", ++lineNumber * lineHeight + "em").text(word);
+                        tspan = text.append("tspan").attr("x", x).attr("y", y).attr("dy", ++lineNumber * lineHeight + "em").style("alignment-baseline", "before-edge").text(word);
                     }
                 }
-                tspan = text.append("tspan").attr("x", x).attr("y", y).attr("dy", ++lineNumber * lineHeight + "em").text(null);
+                tspan = text.append("tspan").attr("x", x).attr("y", y).attr("dy", ++lineNumber * lineHeight + "em").style("alignment-baseline", "before-edge").text(null);
             }
         });
     },
@@ -535,9 +535,22 @@ Meteor.chart = {
                 .attr("cy", chartData.durationScale(track.duration))
                 .attr("fill", "transparent")
                 .on("mouseover", function (d, i) {
+                    chartData.d3Chart.append("rect")
+                        .attr({
+                            id: id + "-background",
+                            x: function () {
+                                return chartData.dateScale(track.date);
+                            },
+                            y: function () {
+                                return chartData.durationScale(track.duration);
+                            }
+                        })
+                        .attr("transform", "translate(" + chartData.margin.left + "," + chartData.margin.top + ")")
+                        .attr("fill", "black");
+
                     chartData.d3Chart.append("text")
                         .attr({
-                            id: id,
+                            id: id + "-text",
                             x: function () {
                                 return chartData.dateScale(track.date);
                             },
@@ -547,12 +560,18 @@ Meteor.chart = {
                         })
                         .attr("transform", "translate(" + chartData.margin.left + "," + chartData.margin.top + ")")
                         .style("font-size", ".82em")
+                        .attr("fill", "white")
                         .text(Meteor.chart._extractTrackTooltip(track))
                         .call(Meteor.chart._wrap, 150);
 
+                    d3.select("#" + id + "-background")
+                        .attr("width", d3.select("#" + id + "-text").node().getBBox().width)
+                        .attr("height", d3.select("#" + id + "-text").node().getBBox().height)
+
                 })
                 .on("mouseout", function (d, i) {
-                    d3.select("#" + id).remove();
+                    d3.select("#" + id + "-text").remove();
+                    d3.select("#" + id + "-background").remove();
                 });
         }
         return chartData;
@@ -589,9 +608,9 @@ Meteor.chart = {
                 .attr("cy", chartData.resultScale(result.result))
                 .attr("fill", "transparent")
                 .on("mouseover", function (d, i) {
-                    chartData.d3Chart.append("text")
+                    chartData.d3Chart.append("rect")
                         .attr({
-                            id: id,
+                            id: id + "-background",
                             x: function () {
                                 return chartData.dateScale(result.date);
                             },
@@ -600,22 +619,34 @@ Meteor.chart = {
                             }
                         })
                         .attr("transform", "translate(" + chartData.margin.left + "," + chartData.margin.top + ")")
-                        .attr("fill", Meteor.chart._getResultColor(chartData, resultBucket.name))
+                        .attr("fill", Meteor.chart._getResultColor(chartData, resultBucket.name));
+
+
+                    chartData.d3Chart.append("text")
+                        .attr({
+                            id: id + "-text",
+                            x: function () {
+                                return chartData.dateScale(result.date);
+                            },
+                            y: function () {
+                                return chartData.resultScale(result.result);
+                            }
+                        })
+                        .attr("transform", "translate(" + chartData.margin.left + "," + chartData.margin.top + ")")
+                        .attr("fill", "white")
                         .style("font-size", ".82em")
                         .text(Meteor.chart._extractResultTooltip(resultBucket, result))
                         .call(Meteor.chart._wrap, 150);
 
+                    d3.select("#" + id + "-background")
+                        .attr("width", d3.select("#" + id + "-text").node().getBBox().width)
+                        .attr("height", d3.select("#" + id + "-text").node().getBBox().height)
 
-                    /*
-                     html(Meteor.chart._extractResultTooltip(resultBucket, result))
-                     .css("left", (d3.event.pageX) + "px")
-                     .css("top", (d3.event.pageY - 160) + "px")
-                     .css("background", Meteor.chart._getResultColor(chartData, resultBucket.name))
-                     .css("color", "white")
-                     .show();*/
                 })
                 .on("mouseout", function (d, i) {
-                    d3.select("#" + id).remove();
+                    d3.select("#" + id + "-text").remove();
+                    d3.select("#" + id + "-background").remove();
+
                 });
 
         }
