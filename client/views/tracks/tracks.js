@@ -62,10 +62,12 @@ Template.tracks.onCreated(function () {
     instance.loaded = new ReactiveVar(0);
 
     this.autorun(function () {
+        NProgress.start();
         var limit = Meteor.tracks.getLimit();
         var subscription = instance.subscribe('TrackData', limit);
         if (subscription.ready()) {
             instance.loaded.set(limit);
+            NProgress.done();
         }
     });
 

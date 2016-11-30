@@ -105,6 +105,8 @@ Meteor.editTrack = {
                 track.data._id = id;
             }
 
+            NProgress.start();
+
             this.resultBuckets = null;
             this.trackBuckets = null;
 
@@ -112,24 +114,25 @@ Meteor.editTrack = {
                 if (!error) {
                     Meteor.editTrack.escapeEdit();
                     Meteor.editTrack.setRecentEditId(result);
-                    Bert.alert({
-                        title: 'Track stored',
-                        message: Meteor.tracker.printDay(track.data.date)
-                        + " #" + track.data.track
-                        + (track.data.duration ? " " + Meteor.tracker.printDuration(track.data.duration) : "")
-                        + (track.data.results ? " " + Meteor.tracker.printArray(track.data.results, " ") : "")
-                        + (track.data.comment ? " " + "//" + track.data.comment : ""),
-                        type: 'info',
-                        style: 'growl-top-right'
-                    });
+                    NProgress.done();
                 } else {
                     errors = Meteor.tracker.printErrorHtml([{description: "Your track could not be stored on the server. " + error}]);
                     $("#errors" + id).html(errors);
+                    NProgress.done();
                 }
             });
         }
-    }
+    },
+    _removeTrack: function(id) {
+        var id = id ? id : "";
 
+        Meteor.editTrack.escapeEdit(id);
+
+        NProgress.start();
+        Meteor.call("remove", Template.currentData(), function(error, result) {
+            NProgress.done();
+        });
+    }
 }
 
 Template.editTrack.events({
@@ -149,8 +152,7 @@ Template.editTrack.events({
         event.preventDefault();
         event.stopPropagation();
         var id = this._id ? this._id : "";
-        Meteor.editTrack.escapeEdit(id);
-        Meteor.call("remove", Template.currentData());
+        Meteor.editTrack._removeTrack(id);
     },
     "keyup textarea": function (event) {
         var id = this._id ? this._id : "";

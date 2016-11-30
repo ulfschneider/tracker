@@ -539,10 +539,10 @@ Meteor.chart = {
                         .attr({
                             id: id + "-background",
                             x: function () {
-                                return chartData.dateScale(track.date);
+                                return chartData.dateScale(track.date) - 3;
                             },
                             y: function () {
-                                return chartData.durationScale(track.duration);
+                                return chartData.durationScale(track.duration) - 3;
                             }
                         })
                         .attr("transform", "translate(" + chartData.margin.left + "," + chartData.margin.top + ")")
@@ -562,11 +562,11 @@ Meteor.chart = {
                         .style("font-size", ".82em")
                         .attr("fill", "white")
                         .text(Meteor.chart._extractTrackTooltip(track))
-                        .call(Meteor.chart._wrap, 150);
+                        .call(Meteor.chart._wrap, chartData.svgWidth - chartData.margin.left - chartData.dateScale(track.date) - 6);
 
                     d3.select("#" + id + "-background")
-                        .attr("width", d3.select("#" + id + "-text").node().getBBox().width)
-                        .attr("height", d3.select("#" + id + "-text").node().getBBox().height)
+                        .attr("width", d3.select("#" + id + "-text").node().getBBox().width + 6)
+                        .attr("height", d3.select("#" + id + "-text").node().getBBox().height + 6)
 
                 })
                 .on("mouseout", function (d, i) {
@@ -612,10 +612,10 @@ Meteor.chart = {
                         .attr({
                             id: id + "-background",
                             x: function () {
-                                return chartData.dateScale(result.date);
+                                return chartData.dateScale(result.date) - 3;
                             },
                             y: function () {
-                                return chartData.resultScale(result.result);
+                                return chartData.resultScale(result.result) - 3;
                             }
                         })
                         .attr("transform", "translate(" + chartData.margin.left + "," + chartData.margin.top + ")")
@@ -636,11 +636,11 @@ Meteor.chart = {
                         .attr("fill", "white")
                         .style("font-size", ".82em")
                         .text(Meteor.chart._extractResultTooltip(resultBucket, result))
-                        .call(Meteor.chart._wrap, 150);
+                        .call(Meteor.chart._wrap, chartData.svgWidth - chartData.margin.left - chartData.dateScale(result.date) - 6);
 
                     d3.select("#" + id + "-background")
-                        .attr("width", d3.select("#" + id + "-text").node().getBBox().width)
-                        .attr("height", d3.select("#" + id + "-text").node().getBBox().height)
+                        .attr("width", d3.select("#" + id + "-text").node().getBBox().width + 6)
+                        .attr("height", d3.select("#" + id + "-text").node().getBBox().height + 6)
 
                 })
                 .on("mouseout", function (d, i) {
