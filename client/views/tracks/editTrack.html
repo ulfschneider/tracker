@@ -1,7 +1,7 @@
 <template name="editTrack">
     {{#if isVisible}}
         <div class="edit-track">
-            {{#unless _id}}<span class="control">File your track: </span>{{/unless}}<div class="text-container"><textarea id="edit{{_id}}" autofocus accesskey="t">{{value}}</textarea></div>
+            {{#unless _id}}<span class="control">File your track: </span>{{/unless}}<div class="text-container"><textarea id="edit{{_id}}" autofocus="autofocus" accesskey="t" readonly="{{#unless isVisible}}readonly{{/unless}}">{{value}}</textarea></div>
             <div class="control" id="control{{_id}}">
                 <div><a href="#" class="submit">Submit</a> <a href="#" class="cancel">Cancel</a>{{#if _id}}
                     <a href="#" class="remove">Remove track</a>{{/if}}</div>

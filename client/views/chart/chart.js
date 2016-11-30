@@ -526,7 +526,7 @@ Meteor.chart = {
                 .attr("cx", chartData.dateScale(track.date))
                 .attr("cy", chartData.durationScale(track.duration))
 
-            //this on is only to increase the hover area
+            //this circle is to increase the hover area
             var id = Meteor.tracker.uid();
             g.append("circle")
                 .attr("class", "dot duration hover " + track.track)
@@ -598,7 +598,7 @@ Meteor.chart = {
                 .attr("cy", chartData.resultScale(result.result))
                 .attr("fill", Meteor.chart._getResultColor(chartData, resultBucket.name))
 
-            //this one is only to increase the hover area
+            //this circle is to increase the hover area
 
             var id = Meteor.tracker.uid();
             g.append("circle")
