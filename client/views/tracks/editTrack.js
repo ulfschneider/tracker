@@ -81,7 +81,7 @@ Meteor.editTrack = {
     escapeEdit: function (id) {
         id = _.isUndefined(id) ? Meteor.editTrack.getEditId() : id;
 
-        $("#edit" + id).blur();
+        $("#edit" + id).blur(); //hide keyboard on touch when finishing the edit routine with pressing enter
         $("#edit" + id).val("");
         $("#edit" + id).removeClass("error");
         $("#errors" + id).html("");

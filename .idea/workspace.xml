@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="8f94bd54-6f4a-4908-8fcb-7b5f5f64d50d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/views/tracks/editTrack.html" afterPath="$PROJECT_DIR$/client/views/tracks/editTrack.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/client/views/tracks/editTrack.js" afterPath="$PROJECT_DIR$/client/views/tracks/editTrack.js" />
     </list>
     <ignored path="tracker.iws" />
@@ -33,11 +32,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="editTrack.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="editTrack.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/client/views/tracks/editTrack.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="389">
-              <caret line="83" column="31" selection-start-line="83" selection-start-column="31" selection-end-line="83" selection-end-column="31" />
+              <caret line="83" column="88" selection-start-line="83" selection-start-column="88" selection-end-line="83" selection-end-column="88" />
               <folding />
             </state>
           </provider>
@@ -103,7 +102,7 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="editTrack.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="editTrack.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/client/views/tracks/editTrack.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="45">
@@ -157,8 +156,8 @@
         <option value="$PROJECT_DIR$/shared/main.js" />
         <option value="$PROJECT_DIR$/client/sylesheets/main.css" />
         <option value="$PROJECT_DIR$/client/views/chart/chart.js" />
-        <option value="$PROJECT_DIR$/client/views/tracks/editTrack.js" />
         <option value="$PROJECT_DIR$/client/views/tracks/editTrack.html" />
+        <option value="$PROJECT_DIR$/client/views/tracks/editTrack.js" />
       </list>
     </option>
   </component>
@@ -488,12 +487,12 @@
       <workItem from="1479668460558" duration="24566000" />
       <workItem from="1479898974264" duration="2287000" />
       <workItem from="1479907246335" duration="2131000" />
-      <workItem from="1479971322739" duration="22558000" />
+      <workItem from="1479971322739" duration="22883000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="296358000" />
+    <option name="totallyTimeSpent" value="296683000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -914,18 +913,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/client/views/tracks/editTrack.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="389">
-          <caret line="83" column="31" selection-start-line="83" selection-start-column="31" selection-end-line="83" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/client/views/tracks/editTrack.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
           <caret line="3" column="174" selection-start-line="3" selection-start-column="174" selection-end-line="3" selection-end-column="174" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/client/views/tracks/editTrack.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="389">
+          <caret line="83" column="88" selection-start-line="83" selection-start-column="88" selection-end-line="83" selection-end-column="88" />
           <folding />
         </state>
       </provider>
