@@ -479,22 +479,22 @@ Meteor.chart = {
         text.each(function () {
             var text = d3.select(this),
                 lines = text.text().split(/\n/).reverse(),
-                l,
+                desiredLine,
                 lineNumber = 0,
                 lineHeight = 1.62, // ems
                 x = text.attr("x"),
                 y = text.attr("y"),
                 tspan = text.text(null).append("tspan").attr("x", x).attr("y", y).style("alignment-baseline", "before-edge");
 
-            while (l = lines.pop()) {
-                var words = l.split(/\s+/).reverse(),
+            while (desiredLine = lines.pop()) {
+                var words = desiredLine.split(/\s+/).reverse(),
                     word,
                     line = [];
 
                 while (word = words.pop()) {
                     line.push(word);
                     tspan.text(line.join(" "));
-                    if (tspan.node().getComputedTextLength() > width) {
+                    if (tspan.node().getComputedTextLength() > width && line.length > 1) {
                         line.pop();
                         tspan.text(line.join(" "));
                         line = [word];
