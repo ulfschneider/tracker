@@ -81,6 +81,7 @@ Meteor.editTrack = {
     escapeEdit: function (id) {
         id = _.isUndefined(id) ? Meteor.editTrack.getEditId() : id;
 
+        $("#edit" + id).blur();
         $("#edit" + id).val("");
         $("#edit" + id).removeClass("error");
         $("#errors" + id).html("");
