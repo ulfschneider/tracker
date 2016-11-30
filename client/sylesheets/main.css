@@ -282,16 +282,16 @@ tr .edit-track {
 
 
 
-/* Bert */
-.bert-alert.clearfix {
-    background:gray;
-    border-radius:4px;
-    padding:5px;
+/* NProgress */
+#nprogress .bar {
+    background:black;
+    height:4px;
 }
 
-.bert-alert .bert-container .bert-gem {
+#nprogress .peg {
     display:none;
 }
+
 
 /*
 SIMPLE GRID

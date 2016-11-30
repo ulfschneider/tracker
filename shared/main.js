@@ -13,6 +13,7 @@ TrackData = new Mongo.Collection("TrackData");
 TrackData.schema = TrackSchema;
 
 if (Meteor.isClient) {
+    NProgress.configure({ showSpinner: false });
     Accounts.ui.config({
         passwordSignupFields: "USERNAME_AND_OPTIONAL_EMAIL"
     });
