@@ -1,4 +1,4 @@
-import {Filter} from "/client/views/chart/filter.js";
+import {Filter} from "/lib/filter.js";
 
 Meteor.chart = {
     chartData: {},
@@ -50,9 +50,7 @@ Meteor.chart = {
                 }
             });
             bucketArray = Array.from(resultBuckets);
-            bucketArray.sort(function (a, b) {
-                return a.toLowerCase().localeCompare(b.toLowerCase());
-            });
+            bucketArray.sort();
         } else {
             bucketArray = chartData.resultFilter.getAll();
         }
@@ -120,7 +118,7 @@ Meteor.chart = {
         var resultBucket = Meteor.tracker.extractResultBucket(result);
 
         for (var i = 0; i < buckets.length; i++) {
-            if (buckets[i].name.toLowerCase() == resultBucket.toLowerCase()) {
+            if (buckets[i].name == resultBucket) {
                 buckets[i].results.push({date: track.date, result: number, duration: track.duration});
                 return trackBucket;
             }
@@ -140,9 +138,9 @@ Meteor.chart = {
         }
         var buckets = chartData.trackBuckets;
         for (var i = 0; i < buckets.length; i++) {
-            if (buckets[i].name.toLowerCase() == track.track.toLowerCase()) {
+            if (buckets[i].name == track.track) {
                 buckets[i].tracks.push(track);
-                buckets[i].hasDuration =  buckets[i].hasDuration || track.duration;
+                buckets[i].hasDuration = buckets[i].hasDuration || track.duration;
 
                 _.each(track.results, function (result) {
                     Meteor.chart._addToResultBucket(chartData, buckets[i], track, result);
@@ -254,9 +252,7 @@ Meteor.chart = {
         _.each(chartData.data, function (d) {
             Meteor.chart._addToTrackBucket(chartData, d);
         });
-        chartData.trackBuckets.sort(function (a, b) {
-            return a.name.toLowerCase().localeCompare(b.name.toLowerCase());
-        });
+        chartData.trackBuckets.sort();
 
         if (chartData.trackFilter.isAllOff() && chartData.resultFilter.isAllOff()) {
             //set last track on
@@ -281,7 +277,7 @@ Meteor.chart = {
         if (chartData.trackBuckets) {
             for (var i = 0; i < chartData.trackBuckets.length; i++) {
                 var name = chartData.trackBuckets[i].name;
-                if (name.toLowerCase() == trackBucketName.toLowerCase()) {
+                if (name == trackBucketName) {
                     return chartData.trackBuckets[i];
                 }
             }
@@ -374,12 +370,11 @@ Meteor.chart = {
     ,
     _setResultColorScale: function (chartData) {
         chartData.resultColorScale = d3.scale.ordinal()
-            .domain(chartData.resultFilter.getAll())
+            .domain(Meteor.tracker.getResultBuckets())
             .range(d3.scale.category20().range());
         return chartData;
     },
     _getResultColor: function (chartData, resultName) {
-        resultName = resultName.toLowerCase();
         return chartData.resultColorScale(resultName);
     },
 
@@ -765,16 +760,28 @@ Template.chart.onCreated(function () {
     _self.loaded = new ReactiveVar(0);
 
     this.autorun(function () {
-        var limit = Meteor.tracks.getLimit();
-        var subscription = _self.subscribe('TrackData', limit);
+        var limit, subscription;
+
+        if (Meteor.queryTracks.hasQuery()) {
+            subscription = _self.subscribe("TrackData");
+        } else {
+            limit = Meteor.tracks.getLimit();
+            subscription = _self.subscribe('TrackData', limit);
+        }
         if (subscription.ready()) {
-            _self.loaded.set(limit);
+            if (!Meteor.queryTracks.hasQuery()) {
+                _self.loaded.set(limit);
+            }
             Meteor.chart.draw(true);
         }
     });
 
     _self.tracks = function () {
-        return TrackData.find({}, {limit: _self.loaded.get(), sort: {date: -1, track: 1}});
+        if (Meteor.queryTracks.hasQuery()) {
+            return TrackData.find(Meteor.queryTracks.getQuery(), { sort: {date: -1, track: 1}});
+        } else {
+            return TrackData.find({}, {limit: _self.loaded.get(), sort: {date: -1, track: 1}});
+        }
     }
 });
 

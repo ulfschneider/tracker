@@ -21,6 +21,10 @@ if (Meteor.isClient) {
 
 if (Meteor.isServer) {
 
+    Meteor.startup(function () {
+        TrackData._ensureIndex({ track: 1, date : 1, userId:1 });
+    });
+
     Meteor.publish("TrackData", function (limit) {
         return TrackData.find({userId: this.userId}, {limit: limit, sort: {date: -1, track: 1}});
     });
@@ -37,7 +41,9 @@ if (Meteor.isServer) {
                 data.userId = this.userId;
                 data.username = Meteor.users.findOne(this.userId).username;
             }
+
             TrackData.schema.validate(data);
+
             if (data._id) {
                 TrackData.update(data._id, data);
                 return data._id;

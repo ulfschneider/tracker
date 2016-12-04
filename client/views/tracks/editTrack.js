@@ -1,51 +1,7 @@
 import {Session} from "meteor/session";
-import {Filter} from "/client/views/chart/filter.js";
 
 Meteor.editTrack = {
-    trackBuckets: null,
-    resultBuckets: null,
     edit: null,
-
-    getTrackBuckets: function () {
-        if (this.trackBuckets) {
-            return this.trackBuckets;
-        }
-
-        this.trackBuckets = [];
-        var track = "";
-        var cursor = TrackData.find({}, {fields: {track: 1}, sort: {track: 1}}).map(function (t) {
-            return t.track;
-        });
-        var _self = this;
-        cursor.forEach(function (t) {
-            if (t.toLowerCase() != track) {
-                _self.trackBuckets.push(t);
-                track = t.toLowerCase();
-            }
-        });
-
-        return this.trackBuckets;
-    },
-    getResultBuckets: function () {
-        if (this.resultBuckets) {
-            return this.resultBuckets;
-        }
-        var buckets = new Filter();
-        var cursor = TrackData.find({}, {fields: {results: 1}}).map(function (t) {
-            return t.results;
-        });
-        cursor.forEach(function (results) {
-            _.each(results, function (r) {
-                var bucket = Meteor.tracker.extractResultBucket(r);
-                if (bucket) {
-                    buckets.add(bucket);
-                }
-            });
-        });
-
-        this.resultBuckets = buckets.getAll();
-        return this.resultBuckets;
-    },
     setEditId: function (editId) {
         Session.set("editId", editId);
         Meteor.editTrack.setRecentEditId(editId);
@@ -199,7 +155,7 @@ Template.editTrack.rendered = function () {
         {
             match: /(^|[\s]+)#([^\s]*)$/,
             search: function (term, callback) {
-                callback($.map(Meteor.editTrack.getTrackBuckets(), function (element) {
+                callback($.map(Meteor.tracker.getTrackBuckets(), function (element) {
                     return element.indexOf(term) === 0 ? element : null;
                 }));
             },
@@ -211,7 +167,7 @@ Template.editTrack.rendered = function () {
         {
             match: /(^|[\s]+)@([^\s]*)$/,  //alternate for mobile phones, the @ is easier to reach than #
             search: function (term, callback) {
-                callback($.map(Meteor.editTrack.getTrackBuckets(), function (element) {
+                callback($.map(Meteor.tracker.getTrackBuckets(), function (element) {
                     return element.indexOf(term) === 0 ? element : null;
                 }));
             },
@@ -227,7 +183,7 @@ Template.editTrack.rendered = function () {
                 var query = Meteor.tracker.extractResultBucket(term);
                 var result = Meteor.tracker.extractResult(term);
 
-                callback($.map(Meteor.editTrack.getResultBuckets(), function (element) {
+                callback($.map(Meteor.tracker.getResultBuckets(), function (element) {
                     return element.indexOf(term) === 0 ? element : null;
                 }));
             },
