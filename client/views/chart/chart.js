@@ -38,7 +38,8 @@ Meteor.chart = {
         }
         return html;
     },
-    _resultBucketsForOnTracks: function (chartData) {
+    _resultBucketsForTracks: function (chartData) {
+        var bucketArray = [];
         if (chartData.trackFilter.hasOneOn()) {
             var resultBuckets = new Set();
             _.each(chartData.trackBuckets, function (trackBucket) {
@@ -48,14 +49,14 @@ Meteor.chart = {
                     });
                 }
             });
-            var bucketArray = Array.from(resultBuckets);
+            bucketArray = Array.from(resultBuckets);
             bucketArray.sort(function (a, b) {
                 return a.toLowerCase().localeCompare(b.toLowerCase());
             });
-            return bucketArray;
         } else {
-            return chartData.resultFilter.getAll();
+            bucketArray = chartData.resultFilter.getAll();
         }
+        return bucketArray;
     },
     _resultBucketNameHtml: function (chartData) {
         var html = "";
@@ -63,7 +64,7 @@ Meteor.chart = {
         if (!chartData.resultFilter.isEmpty()) {
             html += "<ul class='result-bucket-names'>";
 
-            _.each(Meteor.chart._resultBucketsForOnTracks(chartData), function (n) {
+            _.each(Meteor.chart._resultBucketsForTracks(chartData), function (n) {
                 html += '<li><a name="' + n + '"';
                 html += ' href="#r"';
                 if (chartData.resultFilter.isOn(n)) {
@@ -79,8 +80,6 @@ Meteor.chart = {
         }
         return html;
     },
-
-
     _addDomainPadding: function (chartData) {
         if (!_.isUndefined(chartData.durationMax) && !_.isUndefined(chartData.durationMin)) {
             if (isNaN(chartData.durationMin) || chartData.durationMin == chartData.durationMax) {
@@ -113,13 +112,11 @@ Meteor.chart = {
         return chartData;
     },
     _addToResultBucket: function (chartData, trackBucket, track, result) {
-        var number = Meteor.tracker.extractResult(result);
-
-        if (!trackBucket["resultBuckets"]) {
+        if (_.isUndefined(trackBucket.resultBuckets)) {
             trackBucket.resultBuckets = [];
         }
-
         var buckets = trackBucket.resultBuckets;
+        var number = Meteor.tracker.extractResult(result);
         var resultBucket = Meteor.tracker.extractResultBucket(result);
 
         for (var i = 0; i < buckets.length; i++) {
@@ -138,13 +135,14 @@ Meteor.chart = {
         return trackBucket;
     },
     _addToTrackBucket: function (chartData, track) {
-        if (!chartData["trackBuckets"]) {
+        if (_.isUndefined(chartData.trackBuckets)) {
             chartData.trackBuckets = [];
         }
         var buckets = chartData.trackBuckets;
         for (var i = 0; i < buckets.length; i++) {
             if (buckets[i].name.toLowerCase() == track.track.toLowerCase()) {
                 buckets[i].tracks.push(track);
+                buckets[i].hasDuration =  buckets[i].hasDuration || track.duration;
 
                 _.each(track.results, function (result) {
                     Meteor.chart._addToResultBucket(chartData, buckets[i], track, result);
@@ -152,7 +150,7 @@ Meteor.chart = {
                 return chartData;
             }
         }
-        buckets.push({name: track.track, tracks: [track]});
+        buckets.push({name: track.track, tracks: [track], hasDuration: false || track.duration});
         _.each(track.results, function (result) {
             Meteor.chart._addToResultBucket(chartData, buckets[buckets.length - 1], track, result);
         });
