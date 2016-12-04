@@ -13,12 +13,12 @@ Meteor.tracks = {
         }
         return Meteor.tracker.printDay(result);
     },
-    increaseLimit: function() {
+    increaseLimit: function () {
         var limit = Meteor.tracks.getLimit();
         limit += Meteor.tracker.COUNT_RELOAD;
         Session.set("limit", limit);
     },
-    getLimit: function() {
+    getLimit: function () {
         var limit = Session.get("limit");
         if (!limit) {
             return Meteor.tracker.COUNT_RELOAD;
@@ -42,9 +42,9 @@ Template.tracks.helpers({
 
     },
     hasMoreTracks: function () {
-        return Template.instance().tracks().count() >= Meteor.tracks.getLimit();
+        return !Meteor.queryTracks.hasQuery() && Template.instance().tracks().count() >= Meteor.tracks.getLimit();
     },
-    hasTracks: function() {
+    hasTracks: function () {
         return Template.instance().tracks().count() >= 1;
     }
 });
@@ -58,22 +58,34 @@ Template.tracks.events({
 
 Template.tracks.onCreated(function () {
 
-    var instance = this;
-    instance.loaded = new ReactiveVar(0);
+    var _self = this;
+    _self.loaded = new ReactiveVar(0);
 
     this.autorun(function () {
         NProgress.start();
-        var limit = Meteor.tracks.getLimit();
-        var subscription = instance.subscribe('TrackData', limit);
+        var limit, subscription;
+        if (Meteor.queryTracks.hasQuery()) {
+            subscription = _self.subscribe("TrackData");
+        } else {
+            limit = Meteor.tracks.getLimit();
+            subscription = _self.subscribe('TrackData', limit);
+        }
         if (subscription.ready()) {
-            instance.loaded.set(limit);
+            if (!Meteor.queryTracks.hasQuery()) {
+                _self.loaded.set(limit);
+            }
             NProgress.done();
         }
     });
 
-    instance.tracks = function () {
-        return TrackData.find({}, {limit: instance.loaded.get(), sort: {date: -1, track: 1} });
+    _self.tracks = function () {
+        if (Meteor.queryTracks.hasQuery()) {
+            return TrackData.find(Meteor.queryTracks.getQuery(), {sort: {date: -1, track: 1}});
+        } else {
+            return TrackData.find({}, {limit: _self.loaded.get(), sort: {date: -1, track: 1}});
+        }
     }
+
 
 })
 ;

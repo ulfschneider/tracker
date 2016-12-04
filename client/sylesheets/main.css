@@ -237,12 +237,11 @@ tr .edit-track {
     margin: 1.62em 0;
 }
 
-.edit-track .text-container {
+.text-container {
     border-bottom:1px solid black;
 }
 
-.edit-track textarea {
-
+.editable textarea {
     padding:0px;
     padding-top:3px;
     border:none;
@@ -253,19 +252,19 @@ tr .edit-track {
 }
 
 
-.edit-track .control {
+.editable .control {
     height: 1.62em;
 }
 
-.edit-track .control a {
+.editable a {
     text-decoration: underline;
 }
 
-.edit-track .control a.submit {
+.editable a.submit, .editable a.query {
     margin-right: 1.62em;
 }
 
-.edit-track .control a.remove {
+.editable a.remove {
     color: firebrick;
     float: right;
 }
