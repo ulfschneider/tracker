@@ -52,8 +52,13 @@ Template.tracks.helpers({
         return !Meteor.queryTracks.hasQuery() && Template.instance().tracks().count() >= Meteor.tracks.getLimit();
     },
     hasTracks: function () {
-
         return Template.instance().tracks().count() >= 1;
+    },
+    hasQuery: function() {
+        return Meteor.queryTracks.hasQuery();
+    },
+    queryInput: function() {
+        return Meteor.queryTracks.getQueryInput();
     }
 });
 

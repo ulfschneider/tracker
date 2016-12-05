@@ -205,6 +205,10 @@ tr.track td:last-child {
     color:gray;
 }
 
+.query-label {
+    margin-bottom:1.62em;
+}
+
 
 .end-of-list td {
     padding: 3.24em 0;

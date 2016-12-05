@@ -16,6 +16,7 @@
         {{/if}}
 
         <div class="{{#if hasTracks}}col-6{{else}}col-12{{/if}}">
+            {{#if hasQuery}}<div class="query-label">Result of query: {{queryInput}}</div>{{/if}}
             <table class="tracks">
                 {{#each tracks}}
                     {{> track}}
