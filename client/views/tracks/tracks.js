@@ -30,6 +30,10 @@ Meteor.tracks = {
 
 Template.tracks.helpers({
     tracks: function () {
+
+        Meteor.tracker.clearCacheTrackBuckets();
+        Meteor.tracker.clearCacheResultBuckets();
+
         Meteor.tracks.trackDay = null; //reset the trackDay whenever tracks are being requested
 
         var tracks = Template.instance().tracks().fetch();
@@ -45,6 +49,7 @@ Template.tracks.helpers({
         return !Meteor.queryTracks.hasQuery() && Template.instance().tracks().count() >= Meteor.tracks.getLimit();
     },
     hasTracks: function () {
+
         return Template.instance().tracks().count() >= 1;
     }
 });

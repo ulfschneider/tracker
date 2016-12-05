@@ -229,7 +229,10 @@ a.load-more:hover {
 
 .edit-track {
     min-width:300px;
-    margin-bottom:1.62em;
+}
+
+.editable .control {
+    height:1.62em;
 }
 
 tr .edit-track {
@@ -250,21 +253,12 @@ tr .edit-track {
     width: 100%;
 }
 
-
-.editable .control {
-    height: 1.62em;
-}
-
 .editable a {
     text-decoration: underline;
 }
 
 .editable a.submit, .editable a.query {
     margin-right: 1.62em;
-}
-
-.editable a.cancel, .editable a.reset {
-    display:none;
 }
 
 .editable a.remove {

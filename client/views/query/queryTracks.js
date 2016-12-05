@@ -42,7 +42,11 @@ Meteor.queryTracks = {
     },
     _reset: function () {
         $("#query").val("");
+        $("#query").removeClass("error");
         $("#query-errors").html("");
+        $(".control .query").hide();
+        $(".control .reset").hide();
+
         $("#query").blur(); //hide keyboard on touch devices
         Meteor.queryTracks._setQuery("");
     },
@@ -76,9 +80,12 @@ Template.queryTracks.events({
             Meteor.queryTracks._reset();
         }
         if($("#query").val()) {
-            $(".reset").show();
+            $(".control .reset").show();
+            $(".control .query").show();
         } else {
-            $(".reset").hide();
+            $("#query-errors").html("");
+            $(".control .query").hide();
+            $(".control .reset").hide();
         }
 
     },
@@ -103,6 +110,14 @@ Template.queryTracks.helpers({
 Template.queryTracks.rendered = function () {
     $("#query").autosize();
 
+    if($("#query").val()) {
+        $(".control .reset").show();
+        $(".control .query").show();
+    } else {
+        $(".control .query").hide();
+        $(".control .reset").hide();
+    }
+
     $("#query").textcomplete([
         {
             match: /(^|[\s]+)#([^\s]*)$/,
@@ -125,6 +140,7 @@ Template.queryTracks.rendered = function () {
             },
             index: 2,
             replace: function (element) {
+                trackBuckets = null;
                 return "$1#" + element + " ";
             }
         }

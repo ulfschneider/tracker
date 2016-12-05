@@ -35,12 +35,15 @@ Meteor.editTrack = {
         }
     },
     escapeEdit: function (id) {
-        id = id ? Meteor.editTrack.getEditId() : id;
+        id = id ? id : Meteor.editTrack.getEditId();
 
-        $("#edit" + id).blur(); //hide keyboard on devices
         $("#edit" + id).val("");
         $("#edit" + id).removeClass("error");
         $("#errors" + id).html("");
+        $("#control" + id + " .submit").hide();
+        $("#control" + id + " .cancel").hide();
+        $("#edit" + id).blur(); //hide keyboard on devices
+
         Meteor.editTrack.clearEditId();
     },
     isVisible: function () {
@@ -120,9 +123,12 @@ Template.editTrack.events({
             Meteor.editTrack.escapeEdit();
         }
         if($("#edit" + id).val()) {
-            $(".cancel").show();
+            $("#control" + id + " .submit").show();
+            $("#control" + id + " .cancel").show();
         } else {
-            $(".cancel").hide();
+            $("#errors" + id).html("");
+            $("#control" + id + " .submit").hide();
+            $("#control" + id + " .cancel").hide();
         }
     },
     "keypress textarea": function (event) {
@@ -154,6 +160,15 @@ Template.editTrack.rendered = function () {
     if (id) {
         $("#edit" + id).focus();
     }
+
+    if($("#edit" + id).val()) {
+        $("#control" + id + " .submit").show();
+        $("#control" + id + " .cancel").show();
+    } else {
+        $("#control" + id + " .submit").hide();
+        $("#control" + id + " .cancel").hide();
+    }
+
 
 
     $("#edit" + id).textcomplete([
@@ -187,7 +202,6 @@ Template.editTrack.rendered = function () {
             search: function (term, callback) {
                 var query = Meteor.tracker.extractResultBucket(term);
                 var result = Meteor.tracker.extractResult(term);
-
                 callback($.map(Meteor.tracker.getResultBuckets(), function (element) {
                     return element.indexOf(term) === 0 ? element : null;
                 }));

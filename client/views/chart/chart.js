@@ -700,7 +700,7 @@ Meteor.chart = {
             this._setResultColorScale(chartData);
         }
 
-        //set bucket names
+        //set bucket names.
         //track and result bucket names must be set before detecting
         //dimensions, otherwise the chart will have too much height
         $("#trackBucketNames")
