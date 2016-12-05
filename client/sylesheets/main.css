@@ -100,8 +100,7 @@ ul.track-bucket-names a, ul.result-bucket-names a {
 }
 
 ul.track-bucket-names a.reset-filter {
-    color:white;
-    background:gray;
+    text-decoration:underline;
     padding-right:0;
 }
 
@@ -264,6 +263,10 @@ tr .edit-track {
     margin-right: 1.62em;
 }
 
+.editable a.cancel, .editable a.reset {
+    display:none;
+}
+
 .editable a.remove {
     color: firebrick;
     float: right;
@@ -277,6 +280,10 @@ tr .edit-track {
 .textcomplete-dropdown li:hover a,
 .textcomplete-dropdown .active a {
     color:white;
+}
+
+/* query tracks */
+a.reset {
 }
 
 

@@ -32,6 +32,7 @@ Meteor.queryTracks = {
                 query.date = dateSelector;
             }
 
+            $("#query").blur(); //hide keyboard on touch devices
             if (_.isEmpty(query)) {
                 Meteor.queryTracks._setQuery("");
             } else {
@@ -42,6 +43,7 @@ Meteor.queryTracks = {
     _reset: function () {
         $("#query").val("");
         $("#query-errors").html("");
+        $("#query").blur(); //hide keyboard on touch devices
         Meteor.queryTracks._setQuery("");
     },
     getQuery: function () {
@@ -73,6 +75,12 @@ Template.queryTracks.events({
         if (event.which === 27) {
             Meteor.queryTracks._reset();
         }
+        if($("#query").val()) {
+            $(".reset").show();
+        } else {
+            $(".reset").hide();
+        }
+
     },
     "keypress textarea": function (event) {
         if (event.which === 13) {
@@ -83,6 +91,12 @@ Template.queryTracks.events({
         }
     }
 
+});
+
+Template.queryTracks.helpers({
+    hasQuery:function() {
+        return Meteor.queryTracks.hasQuery();
+    }
 });
 
 
@@ -103,7 +117,7 @@ Template.queryTracks.rendered = function () {
             }
         },
         {
-            match: /(^|[\s]+)@([^\s]*)$/,  //alternate for mobile phones, the @ is easier to reach than #
+            match: /(^|[\s]+)@([^\s]*)$/,  //@ as an alternate for mobile phones, the @ is easier to reach than #
             search: function (term, callback) {
                 callback($.map(Meteor.tracker.getTrackBuckets(), function (element) {
                     return element.indexOf(term) === 0 ? element : null;

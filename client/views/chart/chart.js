@@ -26,7 +26,7 @@ Meteor.chart = {
             if (chartData.trackFilter.isAllOff() && chartData.resultFilter.isAllOff()) {
                 html += "<li>Chart filter:</li>";
             } else {
-                html += '<li><a href="#" class="reset-filter">Reset filter:</a>';
+                html += '<li><a href="#" class="reset-filter">Reset filter</a>:</li>';
             }
             _.each(chartData.trackFilter.getAll(), function (n) {
                 html += '<li><a name="' + n + '"';

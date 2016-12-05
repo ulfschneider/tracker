@@ -35,9 +35,9 @@ Meteor.editTrack = {
         }
     },
     escapeEdit: function (id) {
-        id = _.isUndefined(id) ? Meteor.editTrack.getEditId() : id;
+        id = id ? Meteor.editTrack.getEditId() : id;
 
-        $("#edit" + id).blur(); //hide keyboard on touch when finishing the edit routine with pressing enter
+        $("#edit" + id).blur(); //hide keyboard on devices
         $("#edit" + id).val("");
         $("#edit" + id).removeClass("error");
         $("#errors" + id).html("");
@@ -118,6 +118,11 @@ Template.editTrack.events({
         }
         if (event.which === 27) {
             Meteor.editTrack.escapeEdit();
+        }
+        if($("#edit" + id).val()) {
+            $(".cancel").show();
+        } else {
+            $(".cancel").hide();
         }
     },
     "keypress textarea": function (event) {
