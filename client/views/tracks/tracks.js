@@ -25,6 +25,9 @@ Meteor.tracks = {
         } else {
             return limit;
         }
+    },
+    resetLimit: function () {
+        Session.set("limit", Meteor.tracker.COUNT_RELOAD);
     }
 }
 

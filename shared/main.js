@@ -1,3 +1,5 @@
+import { Meteor } from 'meteor/meteor';
+
 TrackSchema = new SimpleSchema({
     _id: {type: String, optional:true}, //mongo id
     date: {type: Date}, //date and time of track
@@ -16,6 +18,11 @@ if (Meteor.isClient) {
     NProgress.configure({ showSpinner: false, template: '<div class="bar" role="bar"><div class="peg"></div></div><div class="spinner" role="spinner"><div class="spinner-icon"></div></div><div class="overlay"></div>' });
     Accounts.ui.config({
         passwordSignupFields: "USERNAME_AND_OPTIONAL_EMAIL"
+    });
+
+    Accounts.onLogin(function() {
+        Meteor.queryTracks.reset();
+        Meteor.tracks.resetLimit();
     });
 }
 

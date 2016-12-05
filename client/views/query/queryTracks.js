@@ -40,7 +40,7 @@ Meteor.queryTracks = {
             }
         }
     },
-    _reset: function () {
+    reset: function () {
         $("#query").val("");
         $("#query").removeClass("error");
         $("#query-errors").html("");
@@ -70,14 +70,14 @@ Template.queryTracks.events({
         event.preventDefault();
         event.stopPropagation();
 
-        Meteor.queryTracks._reset();
+        Meteor.queryTracks.reset();
     },
     "keyup textarea": function (event) {
         if (event.which !== 13) {
             $("#query").removeClass("error");
         }
         if (event.which === 27) {
-            Meteor.queryTracks._reset();
+            Meteor.queryTracks.reset();
         }
         if($("#query").val()) {
             $(".control .reset").show();
