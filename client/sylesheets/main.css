@@ -89,12 +89,8 @@ div.about a {
     text-decoration:underline;
 }
 
-h1 {
-    text-align:center;
-}
 
-
-h2 {
+h1, h2 {
     text-align:center;
     margin-top:4.25em;
     margin-bottom:2.62em;
