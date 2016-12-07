@@ -2,6 +2,8 @@ import {Session} from "meteor/session";
 
 Meteor.editTrack = {
     edit: null,
+    content: null,
+
     setEditId: function (editId) {
         Session.set("editId", editId);
         Meteor.editTrack.setRecentEditId(editId);
@@ -114,6 +116,14 @@ Template.editTrack.events({
         var id = this._id ? this._id : "";
         Meteor.editTrack._removeTrack(id);
     },
+    "click a.watch": function(event) {
+        event.preventDefault();
+        event.stopPropagation();
+
+        Meteor.editTrack.content = $("#edit").val();
+        Meteor.watch.setWatchModeOn();
+
+    },
     "keyup textarea": function (event) {
         var id = this._id ? this._id : "";
         if (event.which !== 13) {
@@ -159,6 +169,9 @@ Template.editTrack.rendered = function () {
 
     if (id) {
         $("#edit" + id).focus();
+    } else if (Meteor.watch.getTime()) {
+        $("#edit").val(Meteor.editTrack.content + " " + Meteor.tracker.printDuration(Meteor.watch.getTime()));
+        Meteor.editTrack.content = "";
     }
 
     if($("#edit" + id).val()) {

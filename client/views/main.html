@@ -7,12 +7,25 @@
 </head>
 
 <body>
-<div class="container">
-    <div class="row header">
-        <div class="col-12">Tracker {{> loginButtons}}</div>
-    </div>
-    {{#if currentUser}}
-       {{> tracks}}
-    {{/if}}
-</div>
+{{> main}}
 </body>
+
+<template name="main">
+    <div class="container">
+        <div class="row header">
+            <div class="col-12">Tracker {{> loginButtons}}</div>
+        </div>
+        {{#if watchMode}}
+            <div class="row">
+                <div class="col-12">
+                    {{> watch}}
+                </div>
+            </div>
+        {{else}}
+            {{#if currentUser}}
+                {{> tracks}}
+            {{/if}}
+        {{/if}}
+    </div>
+</template>
+
