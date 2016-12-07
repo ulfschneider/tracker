@@ -301,7 +301,6 @@ a.reset {
     background:gray;
     color:white;
     display:inline-block;
-    font-size:1.62em;
     margin-right:1.62em;
 }
 
@@ -313,8 +312,12 @@ a.reset {
     background:black;
 }
 
-.watch .control a.paused {
-    background:black;
+.watch .control a.clear {
+    background:firebrick;
+}
+
+.watch .control a.return {
+    background:green;
 }
 
 .watch .control a .key {
