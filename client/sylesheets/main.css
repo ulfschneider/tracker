@@ -285,6 +285,46 @@ a.reset {
 }
 
 
+/* stop watch */
+.watch #time {
+    text-align:center;
+    margin-bottom:.82em;
+}
+
+.watch .control {
+    text-align:center;
+}
+
+.watch .control a {
+    padding:0px 6px;
+    border-radius: 4px;
+    background:gray;
+    color:white;
+    display:inline-block;
+    font-size:1.62em;
+    margin-right:1.62em;
+}
+
+.watch .control a:last-child {
+    margin-right:0;
+}
+
+.watch .control a:hover {
+    background:black;
+}
+
+.watch .control a.paused {
+    background:black;
+}
+
+.watch .control a .key {
+    font-size:.62em;
+    display:block;
+    color:lightgrey;
+
+}
+
+
 
 /* NProgress */
 #nprogress .bar {

@@ -25,6 +25,7 @@
         <item url="file://$USER_HOME$/.meteor/packages/caching-compiler/1.1.9/web.browser/caching-compiler.js" />
         <item url="file://$USER_HOME$/.meteor/packages/caching-compiler/1.1.9/web.browser/multi-file-caching-compiler.js" />
         <item url="file://$USER_HOME$/.meteor/packages/service-configuration/1.0.11/web.browser/service_configuration_common.js" />
+        <item url="file://$USER_HOME$/.meteor/packages/frabrunelle_fittext/1.2.0_2/web.browser/packages/frabrunelle_fittext.js" />
         <item url="file://$USER_HOME$/.meteor/packages/session/1.1.7/web.browser/session.js" />
         <item url="file://$USER_HOME$/.meteor/packages/base64/1.0.10/web.browser/base64.js" />
         <item url="file://$USER_HOME$/.meteor/packages/sha/1.0.9/web.browser/sha256.js" />
@@ -216,6 +217,7 @@
       <root url="file://$USER_HOME$/.meteor/packages/caching-compiler/1.1.9/web.browser/caching-compiler.js" />
       <root url="file://$USER_HOME$/.meteor/packages/caching-compiler/1.1.9/web.browser/multi-file-caching-compiler.js" />
       <root url="file://$USER_HOME$/.meteor/packages/service-configuration/1.0.11/web.browser/service_configuration_common.js" />
+      <root url="file://$USER_HOME$/.meteor/packages/frabrunelle_fittext/1.2.0_2/web.browser/packages/frabrunelle_fittext.js" />
       <root url="file://$USER_HOME$/.meteor/packages/session/1.1.7/web.browser/session.js" />
       <root url="file://$USER_HOME$/.meteor/packages/base64/1.0.10/web.browser/base64.js" />
       <root url="file://$USER_HOME$/.meteor/packages/sha/1.0.9/web.browser/sha256.js" />

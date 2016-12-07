@@ -2,7 +2,7 @@
     {{#if isVisible}}
         <div class="editable">
             <div class="edit-track">
-                {{#unless _id}}<span class="control">File your track: </span>{{/unless}}
+                {{#unless _id}}<span class="control">File your track (<a href="#" class="watch" accesskey="w">use a watch</a>):</span>{{/unless}}
                 <div class="text-container"><textarea id="edit{{_id}}" autofocus="autofocus"
                                                       accesskey="t">{{value}}</textarea></div>
                 <div class="control" id="control{{_id}}"><div><a href="#" class="submit">Submit</a> <a href="#" class="cancel">Cancel</a>{{#if _id}}<a href="#" class="remove">Remove track</a>{{/if}}</div></div>

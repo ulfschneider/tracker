@@ -1,42 +1,47 @@
 <template name="tracks">
-    <div class="row header">
-        <div class="col-6">
-            {{> editTrack}}
-        </div>
-        <div class="col-6">
-            {{> queryTracks}}
-        </div>
-    </div>
-    <div class="row">
 
-        {{#if hasTracks}}
-            <div id="chartContainer" class="col-6">
-                {{> chart}}
+        <div class="row header">
+            <div class="col-6">
+                {{> editTrack}}
             </div>
-        {{/if}}
+            <div class="col-6">
+                {{> queryTracks}}
+            </div>
+        </div>
+        <div class="row">
 
-        <div class="{{#if hasTracks}}col-6{{else}}col-12{{/if}}">
-            {{#if hasQuery}}<div class="query-label">Result of query: {{queryInput}}</div>{{/if}}
-            <table class="tracks">
-                {{#each tracks}}
-                    {{> track}}
-                {{/each}}
-                <tr class="end-of-list">
-                    <td colspan="10">
-                        {{#if Template.subscriptionsReady}}
-                            {{#if hasMoreTracks}}
-                                <a class="load-more" href="#load">Load more tracks</a>
-                            {{else}}
-                                {{#if hasTracks}}
-                                    <span>End of list</span>
+            {{#if hasTracks}}
+                <div id="chartContainer" class="col-6">
+                    {{> chart}}
+                </div>
+            {{/if}}
+
+            <div class="{{#if hasTracks}}col-6{{else}}col-12{{/if}}">
+                {{#if hasQuery}}
+                    <div class="query-label">Result of query: {{queryInput}}</div>{{/if}}
+                <table class="tracks">
+                    {{#each tracks}}
+                        {{> track}}
+                    {{/each}}
+                    <tr class="end-of-list">
+                        <td colspan="10">
+                            {{#if Template.subscriptionsReady}}
+                                {{#if hasMoreTracks}}
+                                    <a class="load-more" href="#load">Load more tracks</a>
+                                {{else}}
+                                    {{#if hasTracks}}
+                                        <span>End of list</span>
+                                    {{/if}}
                                 {{/if}}
                             {{/if}}
-                        {{/if}}
-                    </td>
-                </tr>
-            </table>
+                        </td>
+                    </tr>
+                </table>
+            </div>
         </div>
-    </div>
+        <div class="row">
+            <div class="col-12">{{> watch}}</div>
+        </div>
 </template>
 
 
