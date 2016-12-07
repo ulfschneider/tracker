@@ -170,7 +170,18 @@ Template.editTrack.rendered = function () {
     if (id) {
         $("#edit" + id).focus();
     } else if (Meteor.watch.getTime()) {
-        $("#edit").val(Meteor.editTrack.content + " " + Meteor.tracker.printDuration(Meteor.watch.getTime()));
+        var newContent;
+        if (Meteor.editTrack.content) {
+            if (Meteor.editTrack.content.slice(-1) == " ") {
+                newContent = Meteor.editTrack.content + Meteor.tracker.printDuration(Meteor.watch.getTime())
+            } else {
+                newContent = Meteor.editTrack.content + " " + Meteor.tracker.printDuration(Meteor.watch.getTime())
+            }
+        } else {
+            newContent = Meteor.tracker.printDuration(Meteor.watch.getTime());
+        }
+
+        $("#edit").val(newContent);
         Meteor.editTrack.content = "";
     }
 

@@ -1,12 +1,12 @@
 
 
-Template.main.helpers({
+Template.home.helpers({
     watchMode: function() {
          return Meteor.watch.isWatchMode();
     }
 });
 
-Template.main.onRendered(function () {
+Template.home.onRendered(function () {
     $(document).keydown(function (event) {
         if (Meteor.watch.isWatchMode()) {
             if (event.which == 32) {

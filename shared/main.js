@@ -1,10 +1,10 @@
-import { Meteor } from 'meteor/meteor';
+import {Meteor} from 'meteor/meteor';
 
 TrackSchema = new SimpleSchema({
-    _id: {type: String, optional:true}, //mongo id
+    _id: {type: String, optional: true}, //mongo id
     date: {type: Date}, //date and time of track
     track: {type: String}, //name of track
-    duration: {type: Number, optional:true}, //milliseconds
+    duration: {type: Number, optional: true}, //milliseconds
     results: {type: [String], optional: true}, //further generic results
     comment: {type: String, optional: true}, //a comment
     username: {type: String}, //the name of the user
@@ -15,21 +15,33 @@ TrackData = new Mongo.Collection("TrackData");
 TrackData.schema = TrackSchema;
 
 if (Meteor.isClient) {
-    NProgress.configure({ showSpinner: false, template: '<div class="bar" role="bar"><div class="peg"></div></div><div class="spinner" role="spinner"><div class="spinner-icon"></div></div><div class="overlay"></div>' });
+    NProgress.configure({
+        showSpinner: false,
+        template: '<div class="bar" role="bar"><div class="peg"></div></div><div class="spinner" role="spinner"><div class="spinner-icon"></div></div><div class="overlay"></div>'
+    });
     Accounts.ui.config({
         passwordSignupFields: "USERNAME_AND_OPTIONAL_EMAIL"
     });
 
-    Accounts.onLogin(function() {
+    Accounts.onLogin(function () {
         Meteor.queryTracks.reset();
         Meteor.tracks.resetLimit();
     });
+
+    Router.configure({
+        notFoundTemplate: "home"
+    });
+
+    Router.route("/about", {name: "about", template: "about"});
+
+    Router.route("/", {name: "home", template: "home"});
+
 }
 
 if (Meteor.isServer) {
 
     Meteor.startup(function () {
-        TrackData._ensureIndex({ track: 1, date : 1, userId:1 });
+        TrackData._ensureIndex({track: 1, date: 1, userId: 1});
     });
 
     Meteor.publish("TrackData", function (limit) {
@@ -58,7 +70,7 @@ if (Meteor.isServer) {
                 return TrackData.insert(data);
             }
         },
-        remove: function(data) {
+        remove: function (data) {
             if (data && data._id) {
                 TrackData.remove(data._id);
             }

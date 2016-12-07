@@ -2,7 +2,11 @@
     <div class="watch">
         <div id="time"></div>
         <div class="control">
-            {{#if stopped}}<a href="#" class="start">{{#if hasTime}}Continue{{else}}Start{{/if}}<span class="key">space</span></a>{{#if hasTime}}<a href="#" class="clear">Clear<span class="key">esc</span></a>{{/if}}{{/if}}{{#if running}}<a href="#" class="stop">Stop<span class="key">space</span></a>{{/if}}{{#if stopped}}<a href="#" class="return">Return<span class="key">enter</span></a>{{/if}}
+            {{#if stopped}}<a href="#" class="start">{{#if hasTime}}Continue{{else}}Start{{/if}}<span
+                    class="key">space</span></a>{{/if}}{{#if running}}
+            <a href="#" class="stop">Stop<span class="key">space</span></a>{{/if}}{{#if stopped}}
+            <a href="#" class="return">Return<span class="key">enter</span></a>{{#if hasTime}}
+            <a href="#" class="clear">Clear<span class="key">esc</span></a>{{/if}}{{/if}}
         </div>
     </div>
 </template>
