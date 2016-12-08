@@ -6,6 +6,8 @@ overview of your personal achievements and improvements.
 
 Tracker is free. It is built and shared by [Ulf Schneider](http://ulf.codes/tracker).
 
+![](/r/tracker.jpg)
+
 File a track
 ---
 
@@ -26,7 +28,8 @@ Bring in any other unit which is of interest for you by writing down the number 
 any space between the number and the unit. In the above example we keep track of the distance (**94.6km**), the average 
 speed (**25.06km/h**) and the meters up (**995mtr-up**). You decide how your units are being named.
 
-Add a comment, if you like. Everything that comes behind the double slash **//** is treated as a comment.
+Add a comment, if you like. Everything that comes behind the double slash **//** is treated as a comment. 
+A comment may contain links to web pages.
 
 If you don´t specify a date or a time, your track will be filed with the current date and time. 
 You can specify a different date or time in the format **YY-MM-DD HH:mm** (omit the the time or the date if either one is not needed). 
@@ -70,4 +73,4 @@ Query a date range, like from 1st of march 2015 to 9th of october 2016: **2015-0
 
 Submit your query by pressing ENTER or clicking/touching the Query button.
 
-Happy tracking
+Enjoy your sports routine!

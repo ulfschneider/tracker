@@ -46,6 +46,10 @@ Template.track.helpers({
 });
 
 Template.track.events({
+    "click tr.track a": function(event) {
+        //for links in comments
+        event.stopPropagation();
+    },
     "click tr.track": function (event) {
         if (!Meteor.editTrack.getEditId()) {
             event.preventDefault();

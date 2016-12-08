@@ -25,6 +25,11 @@ body {
     -webkit-text-size-adjust: 100%;
 }
 
+img {
+    max-width:100%;
+    margin:1.62em 0;
+}
+
 a {
     color:black;
 }
@@ -223,6 +228,7 @@ tr.track {
     cursor:pointer;
 }
 
+
 tr.recent td.indicator:before {
     content: "»";
     margin-left: -1em;
@@ -240,6 +246,11 @@ tr.track td:last-child {
 }
 
 .comment {
+    color:gray;
+}
+
+.comment a {
+    text-decoration:underline;
     color:gray;
 }
 
