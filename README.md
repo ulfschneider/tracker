@@ -4,7 +4,7 @@ Tracker
 File your workout routines - called tracks - and get a nice graphical 
 overview of your personal achievements and improvements.
 
-Tracker is free. It is built and shared by [Ulf Schneider](http://ulf.codes/tracker).
+Tracker is free. It is built and shared by [Ulf Schneider](http://ulf.codes).
 
 ![](/public/r/tracker.jpg)
 
