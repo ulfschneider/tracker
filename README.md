@@ -1,4 +1,3 @@
-<template name="help">
 Tracker
 ===
 
@@ -71,7 +70,4 @@ Query a date range, like from 1st of march 2015 to 9th of october 2016: **2015-0
 
 Submit your query by pressing ENTER or clicking/touching the Query button.
 
-<div class="best-wishes">Happy tracking</div>
-
-
-</template>
+Happy tracking
