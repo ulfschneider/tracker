@@ -54,6 +54,9 @@ Template.tracks.helpers({
     hasTracks: function () {
         return Template.instance().tracks().count() >= 1;
     },
+    hasTracksAtAll: function() {
+        return Meteor.tracker.hasTracks();
+    },
     hasQuery: function() {
         return Meteor.queryTracks.hasQuery();
     },
