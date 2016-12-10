@@ -47,33 +47,33 @@ if (Meteor.isServer) {
     Meteor.publish("TrackData", function (limit) {
         return TrackData.find({userId: this.userId}, {limit: limit, sort: {date: -1, track: 1}});
     });
-
-
-    Meteor.methods({
-        upsert: function (data) {
-            if (!this.userId) {
-                //user not authenticated
-                throw new Meteor.Error('not-authenticated');
-            }
-
-            if (data) {
-                data.userId = this.userId;
-                data.username = Meteor.users.findOne(this.userId).username;
-            }
-
-            TrackData.schema.validate(data);
-
-            if (data._id) {
-                TrackData.update(data._id, data);
-                return data._id;
-            } else {
-                return TrackData.insert(data);
-            }
-        },
-        remove: function (data) {
-            if (data && data._id) {
-                TrackData.remove(data._id);
-            }
-        }
-    });
 }
+
+// optimistic UI
+Meteor.methods({
+    upsert: function (data) {
+        if (!this.userId) {
+            //user not authenticated
+            throw new Meteor.Error('not-authenticated');
+        }
+
+        if (data) {
+            data.userId = this.userId;
+            data.username = Meteor.users.findOne(this.userId).username;
+        }
+
+        TrackData.schema.validate(data);
+
+        if (data._id) {
+            TrackData.update(data._id, data);
+            return data._id;
+        } else {
+            return TrackData.insert(data);
+        }
+    },
+    remove: function (data) {
+        if (data && data._id) {
+            TrackData.remove(data._id);
+        }
+    }
+});
