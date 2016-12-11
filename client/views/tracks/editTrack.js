@@ -136,7 +136,6 @@ Template.editTrack.events({
             $("#control" + id + " .submit").show();
             $("#control" + id + " .cancel").show();
         } else {
-            $("#errors" + id).html("");
             $("#control" + id + " .submit").hide();
             $("#control" + id + " .cancel").hide();
         }
