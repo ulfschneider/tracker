@@ -5,8 +5,8 @@
         </tr>
     {{else}}
         <tr class="track{{#if isRecentEditing}} recent{{/if}}">
-            <td class="hidden-sm indicator">{{day}}</td>
-            <td class="hidden-sm">{{time}}</td>
+            <td class="hidden-sm indicator" style="word-break:keep-all;">{{day}}</td>
+            <td class="hidden-sm" style="word-break:keep-all;">{{time}}</td>
             <td>{{track}}</td>
             <td>{{durationAndResults}}{{#if comment}}<br><span class="comment">{{#autolink}}{{comment}}{{/autolink}}</span>{{/if}}</td>
         </tr>
