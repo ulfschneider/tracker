@@ -1,5 +1,4 @@
 @import url("https://fonts.googleapis.com/css?family=Roboto+Mono:300,400,700");
-/*@import url('https://fonts.googleapis.com/css?family=Roboto:400,700');*/
 
 
 * {
@@ -336,6 +335,18 @@ tr .edit-track {
 .watch #time {
     text-align:center;
     margin-bottom:.82em;
+}
+
+.watch #time.running:before {
+    content:">";
+    position:absolute;
+    margin-left:-1em;
+}
+
+.watch #time.stopped.has-time:before {
+    content:"▪";
+    position:absolute;
+    margin-left:-1em;
 }
 
 .watch .control {

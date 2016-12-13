@@ -104,7 +104,7 @@ Meteor.watch = {
 
 Template.watch.helpers({
     running: function () {
-        return Meteor.watch.isRunning() ? "runding" : "";
+        return Meteor.watch.isRunning() ? "running" : "";
     },
     stopped: function () {
         return Meteor.watch.isStopped() ? "stopped" : "";

@@ -1,6 +1,6 @@
 <template name="watch">
     <div class="watch">
-        <div id="time"></div>
+        <div id="time" class="{{running}} {{stopped}} {{hasTime}}"></div>
         <div class="control">
             {{#if stopped}}<a href="#" class="start">
                 {{#if hasTime}}Continue{{else}}Start{{/if}}<span
