@@ -344,7 +344,7 @@ tr .edit-track {
 }
 
 .watch #time.stopped.has-time:before {
-    content:"▪";
+    content:".";
     position:absolute;
     margin-left:-1em;
 }
