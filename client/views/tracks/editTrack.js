@@ -168,16 +168,18 @@ Template.editTrack.rendered = function () {
 
     if (id) {
         $("#edit" + id).focus();
-    } else if (Meteor.watch.getTime()) {
+    } else if (Meteor.watch.getTime() || Meteor.editTrack.content) {
         var newContent;
-        if (Meteor.editTrack.content) {
+        if (Meteor.editTrack.content && Meteor.watch.getTime()) {
             if (Meteor.editTrack.content.slice(-1) == " ") {
                 newContent = Meteor.editTrack.content + Meteor.tracker.printDuration(Meteor.watch.getTime())
             } else {
                 newContent = Meteor.editTrack.content + " " + Meteor.tracker.printDuration(Meteor.watch.getTime())
             }
-        } else {
+        } else if (Meteor.watch.getTime()) {
             newContent = Meteor.tracker.printDuration(Meteor.watch.getTime());
+        } else {
+            newContent = Meteor.editTrack.content;
         }
 
         $("#edit").val(newContent);
