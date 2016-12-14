@@ -182,6 +182,7 @@ Template.editTrack.rendered = function () {
 
         $("#edit").val(newContent);
         Meteor.editTrack.content = "";
+        Meteor.watch.clear();
     }
 
     if($("#edit" + id).val()) {

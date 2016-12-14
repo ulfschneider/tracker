@@ -294,7 +294,7 @@ tr .edit-track {
 }
 
 .text-container {
-    border-bottom:1px solid black;
+    border-bottom:1px solid lightgray;
 }
 
 .editable textarea {
@@ -305,6 +305,7 @@ tr .edit-track {
     resize: none;
     height:1.62em;
     width: 100%;
+    font-weight:bold;
 }
 
 .editable a {
