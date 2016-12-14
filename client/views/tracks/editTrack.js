@@ -170,14 +170,15 @@ Template.editTrack.rendered = function () {
         $("#edit" + id).focus();
     } else if (Meteor.watch.getTime() || Meteor.editTrack.content) {
         var newContent;
-        if (Meteor.editTrack.content && Meteor.watch.getTime()) {
+        var time = Meteor.watch.getTime();
+        if (Meteor.editTrack.content && time) {
             if (Meteor.editTrack.content.slice(-1) == " ") {
-                newContent = Meteor.editTrack.content + Meteor.tracker.printDuration(Meteor.watch.getTime())
+                newContent = Meteor.editTrack.content + Meteor.tracker.printDuration(time)
             } else {
-                newContent = Meteor.editTrack.content + " " + Meteor.tracker.printDuration(Meteor.watch.getTime())
+                newContent = Meteor.editTrack.content + " " + Meteor.tracker.printDuration(time)
             }
-        } else if (Meteor.watch.getTime()) {
-            newContent = Meteor.tracker.printDuration(Meteor.watch.getTime());
+        } else if (time) {
+            newContent = Meteor.tracker.printDuration(time);
         } else {
             newContent = Meteor.editTrack.content;
         }
