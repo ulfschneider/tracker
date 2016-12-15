@@ -2,32 +2,32 @@
 
 Template.home.helpers({
     watchMode: function() {
-         return Meteor.watch.isWatchMode();
+         return Meteor.stopWatch.isWatchMode();
     }
 });
 
 Template.home.onRendered(function () {
     $(document).keydown(function (event) {
-        if (Meteor.watch.isWatchMode()) {
+        if (Meteor.stopWatch.isWatchMode()) {
             if (event.which == 32) {
                 //start - stop
                 event.preventDefault();
                 event.stopPropagation();
 
-                Meteor.watch.toggle();
+                Meteor.stopWatch.toggle();
             } else if (event.which == 13) {
                 //return
-                if (Meteor.watch.isStopped()) {
+                if (Meteor.stopWatch.isStopped()) {
                     event.preventDefault();
                     event.stopPropagation();
-                    Meteor.watch.setTime();
+                    Meteor.stopWatch.setTime();
                 }
             } else if (event.which == 27) {
                 //clear
-                if (Meteor.watch.isStopped()) {
+                if (Meteor.stopWatch.isStopped()) {
                     event.preventDefault();
                     event.stopPropagation();
-                    Meteor.watch.clear();
+                    Meteor.stopWatch.clear();
                 }
             }
         }

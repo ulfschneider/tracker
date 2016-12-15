@@ -1,6 +1,6 @@
 import {Session} from "meteor/session";
 
-Meteor.watch = {
+Meteor.stopWatch = {
     startTime: null,
     millis: 0,
     pausedMillis: 0,
@@ -10,9 +10,9 @@ Meteor.watch = {
     _setTime: function (time) {
         if (_.isUndefined(time)) {
             var now = new Date();
-            Meteor.watch.millis = (now.getTime() - Meteor.watch.startTime.getTime()) + Meteor.watch.pausedMillis;
-            Meteor.watch.millis = Math.floor(Meteor.watch.millis / 1000) * 1000;
-            var duration = Meteor.tracker.printDuration(Meteor.watch.millis);
+            Meteor.stopWatch.millis = (now.getTime() - Meteor.stopWatch.startTime.getTime()) + Meteor.stopWatch.pausedMillis;
+            Meteor.stopWatch.millis = Math.floor(Meteor.stopWatch.millis / 1000) * 1000;
+            var duration = Meteor.tracker.printDuration(Meteor.stopWatch.millis);
             $("#time").html(duration ? duration : "0");
         } else {
             $("#time").html(time);
@@ -102,49 +102,49 @@ Meteor.watch = {
 }
 
 
-Template.watch.helpers({
+Template.stopWatch.helpers({
     running: function () {
-        return Meteor.watch.isRunning() ? "running" : "";
+        return Meteor.stopWatch.isRunning() ? "running" : "";
     },
     stopped: function () {
-        return Meteor.watch.isStopped() ? "stopped" : "";
+        return Meteor.stopWatch.isStopped() ? "stopped" : "";
     },
     hasTime: function () {
-        return Meteor.watch.isStopped() && Meteor.watch.millis ? "has-time" : "";
+        return Meteor.stopWatch.isStopped() && Meteor.stopWatch.millis ? "has-time" : "";
     }
 });
 
 
-Template.watch.events({
+Template.stopWatch.events({
     "click .start": function (event) {
         event.preventDefault();
         event.stopPropagation();
 
-        Meteor.watch.start();
+        Meteor.stopWatch.start();
     },
     "click .stop": function (event) {
         event.preventDefault();
         event.stopPropagation();
 
-        Meteor.watch.stop();
+        Meteor.stopWatch.stop();
     },
     "click .clear": function (event) {
         event.preventDefault();
         event.stopPropagation();
 
-        Meteor.watch.clear();
+        Meteor.stopWatch.clear();
     },
     "click .return": function (event) {
         event.preventDefault();
         event.stopPropagation();
 
-        Meteor.watch.setTime();
+        Meteor.stopWatch.setTime();
     }
 });
 
-Template.watch.onRendered(function () {
+Template.stopWatch.onRendered(function () {
     $("#time").fitText(1, {minFontSize: '1.62em'});
-    Meteor.watch.clear();
+    Meteor.stopWatch.clear();
 })
 
 

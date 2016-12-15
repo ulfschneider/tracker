@@ -44,7 +44,7 @@ Meteor.editTrack = {
         $("#errors" + id).html("");
         $("#control" + id + " .submit").hide();
         $("#control" + id + " .cancel").hide();
-        $("#edit" + id).blur(); //hide keyboard on devices
+        $("#edit" + id).blur(); //hide keyboard on touch devices
 
         Meteor.editTrack.clearEditId();
     },
@@ -121,7 +121,7 @@ Template.editTrack.events({
         event.stopPropagation();
 
         Meteor.editTrack.content = $("#edit").val();
-        Meteor.watch.setWatchModeOn();
+        Meteor.stopWatch.setWatchModeOn();
 
     },
     "keyup textarea": function (event) {
@@ -168,9 +168,9 @@ Template.editTrack.rendered = function () {
 
     if (id) {
         $("#edit" + id).focus();
-    } else if (Meteor.watch.getTime() || Meteor.editTrack.content) {
+    } else if (Meteor.stopWatch.getTime() || Meteor.editTrack.content) {
         var newContent;
-        var time = Meteor.watch.getTime();
+        var time = Meteor.stopWatch.getTime();
         if (Meteor.editTrack.content && time) {
             if (Meteor.editTrack.content.slice(-1) == " ") {
                 newContent = Meteor.editTrack.content + Meteor.tracker.printDuration(time)
@@ -185,7 +185,7 @@ Template.editTrack.rendered = function () {
 
         $("#edit").val(newContent);
         Meteor.editTrack.content = "";
-        Meteor.watch.clear();
+        Meteor.stopWatch.clear();
     }
 
     if($("#edit" + id).val()) {

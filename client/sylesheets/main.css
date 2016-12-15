@@ -165,9 +165,16 @@ ul.track-bucket-names .on {
     text-decoration:none;
 }
 
+.track.filter .duration, .result.filter .number {
+    font-size:.82em;
+    margin-left:.25em;
+}
+
 ul.result-bucket-names .on {
     text-decoration:none;
 }
+
+
 
 .axis path, .axis line {
     display:none;
