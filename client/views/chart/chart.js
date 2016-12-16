@@ -8,7 +8,7 @@ Meteor.chart = {
         return d3.select("#chart");
     },
     chartContainer: function () {
-        //somewhere there must be container for the entire chart
+        //somewhere there must be a container for the entire chart
         //to get the padding of that container into the equation,
         //we select the container via id #chart-container
 
@@ -40,6 +40,10 @@ Meteor.chart = {
         }
         return html;
     },
+    _isAvgMeaning: function (resultBucketName) {
+        //check if the result bucket name indicates to not sum up all numbers to a total, but to calculate the average value
+        return resultBucketName && resultBucketName.indexOf("/") > 0;
+    },
     _resultBucketsForTracks: function (chartData) {
         var bucketArray = [],
             resultBuckets = new Map(),
@@ -48,20 +52,28 @@ Meteor.chart = {
         _.each(chartData.trackBuckets, function (trackBucket) {
             if (allOff || chartData.trackFilter.isOn(trackBucket.name)) {
                 _.each(trackBucket.resultBuckets, function (resultBucket) {
-
-                    if (resultBuckets.has(resultBucket.name)) {
-                        if (resultBucket.number) {
-                            resultBuckets.set(resultBucket.name, resultBuckets.get(resultBucket.name) + resultBucket.number);
-                        }
+                    var value = resultBuckets.get(resultBucket.name);
+                    if (value) {
+                        resultBuckets.set(resultBucket.name, {
+                            number: value.number + resultBucket.number,
+                            count: value.count + resultBucket.count
+                        });
                     } else {
-                        resultBuckets.set(resultBucket.name, (resultBucket.number ? resultBucket.number : 0));
+                        resultBuckets.set(resultBucket.name, {
+                            number: resultBucket.number,
+                            count: resultBucket.count
+                        })
                     }
                 });
             }
         });
 
         _.each(resultBuckets.entries(), function (e) {
-            bucketArray.push({name: e.key, number: e.value});
+            if (Meteor.chart._isAvgMeaning(e.key)) {
+                bucketArray.push({name: e.key, number: e.value.number / e.value.count});
+            } else {
+                bucketArray.push({name: e.key, number: e.value.number});
+            }
         });
 
         bucketArray.sort(function (a, b) {
@@ -87,7 +99,9 @@ Meteor.chart = {
                     html += ' style="color:' + Meteor.chart._getResultColor(chartData, b.name) + ';"';
                     html += ' class="result filter off"';
                 }
-                html += '>' + (b.name ? b.name : 'pure') + (b.number ? ' (' + +b.number.toFixed(2) + ')' : '') + '</a></li>';
+                html += '>' + (b.name ? b.name : 'pure');
+                html += (b.number ? ' (' + +b.number.toFixed(1) + ')' : '');
+                html += '</a></li>';
             });
             html += "</ul>"
         }
@@ -136,6 +150,7 @@ Meteor.chart = {
             if (buckets[i].name == resultBucket) {
                 buckets[i].results.push({date: track.date, result: number, duration: track.duration});
                 buckets[i].number += (number ? number : 0);
+                buckets[i].count += 1;
                 return trackBucket;
             }
         }
@@ -144,7 +159,8 @@ Meteor.chart = {
             name: resultBucket,
             results: [{date: track.date, result: number, duration: track.duration}],
             trackBucket: trackBucket,
-            number: (number ? number : 0)
+            number: (number ? number : 0),
+            count: 1
         });
         chartData.resultFilter.add(resultBucket);
 
@@ -185,8 +201,8 @@ Meteor.chart = {
         chartData.durationMin = d3.min(chartData.trackBuckets, function (trackBucket) {
             if (chartData.trackFilter.isOn(trackBucket.name) || chartData.trackFilter.isAllOff()) {
                 return trackBucket.tracks ? d3.min(trackBucket.tracks, function (t) {
-                    return t.duration;
-                }) : chartData.durationMin;
+                        return t.duration;
+                    }) : chartData.durationMin;
             } else {
                 return chartData.durationMin;
             }
@@ -194,8 +210,8 @@ Meteor.chart = {
         chartData.durationMax = d3.max(chartData.trackBuckets, function (trackBucket) {
             if (chartData.trackFilter.isOn(trackBucket.name) || chartData.trackFilter.isAllOff()) {
                 return trackBucket.tracks ? d3.max(trackBucket.tracks, function (t) {
-                    return t.duration;
-                }) : chartData.durationMax;
+                        return t.duration;
+                    }) : chartData.durationMax;
             } else {
                 return chartData.durationMax;
             }
@@ -203,8 +219,8 @@ Meteor.chart = {
         chartData.dateMin = d3.min(chartData.trackBuckets, function (trackBucket) {
             if (chartData.trackFilter.isOn(trackBucket.name) || chartData.trackFilter.isAllOff()) {
                 return trackBucket.tracks ? d3.min(trackBucket.tracks, function (t) {
-                    return t.date;
-                }) : chartData.dateMin;
+                        return t.date;
+                    }) : chartData.dateMin;
             } else {
                 return chartData.dateMin;
             }
@@ -212,8 +228,8 @@ Meteor.chart = {
         chartData.dateMax = d3.max(chartData.trackBuckets, function (trackBucket) {
             if (chartData.trackFilter.isOn(trackBucket.name) || chartData.trackFilter.isAllOff()) {
                 return trackBucket.tracks ? d3.max(trackBucket.tracks, function (t) {
-                    return t.date;
-                }) : chartData.dateMax;
+                        return t.date;
+                    }) : chartData.dateMax;
             } else {
                 return chartData.dateMax;
             }
@@ -225,8 +241,8 @@ Meteor.chart = {
                 return d3.min(trackBucket.resultBuckets, function (resultBucket) {
                     if (chartData.resultFilter.isOn(resultBucket.name) || chartData.resultFilter.isAllOff()) {
                         return resultBucket.results ? d3.min(resultBucket.results, function (r) {
-                            return parseFloat(r.result);
-                        }) : chartData.resultsMin;
+                                return parseFloat(r.result);
+                            }) : chartData.resultsMin;
                     }
                 });
             } else {
@@ -239,8 +255,8 @@ Meteor.chart = {
                 return d3.max(trackBucket.resultBuckets, function (resultBucket) {
                     if (chartData.resultFilter.isOn(resultBucket.name) || chartData.resultFilter.isAllOff()) {
                         return resultBucket.results ? d3.max(resultBucket.results, function (r) {
-                            return parseFloat(r.result);
-                        }) : chartData.resultsMax;
+                                return parseFloat(r.result);
+                            }) : chartData.resultsMax;
                     }
                 });
             } else {
@@ -270,7 +286,9 @@ Meteor.chart = {
         _.each(chartData.data, function (d) {
             Meteor.chart._addToTrackBucket(chartData, d);
         });
-        chartData.trackBuckets.sort();
+        chartData.trackBuckets.sort(function (a, b) {
+            return a.name.localeCompare(b.name);
+        });
 
         if (chartData.trackFilter.isAllOff() && chartData.resultFilter.isAllOff()) {
             //set last track on
