@@ -532,6 +532,7 @@ Meteor.chart = {
                 }
                 tspan = text.append("tspan").attr("x", x).attr("y", y).attr("dy", ++lineNumber * lineHeight + "em").style("alignment-baseline", "before-edge").text(null);
             }
+
         });
     },
     _drawDurationLine: function (chartData, g, trackBucket) {
@@ -574,7 +575,6 @@ Meteor.chart = {
                                 return chartData.durationScale(track.duration) - 3;
                             }
                         })
-                        .attr("transform", "translate(" + chartData.margin.left + "," + chartData.margin.top + ")")
                         .attr("fill", "black");
 
                     chartData.d3Chart.append("text")
@@ -591,11 +591,13 @@ Meteor.chart = {
                         .style("font-size", ".82em")
                         .attr("fill", "white")
                         .text(Meteor.chart._extractTrackTooltip(track))
-                        .call(Meteor.chart._wrap, chartData.svgWidth - chartData.margin.left - chartData.dateScale(track.date) - 6);
+                        .call(Meteor.chart._wrap, chartData.svgWidth - chartData.margin.left - chartData.dateScale(track.date) - 6)
+                        .attr("transform", "translate(" + (chartData.margin.left + 3) + "," + (chartData.margin.top - d3.select("#" + id + "-text").node().getBBox().height - 6 )+ ")");
 
                     d3.select("#" + id + "-background")
                         .attr("width", d3.select("#" + id + "-text").node().getBBox().width + 6)
                         .attr("height", d3.select("#" + id + "-text").node().getBBox().height + 6)
+                        .attr("transform", "translate(" + (chartData.margin.left + 3) + "," + (chartData.margin.top - d3.select("#" + id + "-text").node().getBBox().height - 6 )+ ")");
 
                 })
                 .on("mouseout", function (d, i) {
@@ -647,7 +649,6 @@ Meteor.chart = {
                                 return chartData.resultScale(result.result) - 3;
                             }
                         })
-                        .attr("transform", "translate(" + chartData.margin.left + "," + chartData.margin.top + ")")
                         .attr("fill", Meteor.chart._getResultColor(chartData, resultBucket.name));
 
 
@@ -665,11 +666,14 @@ Meteor.chart = {
                         .attr("fill", "white")
                         .style("font-size", ".82em")
                         .text(Meteor.chart._extractResultTooltip(resultBucket, result))
-                        .call(Meteor.chart._wrap, chartData.svgWidth - chartData.margin.left - chartData.dateScale(result.date) - 6);
+                        .call(Meteor.chart._wrap, chartData.svgWidth - chartData.margin.left - chartData.dateScale(result.date) - 6)
+                        .attr("transform", "translate(" + (chartData.margin.left + 3) + "," + (chartData.margin.top - d3.select("#" + id + "-text").node().getBBox().height - 6 )+ ")");
 
                     d3.select("#" + id + "-background")
                         .attr("width", d3.select("#" + id + "-text").node().getBBox().width + 6)
                         .attr("height", d3.select("#" + id + "-text").node().getBBox().height + 6)
+                        .attr("transform", "translate(" + (chartData.margin.left + 3) + "," + (chartData.margin.top - d3.select("#" + id + "-text").node().getBBox().height - 6 )+ ")");
+
 
                 })
                 .on("mouseout", function (d, i) {
