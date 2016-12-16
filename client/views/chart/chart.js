@@ -21,7 +21,7 @@ Meteor.chart = {
     },
     _trackBucketNameHtml: function (chartData) {
         var html = "";
-        if (!chartData.trackFilter.isEmpty() || !chartData.resultFilter.isEmpty()) {
+        if (chartData.trackFilter.hasData() || chartData.resultFilter.hasData()) {
             html += "<ul class='track-bucket-names'>";
 
             if (chartData.trackFilter.isAllOff() && chartData.resultFilter.isAllOff()) {
@@ -86,7 +86,7 @@ Meteor.chart = {
     _resultBucketNameHtml: function (chartData) {
         var html = "";
 
-        if (!chartData.resultFilter.isEmpty()) {
+        if (chartData.resultFilter.hasData()) {
             html += "<ul class='result-bucket-names'>";
 
             _.each(Meteor.chart._resultBucketsForTracks(chartData), function (b) {
