@@ -41,9 +41,13 @@ Submit your track by pressing ENTER or clicking/touching the Submit button.
 Display tracks
 ---
 
-Tracks are being displayed in two ways: as an ordered table, where the most recent activities are listed at the top, 
-and as a chart, which will visualize all tracks that are contained in the ordered table. In the chart you can filter 
-down further and hide away those tracks you are currently not interested in.
+Tracks are being displayed in two ways: as an ordered table, where the most recent activities are listed at the top,
+and as a chart, which will visualize all tracks that are contained in the ordered table.
+
+In the chart you can filter down further and hide away those tracks you are currently not interested in.
+The filter controls visualize the total duration of your tracks, as well as the sum for any other unit that you collected.
+There is one special case for your own units - if the unit contains a slash (/), like in km/h, which means kilometers per hour, the
+units are not simply summed up but the average is being calculated. All figures are only for the currently filtered tracks.
 
 Query tracks
 ---
