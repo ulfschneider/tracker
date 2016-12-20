@@ -1,6 +1,7 @@
 import {Session} from "meteor/session";
 
 Meteor.queryTracks = {
+    content: null,
     _setQuery: function (query) {
         Session.set("query", query);
     },
@@ -88,6 +89,7 @@ Template.queryTracks.events({
         if (event.which === 27) {
             Meteor.queryTracks.reset();
         }
+        Meteor.queryTracks.content = $("#query").val();
         if($("#query").val()) {
             $(".control .reset").show();
             $(".control .query").show();
@@ -118,6 +120,8 @@ Template.queryTracks.helpers({
 
 Template.queryTracks.rendered = function () {
     $("#query").autosize();
+
+    $("#query").val(Meteor.queryTracks.content);
 
     if($("#query").val()) {
         $(".control .reset").show();
