@@ -3,7 +3,7 @@ import {Session} from "meteor/session";
 Meteor.editTrack = {
     edit: null,
     content: null,
-    listContent: null,
+    idContent: null,
 
     setEditId: function (editId) {
         Session.set("editId", editId);
@@ -50,6 +50,8 @@ Meteor.editTrack = {
             Meteor.editTrack.setRecentEditId(id);
         }
         Meteor.editTrack.clearEditId();
+        Meteor.editTrack.content = null;
+        Meteor.editTrack.idContent = null;
     },
     isVisible: function () {
         var id = this._id ? this._id : "";
@@ -130,13 +132,14 @@ Template.editTrack.events({
         if (event.which !== 13) {
             $("#edit" + id).removeClass("error");
         }
-        if (event.which === 27) {
-            Meteor.editTrack.escapeEdit();
-        }
         if (!id) {
             Meteor.editTrack.content = $("#edit").val();
         } else {
-            Meteor.editTrack.listContent = $("#edit" + id).val();
+            Meteor.editTrack.idContent = $("#edit" + id).val();
+        }
+
+        if (event.which === 27) {
+            Meteor.editTrack.escapeEdit(id);
         }
         if ($("#edit" + id).val()) {
             $("#control" + id + " .submit").show();
@@ -147,8 +150,8 @@ Template.editTrack.events({
         }
     },
     "keypress textarea": function (event) {
-        var id = this._id ? this._id : "";
         if (event.which === 13) {
+            var id = this._id ? this._id : "";
             event.preventDefault();
             event.stopPropagation();
             Meteor.editTrack._submitTrack(id);
@@ -175,8 +178,8 @@ Template.editTrack.rendered = function () {
     if (id) {
         //list content
         $("#edit" + id).focus();
-        if (Meteor.editTrack.listContent) {
-            $("#edit" + id).val(Meteor.editTrack.listContent);
+        if (Meteor.editTrack.idContent) {
+            $("#edit" + id).val(Meteor.editTrack.idContent);
         }
     } else if (Meteor.stopWatch.getTime() || Meteor.editTrack.content) {
         //non-list content

@@ -5,7 +5,7 @@ Meteor.queryTracks = {
     _setQuery: function (query) {
         Session.set("query", query);
     },
-    _setQueryInput:function(queryInput) {
+    _setQueryInput: function (queryInput) {
         Session.set("queryInput", queryInput);
     },
     _query: function () {
@@ -55,8 +55,9 @@ Meteor.queryTracks = {
         $("#query").blur(); //hide keyboard on touch devices
         Meteor.queryTracks._setQueryInput("");
         Meteor.queryTracks._setQuery("");
+        Meteor.queryTracks.content = null;
     },
-    getQueryInput: function() {
+    getQueryInput: function () {
         var queryInput = Session.get("queryInput");
         return queryInput ? queryInput : "";
     },
@@ -90,7 +91,7 @@ Template.queryTracks.events({
             Meteor.queryTracks.reset();
         }
         Meteor.queryTracks.content = $("#query").val();
-        if($("#query").val()) {
+        if ($("#query").val()) {
             $(".control .reset").show();
             $(".control .query").show();
         } else {
@@ -112,7 +113,7 @@ Template.queryTracks.events({
 });
 
 Template.queryTracks.helpers({
-    hasQuery:function() {
+    hasQuery: function () {
         return Meteor.queryTracks.hasQuery();
     }
 });
@@ -121,9 +122,11 @@ Template.queryTracks.helpers({
 Template.queryTracks.rendered = function () {
     $("#query").autosize();
 
-    $("#query").val(Meteor.queryTracks.content);
+    if (Meteor.queryTracks.content) {
+        $("#query").val(Meteor.queryTracks.content);
+    }
 
-    if($("#query").val()) {
+    if ($("#query").val()) {
         $(".control .reset").show();
         $(".control .query").show();
     } else {
