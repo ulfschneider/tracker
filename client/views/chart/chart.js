@@ -423,6 +423,11 @@ Meteor.chart = {
         var windowHeight = $(window)
             .height();
 
+        _.each($(".padding"), function (element) {
+            padding += $(element).outerHeight(true) - $(element).height() + 2;
+        });
+
+
         var headerHeight = 0;
         _.each($(".header"), function (element) {
             headerHeight += $(element)

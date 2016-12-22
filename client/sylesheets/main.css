@@ -267,10 +267,6 @@ tr.track td:last-child {
     color:gray;
 }
 
-.query-label {
-    margin-bottom:1.62em;
-}
-
 
 .end-of-list td {
     padding: 3.24em 0;
@@ -285,11 +281,26 @@ a.load-more {
     color: white;
 }
 
+/* query */
+.query {
+    margin-bottom:1.62em;
+}
+
+.query-label {
+    margin-bottom:1.62em;
+}
+
+
 
 /* edit track */
 
 .edit-track {
     min-width:300px;
+}
+
+.accent {
+    background:lightgray;
+    position:relative;
 }
 
 .editable .control {
@@ -313,7 +324,13 @@ tr .edit-track {
     height:1.62em;
     width: 100%;
     font-weight:bold;
+    background:transparent;
 }
+
+.accent .editable textarea {
+    border-bottom:1px solid black;
+}
+
 
 .editable a {
     text-decoration: underline;

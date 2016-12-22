@@ -1,43 +1,41 @@
 <template name="tracks">
 
-        <div class="row header">
-            <div class="{{#if hasTracksAtAll}}col-6{{else}}col-12{{/if}}">
-                {{> editTrack}}
-            </div>
-            {{#if hasTracksAtAll}}<div class="col-6">
-                {{> queryTracks}}
-            </div>{{/if}}
+    <div class="row header accent">
+        <div class="col-12">
+            {{> editTrack}}
         </div>
-        <div class="row">
+    </div>
+    <div class="row">
 
-            {{#if hasTracks}}
-                <div id="chartContainer" class="col-6">
-                    {{> chart}}
-                </div>
-            {{/if}}
+        <div class="col-6 padding">
+            {{#if hasTracksAtAll}}{{> queryTracks}}{{/if}}
+            {{#if hasTracks}}{{> chart}}{{/if}}
+        </div>
 
-            <div class="{{#if hasTracks}}col-6{{else}}col-12{{/if}}">
-                {{#if hasQuery}}<div class="query-label">Result of query: <strong>{{queryInput}}</strong></div>{{/if}}
-                <table class="tracks">
-                    {{#each tracks}}
-                        {{> track}}
-                    {{/each}}
-                    <tr class="end-of-list">
-                        <td colspan="10">
-                            {{#if Template.subscriptionsReady}}
-                                {{#if hasMoreTracks}}
-                                    <a class="load-more" href="#load">Load more tracks</a>
-                                {{else}}
-                                    {{#if hasTracks}}
-                                        <span>End of list</span>
-                                    {{/if}}
+
+        <div class="{{#if hasTracks}}col-6{{else}}col-12{{/if}}">
+            {{#if hasQuery}}
+                <div class="query-label">Result of query: <strong>{{queryInput}}</strong></div>{{/if}}
+            <table class="tracks">
+                {{#each tracks}}
+                    {{> track}}
+                {{/each}}
+                <tr class="end-of-list">
+                    <td colspan="10">
+                        {{#if Template.subscriptionsReady}}
+                            {{#if hasMoreTracks}}
+                                <a class="load-more" href="#load">Load more tracks</a>
+                            {{else}}
+                                {{#if hasTracks}}
+                                    <span>End of list</span>
                                 {{/if}}
                             {{/if}}
-                        </td>
-                    </tr>
-                </table>
-            </div>
+                        {{/if}}
+                    </td>
+                </tr>
+            </table>
         </div>
+    </div>
 </template>
 
 
