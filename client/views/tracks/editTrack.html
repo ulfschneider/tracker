@@ -2,11 +2,28 @@
     {{#if isVisible}}
         <div class="editable">
             <div class="edit-track">
-                {{#unless _id}}<span class="control">File your track (<a href="#" class="watch" accesskey="w">use a watch</a>):</span>{{/unless}}
-                <div class="text-container"><textarea id="edit{{_id}}" autofocus="autofocus"
-                                                      accesskey="t">{{value}}</textarea></div>
-                <div class="control" id="control{{_id}}"><div><a href="#" class="submit">Submit</a> <a href="#" class="cancel">Cancel</a>{{#if _id}}<a href="#" class="remove">Remove track</a>{{/if}}</div></div>
-                <div class="error" id="errors{{_id}}"></div>
+                {{#if _id}}
+                    <div class="text-container"><textarea id="edit{{_id}}" autofocus="autofocus"
+                                                          accesskey="t">{{value}}</textarea></div>
+                    <div class="control" id="control{{_id}}">
+                        <div><a href="#" class="submit">Submit</a> <a href="#" class="cancel">Cancel</a>{{#if _id}}
+                            <a href="#" class="remove">Remove track</a>{{/if}}</div>
+                    </div>
+                    <div class="error" id="errors{{_id}}"></div>
+                {{else}}
+                    <dl>
+                        <dt class="control">File your track:</dt>
+                        <dd>
+                            <div class="text-container"><textarea id="edit" autofocus="autofocus"
+                                                                  accesskey="t">{{value}}</textarea></div>
+                            <div class="control" id="control">
+                                <div><a href="#" class="watch" accesskey="w"><i class="fa fa-clock-o" aria-hidden="true"></i></a> <a href="#" class="submit">Submit</a>
+                                    <a href="#" class="cancel">Cancel</a></div>
+                            </div>
+                            <div class="error" id="errors{{_id}}"></div>
+                        </dd>
+                    </dl>
+                {{/if}}
             </div>
         </div>
     {{/if}}

@@ -40,6 +40,21 @@ blockquote {
     margin:2.62em 0;
 }
 
+.editable dl {
+    margin:0;
+    padding:0;
+}
+
+.editable dl dt {
+    width:10em;
+    float:left;
+}
+
+.editable dl dd {
+    margin-left:10em;
+}
+
+
 ::-webkit-input-placeholder {
     color: gray;
 }
@@ -71,6 +86,10 @@ blockquote {
 
 .accounts-dialog * {
     font-family: 'Roboto mono', monospace, sans-serif;
+}
+
+.login-link-text  {
+    color:white;
 }
 
 #login-buttons .login-button, .accounts-dialog .login-button {
@@ -134,10 +153,15 @@ ul.track-bucket-names, ul.result-bucket-names  {
 }
 
 ul.track-bucket-names li, ul.result-bucket-names li {
-    display:inline-block;
-    line-height:1em;
-    margin-right:1em;
-    margin-bottom:.62em;
+    display: inline-block;
+    line-height: 1em;
+    margin-right: 1em;
+    margin-bottom: .62em;
+}
+
+ul.track-bucket-names li:first-child {
+    width:10em;
+    margin-right:0;
 }
 
 ul.track-bucket-names a, ul.result-bucket-names a {
@@ -298,11 +322,6 @@ a.load-more {
     min-width:300px;
 }
 
-.accent {
-    background:lightgray;
-    position:relative;
-}
-
 .editable .control {
     height:1.62em;
 }
@@ -311,24 +330,19 @@ tr .edit-track {
     margin: 1.62em 0;
 }
 
-.text-container {
-    border-bottom:1px solid lightgray;
-}
-
 .editable textarea {
-    padding:0px;
-    padding-top:3px;
-    border:none;
+    padding:0;
+    border:0;
     margin: 0;
+    height:28px;
     resize: none;
-    height:1.62em;
     width: 100%;
     font-weight:bold;
     background:transparent;
 }
 
-.accent .editable textarea {
-    border-bottom:1px solid black;
+.text-container {
+    border-bottom:1px solid lightgray;
 }
 
 
@@ -338,6 +352,11 @@ tr .edit-track {
 
 .editable a.submit, .editable a.query {
     margin-right: 1.62em;
+}
+
+.editable a.watch {
+    padding-right:1em;
+    margin-right:1.62em;
 }
 
 .editable a.remove {
@@ -352,6 +371,33 @@ tr .edit-track {
 
 .textcomplete-dropdown li:hover a,
 .textcomplete-dropdown .active a {
+    color:white;
+}
+
+
+/* accent */
+.accent a.about {
+    color:white;
+}
+
+.accent {
+    background:black;
+    color:white;
+}
+
+.accent .editable textarea {
+    color:white;
+}
+
+.accent .editable textarea.error {
+    color:#e47070;
+}
+
+.accent .error {
+    color:#e47070;
+}
+
+.accent .editable a {
     color:white;
 }
 

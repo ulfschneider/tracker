@@ -25,9 +25,9 @@ Meteor.chart = {
             html += "<ul class='track-bucket-names'>";
 
             if (chartData.trackFilter.isAllOff() && chartData.resultFilter.isAllOff()) {
-                html += "<li>Chart filter:</li>";
+                html += "<li class='label'>Chart filter:</li>";
             } else {
-                html += '<li><a href="#" class="reset-filter">Clear filter</a>:</li>';
+                html += '<li class="label"><a href="#" class="reset-filter">Clear filter</a>:</li>';
             }
 
             _.each(chartData.trackBuckets, function (b) {
@@ -435,7 +435,7 @@ Meteor.chart = {
         });
 
         chartData.svgWidth = w;
-        chartData.svgHeight = Math.max(windowHeight - headerHeight - padding, 200);
+        chartData.svgHeight = Math.max(windowHeight - headerHeight - padding, 300);
 
         return chartData;
     }

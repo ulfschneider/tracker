@@ -42,6 +42,7 @@ Meteor.editTrack = {
 
         $("#edit" + id).val("");
         $("#edit" + id).removeClass("error");
+        $("#edit" + id).css("height", "");
         $("#errors" + id).html("");
         $("#control" + id + " .submit").hide();
         $("#control" + id + " .cancel").hide();

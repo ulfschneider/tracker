@@ -1,8 +1,15 @@
 <template name="queryTracks">
     <div class="editable query header">
-        <span class="control">Query tracks: </span>
-        <div class="text-container"><textarea id="query" accesskey="q">{{query}}</textarea></div>
-        <div class="control"><div><a href="#" class="query">Query</a><a href="#" class="reset">Clear query</a></div></div>
-        <div class="error" id="query-errors"></div>
+        <dl>
+            <dt><span class="control">Query tracks: </span></dt>
+            <dd>
+                <div class="text-container"><textarea id="query" accesskey="q">{{query}}</textarea></div>
+                <div class="control">
+                    <div><a href="#" class="query">Query</a><a href="#" class="reset">Clear query</a></div>
+                </div>
+                <div class="error" id="query-errors"></div>
+            </dd>
+        </dl>
+
     </div>
 </template>
