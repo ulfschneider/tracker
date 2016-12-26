@@ -22,6 +22,7 @@ body {
     -moz-text-size-adjust: 100%;
     -ms-text-size-adjust: 100%;
     -webkit-text-size-adjust: 100%;
+    color:#222;
 }
 
 img {
@@ -30,12 +31,12 @@ img {
 }
 
 a {
-    color:black;
+    color:#222;
 }
 
 blockquote {
-    border-top:1px solid black;
-    border-bottom:1px solid black;
+    border-top:1px solid #222;
+    border-bottom:1px solid #222;
     font-style: italic;
     margin:2.62em 0;
 }
@@ -179,13 +180,13 @@ ul.track-bucket-names a.reset-filter {
 
 
 ul.track-bucket-names .off {
-    color:black;
+    color:#222;
     background:transparent;
 }
 
 ul.track-bucket-names .on {
     color:white;
-    background:black;
+    background:#222;
     text-decoration:none;
 }
 
@@ -214,17 +215,17 @@ ul.result-bucket-names .on {
 }
 
 .axis.duration text {
-    fill: black;
+    fill: #222;
 }
 
 .line.duration {
-    stroke: black;
+    stroke: #222;
     stroke-width: 2px;
     fill:none;
 }
 
 .dot.duration {
-    fill:black;
+    fill:#222;
 }
 
 .line.results {
@@ -366,7 +367,7 @@ tr .edit-track {
 
 .textcomplete-dropdown li:hover,
 .textcomplete-dropdown .active {
-    background: black;
+    background: #222;
 }
 
 .textcomplete-dropdown li:hover a,
@@ -381,7 +382,7 @@ tr .edit-track {
 }
 
 .accent {
-    background:black;
+    background:#222;
     color:white;
 }
 
@@ -455,7 +456,7 @@ tr .edit-track {
 
 /* NProgress */
 #nprogress .bar {
-    background:black;
+    background:#222;
     height:4px;
 }
 

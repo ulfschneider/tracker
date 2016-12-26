@@ -580,7 +580,7 @@ Meteor.chart = {
                                 return chartData.durationScale(track.duration) - 3;
                             }
                         })
-                        .attr("fill", "black");
+                        .attr("fill", "#222");
 
                     chartData.d3Chart.append("text")
                         .attr({
