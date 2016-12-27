@@ -8,12 +8,12 @@
     <div class="row">
 
         <div class="col-6 padding">
-            {{#if hasTracksAtAll}}{{> queryTracks}}{{/if}}
             {{#if hasTracks}}{{> chart}}{{/if}}
         </div>
 
 
         <div class="{{#if hasTracks}}col-6{{else}}col-12{{/if}}">
+            {{#if hasTracksAtAll}}{{> queryTracks}}{{/if}}
             {{#if hasQuery}}
                 <div class="query-label">Result of query: <strong>{{queryInput}}</strong></div>{{/if}}
             <table class="tracks">
