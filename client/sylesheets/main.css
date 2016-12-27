@@ -47,14 +47,14 @@ blockquote {
 }
 
 .editable dl dt {
-    width:10em;
-    float:left;
+    margin:0;
+    padding:0;
 }
 
 .editable dl dd {
-    margin-left:10em;
+    margin:0;
+    padding:0;
 }
-
 
 ::-webkit-input-placeholder {
     color: gray;
@@ -344,6 +344,7 @@ tr .edit-track {
 
 .text-container {
     border-bottom:1px solid lightgray;
+    line-height:0em;
 }
 
 
@@ -523,6 +524,7 @@ inspired by ZACH COLE 2016
     .hidden-sm {
         display: none;
     }
+
 }
 
 @media only screen and (min-width: 80em) {
