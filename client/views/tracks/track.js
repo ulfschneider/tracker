@@ -1,6 +1,6 @@
 Template.track.helpers({
     time: function () {
-        return moment(Template.currentData().date).format("HH:mm");
+        return Meteor.tracker.printTime(Template.currentData().date);
     },
     track: function () {
         var track = Template.currentData().track;
@@ -29,7 +29,9 @@ Template.track.helpers({
     },
     inputValue: function () {
         var input = "";
-        input += moment(Template.currentData().date).format("YY-MM-DD HH:mm");
+
+
+        input += Meteor.tracker.printDay(Template.currentData().date) + " " + Meteor.tracker.printTime(Template.currentData().date);
         input += " #" + Template.currentData().track;
         if (Template.currentData().duration) {
             input += " " + Meteor.tracker.printDuration(Template.currentData().duration);
