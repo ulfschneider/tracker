@@ -290,6 +290,7 @@ tr.track td:last-child {
 .comment a {
     text-decoration:underline;
     color:gray;
+    word-break:break-all;
 }
 
 
