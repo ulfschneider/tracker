@@ -495,7 +495,7 @@ inspired by ZACH COLE 2016
 
 .row [class^="col"] {
     float: left;
-    padding: 1em;
+    padding: 1.62em;
     min-height: 0.125em;
     box-sizing: border-box;
 }
