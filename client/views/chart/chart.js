@@ -597,12 +597,12 @@ Meteor.chart = {
                         .attr("fill", "white")
                         .text(Meteor.chart._extractTrackTooltip(track))
                         .call(Meteor.chart._wrap, chartData.svgWidth - chartData.margin.left - chartData.dateScale(track.date) - 6)
-                        .attr("transform", "translate(" + (chartData.margin.left + 3) + "," + (chartData.margin.top - d3.select("#" + id + "-text").node().getBBox().height - 6 )+ ")");
+                        .attr("transform", "translate(" + (chartData.margin.left + 3) + "," + (chartData.margin.top - d3.select("#" + id + "-text").node().getBBox().height - 6 ) + ")");
 
                     d3.select("#" + id + "-background")
                         .attr("width", d3.select("#" + id + "-text").node().getBBox().width + 6)
                         .attr("height", d3.select("#" + id + "-text").node().getBBox().height + 6)
-                        .attr("transform", "translate(" + (chartData.margin.left + 3) + "," + (chartData.margin.top - d3.select("#" + id + "-text").node().getBBox().height - 6 )+ ")");
+                        .attr("transform", "translate(" + (chartData.margin.left + 3) + "," + (chartData.margin.top - d3.select("#" + id + "-text").node().getBBox().height - 6 ) + ")");
 
                 })
                 .on("mouseout", function (d, i) {
@@ -672,12 +672,12 @@ Meteor.chart = {
                         .style("font-size", ".82em")
                         .text(Meteor.chart._extractResultTooltip(resultBucket, result))
                         .call(Meteor.chart._wrap, chartData.svgWidth - chartData.margin.left - chartData.dateScale(result.date) - 6)
-                        .attr("transform", "translate(" + (chartData.margin.left + 3) + "," + (chartData.margin.top - d3.select("#" + id + "-text").node().getBBox().height - 6 )+ ")");
+                        .attr("transform", "translate(" + (chartData.margin.left + 3) + "," + (chartData.margin.top - d3.select("#" + id + "-text").node().getBBox().height - 6 ) + ")");
 
                     d3.select("#" + id + "-background")
                         .attr("width", d3.select("#" + id + "-text").node().getBBox().width + 6)
                         .attr("height", d3.select("#" + id + "-text").node().getBBox().height + 6)
-                        .attr("transform", "translate(" + (chartData.margin.left + 3) + "," + (chartData.margin.top - d3.select("#" + id + "-text").node().getBBox().height - 6 )+ ")");
+                        .attr("transform", "translate(" + (chartData.margin.left + 3) + "," + (chartData.margin.top - d3.select("#" + id + "-text").node().getBBox().height - 6 ) + ")");
 
 
                 })
@@ -807,12 +807,9 @@ Template.chart.onCreated(function () {
     this.autorun(function () {
         var limit, subscription;
 
-        if (Meteor.queryTracks.hasQuery()) {
-            subscription = _self.subscribe("TrackData");
-        } else {
-            limit = Meteor.tracks.getLimit();
-            subscription = _self.subscribe('TrackData', limit);
-        }
+        subscription = _self.subscribe("TrackData");
+        limit = Meteor.tracks.getLimit();
+
         if (subscription.ready()) {
             if (!Meteor.queryTracks.hasQuery()) {
                 _self.loaded.set(limit);

@@ -54,13 +54,13 @@ Template.tracks.helpers({
     hasTracks: function () {
         return Template.instance().tracks().count() >= 1;
     },
-    hasTracksAtAll: function() {
+    hasTracksAtAll: function () {
         return Meteor.tracker.hasTracks();
     },
-    hasQuery: function() {
+    hasQuery: function () {
         return Meteor.queryTracks.hasQuery();
     },
-    queryInput: function() {
+    queryInput: function () {
         return Meteor.queryTracks.getQueryInput();
     }
 });
@@ -80,12 +80,9 @@ Template.tracks.onCreated(function () {
     this.autorun(function () {
         NProgress.start();
         var limit, subscription;
-        if (Meteor.queryTracks.hasQuery()) {
-            subscription = _self.subscribe("TrackData");
-        } else {
-            limit = Meteor.tracks.getLimit();
-            subscription = _self.subscribe('TrackData', limit);
-        }
+        subscription = _self.subscribe("TrackData");
+        limit = Meteor.tracks.getLimit();
+
         if (subscription.ready()) {
             if (!Meteor.queryTracks.hasQuery()) {
                 _self.loaded.set(limit);
