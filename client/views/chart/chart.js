@@ -435,7 +435,7 @@ Meteor.chart = {
         });
 
         chartData.svgWidth = w;
-        chartData.svgHeight = Math.max(windowHeight - headerHeight - padding, 300);
+        chartData.svgHeight = Math.max(windowHeight - headerHeight - padding, 400);
 
         return chartData;
     }

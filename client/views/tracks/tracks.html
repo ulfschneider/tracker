@@ -1,9 +1,12 @@
 <template name="tracks">
 
     <div class="row header accent">
-        <div class="col-12">
+        <div class="col-6">
             {{> editTrack}}
         </div>
+		<div class="col-6">
+            {{#if hasTracksAtAll}}{{> queryTracks}}{{/if}}
+		</div>
     </div>
     <div class="row">
 
@@ -13,9 +16,8 @@
 
 
         <div class="{{#if hasTracks}}col-6{{else}}col-12{{/if}}">
-            {{#if hasTracksAtAll}}{{> queryTracks}}{{/if}}
-            {{#if hasQuery}}
-                <div class="query-label">Result of query: <strong>{{queryInput}}</strong></div>{{/if}}
+            {{#if hasQuery}}<div class="query-label">Result of query: <strong>{{queryInput}}</strong></div>{{/if}}			
+			
             <table class="tracks">
                 {{#each tracks}}
                     {{> track}}
