@@ -442,7 +442,7 @@ Meteor.chart = {
     ,
     _setDimensions: function (chartData) {
 
-        chartData.margin = {top: 16 * 1.62, right: 100, bottom: 16 * 1.62, left: 100}; //assume 16px for font, line-height is 1.62em
+        chartData.margin = {top: 16 * 3.24, right: 100, bottom: 16 * 1.62, left: 100}; //assume 16px for font, line-height is 1.62em
 
         chartData.width = chartData.svgWidth - chartData.margin.left - chartData.margin.right;
         chartData.height = chartData.svgHeight - chartData.margin.top - chartData.margin.bottom;
