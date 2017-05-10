@@ -5,7 +5,6 @@ Meteor.stopWatch = {
     millis: 0,
     pausedMillis: 0,
     interval: null,
-    stayAwakeInterval:null,
 
     _setTime: function (time) {
         if (_.isUndefined(time)) {
