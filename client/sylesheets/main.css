@@ -455,8 +455,8 @@ tr .edit-track {
 
 /* NProgress */
 #nprogress .bar {
-    background:#222;
-    height:4px;
+    background:green;
+    height:5px;
 }
 
 #nprogress .peg {
