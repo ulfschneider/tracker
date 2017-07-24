@@ -467,7 +467,7 @@ tr .edit-track {
 
 /* NProgress */
 #nprogress .bar {
-    background:green;
+    background:white;
     height:5px;
 }
 
