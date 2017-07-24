@@ -148,7 +148,7 @@ Meteor.chart = {
 
         for (var i = 0; i < buckets.length; i++) {
             if (buckets[i].name == resultBucket) {
-                buckets[i].results.push({date: track.date, result: number, duration: track.duration});
+                buckets[i].results.push({date: track.date, result: number, duration: track.duration, allResults: track.results});
                 buckets[i].number += (number ? number : 0);
                 buckets[i].count += 1;
                 return trackBucket;
@@ -157,7 +157,7 @@ Meteor.chart = {
 
         buckets.push({
             name: resultBucket,
-            results: [{date: track.date, result: number, duration: track.duration}],
+            results: [{date: track.date, result: number, duration: track.duration, allResults: track.results}],
             trackBucket: trackBucket,
             number: (number ? number : 0),
             count: 1
@@ -480,14 +480,12 @@ Meteor.chart = {
     _extractTrackTooltip: function (track) {
         var html = "";
         html += Meteor.tracker.TOKEN_TRACK + track.track;
-        if (track.duration || track.results) {
+        if (track.duration) {
+            html += " ";
+            html += Meteor.tracker.printDuration(track.duration);
+        }
+        if (track.results) {
             html += "\n";
-            if (track.duration) {
-                html += Meteor.tracker.printDuration(track.duration);
-                if (track.results) {
-                    html += " ";
-                }
-            }
             if (track.results) {
                 html += Meteor.tracker.printArray(track.results, " ");
             }
@@ -499,12 +497,14 @@ Meteor.chart = {
     },
     _extractResultTooltip: function (resultBucket, result) {
         var html = "";
-        html += Meteor.tracker.TOKEN_TRACK + resultBucket.trackBucket.name;
+        html += Meteor.tracker.TOKEN_TRACK + resultBucket.trackBucket.name + " " + result.result + resultBucket.name;
         html += "\n";
         if (result.duration) {
             html += Meteor.tracker.printDuration(result.duration) + " ";
         }
-        html += result.result + resultBucket.name;
+        if (result.allResults.length > 1) {
+            html += Meteor.tracker.printArray(result.allResults, " ");
+        }
         html += "\n" + Meteor.tracker.printDay(result.date);
 
         return html;
