@@ -436,12 +436,24 @@ tr .edit-track {
     margin:1.62em auto;
 }
 
+.watch .control a.start {
+    background:green;
+}
+
+.watch .control a.stop {
+    background:firebrick;
+}
+
 .watch .control a.clear {
     background:firebrick;
 }
 
 .watch .control a.return {
-    background:green;
+    background:gray;
+}
+
+.watch .control a.clear {
+    background: #222;
 }
 
 
