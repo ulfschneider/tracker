@@ -552,6 +552,18 @@ Meteor.chart = {
 
         return chartData;
     },
+    _adaptTooltipYTransform: function(chartData, y, yTransform) {
+        if (y + yTransform < 0) {
+            return -y;
+        }
+        return yTransform;
+    },
+    _adaptTooltipXTransform: function(chartData, x, xTransform) {
+        if (x + xTransform > chartData.svgWidth) {
+            return chartData.svgWidth - x;
+        }
+        return xTransform;
+    },
     _drawDurationDot: function (chartData, g, track) {
         if (!isNaN(track.duration)) {
             //this circle is for display
@@ -563,6 +575,9 @@ Meteor.chart = {
 
             //this circle is to increase the hover area
             var id = Meteor.tracker.uid();
+            var x = chartData.dateScale(track.date);
+            var y = chartData.durationScale(track.duration);
+
             g.append("circle")
                 .attr("class", "dot duration hover " + track.track)
                 .attr("r", 10)
@@ -574,10 +589,10 @@ Meteor.chart = {
                         .attr({
                             id: id + "-background",
                             x: function () {
-                                return chartData.dateScale(track.date) - 3;
+                                return x - 3;
                             },
                             y: function () {
-                                return chartData.durationScale(track.duration) - 3;
+                                return y - 3;
                             }
                         })
                         .attr("fill", "#222");
@@ -586,10 +601,10 @@ Meteor.chart = {
                         .attr({
                             id: id + "-text",
                             x: function () {
-                                return chartData.dateScale(track.date);
+                                return x;
                             },
                             y: function () {
-                                return chartData.durationScale(track.duration);
+                                return y;
                             }
                         })
                         .attr("transform", "translate(" + chartData.margin.left + "," + chartData.margin.top + ")")
@@ -597,12 +612,17 @@ Meteor.chart = {
                         .attr("fill", "white")
                         .text(Meteor.chart._extractTrackTooltip(track))
                         .call(Meteor.chart._wrap, chartData.svgWidth - chartData.margin.left - chartData.dateScale(track.date) - 6)
-                        .attr("transform", "translate(" + (chartData.margin.left + 3) + "," + (chartData.margin.top - d3.select("#" + id + "-text").node().getBBox().height - 6 ) + ")");
+                        .attr("transform", "translate("
+                            + Meteor.chart._adaptTooltipXTransform(chartData, x, chartData.margin.left + 3) + ","
+                            + Meteor.chart._adaptTooltipYTransform(chartData, y, chartData.margin.top - d3.select("#" + id + "-text").node().getBBox().height - 6 ) + ")");
+
 
                     d3.select("#" + id + "-background")
                         .attr("width", d3.select("#" + id + "-text").node().getBBox().width + 6)
                         .attr("height", d3.select("#" + id + "-text").node().getBBox().height + 6)
-                        .attr("transform", "translate(" + (chartData.margin.left + 3) + "," + (chartData.margin.top - d3.select("#" + id + "-text").node().getBBox().height - 6 ) + ")");
+                        .attr("transform", "translate("
+                            + Meteor.chart._adaptTooltipXTransform(chartData, x - 3, chartData.margin.left + 3) + ","
+                            + Meteor.chart._adaptTooltipYTransform(chartData, y - 3, chartData.margin.top - d3.select("#" + id + "-text").node().getBBox().height - 6 ) + ")");
 
                 })
                 .on("mouseout", function (d, i) {
@@ -637,6 +657,8 @@ Meteor.chart = {
             //this circle is to increase the hover area
 
             var id = Meteor.tracker.uid();
+            var x = chartData.dateScale(result.date);
+            var y = chartData.resultScale(result.result);
             g.append("circle")
                 .attr("class", "dot results hover " + resultBucket.name)
                 .attr("r", 10)
@@ -648,10 +670,10 @@ Meteor.chart = {
                         .attr({
                             id: id + "-background",
                             x: function () {
-                                return chartData.dateScale(result.date) - 3;
+                                return x - 3;
                             },
                             y: function () {
-                                return chartData.resultScale(result.result) - 3;
+                                return y - 3;
                             }
                         })
                         .attr("fill", Meteor.chart._getResultColor(chartData, resultBucket.name));
@@ -661,10 +683,10 @@ Meteor.chart = {
                         .attr({
                             id: id + "-text",
                             x: function () {
-                                return chartData.dateScale(result.date);
+                                return x;
                             },
                             y: function () {
-                                return chartData.resultScale(result.result);
+                                return y;
                             }
                         })
                         .attr("transform", "translate(" + chartData.margin.left + "," + chartData.margin.top + ")")
@@ -672,12 +694,16 @@ Meteor.chart = {
                         .style("font-size", ".82em")
                         .text(Meteor.chart._extractResultTooltip(resultBucket, result))
                         .call(Meteor.chart._wrap, chartData.svgWidth - chartData.margin.left - chartData.dateScale(result.date) - 6)
-                        .attr("transform", "translate(" + (chartData.margin.left + 3) + "," + (chartData.margin.top - d3.select("#" + id + "-text").node().getBBox().height - 6 ) + ")");
+                        .attr("transform", "translate("
+                            + Meteor.chart._adaptTooltipXTransform(chartData, x, chartData.margin.left + 3) + ","
+                            + Meteor.chart._adaptTooltipYTransform(chartData, y, chartData.margin.top - d3.select("#" + id + "-text").node().getBBox().height - 6 ) + ")");
 
                     d3.select("#" + id + "-background")
                         .attr("width", d3.select("#" + id + "-text").node().getBBox().width + 6)
                         .attr("height", d3.select("#" + id + "-text").node().getBBox().height + 6)
-                        .attr("transform", "translate(" + (chartData.margin.left + 3) + "," + (chartData.margin.top - d3.select("#" + id + "-text").node().getBBox().height - 6 ) + ")");
+                        .attr("transform", "translate("
+                            + Meteor.chart._adaptTooltipXTransform(chartData, x - 1, chartData.margin.left + 3) + ","
+                            + Meteor.chart._adaptTooltipYTransform(chartData, y - 3, chartData.margin.top - d3.select("#" + id + "-text").node().getBBox().height - 6 ) + ")");
 
 
                 })
