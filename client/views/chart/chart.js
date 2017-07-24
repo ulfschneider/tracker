@@ -554,7 +554,7 @@ Meteor.chart = {
     },
     _adaptTooltipYTransform: function(chartData, y, bbox) {
         var yTransform = chartData.margin.top - bbox.height - 6;
-        if (y + yTransform < 0) {
+        if (y + yTransform < chartData.margin.top) {
             return chartData.margin.top + 6;
         }
         return yTransform;
@@ -562,7 +562,7 @@ Meteor.chart = {
     _adaptTooltipXTransform: function(chartData, x, bbox) {
         var xTransform = chartData.margin.left + 3;
         if (x + xTransform + bbox.width > chartData.svgWidth) {
-            return chartData.svgWidth - (x + xTransform + 1 + bbox.width);
+            return chartData.svgWidth - (x + xTransform + 2 + bbox.width);
         }
         return xTransform;
     },
