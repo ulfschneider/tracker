@@ -552,17 +552,17 @@ Meteor.chart = {
 
         return chartData;
     },
-    _adaptTooltipYTransform: function(chartData, y, bbox) {
-        var yTransform = chartData.margin.top - bbox.height - 6;
+    _adaptTooltipYTransform: function(chartData, y, height) {
+        var yTransform = chartData.margin.top - height - 6;
         if (y + yTransform < chartData.margin.top) {
             return chartData.margin.top + 6;
         }
         return yTransform;
     },
-    _adaptTooltipXTransform: function(chartData, x, bbox) {
+    _adaptTooltipXTransform: function(chartData, x, width) {
         var xTransform = chartData.margin.left + 3;
-        if (x + xTransform + bbox.width > chartData.svgWidth) {
-            return chartData.svgWidth - (x + xTransform + 2 + bbox.width);
+        if (x + xTransform + width > chartData.svgWidth) {
+            return chartData.svgWidth - (x + xTransform + width);
         }
         return xTransform;
     },
@@ -615,16 +615,16 @@ Meteor.chart = {
                         .text(Meteor.chart._extractTrackTooltip(track))
                         .call(Meteor.chart._wrap, chartData.svgWidth - chartData.margin.left - chartData.dateScale(track.date) - 6)
                         .attr("transform", "translate("
-                            + Meteor.chart._adaptTooltipXTransform(chartData, x, d3.select("#" + id + "-text").node().getBBox()) + ","
-                            + Meteor.chart._adaptTooltipYTransform(chartData, y, d3.select("#" + id + "-text").node().getBBox()) + ")");
+                            + Meteor.chart._adaptTooltipXTransform(chartData, x, d3.select("#" + id + "-text").node().getBBox().width) + ","
+                            + Meteor.chart._adaptTooltipYTransform(chartData, y, d3.select("#" + id + "-text").node().getBBox().height) + ")");
 
 
                     d3.select("#" + id + "-background")
                         .attr("width", d3.select("#" + id + "-text").node().getBBox().width + 6)
                         .attr("height", d3.select("#" + id + "-text").node().getBBox().height + 6)
                         .attr("transform", "translate("
-                            + Meteor.chart._adaptTooltipXTransform(chartData, x - 3, d3.select("#" + id + "-text").node().getBBox()) + ","
-                            + Meteor.chart._adaptTooltipYTransform(chartData, y - 3, d3.select("#" + id + "-text").node().getBBox()) + ")");
+                            + Meteor.chart._adaptTooltipXTransform(chartData, x, d3.select("#" + id + "-text").node().getBBox().width) + ","
+                            + Meteor.chart._adaptTooltipYTransform(chartData, y, d3.select("#" + id + "-text").node().getBBox().height) + ")");
 
                 })
                 .on("mouseout", function (d, i) {
@@ -697,15 +697,15 @@ Meteor.chart = {
                         .text(Meteor.chart._extractResultTooltip(resultBucket, result))
                         .call(Meteor.chart._wrap, chartData.svgWidth - chartData.margin.left - chartData.dateScale(result.date) - 6)
                         .attr("transform", "translate("
-                            + Meteor.chart._adaptTooltipXTransform(chartData, x, d3.select("#" + id + "-text").node().getBBox()) + ","
-                            + Meteor.chart._adaptTooltipYTransform(chartData, y, d3.select("#" + id + "-text").node().getBBox()) + ")");
+                            + Meteor.chart._adaptTooltipXTransform(chartData, x, d3.select("#" + id + "-text").node().getBBox().width) + ","
+                            + Meteor.chart._adaptTooltipYTransform(chartData, y, d3.select("#" + id + "-text").node().getBBox().height) + ")");
 
                     d3.select("#" + id + "-background")
                         .attr("width", d3.select("#" + id + "-text").node().getBBox().width + 6)
                         .attr("height", d3.select("#" + id + "-text").node().getBBox().height + 6)
                         .attr("transform", "translate("
-                            + Meteor.chart._adaptTooltipXTransform(chartData, x - 1, d3.select("#" + id + "-text").node().getBBox()) + ","
-                            + Meteor.chart._adaptTooltipYTransform(chartData, y - 3, d3.select("#" + id + "-text").node().getBBox()) + ")");
+                            + Meteor.chart._adaptTooltipXTransform(chartData, x, d3.select("#" + id + "-text").node().getBBox().width) + ","
+                            + Meteor.chart._adaptTooltipYTransform(chartData, y, d3.select("#" + id + "-text").node().getBBox().height) + ")");
 
 
                 })
