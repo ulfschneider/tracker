@@ -218,7 +218,7 @@ ul.result-bucket-names .on {
 
 .line.duration {
     stroke: #222;
-    stroke-width: 2px;
+    stroke-width: 1px;
     fill:none;
 }
 
@@ -227,9 +227,13 @@ ul.result-bucket-names .on {
 }
 
 .line.results {
-    stroke-width: 2px;
+    stroke-width: 1px;
     stroke-dasharray: 8,2;
     fill:none;
+}
+
+.line.trend {
+    stroke-width: 2px;
 }
 
 .line.hover {
