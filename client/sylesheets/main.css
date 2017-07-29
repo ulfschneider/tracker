@@ -218,6 +218,7 @@ ul.result-bucket-names .on {
 
 .line.duration {
     stroke: #222;
+    stroke-dasharray: 3,3;
     stroke-width: 1px;
     fill:none;
 }
@@ -228,7 +229,7 @@ ul.result-bucket-names .on {
 
 .line.results {
     stroke-width: 1px;
-    stroke-dasharray: 8,2;
+    stroke-dasharray: 3,3;
     fill:none;
 }
 

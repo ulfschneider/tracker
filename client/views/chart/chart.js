@@ -175,6 +175,7 @@ Meteor.chart = {
         if (_.isUndefined(chartData.trackBuckets)) {
             chartData.trackBuckets = [];
         }
+
         var buckets = chartData.trackBuckets;
         for (var i = 0; i < buckets.length; i++) {
             if (buckets[i].name == track.track) {
@@ -275,8 +276,6 @@ Meteor.chart = {
 
         //clear data
         delete chartData.trackBuckets;
-
-        chartData.trend = true;
 
         if (!chartData["trackFilter"]) {
             chartData.trackFilter = new Filter();
@@ -553,24 +552,24 @@ Meteor.chart = {
                 .attr("class", "line duration " + trackBucket.name)
                 .attr("d", chartData.durationLine(trackBucket.tracks));
 
-            //TODO here is a failure
-            /*
-            var xydata = _.map(trackBucket.tracks, function (track) {
-                return {x: track.date.getTime(), y: track.duration}
+            var xydata = [];
+             _.each(trackBucket.tracks, function (track) {
+                 if (track.date && !_.isUndefined(track.duration)) {
+                     xydata.push({x: track.date.getTime(), y: track.duration});
+                 }
             });
 
-            console.log(JSON.stringify(xydata));
-
-
             var coef = Meteor.tracker.getLinearTrendCoef(xydata);
-            var trend = [{date: new Date(coef.min.x), duration: coef.min.y}, {date: new Date(coef.max.x), duration: coef.max.y}];
+            var trend = [{date: new Date(coef.min.x), duration: coef.min.y}, {
+                date: new Date(coef.max.x),
+                duration: coef.max.y
+            }];
 
             console.log(JSON.stringify(coef));
 
             g.append("path")
                 .attr("class", "line trend " + trackBucket.name)
                 .attr("d", chartData.durationLine(trend));
-    */
         }
         _.each(trackBucket.tracks, function (track) {
             Meteor.chart._drawDurationDot(chartData, g, track);
@@ -662,29 +661,29 @@ Meteor.chart = {
     },
     _drawResultLine: function (chartData, g, resultBucket) {
         if (resultBucket.results.length > 1) {
-            if (chartData.trend) {
-                //draw trend line
-                var xydata = _.map(resultBucket.results, function (result) {
-                    return {x: result.date.getTime(), y: result.result}
-                });
-                var coef = Meteor.tracker.getLinearTrendCoef(xydata);
-                var trend = [{date: new Date(coef.min.x), result: coef.min.y}, {
-                    date: new Date(coef.max.x),
-                    result: coef.max.y
-                }];
 
-                g.append("path")
-                    .attr("class", "line trend " + resultBucket.name)
-                    .attr("d", chartData.resultsLine(trend))
-                    .attr("stroke", Meteor.chart._getResultColor(chartData, resultBucket.name));
-            } else {
+            //draw trend line
+            var xydata = _.map(resultBucket.results, function (result) {
+                return {x: result.date.getTime(), y: result.result}
+            });
+            var coef = Meteor.tracker.getLinearTrendCoef(xydata);
+            var trend = [{date: new Date(coef.min.x), result: coef.min.y}, {
+                date: new Date(coef.max.x),
+                result: coef.max.y
+            }];
 
-                //draw connection line
-                g.append("path")
-                    .attr("class", "line results " + resultBucket.name)
-                    .attr("d", chartData.resultsLine(resultBucket.results))
-                    .attr("stroke", Meteor.chart._getResultColor(chartData, resultBucket.name));
-            }
+            g.append("path")
+                .attr("class", "line trend " + resultBucket.name)
+                .attr("d", chartData.resultsLine(trend))
+                .attr("stroke", Meteor.chart._getResultColor(chartData, resultBucket.name));
+
+
+            //draw connection line
+            g.append("path")
+                .attr("class", "line results " + resultBucket.name)
+                .attr("d", chartData.resultsLine(resultBucket.results))
+                .attr("stroke", Meteor.chart._getResultColor(chartData, resultBucket.name));
+
 
         }
 
@@ -700,7 +699,6 @@ Meteor.chart = {
             return {x: result.date.getTime(), y: result.result}
         });
         var coef = Meteor.tracker.getLinearTrendCoef(xydata);
-
 
 
     },
