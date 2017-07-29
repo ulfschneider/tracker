@@ -233,10 +233,6 @@ ul.result-bucket-names .on {
     fill:none;
 }
 
-.line.trend {
-    stroke-width: 2px;
-}
-
 .line.hover {
     stroke-width:10px;
     stroke: transparent;
@@ -247,6 +243,15 @@ ul.result-bucket-names .on {
     fill:transparent;
     stroke:transparent;
 }
+
+.trend {
+    stroke-width: 1px;
+}
+
+.trend.duration {
+    stroke:#222;
+}
+
 
 #chart-tooltip {
     position: absolute;
