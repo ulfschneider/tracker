@@ -568,9 +568,11 @@ Meteor.chart = {
                 .attr("d", chartData.durationLine(trend));
 
             //draw connection line
+
             g.append("path")
                 .attr("class", "line duration " + trackBucket.name)
                 .attr("d", chartData.durationLine(trackBucket.tracks));
+
 
         }
 
@@ -688,10 +690,12 @@ Meteor.chart = {
 
 
             //draw connection line
+
             g.append("path")
                 .attr("class", "line results " + resultBucket.name)
                 .attr("d", chartData.resultsLine(resultBucket.results))
                 .attr("stroke", Meteor.chart._getResultColor(chartData, resultBucket.name));
+
 
 
         }

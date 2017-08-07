@@ -216,28 +216,26 @@ ul.result-bucket-names .on {
     fill: #222;
 }
 
+.line {
+    stroke-dasharray: 1,3;
+    stroke-width: 1.5px;
+    fill:none;
+}
+
 .line.duration {
     stroke: #222;
-    stroke-dasharray: 3,3;
-    stroke-width: 1px;
-    fill:none;
+}
+
+
+.line.hover {
+    stroke-width:10px;
+    stroke: transparent;
 }
 
 .dot.duration {
     fill:#222;
 }
 
-.line.results {
-    stroke-width: 1px;
-    stroke-dasharray: 3,3;
-    fill:none;
-}
-
-.line.hover {
-    stroke-width:10px;
-    stroke: transparent;
-    fill: none;
-}
 
 .dot.hover {
     fill:transparent;
@@ -245,7 +243,7 @@ ul.result-bucket-names .on {
 }
 
 .trend {
-    stroke-width: 1px;
+    stroke-width: 1.5px;
 }
 
 .trend.duration {
@@ -365,7 +363,6 @@ tr .edit-track {
 }
 
 .editable a.watch {
-    padding-right:1em;
     margin-right:1.62em;
 }
 
