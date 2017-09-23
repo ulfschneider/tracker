@@ -251,14 +251,17 @@ Meteor.chart = {
                       });
 
                       if (resultBucket.min) {
-                        var minMax = chartData.resultBuckets.get(resultBucket.name);
-                        if (minMax && minMax.min) {
-                          minMax.min = d3.min(minMax.min, resultBucket.min);
-                        } else {
-                          minMax = {"min" : resultBucket.min};
-                        }
-                        chartData.resultBuckets.set(resultBucket.name, minMax);
 
+                        var bucket = chartData.resultBuckets.get(resultBucket.name);
+
+                        if (bucket && bucket.min) {
+                          bucket.min = Math.min(bucket.min, resultBucket.min);
+                        } else if (bucket){
+                          bucket.min = resultBucket.min;
+                        } else {
+                           bucket = {"min" : resultBucket.min};
+                        }
+                        chartData.resultBuckets.set(resultBucket.name, bucket);
                         return resultBucket.min;
                       }
                       return chartData.resultsMin;
@@ -278,14 +281,14 @@ Meteor.chart = {
                         });
 
                         if (resultBucket.max) {
-                          var minMax = chartData.resultBuckets.get(resultBucket.name);
-                          //there must be a minMax because of setting min value before
-                          if (minMax.max) {
-                            minMax.max = d3.max(minMax.max, resultBucket.max);
+                          var bucket = chartData.resultBuckets.get(resultBucket.name);
+                          //there must be a bucket because of setting min value before
+                          if (bucket.max) {
+                            bucket.max = Math.max(bucket.max, resultBucket.max);
                           } else {
-                            minMax.max = resultBucket.max;
+                            bucket.max = resultBucket.max;
                           }
-                          chartData.resultBuckets.set(resultBucket.name, minMax);
+                          chartData.resultBuckets.set(resultBucket.name, bucket);
 
                           return resultBucket.max;
                         }
@@ -296,7 +299,6 @@ Meteor.chart = {
                 return chartData.resultsMax;
             }
         });
-
 
     },
     _prepareBuckets: function (chartData) {
