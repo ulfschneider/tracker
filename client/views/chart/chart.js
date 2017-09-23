@@ -8,7 +8,7 @@ Meteor.chart = {
         return d3.select("#chart");
     },
     chartContainer: function () {
-        //somewhere there must be a container for the entire chart
+        //there has to be a container for the entire chart
         //to get the padding of that container into the equation,
         //we select the container via id #chart-container
 
@@ -533,14 +533,13 @@ Meteor.chart = {
         }
 
         //results axis
-        /* //TODO draw only if only one result
-        if (this.hasResult(chartData)) {
+        //draw only if just one result 
+        if (this.hasResult(chartData) && chartData.resultBuckets.size() == 1) {
             g.append("g")
                 .attr("class", "axis results")
                 .attr("transform", "translate(" + chartData.width + ",0)")
                 .call(chartData.resultsAxis);
         }
-        */
         return chartData;
     },
     _extractTrackTooltip: function (track) {
@@ -632,11 +631,7 @@ Meteor.chart = {
             g.append("path")
                 .attr("class", "line duration " + trackBucket.name)
                 .attr("d", chartData.durationLine(trackBucket.tracks));
-
-
         }
-
-
 
         _.each(trackBucket.tracks, function (track) {
             Meteor.chart._drawDurationDot(chartData, g, track);
@@ -745,7 +740,7 @@ Meteor.chart = {
 
             g.append("path")
                 .attr("class", "trend results " + resultBucket.name)
-                .attr("d", /*chartData.resultsLine(trend)*/ chartData.resultBuckets.get(resultBucket.name).line(trend))
+                .attr("d", chartData.resultBuckets.get(resultBucket.name).line(trend))
                 .attr("stroke", Meteor.chart._getResultColor(chartData, resultBucket.name));
 
 
@@ -753,7 +748,7 @@ Meteor.chart = {
 
             g.append("path")
                 .attr("class", "line results " + resultBucket.name)
-                .attr("d", /*chartData.resultsLine(resultBucket.results)*/ chartData.resultBuckets.get(resultBucket.name).line(resultBucket.results))
+                .attr("d",  chartData.resultBuckets.get(resultBucket.name).line(resultBucket.results))
                 .attr("stroke", Meteor.chart._getResultColor(chartData, resultBucket.name));
 
 
@@ -767,14 +762,6 @@ Meteor.chart = {
 
         return chartData;
     },
-    _drawResultTrendLine: function (resultBucket) { //TODO can be removed ??
-        var xydata = _.map(resultBucket.results, function (result) {
-            return {x: result.date.getTime(), y: result.result}
-        });
-        var coef = Meteor.tracker.getLinearTrendCoef(xydata);
-
-
-    },
     _drawResultDot: function (chartData, g, resultBucket, result) {
         if (!isNaN(result.result)) {
             //this circle is for display
@@ -782,19 +769,19 @@ Meteor.chart = {
                 .attr("class", "dot results " + resultBucket.name)
                 .attr("r", 4)
                 .attr("cx", chartData.dateScale(result.date))
-                .attr("cy", /* chartData.resultScale(result.result)*/ chartData.resultBuckets.get(resultBucket.name).scale(result.result))
+                .attr("cy", chartData.resultBuckets.get(resultBucket.name).scale(result.result))
                 .attr("fill", Meteor.chart._getResultColor(chartData, resultBucket.name))
 
             //this circle is to increase the hover area
 
             var id = Meteor.tracker.uid();
             var x = chartData.dateScale(result.date);
-            var y = /*chartData.resultScale(result.result)*/ chartData.resultBuckets.get(resultBucket.name).scale(result.result);
+            var y = chartData.resultBuckets.get(resultBucket.name).scale(result.result);
             g.append("circle")
                 .attr("class", "dot results hover " + resultBucket.name)
                 .attr("r", 10)
                 .attr("cx", chartData.dateScale(result.date))
-                .attr("cy", /*chartData.resultScale(result.result)*/ chartData.resultBuckets.get(resultBucket.name).scale(result.result))
+                .attr("cy", chartData.resultBuckets.get(resultBucket.name).scale(result.result))
                 .attr("fill", "transparent")
                 .on("mouseover", function (d, i) {
                     chartData.d3Chart.append("rect")
