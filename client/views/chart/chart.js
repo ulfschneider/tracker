@@ -297,6 +297,7 @@ Meteor.chart = {
             }
         });
 
+
     },
     _prepareBuckets: function (chartData) {
 
@@ -412,16 +413,26 @@ Meteor.chart = {
     }
     ,
     _setResultsScale: function (chartData) {
+        //general scale for all results combined
         chartData.resultScale = d3.scale.linear()
             .domain([chartData.resultsMin, chartData.resultsMax])
             .rangeRound([chartData.height, 0]);
         chartData.resultsAxis = d3.svg.axis()
             .scale(chartData.resultScale)
             .orient("right");
+
+        //scales per each resultBucket
+        var resultBuckets = chartData.resultBuckets.entries();
+        _.each(resultBuckets, function(resultBucket) {
+          resultBucket.value.scale = d3.scale.linear().domain([resultBucket.value.min, resultBucket.value.max]).rangeRound([chartData.height, 0]);
+          chartData.resultBuckets.set(resultBucket.key, resultBucket.value);
+        });
+
         return chartData;
     }
     ,
     _setResultsLine: function (chartData) {
+        //general results line
         chartData.resultsLine = d3.svg.line()
             .defined(function (d) {
                 return !isNaN(d.result);
@@ -433,12 +444,31 @@ Meteor.chart = {
             .y(function (d) {
                 return chartData.resultScale(d.result);
             });
+
+        //result lines per each resultBucket
+        var resultBuckets = chartData.resultBuckets.entries();
+        _.each(resultBuckets, function(resultBucket) {
+          resultBucket.value.line = d3.svg.line()
+              .defined(function (d) {
+                  return !isNaN(d.result);
+              })
+              .interpolate("monotone")
+              .x(function (d) {
+                  return chartData.dateScale(d.date);
+              })
+              .y(function (d) {
+                  return resultBucket.value.scale(d.result);
+              });
+
+          chartData.resultBuckets.set(resultBucket.key, resultBucket.value);
+        });
+
         return chartData;
     }
     ,
     _setResultColorScale: function (chartData) {
         chartData.resultColorScale = d3.scale.ordinal()
-            .domain(Meteor.tracker.getResultBuckets())
+            .domain(Meteor.tracker.getResultBuckets())  //TODO extract resultbuckets from chartData.resultBuckets
             .range(d3.scale.category20().range());
         return chartData;
     },
@@ -501,12 +531,14 @@ Meteor.chart = {
         }
 
         //results axis
+        /* //TODO draw only if only one result
         if (this.hasResult(chartData)) {
             g.append("g")
                 .attr("class", "axis results")
                 .attr("transform", "translate(" + chartData.width + ",0)")
                 .call(chartData.resultsAxis);
         }
+        */
         return chartData;
     },
     _extractTrackTooltip: function (track) {
@@ -711,7 +743,7 @@ Meteor.chart = {
 
             g.append("path")
                 .attr("class", "trend results " + resultBucket.name)
-                .attr("d", chartData.resultsLine(trend))
+                .attr("d", /*chartData.resultsLine(trend)*/ chartData.resultBuckets.get(resultBucket.name).line(trend))
                 .attr("stroke", Meteor.chart._getResultColor(chartData, resultBucket.name));
 
 
@@ -719,7 +751,7 @@ Meteor.chart = {
 
             g.append("path")
                 .attr("class", "line results " + resultBucket.name)
-                .attr("d", chartData.resultsLine(resultBucket.results))
+                .attr("d", /*chartData.resultsLine(resultBucket.results)*/ chartData.resultBuckets.get(resultBucket.name).line(resultBucket.results))
                 .attr("stroke", Meteor.chart._getResultColor(chartData, resultBucket.name));
 
 
@@ -733,7 +765,7 @@ Meteor.chart = {
 
         return chartData;
     },
-    _drawResultTrendLine: function (resultBucket) {
+    _drawResultTrendLine: function (resultBucket) { //TODO can be removed ??
         var xydata = _.map(resultBucket.results, function (result) {
             return {x: result.date.getTime(), y: result.result}
         });
@@ -748,19 +780,19 @@ Meteor.chart = {
                 .attr("class", "dot results " + resultBucket.name)
                 .attr("r", 4)
                 .attr("cx", chartData.dateScale(result.date))
-                .attr("cy", chartData.resultScale(result.result))
+                .attr("cy", /* chartData.resultScale(result.result)*/ chartData.resultBuckets.get(resultBucket.name).scale(result.result))
                 .attr("fill", Meteor.chart._getResultColor(chartData, resultBucket.name))
 
             //this circle is to increase the hover area
 
             var id = Meteor.tracker.uid();
             var x = chartData.dateScale(result.date);
-            var y = chartData.resultScale(result.result);
+            var y = /*chartData.resultScale(result.result)*/ chartData.resultBuckets.get(resultBucket.name).scale(result.result);
             g.append("circle")
                 .attr("class", "dot results hover " + resultBucket.name)
                 .attr("r", 10)
                 .attr("cx", chartData.dateScale(result.date))
-                .attr("cy", chartData.resultScale(result.result))
+                .attr("cy", /*chartData.resultScale(result.result)*/ chartData.resultBuckets.get(resultBucket.name).scale(result.result))
                 .attr("fill", "transparent")
                 .on("mouseover", function (d, i) {
                     chartData.d3Chart.append("rect")
