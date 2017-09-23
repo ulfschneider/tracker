@@ -203,6 +203,7 @@ Meteor.chart = {
         delete chartData.dateMax;
         delete chartData.resultsMin;
         delete chartData.resultsMax;
+        chartData.resultBuckets = new Map();
 
         chartData.durationMin = d3.min(chartData.trackBuckets, function (trackBucket) {
             if (chartData.trackFilter.isOn(trackBucket.name) || chartData.trackFilter.isAllOff()) {
@@ -241,14 +242,26 @@ Meteor.chart = {
             }
         });
 
-
         chartData.resultsMin = d3.min(chartData.trackBuckets, function (trackBucket) {
             if ((chartData.trackFilter.isOn(trackBucket.name) || chartData.trackFilter.isAllOff()) && trackBucket.resultBuckets) {
                 return d3.min(trackBucket.resultBuckets, function (resultBucket) {
                     if (chartData.resultFilter.isOn(resultBucket.name) || chartData.resultFilter.isAllOff()) {
-                        return resultBucket.results ? d3.min(resultBucket.results, function (r) {
-                            return parseFloat(r.result);
-                        }) : chartData.resultsMin;
+                      resultBucket.min = d3.min(resultBucket.results, function (r) {
+                          return parseFloat(r.result);
+                      });
+
+                      if (resultBucket.min) {
+                        var minMax = chartData.resultBuckets.get(resultBucket.name);
+                        if (minMax && minMax.min) {
+                          minMax.min = d3.min(minMax.min, resultBucket.min);
+                        } else {
+                          minMax = {"min" : resultBucket.min};
+                        }
+                        chartData.resultBuckets.set(resultBucket.name, minMax);
+
+                        return resultBucket.min;
+                      }
+                      return chartData.resultsMin;
                     }
                 });
             } else {
@@ -260,16 +273,29 @@ Meteor.chart = {
             if ((chartData.trackFilter.isOn(trackBucket.name) || chartData.trackFilter.isAllOff()) && trackBucket.resultBuckets) {
                 return d3.max(trackBucket.resultBuckets, function (resultBucket) {
                     if (chartData.resultFilter.isOn(resultBucket.name) || chartData.resultFilter.isAllOff()) {
-                        return resultBucket.results ? d3.max(resultBucket.results, function (r) {
+                      resultBucket.max =  d3.max(resultBucket.results, function (r) {
                             return parseFloat(r.result);
-                        }) : chartData.resultsMax;
+                        });
+
+                        if (resultBucket.max) {
+                          var minMax = chartData.resultBuckets.get(resultBucket.name);
+                          //there must be a minMax because of setting min value before
+                          if (minMax.max) {
+                            minMax.max = d3.max(minMax.max, resultBucket.max);
+                          } else {
+                            minMax.max = resultBucket.max;
+                          }
+                          chartData.resultBuckets.set(resultBucket.name, minMax);
+
+                          return resultBucket.max;
+                        }
+                        return chartData.resultsMax;
                     }
                 });
             } else {
                 return chartData.resultsMax;
             }
         });
-
 
     },
     _prepareBuckets: function (chartData) {
@@ -562,7 +588,7 @@ Meteor.chart = {
                 date: new Date(coef.max.x),
                 duration: coef.max.y
             }];
-            
+
             g.append("path")
                 .attr("class", "trend duration " + trackBucket.name)
                 .attr("d", chartData.durationLine(trend));
