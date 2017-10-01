@@ -6,8 +6,6 @@ overview of your personal achievements and improvements.
 
 Tracker is free. It is built and shared by [Ulf Schneider](http://ulf.codes).
 
-![](/r/tracker.jpg)
-
 File a track
 ---
 
