@@ -108,35 +108,59 @@ Meteor.chart = {
         return html;
     },
     _addDomainPadding: function (chartData) {
-        if (!_.isUndefined(chartData.durationMax) && !_.isUndefined(chartData.durationMin)) {
-            if (isNaN(chartData.durationMin) || chartData.durationMin == chartData.durationMax) {
-                chartData.durationMin = 0;
-            }
+        chartData = Meteor.chart._addDurationPadding(chartData);
+        chartData = Meteor.chart._addResultPadding(chartData);
 
-            var duration = chartData.durationMax - chartData.durationMin;
-            var durationPadding = Math.round(duration / 100 * 10); //10% padding
-            chartData.durationMax += durationPadding;
-            if (chartData.durationMin - durationPadding >= 0) {
-                chartData.durationMin -= durationPadding;
-            } else {
-                chartData.durationMin = 0;
-            }
-        }
-
-        if (!_.isUndefined(chartData.resultsMax) && !_.isUndefined(chartData.resultsMin)) {
-            if (isNaN(chartData.resultsMin) || chartData.resultsMin == chartData.resultsMax) {
-                chartData.resultsMin = 0;
-            }
-            var results = chartData.resultsMax - chartData.resultsMin;
-            var resultsPadding = Math.round(results / 100 * 10); //10% padding
-            chartData.resultsMax += resultsPadding;
-            if (chartData.resultsMin - resultsPadding >= 0) {
-                chartData.resultsMin -= resultsPadding;
-            } else {
-                chartData.resultsMin = 0;
-            }
-        }
         return chartData;
+    },
+    _addDurationPadding: function(chartData) {
+      if (!_.isUndefined(chartData.durationMax) && !_.isUndefined(chartData.durationMin)) {
+          if (isNaN(chartData.durationMin) || chartData.durationMin == chartData.durationMax) {
+              chartData.durationMin = 0;
+          }
+
+          var duration = chartData.durationMax - chartData.durationMin;
+          var durationPadding = Math.round(duration / 100 * 10); //10% padding
+          chartData.durationMax += durationPadding;
+          if (chartData.durationMin - durationPadding >= 0) {
+              chartData.durationMin -= durationPadding;
+          } else {
+              chartData.durationMin = 0;
+          }
+      }
+      return chartData;
+    },
+    _addResultPadding: function(chartData) {
+      if (!_.isUndefined(chartData.resultsMax) && !_.isUndefined(chartData.resultsMin)) {
+          if (isNaN(chartData.resultsMin) || chartData.resultsMin == chartData.resultsMax) {
+              chartData.resultsMin = 0;
+          }
+          var results = chartData.resultsMax - chartData.resultsMin;
+          var resultsPadding = Math.round(results / 100 * 10); //10% padding
+          chartData.resultsMax += resultsPadding;
+          if (chartData.resultsMin - resultsPadding >= 0) {
+              chartData.resultsMin -= resultsPadding;
+          } else {
+              chartData.resultsMin = 0;
+          }
+      }
+      _.each(chartData.activeResultBuckets.entries(), function(resultBucket) {
+        if (!_.isUndefined(resultBucket.value.max) && !_.isUndefined(resultBucket.value.min)) {
+            if (isNaN(resultBucket.value.min) || resultBucket.value.min == resultBucket.value.max) {
+                resultBucket.value.min = 0;
+            }
+            var results = resultBucket.value.max - resultBucket.value.min;
+            var resultsPadding = Math.round(results / 100 * 10); //10% padding
+            resultBucket.value.max += resultsPadding;
+            if (resultBucket.value.min - resultsPadding >= 0) {
+                resultBucket.value.min -= resultsPadding;
+            } else {
+                resultBucket.value.min = 0;
+            }
+            chartData.activeResultBuckets.set(resultBucket.key, resultBucket.value);
+        }
+      });
+      return chartData;
     },
     _addToResultBucket: function (chartData, trackBucket, track, result) {
         if (_.isUndefined(trackBucket.resultBuckets)) {
@@ -203,7 +227,7 @@ Meteor.chart = {
         delete chartData.dateMax;
         delete chartData.resultsMin;
         delete chartData.resultsMax;
-        chartData.resultBuckets = new Map();
+        chartData.activeResultBuckets = new Map();
 
         chartData.durationMin = d3.min(chartData.trackBuckets, function (trackBucket) {
             if (chartData.trackFilter.isOn(trackBucket.name) || chartData.trackFilter.isAllOff()) {
@@ -252,7 +276,7 @@ Meteor.chart = {
 
                       if (resultBucket.min) {
 
-                        var bucket = chartData.resultBuckets.get(resultBucket.name);
+                        var bucket = chartData.activeResultBuckets.get(resultBucket.name);
 
                         if (bucket && bucket.min) {
                           bucket.min = Math.min(bucket.min, resultBucket.min);
@@ -261,7 +285,7 @@ Meteor.chart = {
                         } else {
                            bucket = {"min" : resultBucket.min};
                         }
-                        chartData.resultBuckets.set(resultBucket.name, bucket);
+                        chartData.activeResultBuckets.set(resultBucket.name, bucket);
                         return resultBucket.min;
                       }
                       return chartData.resultsMin;
@@ -272,6 +296,7 @@ Meteor.chart = {
             }
         });
 
+
         chartData.resultsMax = d3.max(chartData.trackBuckets, function (trackBucket) {
             if ((chartData.trackFilter.isOn(trackBucket.name) || chartData.trackFilter.isAllOff()) && trackBucket.resultBuckets) {
                 return d3.max(trackBucket.resultBuckets, function (resultBucket) {
@@ -281,14 +306,14 @@ Meteor.chart = {
                         });
 
                         if (resultBucket.max) {
-                          var bucket = chartData.resultBuckets.get(resultBucket.name);
+                          var bucket = chartData.activeResultBuckets.get(resultBucket.name);
                           //there must be a bucket because of setting min value before
                           if (bucket.max) {
                             bucket.max = Math.max(bucket.max, resultBucket.max);
                           } else {
                             bucket.max = resultBucket.max;
                           }
-                          chartData.resultBuckets.set(resultBucket.name, bucket);
+                          chartData.activeResultBuckets.set(resultBucket.name, bucket);
 
                           return resultBucket.max;
                         }
@@ -419,15 +444,16 @@ Meteor.chart = {
         chartData.resultScale = d3.scale.linear()
             .domain([chartData.resultsMin, chartData.resultsMax])
             .rangeRound([chartData.height, 0]);
+
         chartData.resultsAxis = d3.svg.axis()
             .scale(chartData.resultScale)
             .orient("right");
 
         //scales per each resultBucket
-        var resultBuckets = chartData.resultBuckets.entries();
+        var resultBuckets = chartData.activeResultBuckets.entries();
         _.each(resultBuckets, function(resultBucket) {
           resultBucket.value.scale = d3.scale.linear().domain([resultBucket.value.min, resultBucket.value.max]).rangeRound([chartData.height, 0]);
-          chartData.resultBuckets.set(resultBucket.key, resultBucket.value);
+          chartData.activeResultBuckets.set(resultBucket.key, resultBucket.value);
         });
 
         return chartData;
@@ -448,7 +474,7 @@ Meteor.chart = {
             });
 
         //result lines per each resultBucket
-        var resultBuckets = chartData.resultBuckets.entries();
+        var resultBuckets = chartData.activeResultBuckets.entries();
         _.each(resultBuckets, function(resultBucket) {
           resultBucket.value.line = d3.svg.line()
               .defined(function (d) {
@@ -462,7 +488,7 @@ Meteor.chart = {
                   return resultBucket.value.scale(d.result);
               });
 
-          chartData.resultBuckets.set(resultBucket.key, resultBucket.value);
+          chartData.activeResultBuckets.set(resultBucket.key, resultBucket.value);
         });
 
         return chartData;
@@ -470,7 +496,7 @@ Meteor.chart = {
     ,
     _setResultColorScale: function (chartData) {
         chartData.resultColorScale = d3.scale.ordinal()
-            .domain(Meteor.tracker.getResultBuckets())  //TODO extract resultbuckets from chartData.resultBuckets
+            .domain(Meteor.tracker.getResultBuckets())  //TODO extract resultbuckets from chartData.activeResultBuckets
             .range(d3.scale.category20().range());
         return chartData;
     },
@@ -533,8 +559,8 @@ Meteor.chart = {
         }
 
         //results axis
-        //draw only if just one result 
-        if (this.hasResult(chartData) && chartData.resultBuckets.size() == 1) {
+        //draw only if just one result
+        if (this.hasResult(chartData) && chartData.activeResultBuckets.size() == 1) {
             g.append("g")
                 .attr("class", "axis results")
                 .attr("transform", "translate(" + chartData.width + ",0)")
@@ -740,7 +766,7 @@ Meteor.chart = {
 
             g.append("path")
                 .attr("class", "trend results " + resultBucket.name)
-                .attr("d", chartData.resultBuckets.get(resultBucket.name).line(trend))
+                .attr("d", chartData.activeResultBuckets.get(resultBucket.name).line(trend))
                 .attr("stroke", Meteor.chart._getResultColor(chartData, resultBucket.name));
 
 
@@ -748,7 +774,7 @@ Meteor.chart = {
 
             g.append("path")
                 .attr("class", "line results " + resultBucket.name)
-                .attr("d",  chartData.resultBuckets.get(resultBucket.name).line(resultBucket.results))
+                .attr("d",  chartData.activeResultBuckets.get(resultBucket.name).line(resultBucket.results))
                 .attr("stroke", Meteor.chart._getResultColor(chartData, resultBucket.name));
 
 
@@ -769,19 +795,19 @@ Meteor.chart = {
                 .attr("class", "dot results " + resultBucket.name)
                 .attr("r", 4)
                 .attr("cx", chartData.dateScale(result.date))
-                .attr("cy", chartData.resultBuckets.get(resultBucket.name).scale(result.result))
+                .attr("cy", chartData.activeResultBuckets.get(resultBucket.name).scale(result.result))
                 .attr("fill", Meteor.chart._getResultColor(chartData, resultBucket.name))
 
             //this circle is to increase the hover area
 
             var id = Meteor.tracker.uid();
             var x = chartData.dateScale(result.date);
-            var y = chartData.resultBuckets.get(resultBucket.name).scale(result.result);
+            var y = chartData.activeResultBuckets.get(resultBucket.name).scale(result.result);
             g.append("circle")
                 .attr("class", "dot results hover " + resultBucket.name)
                 .attr("r", 10)
                 .attr("cx", chartData.dateScale(result.date))
-                .attr("cy", chartData.resultBuckets.get(resultBucket.name).scale(result.result))
+                .attr("cy", chartData.activeResultBuckets.get(resultBucket.name).scale(result.result))
                 .attr("fill", "transparent")
                 .on("mouseover", function (d, i) {
                     chartData.d3Chart.append("rect")
